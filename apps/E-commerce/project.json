@@ -66,6 +66,23 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "polyfills": ["zone.js", "zone.js/testing"],
+        "tsConfig": "apps/E-commerce/tsconfig.spec.json",
+        "karmaConfig": "apps/E-commerce/karma.conf.js",
+        "inlineStyleLanguage": "css",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/E-commerce/public"
+          }
+        ],
+        "styles": ["apps/E-commerce/src/styles.css"],
+        "scripts": []
+      }
+    },
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
