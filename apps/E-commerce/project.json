@@ -1,0 +1,79 @@
+{
+  "name": "E-commerce",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/E-commerce/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/E-commerce",
+        "browser": "apps/E-commerce/src/main.ts",
+        "tsConfig": "apps/E-commerce/tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/E-commerce/public"
+          }
+        ],
+        "styles": ["apps/E-commerce/src/styles.css"],
+        "server": "apps/E-commerce/src/main.server.ts",
+        "ssr": {
+          "entry": "apps/E-commerce/src/server.ts"
+        },
+        "outputMode": "server"
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@angular/build:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "E-commerce:build:production"
+        },
+        "development": {
+          "buildTarget": "E-commerce:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "serve-static": {
+      "continuous": true,
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "E-commerce:build",
+        "staticFilePath": "dist/apps/E-commerce/browser",
+        "spa": true
+      }
+    }
+  }
+}
