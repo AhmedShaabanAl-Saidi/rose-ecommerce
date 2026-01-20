@@ -1,2 +1,133 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+    /*Maroon Start*/
+  --color-maroon-50:#fbeaea;
+  --color-maroon-100: #f3c5c7;
+  --color-maroon-200:#ea9fa2;
+  --color-maroon-300: #e07a7d;
+  --color-maroon-400: #d75458;
+  --color-maroon-500: #cd2e33;
+  --color-maroon-600: #a6252a;
+  --color-maroon-700: #741c21;
+  --color-maroon-800: #501419;
+  --color-maroon-900:#2c0c10;
+  --color-maroon-950: #20090c;
+/*Maroon End*/
+
+ 
+
+/*Soft Pink Start*/
+  --color-soft-pink-50:  #fff1f5;
+  --color-soft-pink-100: #ffe0e7;
+  --color-soft-pink-200: #ffc2d0;
+  --color-soft-pink-300: #ffa3b9;
+  --color-soft-pink-400: #ff85a2;
+  --color-soft-pink-500: #ff668b;
+   --color-soft-pink-600: #e65073;
+  --color-soft-pink-700: #cc3a5b;
+  --color-soft-pink-800: #b32443;
+  --color-soft-pink-900:#99102c;
+  --color-soft-pink-950: #590414;
+/*Soft Pink End*/
+
+
+
+
+/*yellow Start*/
+ --color-yellow-50:  #fefce8;
+  --color-yellow-100: #fef9c3;
+  --color-yellow-200: #fef08a;
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+   --color-yellow-600: #ca8a04;
+  --color-yellow-700: #ca8a04;
+  --color-yellow-800:#854d0e;
+  --color-yellow-900:#713f12;
+  --color-yellow-950: #422006;
+/*yellow End*/
+}
+
+
+
+
+/* ======================================
+   LIGHT MODE — SEMANTIC TOKENS
+====================================== */
+@theme {
+  /* Text */
+  --color-text-main: var(--color-zinc-900);
+  --color-text-heading: var(--color-maroon-700);
+  --color-text-subheading: var(--color-soft-pink-500);
+  --color-text-body: var(--color-zinc-700);
+  --color-text-muted: var(--color-zinc-500);
+
+  /* Backgrounds */
+  --color-bg-main: var(--color-white);
+  --color-bg-primary: var(--color-maroon-700);
+  --color-bg-secondary: var(--color-soft-pink-500);
+  --color-bg-surface: var(--color-maroon-50);
+
+  /* Buttons */
+  --color-btn-bg: var(--color-maroon-600);
+  --color-btn-text: var(--color-white);
+  --color-btn-outline-bg: var(--color-white);
+  --color-btn-outline-text: var(--color-maroon-600);
+
+  /* Navigation */
+  --color-nav-bg: var(--color-bg-primary);
+  --color-nav-text: var(--color-white);
+  --color-nav-active: var(--color-soft-pink-200);
+
+  /* Badges */
+  --color-badge-bg: var(--color-maroon-50);
+  --color-badge-text: var(--color-maroon-700);
+
+  /* Cards */
+  --color-card-bg: var(--color-white);
+  --color-card-text: var(--color-maroon-700);
+  --color-card-muted: var(--color-zinc-500);
+
+  /* States */
+  --color-state-hot-bg: var(--color-maroon-50);
+  --color-state-hot-text: var(--color-maroon-600);
+  --color-state-new-bg: var(--color-zinc-100);
+  --color-state-new-text: var(--color-zinc-700);
+
+  /* Footer */
+  --color-footer-bg: var(--color-zinc-800);
+  --color-footer-title: var(--color-soft-pink-300);
+  --color-footer-link: var(--color-zinc-100);
+}
+
+/* ======================================
+   DARK MODE — OVERRIDES ONLY
+====================================== */
+.dark {
+  /* Text */
+  --color-text-main: var(--color-zinc-100);
+  --color-text-heading: var(--color-soft-pink-200);
+  --color-text-subheading: var(--color-maroon-400);
+  --color-text-body: var(--color-zinc-300);
+  --color-text-muted: var(--color-zinc-500);
+
+  /* Backgrounds */
+  --color-bg-main: var(--color-zinc-900);
+  --color-bg-primary: var(--color-maroon-700);
+  --color-bg-secondary: var(--color-soft-pink-500);
+  --color-bg-surface: var(--color-zinc-800);
+
+  /* Buttons */
+  --color-btn-bg: var(--color-white);
+  --color-btn-text: var(--color-maroon-600);
+  --color-btn-outline-bg: var(--color-maroon-600);
+  --color-btn-outline-text: var(--color-white);
+
+  /* Cards */
+  --color-card-bg: var(--color-zinc-800);
+  --color-card-text: var(--color-zinc-100);
+}
+
+
