@@ -20,7 +20,6 @@
           }
         ],
         "styles": [
-          "node_modules/@fortawesome/fontawesome-free/css/all.css",
           "apps/E-commerce/src/styles.css"],
         "server": "apps/E-commerce/src/main.server.ts",
         "ssr": {
