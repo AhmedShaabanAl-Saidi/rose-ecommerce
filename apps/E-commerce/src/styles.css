@@ -1,53 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-    /*Maroon Start*/
-  --color-maroon-50:#fbeaea;
+  /*Maroon Start*/
+  --color-maroon-50: #fbeaea;
   --color-maroon-100: #f3c5c7;
-  --color-maroon-200:#ea9fa2;
+  --color-maroon-200: #ea9fa2;
   --color-maroon-300: #e07a7d;
   --color-maroon-400: #d75458;
   --color-maroon-500: #cd2e33;
   --color-maroon-600: #a6252a;
   --color-maroon-700: #741c21;
   --color-maroon-800: #501419;
-  --color-maroon-900:#2c0c10;
+  --color-maroon-900: #2c0c10;
   --color-maroon-950: #20090c;
-/*Maroon End*/
+  /*Maroon End*/
 
- 
 
-/*Soft Pink Start*/
-  --color-soft-pink-50:  #fff1f5;
+
+  /*Soft Pink Start*/
+  --color-soft-pink-50: #fff1f5;
   --color-soft-pink-100: #ffe0e7;
   --color-soft-pink-200: #ffc2d0;
   --color-soft-pink-300: #ffa3b9;
   --color-soft-pink-400: #ff85a2;
   --color-soft-pink-500: #ff668b;
-   --color-soft-pink-600: #e65073;
+  --color-soft-pink-600: #e65073;
   --color-soft-pink-700: #cc3a5b;
   --color-soft-pink-800: #b32443;
-  --color-soft-pink-900:#99102c;
+  --color-soft-pink-900: #99102c;
   --color-soft-pink-950: #590414;
-/*Soft Pink End*/
+  /*Soft Pink End*/
 
 
 
 
-/*yellow Start*/
- --color-yellow-50:  #fefce8;
+  /*yellow Start*/
+  --color-yellow-50: #fefce8;
   --color-yellow-100: #fef9c3;
   --color-yellow-200: #fef08a;
   --color-yellow-300: #fde047;
   --color-yellow-400: #facc15;
   --color-yellow-500: #eab308;
-   --color-yellow-600: #ca8a04;
+  --color-yellow-600: #ca8a04;
   --color-yellow-700: #ca8a04;
-  --color-yellow-800:#854d0e;
-  --color-yellow-900:#713f12;
+  --color-yellow-800: #854d0e;
+  --color-yellow-900: #713f12;
   --color-yellow-950: #422006;
-/*yellow End*/
+  /*yellow End*/
 }
 
 
@@ -130,4 +131,101 @@
   --color-card-text: var(--color-zinc-100);
 }
 
+/* ======================================
+   GLOBAL STYLES
+====================================== */
+.sarabun-thin {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
 
+.sarabun-extralight {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.sarabun-light {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.sarabun-regular {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sarabun-medium {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.sarabun-semibold {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.sarabun-bold {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.sarabun-extrabold {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.sarabun-thin-italic {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.sarabun-extralight-italic {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.sarabun-light-italic {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.sarabun-regular-italic {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.sarabun-medium-italic {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.sarabun-semibold-italic {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.sarabun-bold-italic {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.sarabun-extrabold-italic {
+  font-family: "Sarabun", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
