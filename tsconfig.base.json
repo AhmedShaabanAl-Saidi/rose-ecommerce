@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@elevate/auth-data-access": ["libs/auth/data-access/src/index.ts"],
       "@elevate/auth-domain": ["libs/auth/domain/src/index.ts"]
     }
   },

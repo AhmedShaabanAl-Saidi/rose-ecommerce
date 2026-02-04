@@ -4,21 +4,19 @@ export interface LoginParams {
 }
 
 export interface RegisterParams {
-  username: string;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   rePassword: string;
   phone: string;
+  gender: 'male' | 'female';
 }
 export interface ChangePasswordParams {
-  oldPassword: string;
   password: string;
-  rePassword: string;
+  newPassword: string;
 }
 export interface EditProfileParams {
-  username?: string;
   firstName?: string;
   lastName?: string;
   email?: string;

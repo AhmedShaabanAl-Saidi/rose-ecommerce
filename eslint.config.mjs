@@ -23,16 +23,16 @@ export default [
           depConstraints: [
             {
               sourceTag: 'type:domain',
-              onlyDependOnLibsWithTags: ['type:domain']
+              onlyDependOnLibsWithTags: ['type:domain'],
             },
             {
               sourceTag: 'type:data',
-              onlyDependOnLibsWithTags: ['type:domain', 'type:data']
+              onlyDependOnLibsWithTags: ['type:domain', 'type:data'],
             },
             {
               sourceTag: 'type:app',
-              onlyDependOnLibsWithTags: ['type:domain', 'type:data', 'type:ui']
-            }
+              onlyDependOnLibsWithTags: ['type:domain', 'type:data', 'type:ui'],
+            },
           ],
         },
       ],
