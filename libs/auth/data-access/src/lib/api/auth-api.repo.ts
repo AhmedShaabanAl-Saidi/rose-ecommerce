@@ -77,9 +77,10 @@ export class AuthApiRepo extends AuthRepo {
     return this._authService.deleteMe();
   }
   editProfile(data: EditProfileParams): Observable<ProfileModel> {
-    return this._authService
-      .editProfile(data)
-      .pipe(map((res) => AuthMapper.toProfileModel(res)));
+    return this._authService.editProfile(data).pipe(
+      map((res) => AuthMapper.toProfileModel(res)),
+      tap((data) => this._state.setUser(data.user))
+    );
   }
   verifyResetCode(data: VerifyResetCodeParams): Observable<StatusModel> {
     return this._authService.verifyResetCode(data);
