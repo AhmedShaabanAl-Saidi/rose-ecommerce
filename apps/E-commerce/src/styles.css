@@ -17,8 +17,6 @@
   --color-maroon-950: #20090c;
   /*Maroon End*/
 
-
-
   /*Soft Pink Start*/
   --color-soft-pink-50: #fff1f5;
   --color-soft-pink-100: #ffe0e7;
@@ -32,9 +30,6 @@
   --color-soft-pink-900: #99102c;
   --color-soft-pink-950: #590414;
   /*Soft Pink End*/
-
-
-
 
   /*yellow Start*/
   --color-yellow-50: #fefce8;
@@ -50,9 +45,6 @@
   --color-yellow-950: #422006;
   /*yellow End*/
 }
-
-
-
 
 /* ======================================
    LIGHT MODE — SEMANTIC TOKENS
@@ -135,97 +127,126 @@
    GLOBAL STYLES
 ====================================== */
 .sarabun-thin {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 100;
   font-style: normal;
 }
 
 .sarabun-extralight {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 200;
   font-style: normal;
 }
 
 .sarabun-light {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 300;
   font-style: normal;
 }
 
 .sarabun-regular {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
 .sarabun-medium {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 500;
   font-style: normal;
 }
 
 .sarabun-semibold {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 600;
   font-style: normal;
 }
 
 .sarabun-bold {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 700;
   font-style: normal;
 }
 
 .sarabun-extrabold {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 800;
   font-style: normal;
 }
 
 .sarabun-thin-italic {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 100;
   font-style: italic;
 }
 
 .sarabun-extralight-italic {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 200;
   font-style: italic;
 }
 
 .sarabun-light-italic {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 300;
   font-style: italic;
 }
 
 .sarabun-regular-italic {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 400;
   font-style: italic;
 }
 
 .sarabun-medium-italic {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 500;
   font-style: italic;
 }
 
 .sarabun-semibold-italic {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 600;
   font-style: italic;
 }
 
 .sarabun-bold-italic {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 700;
   font-style: italic;
 }
 
 .sarabun-extrabold-italic {
-  font-family: "Sarabun", sans-serif;
+  font-family: 'Sarabun', sans-serif;
   font-weight: 800;
   font-style: italic;
+}
+
+
+@utility input-wrapper {
+  @apply flex flex-col gap-1.5 w-full;
+}
+
+@utility input-label {
+  @apply text-zinc-800 dark:text-zinc-50 text-sm font-medium;
+}
+
+@utility input-base {
+  @apply w-full bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-[.625rem] border border-zinc-300 dark:border-zinc-600 outline-none p-2 transition-all duration-200 placeholder:text-zinc-400 focus:ring-1;
+}
+
+@utility input-status-normal {
+  @apply border-zinc-300 focus:border-blue-500 focus:ring-blue-500;
+}
+
+@utility input-status-error {
+  @apply border-red-500 focus:border-red-500 focus:ring-red-500;
+}
+
+@utility input-icon-container {
+  @apply absolute flex items-center text-zinc-400;
+}
+
+@utility input-error-message {
+  @apply flex items-center gap-1 mt-1 text-red-500 text-xs font-medium;
 }
