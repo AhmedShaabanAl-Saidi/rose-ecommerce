@@ -1,0 +1,19 @@
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { BaseInputComponent } from '../base/base-input.component';
+import { LucideAngularModule } from "lucide-angular";
+
+@Component({
+  selector: 'lib-checkbox-input',
+  standalone: true,
+  imports: [CommonModule, LucideAngularModule],
+  templateUrl: './checkbox-input.component.html',
+})
+export class CheckboxInputComponent extends BaseInputComponent {
+  toggle() {
+    if (this.isDisabled) return;
+    this.value = !this.value;
+    this.onChange(this.value);
+    this.onTouched();
+  }
+}

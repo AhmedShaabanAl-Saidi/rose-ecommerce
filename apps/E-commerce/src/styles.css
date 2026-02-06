@@ -254,3 +254,21 @@
 @utility select-base {
   @apply w-full bg-white dark:bg-[#323238] text-zinc-900 dark:text-zinc-300 rounded-[.625rem] border outline-none p-2.5 px-4 pr-10 appearance-none transition-all duration-200 focus:ring-1;
 }
+
+
+
+@utility checkbox-container {
+  @apply flex items-center gap-3 cursor-pointer w-fit;
+}
+
+@utility checkbox-box {
+  @apply w-5 h-5 border-2 rounded-md transition-all duration-200 border-maroon-700 dark:border-soft-pink-300 peer-checked:bg-maroon-700 dark:peer-checked:bg-soft-pink-300 peer-checked:border-maroon-700 dark:peer-checked:border-soft-pink-300 peer-disabled:opacity-50 peer-disabled:cursor-not-allowed;
+}
+
+@utility checkbox-tick {
+  @apply absolute w-3.5 h-3.5 text-white dark:text-zinc-900 pointer-events-none scale-0 peer-checked:scale-100 transition-transform duration-200;
+}
+
+@utility checkbox-label {
+  @apply text-sm font-medium text-zinc-700 dark:text-zinc-300 select-none;
+}
