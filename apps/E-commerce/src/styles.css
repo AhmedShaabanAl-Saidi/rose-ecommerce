@@ -250,3 +250,7 @@
 @utility input-error-message {
   @apply flex items-center gap-1 mt-1 text-red-500 text-xs font-medium;
 }
+
+@utility select-base {
+  @apply w-full bg-white dark:bg-[#323238] text-zinc-900 dark:text-zinc-300 rounded-[.625rem] border outline-none p-2.5 px-4 pr-10 appearance-none transition-all duration-200 focus:ring-1;
+}

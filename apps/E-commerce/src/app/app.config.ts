@@ -18,7 +18,7 @@ import {
 } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AlertCircle, Eye, EyeOff, LucideAngularModule } from 'lucide-angular';
+import { AlertCircle, ChevronDown, Eye, EyeOff, LucideAngularModule } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
       suffix: '.json',
     }),
     importProvidersFrom(
-      LucideAngularModule.pick({ AlertCircle, Eye, EyeOff })
+      LucideAngularModule.pick({ AlertCircle, Eye, EyeOff,ChevronDown })
     )
   ],
 };
