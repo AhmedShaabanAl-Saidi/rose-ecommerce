@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-auth-title',
-    imports: [],
+    imports: [TranslatePipe],
     templateUrl: './auth-title.component.html',
 })
 export class AuthTitleComponent {
     @Input() title!: string;
-    @Input() description?: string;
 }

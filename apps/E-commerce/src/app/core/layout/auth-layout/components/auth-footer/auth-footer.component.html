@@ -1,7 +1,7 @@
 <div class="text-center">
     <p class="text-sm text-gray-600 dark:text-gray-400">
-        {{ text }}
+        {{ text | translate }}
         @if (linkRoute && linkText) {<a [routerLink]="linkRoute" class="font-medium text-[#741C21] hover:underline">{{
-            linkText }}</a>}
+            linkText | translate }}</a>}
     </p>
 </div>
