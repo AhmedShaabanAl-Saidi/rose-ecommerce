@@ -5,11 +5,5 @@
       [config]="config"
     ></ng-otp-input>
   </div>
-
-  @if (Invalid) {
-  <div class="flex items-center gap-1 text-red-500 justify-center">
-    <i-lucide name="alert-circle" size="14"></i-lucide>
-    <span class="text-xs font-medium">{{ errorMessage }}</span>
-  </div>
-  }
+  <lib-input-error [control]="control"></lib-input-error>
 </div>

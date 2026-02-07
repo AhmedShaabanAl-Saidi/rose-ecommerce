@@ -32,10 +32,5 @@
     </span>
     }
   </label>
-
-  @if (Invalid) {
-  <span class="input-error-message">
-    <i-lucide name="alert-circle" size="14"></i-lucide> {{ errorMessage }}
-  </span>
-  }
+  <lib-input-error [control]="control"></lib-input-error>
 </div>

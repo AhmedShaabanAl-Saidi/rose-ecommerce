@@ -5,6 +5,7 @@ import { LucideAngularModule } from 'lucide-angular';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BaseInputComponent } from '../base/base-input.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { InputErrorComponent } from '../error/input-error.component';
 @Component({
   selector: 'lib-phone-input',
   imports: [
@@ -13,6 +14,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ReactiveFormsModule,
     NgxIntlTelInputModule,
     BsDropdownModule,
+    InputErrorComponent,
   ],
   templateUrl: './phone-input.component.html',
   styleUrl: './phone-input.component.css',
@@ -20,12 +22,5 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 export class PhoneInputComponent extends BaseInputComponent {
   get formField(): FormControl {
     return (this.control as FormControl) || new FormControl();
-  }
-  override get errorMessage(): string {
-    const errors = this.control?.errors;
-    if (errors?.['required']) return 'Phone number is required';
-    if (errors?.['validatePhoneNumber'] === false)
-      return 'Invalid phone number format';
-    return super.errorMessage;
   }
 }

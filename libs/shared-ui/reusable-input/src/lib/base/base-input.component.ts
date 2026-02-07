@@ -40,20 +40,4 @@ export abstract class BaseInputComponent implements ControlValueAccessor {
   get Invalid(): boolean {
     return !!(this.control?.touched && this.control?.invalid);
   }
-  get errorMessage(): string {
-    const errors = this.control?.errors;
-    if (!errors) return '';
-
-    if (errors['required']) return 'Field is required';
-    if (errors['email']) return 'Please enter a valid email address';
-    if (errors['minlength'])
-      return `Minimum ${errors['minlength'].requiredLength} characters required`;
-    if (errors['maxlength'])
-      return `Maximum ${errors['maxlength'].requiredLength} characters allowed`;
-    if (errors['mismatch']) return 'Fields do not match';
-    if (errors['min']) return `Value must be at least ${errors['min'].min}`;
-    if (errors['max']) return `Value must be no more than ${errors['max'].max}`;
-
-    return 'Invalid field';
-  }
 }

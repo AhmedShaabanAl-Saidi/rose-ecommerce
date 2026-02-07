@@ -1,9 +1,6 @@
 <div class="input-wrapper">
   @if (label()) {
-  <label
-    [for]="label()"
-    class="input-label"
-  >
+  <label [for]="label()" class="input-label">
     {{ label() }}
   </label>
   }
@@ -19,12 +16,8 @@
     [maxLength]="15"
     name="phone"
     [formControl]="formField"
-    class="bg-white dark:bg-zinc-900 dark:text-white outline outline-gray-200 dark:outline-zinc-700 rounded-lg"  ></ngx-intl-tel-input>
+    class="bg-white dark:bg-zinc-900 dark:text-white outline outline-gray-200 dark:outline-zinc-700 rounded-lg"
+  ></ngx-intl-tel-input>
 
-  @if (Invalid) {
-  <div class="flex items-center gap-1 mt-1 text-red-500">
-    <i-lucide name="alert-circle" size="14" class="shrink-0"></i-lucide>
-    <span class="text-xs font-medium">{{ errorMessage }}</span>
-  </div>
-  }
+  <lib-input-error [control]="control"></lib-input-error>
 </div>

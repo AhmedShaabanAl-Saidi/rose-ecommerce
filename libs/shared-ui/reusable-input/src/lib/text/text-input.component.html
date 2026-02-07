@@ -14,7 +14,9 @@
 
     <input
       [id]="label()"
-      [type]="type() === 'password' ? (showPassword() ? 'text' : 'password') : type()"
+      [type]="
+        type() === 'password' ? (showPassword() ? 'text' : 'password') : type()
+      "
       [placeholder]="placeholder()"
       [value]="value || ''"
       [disabled]="isDisabled"
@@ -33,15 +35,13 @@
       (click)="togglePassword()"
       class="input-icon-container right-3 cursor-pointer hover:text-zinc-600 dark:hover:text-zinc-200 focus:outline-none"
     >
-      <i-lucide [name]="showPassword() ? 'eye' : 'eye-off'" size="18"></i-lucide>
+      <i-lucide
+        [name]="showPassword() ? 'eye' : 'eye-off'"
+        size="18"
+      ></i-lucide>
     </button>
     }
   </div>
 
-  @if (Invalid) {
-  <div class="input-error-message">
-    <i-lucide name="alert-circle" size="14" class="shrink-0"></i-lucide>
-    <span>{{ errorMessage }}</span>
-  </div>
-  }
+  <lib-input-error [control]="control" [customType]="type()"></lib-input-error>
 </div>
