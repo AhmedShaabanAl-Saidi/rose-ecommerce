@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LucideAngularModule, LogOut, ChevronRight, Mail } from 'lucide-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UiButtonComponent, UiLabelComponent, UiErrorComponent } from '../shared/components/ui';
 
 @Component({
   selector: 'app-ui-demo',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UiButtonComponent, UiLabelComponent, UiErrorComponent],
+  imports: [CommonModule, ReactiveFormsModule, UiButtonComponent, UiLabelComponent, UiErrorComponent, LucideAngularModule],
   template: `
     <div class="p-8 space-y-8 max-w-2xl mx-auto">
       <h1 class="text-2xl font-bold">UI Components Demo</h1>
@@ -33,6 +34,12 @@ import { UiButtonComponent, UiLabelComponent, UiErrorComponent } from '../shared
             <h3 class="font-medium">Block Button</h3>
             <ui-button [block]="true">Block Button</ui-button>
         </div>
+        <div class="flex flex-wrap gap-4 items-center">
+            <h3 class="font-medium w-full">With Icons</h3>
+            <ui-button [icon]="Mail">Login with Email</ui-button>
+            <ui-button [icon]="ChevronRight" iconPos="right">Get Started</ui-button>
+            <ui-button variant="secondary" [icon]="LogOut">Sign Out</ui-button>
+        </div>
       </section>
 
       <section class="space-y-4">
@@ -56,4 +63,8 @@ import { UiButtonComponent, UiLabelComponent, UiErrorComponent } from '../shared
     </div>
   `
 })
-export class UiDemoComponent {}
+export class UiDemoComponent {
+  readonly LogOut = LogOut;
+  readonly ChevronRight = ChevronRight;
+  readonly Mail = Mail;
+}

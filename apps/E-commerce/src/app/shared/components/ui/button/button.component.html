@@ -14,6 +14,22 @@
       Loading...
     </ng-container>
   } @else {
+    @if (icon() && iconPos() === 'left') {
+      <lucide-icon 
+        [img]="icon()" 
+        class="mr-2 h-4 w-4" 
+        aria-hidden="true"
+      ></lucide-icon>
+    }
+    
     <ng-content></ng-content>
+    
+    @if (icon() && iconPos() === 'right') {
+      <lucide-icon 
+        [img]="icon()" 
+        class="ml-2 h-4 w-4" 
+        aria-hidden="true"
+      ></lucide-icon>
+    }
   }
 </button>
