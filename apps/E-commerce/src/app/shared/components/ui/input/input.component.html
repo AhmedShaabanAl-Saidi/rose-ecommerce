@@ -1,0 +1,54 @@
+<div class="w-full space-y-2">
+  @if (label()) {
+    <label 
+      [for]="id()" 
+      class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-[var(--color-text-body)]"
+    >
+      {{ label() }}
+    </label>
+  }
+  <div class="relative">
+    <input
+      [type]="inputType()"
+      [id]="id()"
+      [placeholder]="placeholder()"
+      [formControl]="control()"
+      class="flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm placeholder:text-[var(--color-text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
+      [class.border-red-500]="error()"
+      [class.focus-visible:ring-red-500]="error()"
+      [class.border-[var(--color-zinc-200)]]="!error()"
+      [class.focus-visible:ring-[var(--color-maroon-600)]]="!error()"
+    />
+    
+    @if (type() === 'password') {
+      <button
+        type="button"
+        (click)="togglePasswordVisibility()"
+        class="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] focus:outline-none"
+      >
+        @if (passwordVisible()) {
+          <!-- Eye Off Icon -->
+          <lucide-icon 
+            [img]="EyeOff" 
+            class="h-[18px] w-[18px]" 
+            strokeWidth="2"
+            aria-hidden="true"
+          ></lucide-icon>
+        } @else {
+          <!-- Eye Icon -->
+          <lucide-icon 
+            [img]="Eye" 
+            class="h-[18px] w-[18px]" 
+            strokeWidth="2"
+            aria-hidden="true"
+          ></lucide-icon>
+        }
+      </button>
+    }
+  </div>
+  @if (error()) {
+    <p class="text-sm font-medium text-red-500 animate-in slide-in-from-top-1 fade-in-0">
+      {{ error() }}
+    </p>
+  }
+</div>
