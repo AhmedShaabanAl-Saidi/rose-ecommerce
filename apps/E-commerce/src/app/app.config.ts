@@ -1,6 +1,8 @@
+import { loadingInterceptor } from './core/interceptors/loading/loading-interceptor';
 import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
 import {
   ApplicationConfig,
+  importProvidersFrom,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
@@ -19,15 +21,17 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideToastr } from 'ngx-toastr';
 import { errorInterceptor } from './core/interceptors/errors/error-interceptor';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { provideAnimations } from '@angular/platform-browser/animations';
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideClientHydration(withEventReplay()),
     provideBrowserGlobalErrorListeners(),
     provideRouter(appRoutes),
     provideHttpClient(
       withFetch(),
-      withInterceptors([errorInterceptor, authInterceptor])
+      withInterceptors([loadingInterceptor, authInterceptor, errorInterceptor])
     ),
     provideAuth({ baseUrl: 'https://flower.elevateegy.com/' }),
     provideZonelessChangeDetection(),
@@ -44,5 +48,8 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    importProvidersFrom([
+      NgxSpinnerModule.forRoot({ type: 'triangle-skew-spin' }),
+    ]),
   ],
 };
