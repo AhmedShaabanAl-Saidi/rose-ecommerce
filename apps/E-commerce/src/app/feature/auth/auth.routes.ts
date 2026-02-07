@@ -19,14 +19,6 @@ export const authRoutes: Routes = [
                 path: 'forgot-password',
                 loadComponent: () => import('./pages/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent),
             },
-            {
-                path: 'otp-code',
-                loadComponent: () => import('./pages/otp-code/otp-code.component').then(m => m.OtpCodeComponent),
-            },
-            {
-                path: 'reset-password',
-                loadComponent: () => import('./pages/reset-password/reset-password.component').then(m => m.ResetPasswordComponent),
-            },
         ]
     }
 ];
