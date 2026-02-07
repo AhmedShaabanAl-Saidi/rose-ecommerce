@@ -5,47 +5,23 @@
   "AUTH": {
     "LOGIN": {
       "TITLE": "Welcome back!",
-      "EMAIL": "Email",
-      "PASSWORD": "Password",
-      "SUBMIT": "Login",
-      "FORGOT_PASSWORD": "Forgot Password?",
       "FOOTER_TEXT": "Don't have an account yet?",
       "FOOTER_LINK": "Create one now!"
     },
     "REGISTER": {
       "TITLE": "Become part of our family!",
-      "FIRST_NAME": "First Name",
-      "LAST_NAME": "Last Name",
-      "EMAIL": "Email",
-      "PASSWORD": "Password",
-      "CONFIRM_PASSWORD": "Confirm Password",
-      "PHONE": "Phone",
-      "SUBMIT": "Register",
       "FOOTER_TEXT": "Already have an account?",
       "FOOTER_LINK": "Login now!"
     },
     "FORGOT_PASSWORD": {
-      "TITLE": "Forgot Password?",
-      "DESCRIPTION": "Enter your email to reset your password.",
-      "EMAIL": "Email",
-      "SUBMIT": "Send Code",
       "FOOTER_TEXT": "Remember your password?",
       "FOOTER_LINK": "Login now!"
     },
     "OTP": {
-      "TITLE": "OTP Code",
-      "DESCRIPTION": "Check your email for the verification code.",
-      "CODE": "Code",
-      "SUBMIT": "Verify",
       "FOOTER_TEXT": "Didn't receive code?",
       "FOOTER_LINK": "Resend"
     },
     "RESET_PASSWORD": {
-      "TITLE": "Reset Password",
-      "DESCRIPTION": "Enter your new password below.",
-      "EMAIL": "Email",
-      "NEW_PASSWORD": "New Password",
-      "SUBMIT": "Reset Password",
       "FOOTER_LINK": "Back to Login"
     }
   }

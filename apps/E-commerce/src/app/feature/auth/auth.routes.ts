@@ -31,8 +31,6 @@ export const authRoutes: Routes = [
                 path: 'forgot-password',
                 loadComponent: () => import('./pages/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent),
                 data: {
-                    title: 'AUTH.FORGOT_PASSWORD.TITLE',
-                    description: 'AUTH.FORGOT_PASSWORD.DESCRIPTION',
                     footerText: 'AUTH.FORGOT_PASSWORD.FOOTER_TEXT',
                     footerLinkText: 'AUTH.FORGOT_PASSWORD.FOOTER_LINK',
                     footerLinkRoute: '/auth/login'
@@ -42,8 +40,6 @@ export const authRoutes: Routes = [
                 path: 'otp-code',
                 loadComponent: () => import('./pages/otp-code/otp-code.component').then(m => m.OtpCodeComponent),
                 data: {
-                    title: 'AUTH.OTP.TITLE',
-                    description: 'AUTH.OTP.DESCRIPTION',
                     footerText: 'AUTH.OTP.FOOTER_TEXT',
                     footerLinkText: 'AUTH.OTP.FOOTER_LINK',
                     footerLinkRoute: '/auth/forgot-password'
@@ -53,8 +49,6 @@ export const authRoutes: Routes = [
                 path: 'reset-password',
                 loadComponent: () => import('./pages/reset-password/reset-password.component').then(m => m.ResetPasswordComponent),
                 data: {
-                    title: 'AUTH.RESET_PASSWORD.TITLE',
-                    description: 'AUTH.RESET_PASSWORD.DESCRIPTION',
                     footerLinkText: 'AUTH.RESET_PASSWORD.FOOTER_LINK',
                     footerLinkRoute: '/auth/login'
                 }
