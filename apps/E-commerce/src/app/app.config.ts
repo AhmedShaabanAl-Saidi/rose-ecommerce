@@ -1,3 +1,4 @@
+import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
 import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
@@ -9,8 +10,12 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideTranslateService } from "@ngx-translate/core";
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
+import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export const appConfig: ApplicationConfig = {
@@ -18,7 +23,8 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideBrowserGlobalErrorListeners(),
     provideRouter(appRoutes),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    provideAuth({ baseUrl: 'https://flower.elevateegy.com/' }),
     provideZonelessChangeDetection(),
     provideTranslateService({
       fallbackLang: 'en',
