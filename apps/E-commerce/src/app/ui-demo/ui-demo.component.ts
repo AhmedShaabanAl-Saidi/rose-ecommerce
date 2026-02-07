@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
-import { UiButtonComponent, UiInputComponent, UiErrorComponent } from '../shared/components/ui';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UiButtonComponent, UiLabelComponent, UiErrorComponent } from '../shared/components/ui';
 
 @Component({
   selector: 'app-ui-demo',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, UiButtonComponent, UiInputComponent, UiErrorComponent],
+  imports: [CommonModule, ReactiveFormsModule, UiButtonComponent, UiLabelComponent, UiErrorComponent],
   template: `
     <div class="p-8 space-y-8 max-w-2xl mx-auto">
       <h1 class="text-2xl font-bold">UI Components Demo</h1>
@@ -36,16 +36,16 @@ import { UiButtonComponent, UiInputComponent, UiErrorComponent } from '../shared
       </section>
 
       <section class="space-y-4">
-        <h2 class="text-xl font-semibold">Inputs</h2>
-        <div class="space-y-4">
-          <ui-input label="Email" placeholder="Enter your email" [control]="emailControl" />
-          <ui-input label="Password" type="password" placeholder="Enter password" [control]="passwordControl" />
-          <ui-input 
-            label="With Manual Error" 
-            placeholder="This has an error" 
-            [control]="errorControl" 
-            errorMessage="Manual error message" 
-          />
+        <h2 class="text-xl font-semibold">Labels</h2>
+        <div class="flex flex-col gap-4">
+          <div class="space-y-1">
+            <label ui-label>Default Label</label>
+            <p class="text-sm text-gray-500">Associated with an input (conceptually)</p>
+          </div>
+          <div class="space-y-1">
+            <label ui-label class="text-red-500">Styled Label (Red)</label>
+             <p class="text-sm text-gray-500">Custom class applied</p>
+          </div>
         </div>
       </section>
       
@@ -56,8 +56,4 @@ import { UiButtonComponent, UiInputComponent, UiErrorComponent } from '../shared
     </div>
   `
 })
-export class UiDemoComponent {
-  emailControl = new FormControl('', [Validators.required, Validators.email]);
-  passwordControl = new FormControl('', [Validators.required]);
-  errorControl = new FormControl('');
-}
+export class UiDemoComponent {}
