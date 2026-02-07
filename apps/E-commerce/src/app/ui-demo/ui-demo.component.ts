@@ -38,7 +38,7 @@ import { UiButtonComponent, UiLabelComponent, UiErrorComponent } from '../shared
             <h3 class="font-medium w-full">With Icons</h3>
             <ui-button [icon]="Mail">Login with Email</ui-button>
             <ui-button [icon]="ChevronRight" iconPos="right">Get Started</ui-button>
-            <ui-button variant="secondary" [icon]="LogOut">Sign Out</ui-button>
+            <ui-button variant="secondary" [icon]="LogOut" (click)="onButtonClick($event)">Sign Out</ui-button>
         </div>
       </section>
 
@@ -67,4 +67,8 @@ export class UiDemoComponent {
   readonly LogOut = LogOut;
   readonly ChevronRight = ChevronRight;
   readonly Mail = Mail;
+
+  onButtonClick(event: MouseEvent) {
+    console.log('Button clicked!', event);
+  }
 }

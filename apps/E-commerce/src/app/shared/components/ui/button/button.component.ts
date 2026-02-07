@@ -1,4 +1,4 @@
-import { Component, input, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, computed, ChangeDetectionStrategy, output } from '@angular/core';
 import { LucideAngularModule, Loader2 } from 'lucide-angular';
 
 
@@ -23,6 +23,7 @@ export class UiButtonComponent {
   readonly block = input(false);
   readonly icon = input<any>(null);
   readonly iconPos = input<'left' | 'right'>('left');
+  readonly click = output<MouseEvent>();
   
   readonly classes = computed(() => {
     const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50';
@@ -54,6 +55,8 @@ export class UiButtonComponent {
     if (this.disabled() || this.loading()) {
       event.preventDefault();
       event.stopPropagation();
+      return;
     }
+    this.click.emit(event);
   }
 }
