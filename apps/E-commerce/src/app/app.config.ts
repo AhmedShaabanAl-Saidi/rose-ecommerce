@@ -1,6 +1,7 @@
 import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
 import {
   ApplicationConfig,
+  importProvidersFrom,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
@@ -17,9 +18,11 @@ import {
 } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { provideAnimations } from '@angular/platform-browser/animations'; 
+import { AlertCircle, ChevronDown, Eye, EyeOff, LucideAngularModule } from 'lucide-angular';
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideClientHydration(withEventReplay()),
     provideBrowserGlobalErrorListeners(),
     provideRouter(appRoutes),
@@ -33,5 +36,8 @@ export const appConfig: ApplicationConfig = {
       prefix: '/i18n/',
       suffix: '.json',
     }),
+    importProvidersFrom(
+      LucideAngularModule.pick({ AlertCircle, Eye, EyeOff,ChevronDown })
+    )
   ],
 };
