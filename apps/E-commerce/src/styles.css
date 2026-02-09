@@ -277,3 +277,51 @@
     color: #000 !important;
   }
 }
+
+@utility input-wrapper {
+  @apply flex flex-col gap-1.5 w-full;
+}
+
+@utility input-label {
+  @apply text-zinc-800 dark:text-zinc-50 text-sm font-medium;
+}
+
+@utility input-base {
+  @apply w-full bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-[.625rem] border border-zinc-300 dark:border-zinc-600 outline-none p-2 transition-all duration-200 placeholder:text-zinc-400 focus:ring-1;
+}
+
+@utility input-status-normal {
+  @apply border-zinc-300 focus:border-blue-500 focus:ring-blue-500;
+}
+
+@utility input-status-error {
+  @apply border-red-500 focus:border-red-500 focus:ring-red-500;
+}
+
+@utility input-icon-container {
+  @apply absolute flex items-center text-zinc-400;
+}
+
+@utility input-error-message {
+  @apply flex items-center gap-1 mt-1 text-red-500 text-xs font-medium;
+}
+
+@utility select-base {
+  @apply w-full bg-white dark:bg-[#323238] text-zinc-900 dark:text-zinc-300 rounded-[.625rem] border outline-none p-2.5 px-4 pr-10 appearance-none transition-all duration-200 focus:ring-1;
+}
+
+@utility checkbox-container {
+  @apply flex items-center gap-3 cursor-pointer w-fit;
+}
+
+@utility checkbox-box {
+  @apply w-5 h-5 border-2 rounded-md transition-all duration-200 border-maroon-700 dark:border-soft-pink-300 peer-checked:bg-maroon-700 dark:peer-checked:bg-soft-pink-300 peer-checked:border-maroon-700 dark:peer-checked:border-soft-pink-300 peer-disabled:opacity-50 peer-disabled:cursor-not-allowed;
+}
+
+@utility checkbox-tick {
+  @apply absolute w-3.5 h-3.5 text-white dark:text-zinc-900 pointer-events-none scale-0 peer-checked:scale-100 transition-transform duration-200;
+}
+
+@utility checkbox-label {
+  @apply text-sm font-medium text-zinc-700 dark:text-zinc-300 select-none;
+}

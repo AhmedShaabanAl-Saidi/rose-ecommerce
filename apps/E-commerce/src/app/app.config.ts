@@ -23,6 +23,13 @@ import { provideToastr } from 'ngx-toastr';
 import { errorInterceptor } from './core/interceptors/errors/error-interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import {
+  AlertCircle,
+  ChevronDown,
+  Eye,
+  EyeOff,
+  LucideAngularModule,
+} from 'lucide-angular';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
@@ -51,5 +58,8 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([
       NgxSpinnerModule.forRoot({ type: 'triangle-skew-spin' }),
     ]),
+    importProvidersFrom(
+      LucideAngularModule.pick({ AlertCircle, Eye, EyeOff, ChevronDown })
+    ),
   ],
 };
