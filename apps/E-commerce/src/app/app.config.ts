@@ -43,7 +43,7 @@ export const appConfig: ApplicationConfig = {
     provideAuth({ baseUrl: 'https://flower.elevateegy.com/' }),
     provideZonelessChangeDetection(),
     provideTranslateService({
-      defaultLanguage: 'en',
+      fallbackLang: 'en',
     }),
     provideTranslateHttpLoader({
       prefix: '/i18n/',

@@ -6,30 +6,4 @@
   [fullScreen]="true"
   ><p style="color: white">Loading...</p></ngx-spinner
 >
-
-<div class="p-5">
-  <h2
-    class="bg-zinc-500 shadow-md text-2xl text-white rounded-xl w-1/2 mx-auto text-center p-3 mb-5"
-  >
-    {{ 'HELLO' | translate }} - {{ 'WELCOME' | translate }}
-  </h2>
-
-  <div class="flex gap-4 justify-center mb-5">
-    <button
-      (click)="changeClient('en')"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    >
-      English
-    </button>
-    <button
-      (click)="changeClient('ar')"
-      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-    >
-      العربية
-    </button>
-  </div>
-
-  <i-lucide [img]="FileIcon" class="my-icon"></i-lucide>
-
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>

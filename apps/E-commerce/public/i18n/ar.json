@@ -1,5 +1,28 @@
 {
   "HELLO": "مرحبا",
   "WELCOME": "مرحبا بكم في التجارة الإلكترونية",
-  "SWITCH_LANGUAGE": "تغيير اللغة"
+  "SWITCH_LANGUAGE": "تغيير اللغة",
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "مرحبًا بعودتك!",
+      "FOOTER_TEXT": "ليس لديك حساب بعد؟",
+      "FOOTER_LINK": "أنشئ حساباً الآن!"
+    },
+    "REGISTER": {
+      "TITLE": "كن جزءًا من عائلتنا!",
+      "FOOTER_TEXT": "لديك حساب بالفعل؟",
+      "FOOTER_LINK": "سجل الدخول الآن!"
+    },
+    "FORGOT_PASSWORD": {
+      "FOOTER_TEXT": "تذكرت كلمة المرور؟",
+      "FOOTER_LINK": "سجل الدخول الآن!"
+    },
+    "OTP": {
+      "FOOTER_TEXT": "لم تستلم الرمز؟",
+      "FOOTER_LINK": "إعادة إرسال"
+    },
+    "RESET_PASSWORD": {
+      "FOOTER_LINK": "العودة لتسجيل الدخول"
+    }
+  }
 }

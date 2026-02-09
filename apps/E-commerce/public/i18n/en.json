@@ -1,5 +1,28 @@
 {
   "HELLO": "Hello",
   "WELCOME": "Welcome to E-commerce",
-  "SWITCH_LANGUAGE": "Switch Language"
+  "SWITCH_LANGUAGE": "Switch Language",
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Welcome back!",
+      "FOOTER_TEXT": "Don't have an account yet?",
+      "FOOTER_LINK": "Create one now!"
+    },
+    "REGISTER": {
+      "TITLE": "Become part of our family!",
+      "FOOTER_TEXT": "Already have an account?",
+      "FOOTER_LINK": "Login now!"
+    },
+    "FORGOT_PASSWORD": {
+      "FOOTER_TEXT": "Remember your password?",
+      "FOOTER_LINK": "Login now!"
+    },
+    "OTP": {
+      "FOOTER_TEXT": "Didn't receive code?",
+      "FOOTER_LINK": "Resend"
+    },
+    "RESET_PASSWORD": {
+      "FOOTER_LINK": "Back to Login"
+    }
+  }
 }
