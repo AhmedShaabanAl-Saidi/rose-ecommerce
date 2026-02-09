@@ -88,4 +88,8 @@ export class AuthApiRepo extends AuthRepo {
   resetPassword(data: ResetPasswordParams): Observable<PasswordModel> {
     return this._authService.resetPassword(data);
   }
+  cleanData() {
+    this._storage.removeToken();
+    this._state.setUser(null);
+  }
 }

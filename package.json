@@ -24,6 +24,8 @@
     "ng-otp-input": "^2.0.9",
     "ngx-bootstrap": "^21.0.1",
     "ngx-cookie-service-ssr": "^21.1.0",
+    "ngx-spinner": "^21.0.0",
+    "ngx-toastr": "^20.0.5",
     "ngx-intl-tel-input": "^17.0.0",
     "rxjs": "~7.8.0",
     "tailwindcss": "^4.0.0",

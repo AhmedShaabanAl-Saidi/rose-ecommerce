@@ -31,4 +31,5 @@ export abstract class AuthRepo {
     data: VerifyResetCodeParams
   ): Observable<StatusModel>;
   abstract resetPassword(data: ResetPasswordParams): Observable<PasswordModel>;
+  abstract cleanData(): void;
 }
