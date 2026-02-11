@@ -75,6 +75,7 @@ export class OtpCodeComponent {
 
   verify(): void {
     if (!this.isFormValid() || this.isLoading()) {
+      this.otpControl.markAsTouched();
       return;
     }
 

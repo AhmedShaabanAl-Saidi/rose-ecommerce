@@ -7,7 +7,7 @@
             {{ 'AUTH.OTP.DESCRIPTION' | translate }}
             <span class="font-medium text-gray-900 dark:text-white" dir="ltr">{{ email() }}</span>
             <button type="button" (click)="onEdit()"
-                class="text-primary-600 hover:text-primary-700 font-medium ms-1 underline">
+                class="text-blue-600 hover:text-blue-700 font-medium ms-1 underline cursor-pointer">
                 {{ 'AUTH.OTP.EDIT' | translate }}
             </button>
         </p>
@@ -24,7 +24,7 @@
 
                     <button type="button" (click)="resend()" [disabled]="timer() > 0 || isLoading()"
                         [class.opacity-50]="timer() > 0 || isLoading()"
-                        class="text-primary-600 hover:text-primary-700 font-medium disabled:cursor-not-allowed">
+                        class="text-primary-600 hover:text-primary-700 font-medium disabled:cursor-not-allowed cursor-pointer">
                         {{ 'AUTH.OTP.SEND_NEW' | translate }}
                     </button>
         </div>
