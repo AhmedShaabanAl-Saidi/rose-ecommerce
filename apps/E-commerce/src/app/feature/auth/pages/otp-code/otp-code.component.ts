@@ -1,13 +1,14 @@
 import { Component, inject, output, signal, PLATFORM_ID, computed } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AuthRepo } from '@elevate/auth-domain';
 import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
 import { OtpInputComponent } from '@elevate/reusable-input';
 import { DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { interval, Subject, takeWhile, takeUntil, startWith, map } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 type LoadingState = 'idle' | 'verifying' | 'resending';
 
@@ -20,6 +21,8 @@ export class OtpCodeComponent {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly auth = inject(AuthRepo);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly toastr = inject(ToastrService);
+  private readonly translate = inject(TranslateService);
 
   readonly email = signal<string>('');
   readonly timer = signal<number>(0);
@@ -110,6 +113,7 @@ export class OtpCodeComponent {
           this.loadingState.set('idle');
           this.resetTimer();
           this.otpControl.reset();
+          this.toastr.success(this.translate.instant('AUTH.OTP.SUCCESS_RESEND'));
         }
       });
   }
