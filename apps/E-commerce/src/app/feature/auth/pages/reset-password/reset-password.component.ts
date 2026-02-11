@@ -6,14 +6,14 @@ import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-pa
 import { AuthRepo } from '@elevate/auth-domain';
 import { ToastrService } from 'ngx-toastr';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { LucideAngularModule } from 'lucide-angular';
 import { ResetPasswordStateService } from '../../services/reset-password-state.service';
-
+import { TextInputComponent } from '@elevate/reusable-input'; 
+import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
 
 @Component({
   selector: 'app-reset-password',
   standalone: true,
-  imports: [ReactiveFormsModule, TranslatePipe, LucideAngularModule],
+  imports: [ReactiveFormsModule, TranslatePipe, TextInputComponent, UiButtonComponent],
   templateUrl: './reset-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -56,17 +56,7 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
     confirmPassword: ['', [Validators.required]]
   }, { validators: this.passwordMatchValidator });
 
-  passwordVisible = signal(false);
-  confirmPasswordVisible = signal(false);
   isLoading = signal(false);
-
-  togglePasswordVisibility() {
-    this.passwordVisible.update(v => !v);
-  }
-
-  toggleConfirmPasswordVisibility() {
-    this.confirmPasswordVisible.update(v => !v);
-  }
 
   onSubmit() {
     if (this.form.invalid || !this.email) {
@@ -82,10 +72,10 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
         next: () => {
-            this.isLoading.set(false);
-            const successMessage = this.translate.instant('AUTH.RESET_PASSWORD.SUCCESS');
-            this.toastr.success(successMessage);
-            setTimeout(() => this.router.navigate(['/auth/login']), 2000);
+             this.isLoading.set(false);
+             const successMessage = this.translate.instant('AUTH.RESET_PASSWORD.SUCCESS');
+             this.toastr.success(successMessage);
+             setTimeout(() => this.router.navigate(['/auth/login']), 2000);
         },
         error: () => {
              this.isLoading.set(false);
@@ -101,8 +91,8 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
     const confirmPassword = control.get('confirmPassword');
 
     if (password && confirmPassword && password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatch: true });
-      return { passwordMismatch: true };
+      confirmPassword.setErrors({ mismatch: true }); // Updated key
+      return { mismatch: true };
     }
     return null;
   }
