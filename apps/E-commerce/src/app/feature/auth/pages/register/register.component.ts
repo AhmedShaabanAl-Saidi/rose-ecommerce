@@ -1,5 +1,5 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 import {
   AbstractControl,
   FormBuilder,
@@ -7,17 +7,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthRepo } from '@elevate/auth-domain';
-import { ToastrService } from 'ngx-toastr';
 import {
-  TextInputComponent,
   PhoneInputComponent,
   SelectInputComponent,
-  InputErrorComponent,
+  TextInputComponent,
 } from '@elevate/reusable-input';
-import { CommonModule } from '@angular/common';
-import { UiButtonComponent } from 'apps/E-commerce/src/app/shared/components/ui';
-import { Router } from '@angular/router';
+import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
+import { ToastrService } from 'ngx-toastr';
+import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +27,6 @@ import { Router } from '@angular/router';
     PhoneInputComponent,
     SelectInputComponent,
     UiButtonComponent,
-    InputErrorComponent,
   ],
   templateUrl: './register.component.html',
 })
@@ -62,22 +60,29 @@ export class RegisterComponent implements AuthPage {
             ),
           ],
         ],
-        rePassword: ['', [Validators.required, this.passwordMatchValidator]], // Removed the individual validator here
+        rePassword: ['', [Validators.required]],
       },
-      { validators: this.passwordMatchValidator } // Group-level validator is enough
+      { validators: this.passwordMatchValidator }
     );
   }
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.formInit();
   }
   passwordMatchValidator(group: AbstractControl) {
-    const password = group.get('password')?.value;
-    const rePassword = group.get('rePassword')?.value;
+    const password = group.get('password');
+    const rePassword = group.get('rePassword');
 
-    // Return null if they match, or an error object if they don't
-    return password === rePassword ? null : { mismatch: true };
+    if (password?.value !== rePassword?.value) {
+      rePassword?.setErrors({ ...rePassword.errors, mismatch: true });
+      return { mismatch: true };
+    } else {
+      const errors = rePassword?.errors;
+      if (errors) {
+        delete errors['mismatch'];
+        rePassword?.setErrors(Object.keys(errors).length ? errors : null);
+      }
+      return null;
+    }
   }
 
   submit() {
@@ -86,10 +91,9 @@ export class RegisterComponent implements AuthPage {
       return;
     }
 
-    // Create a clean payload for the API
     const payload = {
       ...this.authForm.value,
-      phone: this.authForm.value.phone?.e164Number, // Safe extraction
+      phone: this.authForm.value.phone?.e164Number,
     };
 
     this.authRepo.register(payload).subscribe({
@@ -97,7 +101,6 @@ export class RegisterComponent implements AuthPage {
         this.toaster.success('Registration successful');
         this.router.navigate(['/auth/login']);
       },
-      // Don't forget to handle errors here too!
     });
   }
 }

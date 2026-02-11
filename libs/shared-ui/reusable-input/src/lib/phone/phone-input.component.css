@@ -33,6 +33,6 @@
   color: #9f9fa9;
 }
 
-::ng-deep .ng-invalid.ng-touched input {
+:host ::ng-deep .ng-invalid.ng-touched input {
   border-color: #ef4444 !important;
 }

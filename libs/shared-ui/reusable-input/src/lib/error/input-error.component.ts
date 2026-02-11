@@ -40,7 +40,7 @@ export class InputErrorComponent {
 
     if (errors['pattern']) {
       if (this.customType() === 'password')
-        return 'Password must contain uppercase, lowercase and numbers';
+        return 'Password must be at least 8 characters with (A-z, 0-9, @$!%*?&)';
       return 'Invalid format';
     }
 
