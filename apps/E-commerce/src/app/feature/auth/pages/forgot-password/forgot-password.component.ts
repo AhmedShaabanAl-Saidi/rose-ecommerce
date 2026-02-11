@@ -1,5 +1,6 @@
-import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, signal, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthRepo } from '@elevate/auth-domain';
@@ -16,12 +17,28 @@ import { OtpCodeComponent } from '../otp-code/otp-code.component';
 export class ForgotPasswordComponent implements AuthPage {
   private readonly auth = inject(AuthRepo);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly platformId = inject(PLATFORM_ID);
 
-  readonly step = signal<1 | 2>(1);
+  readonly step = signal<1 | 2 | null>(null);
+
+  constructor() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.step.set(localStorage.getItem('email') ? 2 : 1);
+    }
+  }
   readonly isLoading = signal<boolean>(false);
 
   readonly authData = computed<AuthPageData>(() => {
-    if (this.step() === 1) {
+    const currentStep = this.step();
+    if (currentStep === 2) {
+      return {
+        title: 'AUTH.OTP.TITLE',
+        description: 'AUTH.OTP.DESCRIPTION',
+        footerText: 'AUTH.OTP.FOOTER_TEXT',
+        footerLinkText: 'AUTH.OTP.FOOTER_LINK',
+        titleStyle: 'simple'
+      };
+    } else if (currentStep === 1) {
       return {
         title: 'AUTH.FORGOT_PASSWORD.TITLE',
         description: 'AUTH.FORGOT_PASSWORD.DESCRIPTION',
@@ -32,10 +49,8 @@ export class ForgotPasswordComponent implements AuthPage {
       };
     } else {
       return {
-        title: 'AUTH.OTP.TITLE',
-        description: 'AUTH.OTP.DESCRIPTION',
-        footerText: 'AUTH.OTP.FOOTER_TEXT',
-        footerLinkText: 'AUTH.OTP.FOOTER_LINK',
+        title: '',
+        description: '',
         titleStyle: 'simple'
       };
     }
@@ -67,6 +82,7 @@ export class ForgotPasswordComponent implements AuthPage {
   }
 
   onBackToEmail() {
+    localStorage.removeItem('email');
     this.step.set(1);
   }
 }

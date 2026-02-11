@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 
 @Component({
@@ -8,8 +9,11 @@ import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-pa
 })
 export class OtpCodeComponent {
   readonly email = signal<string>('');
+  private readonly platformId = inject(PLATFORM_ID);
 
   constructor() {
-    this.email.set(localStorage.getItem('email') || '');
+    if (isPlatformBrowser(this.platformId)) {
+      this.email.set(localStorage.getItem('email') || '');
+    }
   }
 }
