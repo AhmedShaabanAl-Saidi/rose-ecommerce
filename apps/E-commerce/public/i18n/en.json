@@ -14,6 +14,8 @@
       "FOOTER_LINK": "Login now!"
     },
     "FORGOT_PASSWORD": {
+      "TITLE": "Forgot Password?",
+      "DESCRIPTION": "Worry not, we'll send you instructions to help you reset it.",
       "FOOTER_TEXT": "Remember your password?",
       "FOOTER_LINK": "Login now!"
     },
