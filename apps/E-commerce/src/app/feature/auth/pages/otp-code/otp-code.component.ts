@@ -6,10 +6,10 @@ import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-pa
   imports: [],
   templateUrl: './otp-code.component.html',
 })
-export class OtpCodeComponent implements AuthPage {
-  readonly authData = signal({
-    footerText: 'AUTH.OTP.FOOTER_TEXT',
-    footerLinkText: 'AUTH.OTP.FOOTER_LINK',
-    footerLinkRoute: '/auth/forgot-password'
-  });
+export class OtpCodeComponent {
+  readonly email = signal<string>('');
+
+  constructor() {
+    this.email.set(localStorage.getItem('email') || '');
+  }
 }

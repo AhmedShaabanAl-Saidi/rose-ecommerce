@@ -20,6 +20,8 @@
       "FOOTER_LINK": "Login now!"
     },
     "OTP": {
+      "TITLE": "Verify Code",
+      "DESCRIPTION": "Please enter the code we just sent to your email.",
       "FOOTER_TEXT": "Didn't receive code?",
       "FOOTER_LINK": "Resend"
     },

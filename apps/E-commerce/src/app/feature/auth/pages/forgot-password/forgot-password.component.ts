@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -6,27 +6,40 @@ import { AuthRepo } from '@elevate/auth-domain';
 import { AuthPage, AuthPageData } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
 import { TextInputComponent } from '@elevate/reusable-input';
+import { OtpCodeComponent } from '../otp-code/otp-code.component';
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [ReactiveFormsModule, UiButtonComponent, TextInputComponent],
+  imports: [ReactiveFormsModule, UiButtonComponent, TextInputComponent, OtpCodeComponent],
   templateUrl: './forgot-password.component.html',
 })
 export class ForgotPasswordComponent implements AuthPage {
   private readonly auth = inject(AuthRepo);
-  private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly authData = signal<AuthPageData>({
-    title: 'AUTH.FORGOT_PASSWORD.TITLE',
-    description: 'AUTH.FORGOT_PASSWORD.DESCRIPTION',
-    footerText: 'AUTH.FORGOT_PASSWORD.FOOTER_TEXT',
-    footerLinkText: 'AUTH.FORGOT_PASSWORD.FOOTER_LINK',
-    footerLinkRoute: '/auth/login',
-    titleStyle: 'simple'
-  });
-
+  readonly step = signal<1 | 2>(1);
   readonly isLoading = signal<boolean>(false);
+
+  readonly authData = computed<AuthPageData>(() => {
+    if (this.step() === 1) {
+      return {
+        title: 'AUTH.FORGOT_PASSWORD.TITLE',
+        description: 'AUTH.FORGOT_PASSWORD.DESCRIPTION',
+        footerText: 'AUTH.FORGOT_PASSWORD.FOOTER_TEXT',
+        footerLinkText: 'AUTH.FORGOT_PASSWORD.FOOTER_LINK',
+        footerLinkRoute: '/auth/login',
+        titleStyle: 'simple'
+      };
+    } else {
+      return {
+        title: 'AUTH.OTP.TITLE',
+        description: 'AUTH.OTP.DESCRIPTION',
+        footerText: 'AUTH.OTP.FOOTER_TEXT',
+        footerLinkText: 'AUTH.OTP.FOOTER_LINK',
+        titleStyle: 'simple'
+      };
+    }
+  });
 
   readonly forgotPasswordForm = new FormGroup({
     email: new FormControl('', { validators: [Validators.required, Validators.email], nonNullable: true }),
@@ -47,8 +60,13 @@ export class ForgotPasswordComponent implements AuthPage {
       .subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.router.navigate(['/auth/login']);
+          localStorage.setItem('email', payload.email);
+          this.step.set(2);
         }
       });
+  }
+
+  onBackToEmail() {
+    this.step.set(1);
   }
 }
