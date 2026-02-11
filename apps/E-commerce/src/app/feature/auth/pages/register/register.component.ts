@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import {
@@ -27,6 +28,7 @@ import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-pa
     PhoneInputComponent,
     SelectInputComponent,
     UiButtonComponent,
+    TranslatePipe,
   ],
   templateUrl: './register.component.html',
 })

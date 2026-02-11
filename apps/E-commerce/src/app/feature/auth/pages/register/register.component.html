@@ -1,55 +1,56 @@
 <div class="space-y-6">
   <form [formGroup]="authForm" (ngSubmit)="submit()" class="space-y-5">
+
     <div class="grid grid-cols-2 gap-4">
       <lib-text-input
-        label="First name"
-        placeholder="First name"
+        [label]="'AUTH.REGISTER.FIRST_NAME' | translate"
+        [placeholder]="'AUTH.REGISTER.FIRST_NAME' | translate"
         formControlName="firstName"
       ></lib-text-input>
 
       <lib-text-input
-        label="Last name"
-        placeholder="Last name"
+        [label]="'AUTH.REGISTER.LAST_NAME' | translate"
+        [placeholder]="'AUTH.REGISTER.LAST_NAME' | translate"
         formControlName="lastName"
       ></lib-text-input>
     </div>
 
     <lib-text-input
-      label="Email"
-      placeholder="Email"
+      [label]="'AUTH.REGISTER.EMAIL' | translate"
+      [placeholder]="'AUTH.REGISTER.EMAIL' | translate"
       type="email"
       formControlName="email"
     ></lib-text-input>
 
-    <lib-phone-input label="Phone" formControlName="phone"></lib-phone-input>
+    <lib-phone-input
+      [label]="'AUTH.REGISTER.PHONE' | translate"
+      formControlName="phone">
+    </lib-phone-input>
 
     <div class="relative">
       <lib-select-input
-        label="Gender"
+        [label]="'AUTH.REGISTER.GENDER' | translate"
         formControlName="gender"
         [options]="[
-          { label: 'Male', value: 'male' },
-          { label: 'Female', value: 'female' }
+          { label: ('AUTH.REGISTER.MALE' | translate), value: 'male' },
+          { label: ('AUTH.REGISTER.FEMALE' | translate), value: 'female' }
         ]"
       ></lib-select-input>
     </div>
 
     <lib-text-input
-      label="Password"
+      [label]="'AUTH.REGISTER.PASSWORD' | translate"
       type="password"
-      placeholder="Password"
+      [placeholder]="'AUTH.REGISTER.PASSWORD' | translate"
       formControlName="password"
     ></lib-text-input>
 
     <lib-text-input
-      label="Confirm Password"
-      placeholder="Confirm Password"
+      [label]="'AUTH.REGISTER.CONFIRM_PASSWORD' | translate"
+      [placeholder]="'AUTH.REGISTER.CONFIRM_PASSWORD' | translate"
       type="password"
       formControlName="rePassword"
     ></lib-text-input>
-
-
-
 
     <div class="mt-4">
       <ui-button
@@ -58,7 +59,7 @@
         [disabled]="authForm.invalid"
         class="w-full block mt-3"
       >
-        Create Account
+        {{ 'AUTH.REGISTER.SUBMIT' | translate }}
       </ui-button>
     </div>
   </form>

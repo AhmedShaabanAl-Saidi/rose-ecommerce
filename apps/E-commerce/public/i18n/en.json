@@ -10,6 +10,16 @@
     },
     "REGISTER": {
       "TITLE": "Become part of our family!",
+      "FIRST_NAME": "First name",
+      "LAST_NAME": "Last name",
+      "EMAIL": "Email",
+      "PHONE": "Phone",
+      "GENDER": "Gender",
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "SUBMIT": "Create Account",
       "FOOTER_TEXT": "Already have an account?",
       "FOOTER_LINK": "Login now!"
     },
