@@ -2,7 +2,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
@@ -18,7 +17,10 @@ import {
 import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
 import { ToastrService } from 'ngx-toastr';
 import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
+import { passwordMatchValidator } from '../../../../shared/utils/validators/pass.valiators';
 
+const PasswordPattern =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 @Component({
   selector: 'app-register',
   imports: [
@@ -33,6 +35,8 @@ import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-pa
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements AuthPage {
+  isLoading = false;
+
   readonly authData = signal({
     title: 'AUTH.REGISTER.TITLE',
     footerText: 'AUTH.REGISTER.FOOTER_TEXT',
@@ -55,36 +59,15 @@ export class RegisterComponent implements AuthPage {
         gender: ['', Validators.required],
         password: [
           '',
-          [
-            Validators.required,
-            Validators.pattern(
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-            ),
-          ],
+          [Validators.required, Validators.pattern(PasswordPattern)],
         ],
         rePassword: ['', [Validators.required]],
       },
-      { validators: this.passwordMatchValidator }
+      { validators: passwordMatchValidator }
     );
   }
   ngOnInit(): void {
     this.formInit();
-  }
-  passwordMatchValidator(group: AbstractControl) {
-    const password = group.get('password');
-    const rePassword = group.get('rePassword');
-
-    if (password?.value !== rePassword?.value) {
-      rePassword?.setErrors({ ...rePassword.errors, mismatch: true });
-      return { mismatch: true };
-    } else {
-      const errors = rePassword?.errors;
-      if (errors) {
-        delete errors['mismatch'];
-        rePassword?.setErrors(Object.keys(errors).length ? errors : null);
-      }
-      return null;
-    }
   }
 
   submit() {
@@ -92,6 +75,7 @@ export class RegisterComponent implements AuthPage {
       this.authForm.markAllAsTouched();
       return;
     }
+    this.isLoading = true;
 
     const payload = {
       ...this.authForm.value,
@@ -102,6 +86,13 @@ export class RegisterComponent implements AuthPage {
       next: () => {
         this.toaster.success('Registration successful');
         this.router.navigate(['/auth/login']);
+      },
+      error: (err) => {
+        this.toaster.error(err?.error?.message || 'Registration failed');
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
       },
     });
   }
