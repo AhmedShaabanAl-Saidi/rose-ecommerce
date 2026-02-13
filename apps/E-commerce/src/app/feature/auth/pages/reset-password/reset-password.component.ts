@@ -9,6 +9,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ResetPasswordStateService } from '../../services/reset-password-state.service';
 import { TextInputComponent } from '@elevate/reusable-input'; 
 import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
+import { CustomValidators } from '../../../../shared/utils/validators';
 
 @Component({
   selector: 'app-reset-password',
@@ -52,9 +53,9 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
   });
 
   form = this.fb.group({
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required, Validators.minLength(8), CustomValidators.strongPassword]],
     confirmPassword: ['', [Validators.required]]
-  }, { validators: this.passwordMatchValidator });
+  }, { validators: CustomValidators.passwordMatchValidator });
 
   isLoading = signal(false);
 
@@ -86,14 +87,5 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
     }
   }
 
-  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
 
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ mismatch: true }); // Updated key
-      return { mismatch: true };
-    }
-    return null;
-  }
 }
