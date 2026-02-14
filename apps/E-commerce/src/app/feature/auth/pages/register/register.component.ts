@@ -17,7 +17,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 import { Validations } from '../../../../shared/utils/validators/validators-utils';
-import { ButtonComponent } from '@elevate/reusable-button';
+import { ButtonComponent } from '@elevate/reusable-ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -29,7 +29,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     PhoneInputComponent,
     SelectInputComponent,
     TranslatePipe,
-    ButtonComponent
+    ButtonComponent,
+
 ],
   templateUrl: './register.component.html',
 })

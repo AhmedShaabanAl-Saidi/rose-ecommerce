@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LucideAngularModule, LogOut, ChevronRight, Mail } from 'lucide-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UiLabelComponent, UiErrorComponent } from '../shared/components/ui';
-import { ButtonComponent } from '@elevate/reusable-button';
+import { ButtonComponent } from '@elevate/reusable-ui';
 @Component({
   selector: 'app-ui-demo',
   standalone: true,
