@@ -1,7 +1,6 @@
 import { Component, computed, DestroyRef, inject, signal, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
-import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthRepo } from '@elevate/auth-domain';
 import { AuthPage, AuthPageData } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
@@ -32,10 +31,8 @@ export class ForgotPasswordComponent implements AuthPage {
     const currentStep = this.step();
     if (currentStep === 2) {
       return {
-        title: 'AUTH.OTP.TITLE',
-        description: 'AUTH.OTP.DESCRIPTION',
-        footerText: 'AUTH.OTP.FOOTER_TEXT',
-        footerLinkText: 'AUTH.OTP.FOOTER_LINK',
+        title: '',
+        description: '',
         titleStyle: 'simple'
       };
     } else if (currentStep === 1) {

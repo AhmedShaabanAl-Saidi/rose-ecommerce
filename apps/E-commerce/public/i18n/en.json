@@ -20,10 +20,14 @@
       "FOOTER_LINK": "Login now!"
     },
     "OTP": {
-      "TITLE": "Verify Code",
-      "DESCRIPTION": "Please enter the code we just sent to your email.",
-      "FOOTER_TEXT": "Didn't receive code?",
-      "FOOTER_LINK": "Resend"
+      "TITLE": "Enter the OTP Code",
+      "DESCRIPTION": "We have sent a 6-digit code to",
+      "EDIT": "Edit",
+      "VERIFY": "Verify OTP",
+      "SEND_NEW": "Send a new code",
+      "SUCCESS_RESEND": "A new OTP code has been sent to your email",
+      "FOOTER_TEXT": "Need help?",
+      "FOOTER_LINK": "Contact us"
     },
     "RESET_PASSWORD": {
       "TITLE": "Create a new password",
