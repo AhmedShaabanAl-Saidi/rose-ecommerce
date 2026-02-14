@@ -44,6 +44,9 @@ export class InputErrorComponent {
       return 'Invalid format';
     }
 
+    if (errors['strongPassword'])
+      return 'Password must contain uppercase, lowercase, number and special character';
+
     return 'Invalid field';
   }
 }

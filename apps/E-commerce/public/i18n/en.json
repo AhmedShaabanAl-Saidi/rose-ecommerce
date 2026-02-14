@@ -24,15 +24,31 @@
       "FOOTER_LINK": "Login now!"
     },
     "FORGOT_PASSWORD": {
+      "TITLE": "Forgot Password?",
+      "DESCRIPTION": "Worry not, we'll send you instructions to help you reset it.",
       "FOOTER_TEXT": "Remember your password?",
       "FOOTER_LINK": "Login now!"
     },
     "OTP": {
-      "FOOTER_TEXT": "Didn't receive code?",
-      "FOOTER_LINK": "Resend"
+      "TITLE": "Enter the OTP Code",
+      "DESCRIPTION": "We have sent a 6-digit code to",
+      "EDIT": "Edit",
+      "VERIFY": "Verify OTP",
+      "SEND_NEW": "Send a new code",
+      "SUCCESS_RESEND": "A new OTP code has been sent to your email",
+      "FOOTER_TEXT": "Need help?",
+      "FOOTER_LINK": "Contact us"
     },
     "RESET_PASSWORD": {
-      "FOOTER_LINK": "Back to Login"
+      "TITLE": "Create a new password",
+      "SUBTITLE": "Set a strong password to secure your account.",
+      "PASSWORD_LABEL": "Password",
+      "CONFIRM_PASSWORD_LABEL": "Confirm Password",
+      "SUBMIT": "Reset Password",
+      "FOOTER_TEXT": "Need help?",
+      "FOOTER_LINK": "Contact us",
+      "SUCCESS": "Your password has been successfully reset.",
+      "ERROR": "Something went wrong. Please try again."
     }
   }
 }

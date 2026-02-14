@@ -28,6 +28,7 @@ import {
   ChevronDown,
   Eye,
   EyeOff,
+  Lock,
   LucideAngularModule,
 } from 'lucide-angular';
 export const appConfig: ApplicationConfig = {
@@ -59,7 +60,7 @@ export const appConfig: ApplicationConfig = {
       NgxSpinnerModule.forRoot({ type: 'triangle-skew-spin' }),
     ]),
     importProvidersFrom(
-      LucideAngularModule.pick({ AlertCircle, Eye, EyeOff, ChevronDown })
+      LucideAngularModule.pick({ AlertCircle, Eye, EyeOff, ChevronDown, Lock })
     ),
   ],
 };
