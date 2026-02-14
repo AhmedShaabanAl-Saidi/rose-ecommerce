@@ -40,9 +40,9 @@ export class LoginComponent implements AuthPage {
 
     this.isLoading.set(true);
 
-    const payload = this.loginForm.getRawValue();
+    const { rememberMe, ...payload } = this.loginForm.getRawValue();
+    this.auth.login(payload, rememberMe)
 
-    this.auth.login(payload, payload.rememberMe)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
