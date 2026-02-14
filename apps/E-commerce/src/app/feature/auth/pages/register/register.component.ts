@@ -1,6 +1,6 @@
 import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -18,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 import { Validations } from '../../../../shared/utils/validators/validators-utils';
 import { ButtonComponent } from '@elevate/reusable-button';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-register',
@@ -47,6 +48,7 @@ export class RegisterComponent implements AuthPage {
   private readonly authRepo = inject(AuthRepo);
   private readonly toaster = inject(ToastrService);
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef)
   formInit() {
     this.authForm = this.fb.group(
       {
@@ -80,18 +82,12 @@ export class RegisterComponent implements AuthPage {
       phone: this.authForm.value.phone?.e164Number,
     };
 
-    this.authRepo.register(payload).subscribe({
+    this.authRepo.register(payload).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => {
         this.toaster.success('Registration successful');
         this.router.navigate(['/auth/login']);
       },
-      error: (err) => {
-        this.toaster.error(err?.error?.message || 'Registration failed');
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
-      },
+
     });
   }
 }
