@@ -19,7 +19,9 @@ export class AuthLayoutComponent {
 
   onActivate(component: unknown) {
     if (this.isAuthPage(component)) {
-      this.activeComponent.set(component);
+      Promise.resolve().then(() => {
+        this.activeComponent.set(component);
+      });
     }
   }
 

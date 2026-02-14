@@ -6,6 +6,7 @@ export interface AuthPageData {
     footerText?: string;
     footerLinkText?: string;
     footerLinkRoute?: string;
+    titleStyle?: 'default' | 'simple';
 }
 
 export interface AuthPage {

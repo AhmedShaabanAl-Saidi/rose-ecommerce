@@ -14,10 +14,14 @@
       "FOOTER_LINK": "Login now!"
     },
     "FORGOT_PASSWORD": {
+      "TITLE": "Forgot Password?",
+      "DESCRIPTION": "Worry not, we'll send you instructions to help you reset it.",
       "FOOTER_TEXT": "Remember your password?",
       "FOOTER_LINK": "Login now!"
     },
     "OTP": {
+      "TITLE": "Verify Code",
+      "DESCRIPTION": "Please enter the code we just sent to your email.",
       "FOOTER_TEXT": "Didn't receive code?",
       "FOOTER_LINK": "Resend"
     },

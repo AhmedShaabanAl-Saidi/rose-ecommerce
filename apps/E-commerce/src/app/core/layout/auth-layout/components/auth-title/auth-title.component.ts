@@ -8,4 +8,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class AuthTitleComponent {
     @Input() title!: string;
+    @Input() style: 'default' | 'simple' = 'default';
+    @Input() description = '';
 }
