@@ -22,7 +22,15 @@
       "FOOTER_LINK": "Resend"
     },
     "RESET_PASSWORD": {
-      "FOOTER_LINK": "Back to Login"
+      "TITLE": "Create a new password",
+      "SUBTITLE": "Set a strong password to secure your account.",
+      "PASSWORD_LABEL": "Password",
+      "CONFIRM_PASSWORD_LABEL": "Confirm Password",
+      "SUBMIT": "Reset Password",
+      "FOOTER_TEXT": "Need help?",
+      "FOOTER_LINK": "Contact us",
+      "SUCCESS": "Your password has been successfully reset.",
+      "ERROR": "Something went wrong. Please try again."
     }
   }
 }
