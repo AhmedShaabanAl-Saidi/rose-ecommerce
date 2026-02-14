@@ -1,3 +1,20 @@
-<div class="space-y-6">
-    
-</div>
+<form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="space-y-6">
+  <div class="space-y-2">
+    <lib-text-input formControlName="email" label="Email" placeholder="user@example.com" type="email" />
+  </div>
+
+  <div class="space-y-2">
+    <lib-text-input formControlName="password" label="Password" placeholder="********" type="password" />
+    <div class="flex justify-end">
+      <a routerLink="/auth/forgot-password" class="text-sm font-medium text-(--color-maroon-700) hover:underline">
+        Forgot your password?
+      </a>
+    </div>
+  </div>
+
+  <div class="flex items-center">
+    <lib-checkbox-input formControlName="rememberMe" label="Remember me" />
+  </div>
+
+  <ui-button type="submit" [loading]="isLoading()" [block]="true" variant="primary">Login</ui-button>
+</form>
