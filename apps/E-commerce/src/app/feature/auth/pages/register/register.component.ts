@@ -13,14 +13,12 @@ import {
   PhoneInputComponent,
   SelectInputComponent,
   TextInputComponent,
-} from '@elevate/reusable-input';
-import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
+}  from '@elevate/reusable-input';
 import { ToastrService } from 'ngx-toastr';
 import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
-import { passwordMatchValidator } from '../../../../shared/utils/validators/pass.valiators';
+import { Validations } from '../../../../shared/utils/validators/validators-utils';
+import { ButtonComponent } from '@elevate/reusable-button';
 
-const PasswordPattern =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 @Component({
   selector: 'app-register',
   imports: [
@@ -29,9 +27,9 @@ const PasswordPattern =
     TextInputComponent,
     PhoneInputComponent,
     SelectInputComponent,
-    UiButtonComponent,
     TranslatePipe,
-  ],
+    ButtonComponent
+],
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements AuthPage {
@@ -59,11 +57,11 @@ export class RegisterComponent implements AuthPage {
         gender: ['', Validators.required],
         password: [
           '',
-          [Validators.required, Validators.pattern(PasswordPattern)],
+          [Validators.required, Validators.pattern(Validations.passwordPattern)],
         ],
         rePassword: ['', [Validators.required]],
       },
-      { validators: passwordMatchValidator }
+      { validators: Validations.matchFieldsValidator('password', 'rePassword') }
     );
   }
   ngOnInit(): void {

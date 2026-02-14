@@ -1,0 +1,35 @@
+<button
+  [type]="type()"
+  [disabled]="disabled() || loading()"
+  [class]="classes()"
+  (click)="onClick($event)"
+>
+  @if (loading()) {
+    <ng-container>
+      <lucide-icon
+        [img]="Loader2"
+        class="animate-spin -ml-1 mr-3 h-5 w-5 text-current"
+        aria-hidden="true"
+      ></lucide-icon>
+      Loading...
+    </ng-container>
+  } @else {
+    @if (icon() && iconPos() === 'left') {
+      <lucide-icon
+        [img]="icon()"
+        class="mr-2 h-4 w-4"
+        aria-hidden="true"
+      ></lucide-icon>
+    }
+
+    <ng-content></ng-content>
+
+    @if (icon() && iconPos() === 'right') {
+      <lucide-icon
+        [img]="icon()"
+        class="ml-2 h-4 w-4"
+        aria-hidden="true"
+      ></lucide-icon>
+    }
+  }
+</button>
