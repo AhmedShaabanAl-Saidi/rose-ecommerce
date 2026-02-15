@@ -1,6 +1,6 @@
 import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,14 +13,13 @@ import {
   PhoneInputComponent,
   SelectInputComponent,
   TextInputComponent,
-} from '@elevate/reusable-input';
-import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
+}  from '@elevate/reusable-input';
 import { ToastrService } from 'ngx-toastr';
 import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
-import { passwordMatchValidator } from '../../../../shared/utils/validators/pass.valiators';
+import { Validations } from '../../../../shared/utils/validators/validators-utils';
+import { ButtonComponent } from '@elevate/reusable-ui';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-const PasswordPattern =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 @Component({
   selector: 'app-register',
   imports: [
@@ -29,9 +28,10 @@ const PasswordPattern =
     TextInputComponent,
     PhoneInputComponent,
     SelectInputComponent,
-    UiButtonComponent,
     TranslatePipe,
-  ],
+    ButtonComponent,
+
+],
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements AuthPage {
@@ -49,6 +49,7 @@ export class RegisterComponent implements AuthPage {
   private readonly authRepo = inject(AuthRepo);
   private readonly toaster = inject(ToastrService);
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef)
   formInit() {
     this.authForm = this.fb.group(
       {
@@ -59,11 +60,11 @@ export class RegisterComponent implements AuthPage {
         gender: ['', Validators.required],
         password: [
           '',
-          [Validators.required, Validators.pattern(PasswordPattern)],
+          [Validators.required, Validators.pattern(Validations.passwordPattern)],
         ],
         rePassword: ['', [Validators.required]],
       },
-      { validators: passwordMatchValidator }
+      { validators: Validations.matchFieldsValidator('password', 'rePassword') }
     );
   }
   ngOnInit(): void {
@@ -82,18 +83,12 @@ export class RegisterComponent implements AuthPage {
       phone: this.authForm.value.phone?.e164Number,
     };
 
-    this.authRepo.register(payload).subscribe({
+    this.authRepo.register(payload).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => {
         this.toaster.success('Registration successful');
         this.router.navigate(['/auth/login']);
       },
-      error: (err) => {
-        this.toaster.error(err?.error?.message || 'Registration failed');
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
-      },
+
     });
   }
 }
