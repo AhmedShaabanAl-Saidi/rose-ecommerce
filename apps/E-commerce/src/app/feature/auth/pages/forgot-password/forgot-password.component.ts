@@ -1,27 +1,22 @@
-import { ButtonComponent } from '@elevate/reusable-ui';
-import {
-  Component,
-  computed,
-  DestroyRef,
-  inject,
-  signal,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { isPlatformBrowser } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthRepo } from '@elevate/auth-domain';
+import { TextInputComponent } from '@elevate/reusable-input';
+import { ButtonComponent } from '@elevate/reusable-ui';
+import { finalize } from 'rxjs';
 import {
   AuthPage,
   AuthPageData,
 } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
-import { TextInputComponent } from '@elevate/reusable-input';
+import { ResetPasswordState } from '../../services/reset-password-state.service';
 import { OtpCodeComponent } from '../otp-code/otp-code.component';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -30,21 +25,16 @@ import { OtpCodeComponent } from '../otp-code/otp-code.component';
     ButtonComponent,
     TextInputComponent,
     OtpCodeComponent,
+    ResetPasswordComponent,
   ],
   templateUrl: './forgot-password.component.html',
 })
 export class ForgotPasswordComponent implements AuthPage {
   private readonly auth = inject(AuthRepo);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly platformId = inject(PLATFORM_ID);
+  private readonly resetState = inject(ResetPasswordState);
+  readonly step = computed(() => this.resetState.step());
 
-  readonly step = signal<1 | 2 | null>(null);
-
-  constructor() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.step.set(localStorage.getItem('email') ? 2 : 1);
-    }
-  }
   readonly isLoading = signal<boolean>(false);
 
   readonly authData = computed<AuthPageData>(() => {
@@ -66,9 +56,11 @@ export class ForgotPasswordComponent implements AuthPage {
       };
     } else {
       return {
-        title: '',
-        description: '',
-        titleStyle: 'simple',
+        title: 'AUTH.RESET_PASSWORD.TITLE',
+        description: 'AUTH.RESET_PASSWORD.SUBTITLE',
+        footerText: 'AUTH.RESET_PASSWORD.FOOTER_TEXT',
+        footerLinkText: 'AUTH.RESET_PASSWORD.FOOTER_LINK',
+        footerLinkRoute: '/contact',
       };
     }
   });
@@ -92,18 +84,15 @@ export class ForgotPasswordComponent implements AuthPage {
 
     this.auth
       .forgetPassword(payload)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.isLoading.set(false))
+      )
       .subscribe({
         next: () => {
-          this.isLoading.set(false);
-          localStorage.setItem('email', payload.email);
-          this.step.set(2);
+          this.resetState.setEmail(payload.email);
+          this.resetState.setStep(2);
         },
       });
-  }
-
-  onBackToEmail() {
-    localStorage.removeItem('email');
-    this.step.set(1);
   }
 }

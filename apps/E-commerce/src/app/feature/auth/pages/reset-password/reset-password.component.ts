@@ -14,10 +14,10 @@ import { TextInputComponent } from '@elevate/reusable-input';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
 import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 import { ValidationsUtils } from '../../../../shared/utils/validators/validators-utils';
-import { ResetPasswordStateService } from '../../services/reset-password-state.service';
-import { finalize } from 'rxjs';
+import { ResetPasswordState } from '../../services/reset-password-state.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -31,7 +31,7 @@ import { finalize } from 'rxjs';
   templateUrl: './reset-password.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ResetPasswordComponent implements AuthPage, OnInit {
+export class ResetPasswordComponent implements OnInit {
   private fb = inject(FormBuilder);
   private authRepo = inject(AuthRepo);
   private router = inject(Router);
@@ -39,32 +39,16 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
   private toastr = inject(ToastrService);
   private translate = inject(TranslateService);
   private destroyRef = inject(DestroyRef);
-  private resetPasswordState = inject(ResetPasswordStateService);
+  private resetPasswordState = inject(ResetPasswordState);
 
-  private email = '';
-
-  constructor() {
-    this.resetPasswordState.setEmail('mahmoudsami11095@gmail.com');
-  }
+  private email!: string | null;
 
   ngOnInit() {
     this.email = this.resetPasswordState.email();
-
     if (!this.email) {
-      this.toastr.error(
-        'Email is missing. Please try the forgot password process again.'
-      );
-      this.router.navigate(['/auth/forgot-password']);
+      this.resetPasswordState.setStep(1);
     }
   }
-
-  readonly authData = signal({
-    title: 'AUTH.RESET_PASSWORD.TITLE',
-    description: 'AUTH.RESET_PASSWORD.SUBTITLE',
-    footerText: 'AUTH.RESET_PASSWORD.FOOTER_TEXT',
-    footerLinkText: 'AUTH.RESET_PASSWORD.FOOTER_LINK',
-    footerLinkRoute: '/contact',
-  });
 
   form = this.fb.group(
     {
