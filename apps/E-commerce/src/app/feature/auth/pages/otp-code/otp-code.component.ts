@@ -24,8 +24,7 @@ import {
   takeWhile,
 } from 'rxjs';
 import { ResetPasswordState } from '../../services/reset-password-state.service';
-
-type LoadingState = 'idle' | 'verifying' | 'resending';
+import { LoadingState } from './interface/LoadingState.interface';
 
 @Component({
   selector: 'app-otp-code',

@@ -23,13 +23,7 @@ import {
   AuthPageData,
 } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 import { authConfig } from '../../auth.config';
-
-interface PhoneValue {
-  e164Number: string;
-  internationalNumber?: string;
-  nationalNumber?: string;
-  countryCode?: string;
-}
+import { PhoneValue } from './interface/PhoneValue.interface';
 
 @Component({
   selector: 'app-register',
