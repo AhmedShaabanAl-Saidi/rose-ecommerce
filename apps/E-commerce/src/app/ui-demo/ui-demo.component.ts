@@ -14,7 +14,6 @@ import {
 } from '@elevate/reusable-ui';
 @Component({
   selector: 'app-ui-demo',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

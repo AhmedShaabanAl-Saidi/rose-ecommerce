@@ -12,7 +12,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'lib-select-input',
-  standalone: true,
   imports: [LucideAngularModule, CommonModule, InputErrorComponent, TranslatePipe],
   templateUrl: './select-input.component.html',
 })

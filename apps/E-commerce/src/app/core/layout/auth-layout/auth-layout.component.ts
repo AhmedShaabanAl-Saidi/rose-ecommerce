@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { AuthSeparatorComponent } from './components/auth-separator/auth-separator.component';
 import { AuthBackgroundComponent } from './components/auth-background/auth-background.component';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
+import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 import { AuthTitleComponent } from './components/auth-title/auth-title.component';
 import { AuthFooterComponent } from './components/auth-footer/auth-footer.component';
 import { AuthPage, AuthPageData } from './interfaces/auth-page-data';
 
 @Component({
   selector: 'app-auth-layout',
-  imports: [CommonModule, RouterOutlet, AuthSeparatorComponent, AuthBackgroundComponent, LanguageSwitcherComponent, AuthTitleComponent, AuthFooterComponent],
+  imports: [CommonModule, RouterOutlet, AuthSeparatorComponent, AuthBackgroundComponent, LanguageSwitcherComponent, ThemeSwitcherComponent, AuthTitleComponent, AuthFooterComponent],
   templateUrl: './auth-layout.component.html',
 })
 export class AuthLayoutComponent {
