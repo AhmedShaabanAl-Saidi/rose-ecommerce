@@ -24,6 +24,7 @@ import {
 } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 import { authConfig } from '../../auth.config';
 import { PhoneValue } from './interface/PhoneValue.interface';
+import { Gender } from '../../../../core/enums/gender.enum';
 
 @Component({
   selector: 'app-register',
@@ -66,7 +67,7 @@ export class RegisterComponent implements AuthPage {
         validators: [Validators.required],
         nonNullable: true,
       }),
-      gender: new FormControl<'male' | 'female' | ''>('', {
+      gender: new FormControl<Gender | ''>('', {
         validators: [Validators.required],
         nonNullable: true,
       }),
@@ -88,8 +89,8 @@ export class RegisterComponent implements AuthPage {
   );
 
   readonly genderOptions = [
-    { label: this.translate.instant('AUTH.REGISTER.MALE'), value: 'male' },
-    { label: this.translate.instant('AUTH.REGISTER.FEMALE'), value: 'female' },
+    { label: this.translate.instant('AUTH.REGISTER.MALE'), value: Gender.Male },
+    { label: this.translate.instant('AUTH.REGISTER.FEMALE'), value: Gender.Female },
   ];
 
   submit(): void {
@@ -112,7 +113,7 @@ export class RegisterComponent implements AuthPage {
       lastName: formValue.lastName,
       email: formValue.email,
       phone: phone,
-      gender: formValue.gender as 'male' | 'female',
+      gender: formValue.gender as Gender,
       password: formValue.password,
       rePassword: formValue.rePassword,
     };

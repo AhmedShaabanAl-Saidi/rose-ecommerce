@@ -16,7 +16,7 @@
       [class.input-status-error]="Invalid"
     >
       <option value="" disabled [selected]="!value">
-        {{ placeholder() || 'Select option' }}
+        {{ placeholder() || ('SHARED.SELECT_OPTION' | translate) }}
       </option>
 
       @for (opt of options(); track opt.value) {
