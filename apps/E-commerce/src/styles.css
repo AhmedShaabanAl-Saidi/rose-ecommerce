@@ -66,8 +66,29 @@
   /* Buttons */
   --color-btn-bg: var(--color-maroon-600);
   --color-btn-text: var(--color-white);
-  --color-btn-outline-bg: var(--color-white);
+  --color-btn-hover: var(--color-maroon-700);
+
+  --color-btn-secondary-bg: var(--color-maroon-50);
+  --color-btn-secondary-hover: var(--color-maroon-100);
+  --color-btn-secondary-text: var(--color-maroon-600);
+
+  --color-btn-outline-bg: transparent;
+  --color-btn-outline-border: var(--color-maroon-600);
+  --color-btn-outline-hover: var(--color-maroon-50);
   --color-btn-outline-text: var(--color-maroon-600);
+
+  --color-btn-subtle-bg: var(--color-zinc-50);
+  --color-btn-subtle-hover: var(--color-zinc-100);
+  --color-btn-subtle-border: var(--color-zinc-400);
+  --color-btn-subtle-text: var(--color-zinc-800);
+
+  --color-btn-ghost-bg: var(--color-white);
+  --color-btn-ghost-hover: var(--color-zinc-100);
+  --color-btn-ghost-text: var(--color-zinc-800);
+
+  --color-btn-destructive-bg: var(--color-red-600);
+  --color-btn-destructive-hover: var(--color-red-700);
+  --color-btn-destructive-text: var(--color-white);
 
   /* Navigation */
   --color-nav-bg: var(--color-bg-primary);
@@ -113,10 +134,31 @@
   --color-bg-surface: var(--color-zinc-800);
 
   /* Buttons */
-  --color-btn-bg: var(--color-white);
-  --color-btn-text: var(--color-maroon-600);
-  --color-btn-outline-bg: var(--color-maroon-600);
-  --color-btn-outline-text: var(--color-white);
+  --color-btn-bg: var(--color-soft-pink-300);
+  --color-btn-text: var(--color-zinc-800);
+  --color-btn-hover: var(--color-soft-pink-400);
+
+  --color-btn-secondary-bg: var(--color-zinc-700);
+  --color-btn-secondary-hover: var(--color-zinc-600);
+  --color-btn-secondary-text: var(--color-soft-pink-300);
+
+  --color-btn-outline-bg: var(--color-zinc-800);
+  --color-btn-outline-border: var(--color-soft-pink-300);
+  --color-btn-outline-hover: var(--color-zinc-700);
+  --color-btn-outline-text: var(--color-soft-pink-300);
+
+  --color-btn-subtle-bg: var(--color-zinc-800);
+  --color-btn-subtle-hover: var(--color-zinc-700);
+  --color-btn-subtle-border: var(--color-zinc-500);
+  --color-btn-subtle-text: var(--color-zinc-50);
+
+  --color-btn-ghost-bg: transparent;
+  --color-btn-ghost-hover: var(--color-zinc-700);
+  --color-btn-ghost-text: var(--color-zinc-50);
+
+  --color-btn-destructive-bg: var(--color-red-500);
+  --color-btn-destructive-hover: var(--color-red-600);
+  --color-btn-destructive-text: var(--color-zinc-50);
 
   /* Cards */
   --color-card-bg: var(--color-zinc-800);

@@ -1,15 +1,32 @@
+import { ButtonComponent } from '@elevate/reusable-ui';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthRepo } from '@elevate/auth-domain';
-import { AuthPage, AuthPageData } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
-import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
-import { TextInputComponent, CheckboxInputComponent } from '@elevate/reusable-input';
+import {
+  AuthPage,
+  AuthPageData,
+} from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
+import {
+  TextInputComponent,
+  CheckboxInputComponent,
+} from '@elevate/reusable-input';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink, UiButtonComponent, TextInputComponent, CheckboxInputComponent],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    ButtonComponent,
+    TextInputComponent,
+    CheckboxInputComponent,
+  ],
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements AuthPage {
@@ -21,14 +38,20 @@ export class LoginComponent implements AuthPage {
     title: 'AUTH.LOGIN.TITLE',
     footerText: 'AUTH.LOGIN.FOOTER_TEXT',
     footerLinkText: 'AUTH.LOGIN.FOOTER_LINK',
-    footerLinkRoute: '/auth/register'
+    footerLinkRoute: '/auth/register',
   });
 
   readonly isLoading = signal<boolean>(false);
 
   readonly loginForm = new FormGroup({
-    email: new FormControl('', { validators: [Validators.required, Validators.email], nonNullable: true }),
-    password: new FormControl('', { validators: [Validators.required], nonNullable: true }),
+    email: new FormControl('', {
+      validators: [Validators.required, Validators.email],
+      nonNullable: true,
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required],
+      nonNullable: true,
+    }),
     rememberMe: new FormControl(false, { nonNullable: true }),
   });
 
@@ -41,7 +64,8 @@ export class LoginComponent implements AuthPage {
     this.isLoading.set(true);
 
     const { rememberMe, ...payload } = this.loginForm.getRawValue();
-    this.auth.login(payload, rememberMe)
+    this.auth
+      .login(payload, rememberMe)
 
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -49,7 +73,7 @@ export class LoginComponent implements AuthPage {
           this.isLoading.set(false);
           this.loginForm.reset();
           this.router.navigate(['/home']);
-        }
+        },
       });
   }
 }
