@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { Home } from './feature/home/home';
 
 export const appRoutes: Route[] = [
   {
@@ -10,5 +11,9 @@ export const appRoutes: Route[] = [
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    component: Home,
   },
 ];

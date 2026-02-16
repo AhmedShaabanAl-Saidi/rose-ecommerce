@@ -1,12 +1,13 @@
 import { Component, input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'lib-input-error',
   standalone: true,
   templateUrl: './input-error.component.html',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, TranslateModule],
 })
 export class InputErrorComponent {
   control = input.required<AbstractControl | null | undefined>();
@@ -17,36 +18,38 @@ export class InputErrorComponent {
     return !!(ctrl && ctrl.invalid && ctrl.touched);
   }
 
-  get errorMessage(): string {
+  get errorInfo(): { key: string; params?: any } {
     const errors = this.control()?.errors;
-    if (!errors) return '';
+    if (!errors) return { key: '' };
 
-    if (errors['required']) return 'Field is required';
-    if (errors['email']) return 'Please enter a valid email address';
+    if (errors['required']) return { key: 'VALIDATION.REQUIRED' };
+    if (errors['email']) return { key: 'VALIDATION.EMAIL' };
 
     if (errors['minlength'])
-      return `Minimum ${errors['minlength'].requiredLength} characters required`;
+      return {
+        key: 'VALIDATION.MIN_LENGTH',
+        params: { length: errors['minlength'].requiredLength },
+      };
 
     if (errors['maxlength'])
-      return `Maximum ${errors['maxlength'].requiredLength} characters allowed`;
+      return {
+        key: 'VALIDATION.MAX_LENGTH',
+        params: { length: errors['maxlength'].requiredLength },
+      };
 
-    if (errors['min']) return `Value must be at least ${errors['min'].min}`;
-    if (errors['max']) return `Value must be no more than ${errors['max'].max}`;
-
-    if (errors['mismatch']) return 'Fields do not match';
+    if (errors['mismatch']) return { key: 'VALIDATION.MISMATCH' };
 
     if (errors['validatePhoneNumber'] === false)
-      return 'Invalid phone number format';
+      return { key: 'VALIDATION.INVALID_PHONE' };
 
     if (errors['pattern']) {
-      if (this.customType() === 'password')
-        return 'Password must be at least 8 characters with (A-z, 0-9, @$!%*?&)';
-      return 'Invalid format';
+      return this.customType() === 'password'
+        ? { key: 'VALIDATION.PATTERN_PASSWORD' }
+        : { key: 'VALIDATION.INVALID' };
     }
 
-    if (errors['strongPassword'])
-      return 'Password must contain uppercase, lowercase, number and special character';
+    if (errors['strongPassword']) return { key: 'VALIDATION.STRONG_PASSWORD' };
 
-    return 'Invalid field';
+    return { key: 'VALIDATION.INVALID' };
   }
 }

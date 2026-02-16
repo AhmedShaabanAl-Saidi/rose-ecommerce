@@ -7,7 +7,7 @@
 
   <div class="relative w-full flex items-center">
     @if (icon()) {
-    <div class="input-icon-container left-3 pointer-events-none">
+    <div class="input-icon-container icon-start pointer-events-none">
       <i-lucide [name]="icon()" size="18"></i-lucide>
     </div>
     }
@@ -25,15 +25,15 @@
       class="input-base"
       [class.input-status-normal]="!Invalid"
       [class.input-status-error]="Invalid"
-      [class.pl-10]="icon()"
-      [class.pr-10]="type() === 'password'"
+      [class.input-padding-start]="icon()"
+      [class.input-padding-end]="type() === 'password'"
     />
 
     @if (type() === 'password') {
     <button
       type="button"
       (click)="togglePassword()"
-      class="input-icon-container right-3 cursor-pointer hover:text-zinc-600 dark:hover:text-zinc-200 focus:outline-none"
+      class="input-icon-container icon-end cursor-pointer hover:text-zinc-600 dark:hover:text-zinc-200 focus:outline-none"
     >
       <i-lucide
         [name]="showPassword() ? 'eye' : 'eye-off'"

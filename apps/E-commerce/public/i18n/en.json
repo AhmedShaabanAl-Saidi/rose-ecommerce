@@ -6,7 +6,14 @@
     "LOGIN": {
       "TITLE": "Welcome back!",
       "FOOTER_TEXT": "Don't have an account yet?",
-      "FOOTER_LINK": "Create one now!"
+      "FOOTER_LINK": "Create one now!",
+      "EMAIL": "Email",
+      "EMAIL_PLACEHOLDER": "user@example.com",
+      "PASSWORD": "Password",
+      "PASSWORD_PLACEHOLDER": "********",
+      "REMEMBER_ME": "Remember me",
+      "FORGOT_PASSWORD": "Forgot your password?",
+      "SUBMIT":"Login"
     },
     "REGISTER": {
       "TITLE": "Become part of our family!",
@@ -50,5 +57,16 @@
       "SUCCESS": "Your password has been successfully reset.",
       "ERROR": "Something went wrong. Please try again."
     }
-  }
+  },
+  "VALIDATION": {
+  "REQUIRED": "Field is required",
+  "EMAIL": "Please enter a valid email address",
+  "MIN_LENGTH": "Minimum {{length}} characters required",
+  "MAX_LENGTH": "Maximum {{length}} characters allowed",
+  "MISMATCH": "Fields do not match",
+  "INVALID_PHONE": "Invalid phone number format",
+  "STRONG_PASSWORD": "Password must contain uppercase, lowercase, number and special character",
+  "PATTERN_PASSWORD":  "Password must contain uppercase, lowercase, number and special character",
+  "INVALID": "Invalid field"
+}
 }
