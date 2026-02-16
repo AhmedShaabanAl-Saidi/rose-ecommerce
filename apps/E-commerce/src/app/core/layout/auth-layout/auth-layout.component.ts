@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, effect } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthSeparatorComponent } from './components/auth-separator/auth-separator.component';
@@ -17,11 +17,21 @@ export class AuthLayoutComponent {
   activeComponent = signal<AuthPage | null>(null);
   currentPageData = computed<AuthPageData>(() => this.activeComponent()?.authData() ?? {});
 
+  private pendingComponent = signal<AuthPage | null>(null);
+
+  constructor() {
+    effect(() => {
+      const component = this.pendingComponent();
+      if (component) {
+        this.activeComponent.set(component);
+        this.pendingComponent.set(null);
+      }
+    });
+  }
+
   onActivate(component: unknown) {
     if (this.isAuthPage(component)) {
-      Promise.resolve().then(() => {
-        this.activeComponent.set(component);
-      });
+      this.pendingComponent.set(component);
     }
   }
 
