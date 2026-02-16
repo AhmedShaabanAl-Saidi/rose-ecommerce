@@ -101,21 +101,17 @@ export class RegisterComponent implements AuthPage {
 
     this.isLoading.set(true);
 
-    const formValue = this.authForm.getRawValue();
+    const { phone: phoneRaw, ...formValues } = this.authForm.getRawValue();
 
-    const phoneValue = formValue.phone;
-    const phone = typeof phoneValue === 'string'
-      ? phoneValue
-      : (phoneValue as PhoneValue).e164Number;
+    const phone =
+      typeof phoneRaw === 'string'
+        ? phoneRaw
+        : (phoneRaw as PhoneValue).e164Number;
 
     const payload = {
-      firstName: formValue.firstName,
-      lastName: formValue.lastName,
-      email: formValue.email,
-      phone: phone,
-      gender: formValue.gender as Gender,
-      password: formValue.password,
-      rePassword: formValue.rePassword,
+      ...formValues,
+      phone,
+      gender: formValues.gender as Gender,
     };
 
     this.auth
