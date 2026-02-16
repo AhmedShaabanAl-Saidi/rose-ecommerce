@@ -22,6 +22,7 @@ import {
   AuthPage,
   AuthPageData,
 } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
+import { authConfig } from '../../auth.config';
 
 interface PhoneValue {
   e164Number: string;
@@ -49,12 +50,7 @@ export class RegisterComponent implements AuthPage {
   private readonly toastr = inject(ToastrService);
   private readonly translate = inject(TranslateService);
 
-  readonly authData = signal<AuthPageData>({
-    title: 'AUTH.REGISTER.TITLE',
-    footerText: 'AUTH.REGISTER.FOOTER_TEXT',
-    footerLinkText: 'AUTH.REGISTER.FOOTER_LINK',
-    footerLinkRoute: '/auth/login',
-  });
+  readonly authData = signal<AuthPageData>(authConfig.register);
 
   readonly isLoading = signal(false);
 

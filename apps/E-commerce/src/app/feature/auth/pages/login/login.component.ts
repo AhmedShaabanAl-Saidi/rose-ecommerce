@@ -20,6 +20,7 @@ import {
   AuthPage,
   AuthPageData,
 } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
+import { authConfig } from '../../auth.config';
 
 @Component({
   selector: 'app-login',
@@ -39,12 +40,7 @@ export class LoginComponent implements AuthPage {
   private readonly destroyRef = inject(DestroyRef);
   private readonly toastr = inject(ToastrService);
 
-  readonly authData = signal<AuthPageData>({
-    title: 'AUTH.LOGIN.TITLE',
-    footerText: 'AUTH.LOGIN.FOOTER_TEXT',
-    footerLinkText: 'AUTH.LOGIN.FOOTER_LINK',
-    footerLinkRoute: '/auth/register',
-  });
+  readonly authData = signal<AuthPageData>(authConfig.login);
 
   readonly isLoading = signal(false);
 

@@ -14,6 +14,7 @@ import {
   AuthPage,
   AuthPageData,
 } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
+import { authConfig } from '../../auth.config';
 import { ResetPasswordState } from '../../services/reset-password-state.service';
 import { OtpCodeComponent } from '../otp-code/otp-code.component';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
@@ -39,31 +40,7 @@ export class ForgotPasswordComponent implements AuthPage {
 
   readonly authData = computed<AuthPageData>(() => {
     const currentStep = this.step();
-
-    const stepConfig: Record<number, AuthPageData> = {
-      1: {
-        title: 'AUTH.FORGOT_PASSWORD.TITLE',
-        description: 'AUTH.FORGOT_PASSWORD.DESCRIPTION',
-        footerText: 'AUTH.FORGOT_PASSWORD.FOOTER_TEXT',
-        footerLinkText: 'AUTH.FORGOT_PASSWORD.FOOTER_LINK',
-        footerLinkRoute: '/auth/login',
-        titleStyle: 'simple',
-      },
-      2: {
-        title: '',
-        description: '',
-        titleStyle: 'simple',
-      },
-      3: {
-        title: 'AUTH.RESET_PASSWORD.TITLE',
-        description: 'AUTH.RESET_PASSWORD.SUBTITLE',
-        footerText: 'AUTH.RESET_PASSWORD.FOOTER_TEXT',
-        footerLinkText: 'AUTH.RESET_PASSWORD.FOOTER_LINK',
-        footerLinkRoute: '/contact',
-      },
-    };
-
-    return stepConfig[currentStep];
+    return authConfig.forgotPassword[currentStep];
   });
 
   readonly forgotPasswordForm = new FormGroup({
