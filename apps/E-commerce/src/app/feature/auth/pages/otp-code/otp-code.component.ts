@@ -1,20 +1,41 @@
-import { Component, inject, output, signal, PLATFORM_ID, computed } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { AuthRepo } from '@elevate/auth-domain';
-import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
-import { OtpInputComponent } from '@elevate/reusable-input';
-import { DestroyRef } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { interval, Subject, takeWhile, takeUntil, startWith, map } from 'rxjs';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthRepo } from '@elevate/auth-domain';
+import { OtpInputComponent } from '@elevate/reusable-input';
+import { ButtonComponent } from '@elevate/reusable-ui';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import {
+  finalize,
+  interval,
+  map,
+  startWith,
+  Subject,
+  takeUntil,
+  takeWhile,
+} from 'rxjs';
+import { ResetPasswordState } from '../../services/reset-password-state.service';
 
 type LoadingState = 'idle' | 'verifying' | 'resending';
 
 @Component({
   selector: 'app-otp-code',
-  imports: [CommonModule, ReactiveFormsModule, UiButtonComponent, OtpInputComponent, TranslatePipe],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonComponent,
+    OtpInputComponent,
+    TranslatePipe,
+  ],
   templateUrl: './otp-code.component.html',
 })
 export class OtpCodeComponent {
@@ -23,6 +44,7 @@ export class OtpCodeComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly toastr = inject(ToastrService);
   private readonly translate = inject(TranslateService);
+  private readonly resetState = inject(ResetPasswordState);
 
   readonly email = signal<string>('');
   readonly timer = signal<number>(0);
@@ -32,15 +54,17 @@ export class OtpCodeComponent {
   readonly isResending = computed(() => this.loadingState() === 'resending');
   readonly isLoading = computed(() => this.loadingState() !== 'idle');
   readonly canResend = computed(() => this.timer() === 0 && !this.isLoading());
-  readonly isFormValid = computed(() =>
-    this.otpControl.valid && this.email().length > 0
+  readonly isFormValid = computed(
+    () => this.otpControl.valid && this.email().length > 0
   );
 
-  readonly back = output<void>();
-
   readonly otpControl = new FormControl('', {
-    validators: [Validators.required, Validators.minLength(6), Validators.maxLength(6)],
-    nonNullable: true
+    validators: [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(6),
+    ],
+    nonNullable: true,
   });
 
   private readonly timerReset$ = new Subject<void>();
@@ -53,7 +77,7 @@ export class OtpCodeComponent {
   }
 
   private initializeEmail(): void {
-    const storedEmail = localStorage.getItem('email');
+    const storedEmail = this.resetState.email();
     if (storedEmail) {
       this.email.set(storedEmail);
     }
@@ -66,12 +90,12 @@ export class OtpCodeComponent {
     interval(1000)
       .pipe(
         startWith(0),
-        map(tick => TIMER_DURATION - tick - 1),
-        takeWhile(time => time >= 0),
+        map((tick) => TIMER_DURATION - tick - 1),
+        takeWhile((time) => time >= 0),
         takeUntil(this.timerReset$),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe(time => {
+      .subscribe((time) => {
         this.timer.set(time);
       });
   }
@@ -86,16 +110,19 @@ export class OtpCodeComponent {
 
     const payload = {
       email: this.email(),
-      resetCode: this.otpControl.value
+      resetCode: this.otpControl.value,
     };
 
-    this.auth.verifyResetCode(payload)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+    this.auth
+      .verifyResetCode(payload)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.loadingState.set('idle'))
+      )
       .subscribe({
         next: () => {
-          this.loadingState.set('idle');
-          this.clearStoredEmail();
-        }
+          this.resetState.setStep(3);
+        },
       });
   }
 
@@ -106,31 +133,30 @@ export class OtpCodeComponent {
 
     this.loadingState.set('resending');
 
-    this.auth.forgetPassword({ email: this.email() })
-      .pipe(takeUntilDestroyed(this.destroyRef))
+    this.auth
+      .forgetPassword({ email: this.email() })
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.loadingState.set('idle'))
+      )
       .subscribe({
         next: () => {
-          this.loadingState.set('idle');
           this.resetTimer();
           this.otpControl.reset();
-          this.toastr.success(this.translate.instant('AUTH.OTP.SUCCESS_RESEND'));
-        }
+          this.toastr.success(
+            this.translate.instant('AUTH.OTP.SUCCESS_RESEND')
+          );
+        },
       });
   }
 
   onEdit(): void {
-    this.back.emit();
+    this.resetState.setStep(1);
   }
 
   private resetTimer(): void {
     this.timerReset$.next();
     this.startTimer();
-  }
-
-  private clearStoredEmail(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('email');
-    }
   }
 
   formatTimer(): string {

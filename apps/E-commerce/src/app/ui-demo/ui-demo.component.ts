@@ -1,14 +1,29 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, LogOut, ChevronRight, Mail } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  LogOut,
+  ChevronRight,
+  Mail,
+} from 'lucide-angular';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UiLabelComponent, UiErrorComponent } from '../shared/components/ui';
-import { ButtonComponent } from '@elevate/reusable-ui';
+import {
+  ButtonComponent,
+  LableComponent,
+  ErrorComponent,
+} from '@elevate/reusable-ui';
 @Component({
   selector: 'app-ui-demo',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, UiLabelComponent, UiErrorComponent, LucideAngularModule],
-  templateUrl: './ui-demo.component.html'
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonComponent,
+    LableComponent,
+    ErrorComponent,
+    LucideAngularModule,
+  ],
+  templateUrl: './ui-demo.component.html',
 })
 export class UiDemoComponent {
   readonly LogOut = LogOut;

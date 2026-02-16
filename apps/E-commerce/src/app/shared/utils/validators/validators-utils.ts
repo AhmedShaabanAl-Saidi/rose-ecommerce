@@ -1,17 +1,14 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export class Validations {
-
+export class ValidationsUtils {
   static passwordPattern =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
 
   static matchFieldsValidator(
     field: string,
     confirmField: string
   ): ValidatorFn {
-
     return (group: AbstractControl): ValidationErrors | null => {
-
       const control = group.get(field);
       const confirmControl = group.get(confirmField);
 
@@ -24,7 +21,7 @@ export class Validations {
       if (control.value !== confirmControl.value) {
         confirmControl.setErrors({
           ...confirmControl.errors,
-          mismatch: true
+          mismatch: true,
         });
         return { mismatch: true };
       }
@@ -32,9 +29,7 @@ export class Validations {
       const errors = confirmControl.errors;
       if (errors) {
         delete errors['mismatch'];
-        confirmControl.setErrors(
-          Object.keys(errors).length ? errors : null
-        );
+        confirmControl.setErrors(Object.keys(errors).length ? errors : null);
       }
 
       return null;

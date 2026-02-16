@@ -1,24 +1,37 @@
-import { Component, signal, inject, ChangeDetectionStrategy, DestroyRef, OnInit } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 import { AuthRepo } from '@elevate/auth-domain';
-import { ToastrService } from 'ngx-toastr';
+import { TextInputComponent } from '@elevate/reusable-input';
+import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { ResetPasswordStateService } from '../../services/reset-password-state.service';
-import { TextInputComponent } from '@elevate/reusable-input'; 
-import { UiButtonComponent } from '../../../../shared/components/ui/button/button.component';
-import { CustomValidators } from '../../../../shared/utils/validators';
+import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
+import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
+import { ValidationsUtils } from '../../../../shared/utils/validators/validators-utils';
+import { ResetPasswordState } from '../../services/reset-password-state.service';
 
 @Component({
   selector: 'app-reset-password',
   standalone: true,
-  imports: [ReactiveFormsModule, TranslatePipe, TextInputComponent, UiButtonComponent],
+  imports: [
+    ReactiveFormsModule,
+    TranslatePipe,
+    TextInputComponent,
+    ButtonComponent,
+  ],
   templateUrl: './reset-password.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ResetPasswordComponent implements AuthPage, OnInit {
+export class ResetPasswordComponent implements OnInit {
   private fb = inject(FormBuilder);
   private authRepo = inject(AuthRepo);
   private router = inject(Router);
@@ -26,36 +39,36 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
   private toastr = inject(ToastrService);
   private translate = inject(TranslateService);
   private destroyRef = inject(DestroyRef);
-  private resetPasswordState = inject(ResetPasswordStateService);
+  private resetPasswordState = inject(ResetPasswordState);
 
-  private email = '';
-
-  constructor() {
-    // For manual testing uncomment the line below:
-    // this.resetPasswordState.setEmail('mahmoudsami11095@gmail.com');
-  }
+  private email!: string | null;
 
   ngOnInit() {
-      this.email = this.resetPasswordState.email();
-      
-      if (!this.email) {
-        this.toastr.error('Email is missing. Please try the forgot password process again.');
-        this.router.navigate(['/auth/forgot-password']);
-      }
+    this.email = this.resetPasswordState.email();
+    if (!this.email) {
+      this.resetPasswordState.setStep(1);
+    }
   }
 
-  readonly authData = signal({
-    title: 'AUTH.RESET_PASSWORD.TITLE',
-    description: 'AUTH.RESET_PASSWORD.SUBTITLE',
-    footerText: 'AUTH.RESET_PASSWORD.FOOTER_TEXT',
-    footerLinkText: 'AUTH.RESET_PASSWORD.FOOTER_LINK',
-    footerLinkRoute: '/contact'
-  });
-
-  form = this.fb.group({
-    password: ['', [Validators.required, Validators.minLength(8), CustomValidators.strongPassword]],
-    confirmPassword: ['', [Validators.required]]
-  }, { validators: CustomValidators.passwordMatchValidator });
+  form = this.fb.group(
+    {
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(ValidationsUtils.passwordPattern),
+        ],
+      ],
+      confirmPassword: ['', [Validators.required]],
+    },
+    {
+      validators: ValidationsUtils.matchFieldsValidator(
+        'password',
+        'confirmPassword'
+      ),
+    }
+  );
 
   isLoading = signal(false);
 
@@ -66,26 +79,25 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
     }
 
     this.isLoading.set(true);
-    const password = this.form.get('password')?.value;
+    const password = this.form.get('password');
 
-    if (password) {
-        this.authRepo.resetPassword({ email: this.email, newPassword: password })
-        .pipe(takeUntilDestroyed(this.destroyRef))
+    if (password?.value) {
+      this.authRepo
+        .resetPassword({ email: this.email, newPassword: password.value })
+        .pipe(
+          takeUntilDestroyed(this.destroyRef),
+          finalize(() => this.isLoading.set(false))
+        )
         .subscribe({
-        next: () => {
-             this.isLoading.set(false);
-             const successMessage = this.translate.instant('AUTH.RESET_PASSWORD.SUCCESS');
-             this.toastr.success(successMessage);
-             setTimeout(() => this.router.navigate(['/auth/login']), 2000);
-        },
-        error: () => {
-             this.isLoading.set(false);
-             // Assuming key exists or generic
-             this.toastr.error('Something went wrong. Please try again.');
-        }
+          next: () => {
+            this.isLoading.set(false);
+            const successMessage = this.translate.instant(
+              'AUTH.RESET_PASSWORD.SUCCESS'
+            );
+            this.toastr.success(successMessage);
+            this.router.navigate(['/auth/login']);
+          },
         });
     }
   }
-
-
 }
