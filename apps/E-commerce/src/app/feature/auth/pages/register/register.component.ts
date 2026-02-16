@@ -1,8 +1,7 @@
-import { TranslatePipe } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -14,83 +13,121 @@ import {
   SelectInputComponent,
   TextInputComponent,
 } from '@elevate/reusable-input';
-import { ToastrService } from 'ngx-toastr';
-import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
 import { ButtonComponent } from '@elevate/reusable-ui';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
-import { ValidationsUtils } from 'apps/E-commerce/src/app/shared/utils/validators/validators-utils';
+import { ValidationsUtils } from '../../../../shared/utils/validators/validators-utils';
+import {
+  AuthPage,
+  AuthPageData,
+} from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
+
+interface PhoneValue {
+  e164Number: string;
+  internationalNumber?: string;
+  nationalNumber?: string;
+  countryCode?: string;
+}
 
 @Component({
   selector: 'app-register',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     TextInputComponent,
     PhoneInputComponent,
     SelectInputComponent,
-    TranslatePipe,
     ButtonComponent,
+    TranslatePipe,
   ],
   templateUrl: './register.component.html',
 })
-export class RegisterComponent implements AuthPage, OnInit {
-  readonly authData = signal({
+export class RegisterComponent implements AuthPage {
+  private readonly auth = inject(AuthRepo);
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly toastr = inject(ToastrService);
+  private readonly translate = inject(TranslateService);
+
+  readonly authData = signal<AuthPageData>({
     title: 'AUTH.REGISTER.TITLE',
     footerText: 'AUTH.REGISTER.FOOTER_TEXT',
     footerLinkText: 'AUTH.REGISTER.FOOTER_LINK',
     footerLinkRoute: '/auth/login',
   });
 
-  isLoading = signal<boolean>(false);
-  authForm!: FormGroup;
-  private readonly fb = inject(FormBuilder);
-  private readonly authRepo = inject(AuthRepo);
-  private readonly toaster = inject(ToastrService);
-  private readonly router = inject(Router);
-  private readonly destroyRef = inject(DestroyRef);
-  formInit() {
-    this.authForm = this.fb.group(
-      {
-        firstName: ['', [Validators.required, Validators.minLength(5)]],
-        lastName: ['', [Validators.required, Validators.maxLength(20)]],
-        email: ['', [Validators.required, Validators.email]],
-        phone: ['', [Validators.required]],
-        gender: ['', Validators.required],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(ValidationsUtils.passwordPattern),
-          ],
-        ],
-        rePassword: ['', [Validators.required]],
-      },
-      {
-        validators: ValidationsUtils.matchFieldsValidator(
-          'password',
-          'rePassword'
-        ),
-      }
-    );
-  }
-  ngOnInit(): void {
-    this.formInit();
-  }
+  readonly isLoading = signal(false);
 
-  submit() {
+  readonly authForm = new FormGroup(
+    {
+      firstName: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(3)],
+        nonNullable: true,
+      }),
+      lastName: new FormControl('', {
+        validators: [Validators.required, Validators.maxLength(20)],
+        nonNullable: true,
+      }),
+      email: new FormControl('', {
+        validators: [Validators.required, Validators.email],
+        nonNullable: true,
+      }),
+      phone: new FormControl<string | PhoneValue>('', {
+        validators: [Validators.required],
+        nonNullable: true,
+      }),
+      gender: new FormControl<'male' | 'female' | ''>('', {
+        validators: [Validators.required],
+        nonNullable: true,
+      }),
+      password: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.pattern(ValidationsUtils.passwordPattern),
+        ],
+        nonNullable: true,
+      }),
+      rePassword: new FormControl('', {
+        validators: [Validators.required],
+        nonNullable: true,
+      }),
+    },
+    {
+      validators: ValidationsUtils.matchFieldsValidator('password', 'rePassword'),
+    }
+  );
+
+  readonly genderOptions = [
+    { label: this.translate.instant('AUTH.REGISTER.MALE'), value: 'male' },
+    { label: this.translate.instant('AUTH.REGISTER.FEMALE'), value: 'female' },
+  ];
+
+  submit(): void {
     if (this.authForm.invalid) {
       this.authForm.markAllAsTouched();
       return;
     }
+
     this.isLoading.set(true);
 
+    const formValue = this.authForm.getRawValue();
+
+    const phoneValue = formValue.phone;
+    const phone = typeof phoneValue === 'string'
+      ? phoneValue
+      : (phoneValue as PhoneValue).e164Number;
+
     const payload = {
-      ...this.authForm.value,
-      phone: this.authForm.value.phone?.e164Number,
+      firstName: formValue.firstName,
+      lastName: formValue.lastName,
+      email: formValue.email,
+      phone: phone,
+      gender: formValue.gender as 'male' | 'female',
+      password: formValue.password,
+      rePassword: formValue.rePassword,
     };
 
-    this.authRepo
+    this.auth
       .register(payload)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
@@ -98,7 +135,9 @@ export class RegisterComponent implements AuthPage, OnInit {
       )
       .subscribe({
         next: () => {
-          this.toaster.success('Registration successful');
+          this.toastr.success(
+            this.translate.instant('AUTH.REGISTER.SUCCESS')
+          );
           this.router.navigate(['/auth/login']);
         },
       });

@@ -1,4 +1,5 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormControl,
   FormGroup,
@@ -6,20 +7,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthModel, AuthRepo } from '@elevate/auth-domain';
+import {
+  CheckboxInputComponent,
+  TextInputComponent,
+} from '@elevate/reusable-input';
+import { ButtonComponent } from '@elevate/reusable-ui';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
 import {
   AuthPage,
   AuthPageData,
 } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
-import { ButtonComponent } from '@elevate/reusable-ui';
-import {
-  TextInputComponent,
-  CheckboxInputComponent,
-} from '@elevate/reusable-input';
-import { finalize } from 'rxjs';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +37,8 @@ export class LoginComponent implements AuthPage {
   private readonly auth = inject(AuthRepo);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly toaster = inject(ToastrService);
+  private readonly toastr = inject(ToastrService);
+
   readonly authData = signal<AuthPageData>({
     title: 'AUTH.LOGIN.TITLE',
     footerText: 'AUTH.LOGIN.FOOTER_TEXT',
@@ -45,7 +46,7 @@ export class LoginComponent implements AuthPage {
     footerLinkRoute: '/auth/register',
   });
 
-  readonly isLoading = signal<boolean>(false);
+  readonly isLoading = signal(false);
 
   readonly loginForm = new FormGroup({
     email: new FormControl('', {
@@ -68,9 +69,9 @@ export class LoginComponent implements AuthPage {
     this.isLoading.set(true);
 
     const { rememberMe, ...payload } = this.loginForm.getRawValue();
+
     this.auth
       .login(payload, rememberMe)
-
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         finalize(() => this.isLoading.set(false))
@@ -78,7 +79,7 @@ export class LoginComponent implements AuthPage {
       .subscribe({
         next: (res: AuthModel) => {
           this.loginForm.reset();
-          this.toaster.success(res.message);
+          this.toastr.success(res.message);
           this.router.navigate(['/home']);
         },
       });

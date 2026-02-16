@@ -45,9 +45,13 @@ export class OtpCodeComponent {
   private readonly toastr = inject(ToastrService);
   private readonly translate = inject(TranslateService);
   private readonly resetState = inject(ResetPasswordState);
+  private readonly timerReset$ = new Subject<void>();
 
-  readonly email = signal<string>('');
-  readonly timer = signal<number>(0);
+  private readonly TIMER_DURATION = 60;
+  private readonly OTP_LENGTH = 6;
+
+  readonly email = this.resetState.email;
+  readonly timer = signal(0);
   readonly loadingState = signal<LoadingState>('idle');
 
   readonly isVerifying = computed(() => this.loadingState() === 'verifying');
@@ -61,43 +65,35 @@ export class OtpCodeComponent {
   readonly otpControl = new FormControl('', {
     validators: [
       Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(6),
+      Validators.minLength(this.OTP_LENGTH),
+      Validators.maxLength(this.OTP_LENGTH),
     ],
     nonNullable: true,
   });
 
-  private readonly timerReset$ = new Subject<void>();
-
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
-      this.initializeEmail();
       this.startTimer();
     }
   }
 
-  private initializeEmail(): void {
-    const storedEmail = this.resetState.email();
-    if (storedEmail) {
-      this.email.set(storedEmail);
-    }
-  }
-
   private startTimer(): void {
-    const TIMER_DURATION = 60;
-    this.timer.set(TIMER_DURATION);
+    this.timer.set(this.TIMER_DURATION);
 
     interval(1000)
       .pipe(
         startWith(0),
-        map((tick) => TIMER_DURATION - tick - 1),
+        map((tick) => this.TIMER_DURATION - tick - 1),
         takeWhile((time) => time >= 0),
         takeUntil(this.timerReset$),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe((time) => {
-        this.timer.set(time);
-      });
+      .subscribe((time) => this.timer.set(time));
+  }
+
+  private resetTimer(): void {
+    this.timerReset$.next();
+    this.startTimer();
   }
 
   verify(): void {
@@ -108,13 +104,10 @@ export class OtpCodeComponent {
 
     this.loadingState.set('verifying');
 
-    const payload = {
-      email: this.email(),
-      resetCode: this.otpControl.value,
-    };
-
     this.auth
-      .verifyResetCode(payload)
+      .verifyResetCode({
+        resetCode: this.otpControl.value,
+      })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         finalize(() => this.loadingState.set('idle'))
@@ -152,11 +145,6 @@ export class OtpCodeComponent {
 
   onEdit(): void {
     this.resetState.setStep(1);
-  }
-
-  private resetTimer(): void {
-    this.timerReset$.next();
-    this.startTimer();
   }
 
   formatTimer(): string {
