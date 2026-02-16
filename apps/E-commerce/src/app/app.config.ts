@@ -1,4 +1,3 @@
-import { loadingInterceptor } from './core/interceptors/loading/loading-interceptor';
 import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
 import {
   ApplicationConfig,
@@ -20,7 +19,7 @@ import {
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideToastr } from 'ngx-toastr';
-import { errorInterceptor } from './core/interceptors/errors/error-interceptor';
+import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
@@ -31,6 +30,7 @@ import {
   Lock,
   LucideAngularModule,
 } from 'lucide-angular';
+import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),

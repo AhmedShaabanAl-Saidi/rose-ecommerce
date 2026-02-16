@@ -15,9 +15,8 @@ import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
-import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
-import { ValidationsUtils } from '../../../../shared/utils/validators/validators-utils';
 import { ResetPasswordState } from '../../services/reset-password-state.service';
+import { ValidationsUtils } from 'apps/E-commerce/src/app/shared/utils/validators/validators-utils';
 
 @Component({
   selector: 'app-reset-password',

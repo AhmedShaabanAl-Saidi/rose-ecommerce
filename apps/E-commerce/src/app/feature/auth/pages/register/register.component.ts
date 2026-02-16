@@ -16,10 +16,10 @@ import {
 } from '@elevate/reusable-input';
 import { ToastrService } from 'ngx-toastr';
 import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
-import { ValidationsUtils } from '../../../../shared/utils/validators/validators-utils';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
+import { ValidationsUtils } from 'apps/E-commerce/src/app/shared/utils/validators/validators-utils';
 
 @Component({
   selector: 'app-register',
