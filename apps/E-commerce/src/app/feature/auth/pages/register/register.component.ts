@@ -1,6 +1,6 @@
 import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,12 +13,13 @@ import {
   PhoneInputComponent,
   SelectInputComponent,
   TextInputComponent,
-}  from '@elevate/reusable-input';
+} from '@elevate/reusable-input';
 import { ToastrService } from 'ngx-toastr';
 import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
-import { Validations } from '../../../../shared/utils/validators/validators-utils';
+import { ValidationsUtils } from '../../../../shared/utils/validators/validators-utils';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -30,13 +31,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     SelectInputComponent,
     TranslatePipe,
     ButtonComponent,
-
-],
+  ],
   templateUrl: './register.component.html',
 })
-export class RegisterComponent implements AuthPage {
-  isLoading = false;
-
+export class RegisterComponent implements AuthPage, OnInit {
   readonly authData = signal({
     title: 'AUTH.REGISTER.TITLE',
     footerText: 'AUTH.REGISTER.FOOTER_TEXT',
@@ -44,12 +42,13 @@ export class RegisterComponent implements AuthPage {
     footerLinkRoute: '/auth/login',
   });
 
+  isLoading = signal<boolean>(false);
   authForm!: FormGroup;
   private readonly fb = inject(FormBuilder);
   private readonly authRepo = inject(AuthRepo);
   private readonly toaster = inject(ToastrService);
   private readonly router = inject(Router);
-  private readonly destroyRef = inject(DestroyRef)
+  private readonly destroyRef = inject(DestroyRef);
   formInit() {
     this.authForm = this.fb.group(
       {
@@ -60,11 +59,19 @@ export class RegisterComponent implements AuthPage {
         gender: ['', Validators.required],
         password: [
           '',
-          [Validators.required, Validators.pattern(Validations.passwordPattern)],
+          [
+            Validators.required,
+            Validators.pattern(ValidationsUtils.passwordPattern),
+          ],
         ],
         rePassword: ['', [Validators.required]],
       },
-      { validators: Validations.matchFieldsValidator('password', 'rePassword') }
+      {
+        validators: ValidationsUtils.matchFieldsValidator(
+          'password',
+          'rePassword'
+        ),
+      }
     );
   }
   ngOnInit(): void {
@@ -76,19 +83,24 @@ export class RegisterComponent implements AuthPage {
       this.authForm.markAllAsTouched();
       return;
     }
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     const payload = {
       ...this.authForm.value,
       phone: this.authForm.value.phone?.e164Number,
     };
 
-    this.authRepo.register(payload).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: () => {
-        this.toaster.success('Registration successful');
-        this.router.navigate(['/auth/login']);
-      },
-
-    });
+    this.authRepo
+      .register(payload)
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.isLoading.set(false))
+      )
+      .subscribe({
+        next: () => {
+          this.toaster.success('Registration successful');
+          this.router.navigate(['/auth/login']);
+        },
+      });
   }
 }

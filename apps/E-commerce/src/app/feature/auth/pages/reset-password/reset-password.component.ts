@@ -15,8 +15,9 @@ import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthPage } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
-import { CustomValidators } from '../../../../shared/utils/validators';
+import { ValidationsUtils } from '../../../../shared/utils/validators/validators-utils';
 import { ResetPasswordStateService } from '../../services/reset-password-state.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-reset-password',
@@ -43,8 +44,7 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
   private email = '';
 
   constructor() {
-    // For manual testing uncomment the line below:
-    // this.resetPasswordState.setEmail('mahmoudsami11095@gmail.com');
+    this.resetPasswordState.setEmail('mahmoudsami11095@gmail.com');
   }
 
   ngOnInit() {
@@ -73,12 +73,17 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
         [
           Validators.required,
           Validators.minLength(8),
-          CustomValidators.strongPassword,
+          Validators.pattern(ValidationsUtils.passwordPattern),
         ],
       ],
       confirmPassword: ['', [Validators.required]],
     },
-    { validators: CustomValidators.passwordMatchValidator }
+    {
+      validators: ValidationsUtils.matchFieldsValidator(
+        'password',
+        'confirmPassword'
+      ),
+    }
   );
 
   isLoading = signal(false);
@@ -90,12 +95,15 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
     }
 
     this.isLoading.set(true);
-    const password = this.form.get('password')?.value;
+    const password = this.form.get('password');
 
-    if (password) {
+    if (password?.value) {
       this.authRepo
-        .resetPassword({ email: this.email, newPassword: password })
-        .pipe(takeUntilDestroyed(this.destroyRef))
+        .resetPassword({ email: this.email, newPassword: password.value })
+        .pipe(
+          takeUntilDestroyed(this.destroyRef),
+          finalize(() => this.isLoading.set(false))
+        )
         .subscribe({
           next: () => {
             this.isLoading.set(false);
@@ -103,12 +111,7 @@ export class ResetPasswordComponent implements AuthPage, OnInit {
               'AUTH.RESET_PASSWORD.SUCCESS'
             );
             this.toastr.success(successMessage);
-            setTimeout(() => this.router.navigate(['/auth/login']), 2000);
-          },
-          error: () => {
-            this.isLoading.set(false);
-            // Assuming key exists or generic
-            this.toastr.error('Something went wrong. Please try again.');
+            this.router.navigate(['/auth/login']);
           },
         });
     }
