@@ -6,7 +6,6 @@ import { InputErrorComponent } from '../error/input-error.component';
 
 @Component({
   selector: 'lib-otp-input',
-  standalone: true,
   imports: [NgOtpInputModule, LucideAngularModule, InputErrorComponent],
   templateUrl: './otp-input.component.html',
   styleUrl: './otp-input.component.css',

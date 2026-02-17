@@ -6,7 +6,6 @@ import { InputErrorComponent } from '../error/input-error.component';
 
 @Component({
   selector: 'lib-checkbox-input',
-  standalone: true,
   imports: [CommonModule, LucideAngularModule, InputErrorComponent],
   templateUrl: './checkbox-input.component.html',
 })

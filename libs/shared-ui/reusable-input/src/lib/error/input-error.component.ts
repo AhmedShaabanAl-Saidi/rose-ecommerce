@@ -5,7 +5,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'lib-input-error',
-  standalone: true,
   templateUrl: './input-error.component.html',
   imports: [LucideAngularModule, TranslateModule],
 })

@@ -8,11 +8,11 @@ export interface SelectOption {
   label: string;
   value: any;
 }
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'lib-select-input',
-  standalone: true,
-  imports: [LucideAngularModule, CommonModule, InputErrorComponent],
+  imports: [LucideAngularModule, CommonModule, InputErrorComponent, TranslatePipe],
   templateUrl: './select-input.component.html',
 })
 export class SelectInputComponent extends BaseInputComponent {

@@ -13,7 +13,7 @@
       "PASSWORD_PLACEHOLDER": "********",
       "REMEMBER_ME": "Remember me",
       "FORGOT_PASSWORD": "Forgot your password?",
-      "SUBMIT":"Login"
+      "SUBMIT": "Login"
     },
     "REGISTER": {
       "TITLE": "Become part of our family!",
@@ -59,14 +59,17 @@
     }
   },
   "VALIDATION": {
-  "REQUIRED": "Field is required",
-  "EMAIL": "Please enter a valid email address",
-  "MIN_LENGTH": "Minimum {{length}} characters required",
-  "MAX_LENGTH": "Maximum {{length}} characters allowed",
-  "MISMATCH": "Fields do not match",
-  "INVALID_PHONE": "Invalid phone number format",
-  "STRONG_PASSWORD": "Password must contain uppercase, lowercase, number and special character",
-  "PATTERN_PASSWORD":  "Password must contain uppercase, lowercase, number and special character",
-  "INVALID": "Invalid field"
-}
+    "REQUIRED": "Field is required",
+    "EMAIL": "Please enter a valid email address",
+    "MIN_LENGTH": "Minimum {{length}} characters required",
+    "MAX_LENGTH": "Maximum {{length}} characters allowed",
+    "MISMATCH": "Fields do not match",
+    "INVALID_PHONE": "Invalid phone number format",
+    "STRONG_PASSWORD": "Password must contain uppercase, lowercase, number and special character",
+    "PATTERN_PASSWORD": "Password must contain uppercase, lowercase, number and special character",
+    "INVALID": "Invalid field"
+  },
+  "SHARED": {
+    "SELECT_OPTION": "Select option"
+  }
 }

@@ -14,6 +14,7 @@ import {
   AuthPage,
   AuthPageData,
 } from '../../../../core/layout/auth-layout/interfaces/auth-page-data';
+import { authConfig } from '../../auth.config';
 import { ResetPasswordState } from '../../services/reset-password-state.service';
 import { OtpCodeComponent } from '../otp-code/otp-code.component';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
@@ -33,36 +34,13 @@ export class ForgotPasswordComponent implements AuthPage {
   private readonly auth = inject(AuthRepo);
   private readonly destroyRef = inject(DestroyRef);
   private readonly resetState = inject(ResetPasswordState);
-  readonly step = computed(() => this.resetState.step());
 
-  readonly isLoading = signal<boolean>(false);
+  readonly step = this.resetState.step;
+  readonly isLoading = signal(false);
 
   readonly authData = computed<AuthPageData>(() => {
     const currentStep = this.step();
-    if (currentStep === 2) {
-      return {
-        title: '',
-        description: '',
-        titleStyle: 'simple',
-      };
-    } else if (currentStep === 1) {
-      return {
-        title: 'AUTH.FORGOT_PASSWORD.TITLE',
-        description: 'AUTH.FORGOT_PASSWORD.DESCRIPTION',
-        footerText: 'AUTH.FORGOT_PASSWORD.FOOTER_TEXT',
-        footerLinkText: 'AUTH.FORGOT_PASSWORD.FOOTER_LINK',
-        footerLinkRoute: '/auth/login',
-        titleStyle: 'simple',
-      };
-    } else {
-      return {
-        title: 'AUTH.RESET_PASSWORD.TITLE',
-        description: 'AUTH.RESET_PASSWORD.SUBTITLE',
-        footerText: 'AUTH.RESET_PASSWORD.FOOTER_TEXT',
-        footerLinkText: 'AUTH.RESET_PASSWORD.FOOTER_LINK',
-        footerLinkRoute: '/contact',
-      };
-    }
+    return authConfig.forgotPassword[currentStep];
   });
 
   readonly forgotPasswordForm = new FormGroup({
@@ -80,17 +58,17 @@ export class ForgotPasswordComponent implements AuthPage {
 
     this.isLoading.set(true);
 
-    const payload = this.forgotPasswordForm.getRawValue();
+    const { email } = this.forgotPasswordForm.getRawValue();
 
     this.auth
-      .forgetPassword(payload)
+      .forgetPassword({ email })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         finalize(() => this.isLoading.set(false))
       )
       .subscribe({
         next: () => {
-          this.resetState.setEmail(payload.email);
+          this.resetState.setEmail(email);
           this.resetState.setStep(2);
         },
       });
