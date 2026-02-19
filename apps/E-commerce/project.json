@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/E-commerce/src",
-  "tags": [],
+  "tags": ["type:app"],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
@@ -20,7 +20,15 @@
           }
         ],
         "styles": [
-          "apps/E-commerce/src/styles.css"],
+          "apps/E-commerce/src/styles.css",
+         "node_modules/ngx-toastr/toastr.css",
+        "node_modules/ngx-spinner/animations/triangle-skew-spin.css" ,
+        "node_modules/intl-tel-input/build/css/intlTelInput.css"
+         ],
+        
+        "scripts": [
+          "node_modules/intl-tel-input/build/js/utils.js"
+        ],
         "server": "apps/E-commerce/src/main.server.ts",
         "ssr": {
           "entry": "apps/E-commerce/src/server.ts"

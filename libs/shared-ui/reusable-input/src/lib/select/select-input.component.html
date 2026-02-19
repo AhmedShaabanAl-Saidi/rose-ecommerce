@@ -1,0 +1,35 @@
+<div class="input-wrapper">
+  @if (label()) {
+  <label [for]="label()" class="input-label">
+    {{ label() }}
+  </label>
+  }
+
+  <div class="relative w-full flex items-center">
+    <select
+      [id]="label()"
+      [disabled]="isDisabled"
+      (blur)="onTouched()"
+      (change)="onSelectChange($event)"
+      class="select-base"
+      [class.input-status-normal]="!Invalid"
+      [class.input-status-error]="Invalid"
+    >
+      <option value="" disabled [selected]="!value">
+        {{ placeholder() || ('SHARED.SELECT_OPTION' | translate) }}
+      </option>
+
+      @for (opt of options(); track opt.value) {
+      <option [value]="opt.value" [selected]="value === opt.value">
+        {{ opt.label }}
+      </option>
+      }
+    </select>
+
+    <div class="input-icon-container right-3 pointer-events-none">
+      <i-lucide name="chevron-down" size="18"></i-lucide>
+    </div>
+  </div>
+
+  <lib-input-error [control]="control"></lib-input-error>
+</div>

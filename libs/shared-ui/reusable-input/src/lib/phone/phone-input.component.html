@@ -1,0 +1,23 @@
+<div class="input-wrapper">
+  @if (label()) {
+  <label [for]="label()" class="input-label">
+    {{ label() }}
+  </label>
+  }
+
+  <ngx-intl-tel-input
+    [preferredCountries]="['eg', 'sa', 'us']"
+    [enableAutoCountrySelect]="true"
+    [enablePlaceholder]="true"
+    [searchCountryFlag]="true"
+    [selectFirstCountry]="true"
+    [phoneValidation]="true"
+    [separateDialCode]="true"
+    [maxLength]="15"
+    name="phone"
+    [formControl]="formField"
+    class="bg-white dark:bg-zinc-900 dark:text-white outline outline-gray-200 dark:outline-zinc-700 rounded-lg"
+  ></ngx-intl-tel-input>
+
+  <lib-input-error [control]="control"></lib-input-error>
+</div>

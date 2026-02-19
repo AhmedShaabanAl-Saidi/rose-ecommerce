@@ -1,5 +1,75 @@
 {
   "HELLO": "Hello",
   "WELCOME": "Welcome to E-commerce",
-  "SWITCH_LANGUAGE": "Switch Language"
+  "SWITCH_LANGUAGE": "Switch Language",
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Welcome back!",
+      "FOOTER_TEXT": "Don't have an account yet?",
+      "FOOTER_LINK": "Create one now!",
+      "EMAIL": "Email",
+      "EMAIL_PLACEHOLDER": "user@example.com",
+      "PASSWORD": "Password",
+      "PASSWORD_PLACEHOLDER": "********",
+      "REMEMBER_ME": "Remember me",
+      "FORGOT_PASSWORD": "Forgot your password?",
+      "SUBMIT": "Login"
+    },
+    "REGISTER": {
+      "TITLE": "Become part of our family!",
+      "FIRST_NAME": "First name",
+      "LAST_NAME": "Last name",
+      "EMAIL": "Email",
+      "PHONE": "Phone",
+      "GENDER": "Gender",
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "SUBMIT": "Create Account",
+      "FOOTER_TEXT": "Already have an account?",
+      "FOOTER_LINK": "Login now!"
+    },
+    "FORGOT_PASSWORD": {
+      "TITLE": "Forgot Password?",
+      "DESCRIPTION": "Worry not, we'll send you instructions to help you reset it.",
+      "FOOTER_TEXT": "Remember your password?",
+      "FOOTER_LINK": "Login now!"
+    },
+    "OTP": {
+      "TITLE": "Enter the OTP Code",
+      "DESCRIPTION": "We have sent a 6-digit code to",
+      "EDIT": "Edit",
+      "VERIFY": "Verify OTP",
+      "SEND_NEW": "Send a new code",
+      "SUCCESS_RESEND": "A new OTP code has been sent to your email",
+      "FOOTER_TEXT": "Need help?",
+      "FOOTER_LINK": "Contact us"
+    },
+    "RESET_PASSWORD": {
+      "TITLE": "Create a new password",
+      "SUBTITLE": "Set a strong password to secure your account.",
+      "PASSWORD_LABEL": "Password",
+      "CONFIRM_PASSWORD_LABEL": "Confirm Password",
+      "SUBMIT": "Reset Password",
+      "FOOTER_TEXT": "Need help?",
+      "FOOTER_LINK": "Contact us",
+      "SUCCESS": "Your password has been successfully reset.",
+      "ERROR": "Something went wrong. Please try again."
+    }
+  },
+  "VALIDATION": {
+    "REQUIRED": "Field is required",
+    "EMAIL": "Please enter a valid email address",
+    "MIN_LENGTH": "Minimum {{length}} characters required",
+    "MAX_LENGTH": "Maximum {{length}} characters allowed",
+    "MISMATCH": "Fields do not match",
+    "INVALID_PHONE": "Invalid phone number format",
+    "STRONG_PASSWORD": "Password must contain uppercase, lowercase, number and special character",
+    "PATTERN_PASSWORD": "Password must contain uppercase, lowercase, number and special character",
+    "INVALID": "Invalid field"
+  },
+  "SHARED": {
+    "SELECT_OPTION": "Select option"
+  }
 }
