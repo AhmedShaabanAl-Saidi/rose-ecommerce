@@ -1,5 +1,5 @@
-import { isPlatformBrowser, DOCUMENT } from '@angular/common';
-import { inject, Injectable, PLATFORM_ID, signal, computed, Renderer2, RendererFactory2, DestroyRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { inject, Injectable, signal, computed, Renderer2, RendererFactory2, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateService } from '@ngx-translate/core';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
@@ -8,17 +8,15 @@ import { SsrCookieService } from 'ngx-cookie-service-ssr';
   providedIn: 'root',
 })
 export class languageService {
-  private readonly platformId = inject(PLATFORM_ID);
   private readonly translateService = inject(TranslateService);
   private readonly cookieService = inject(SsrCookieService);
   private readonly document = inject(DOCUMENT);
   private readonly rendererFactory = inject(RendererFactory2);
   private readonly destroyRef = inject(DestroyRef);
   private readonly renderer: Renderer2;
-  private readonly isBrowser = isPlatformBrowser(this.platformId);
 
   private currentLangSignal = signal<string>(
-    this.translateService.currentLang || 'en'
+    this.translateService.getCurrentLang() || 'en'
   );
 
   readonly currentLang = this.currentLangSignal.asReadonly();
@@ -46,9 +44,5 @@ export class languageService {
   changeLanguage(language: string): void {
     this.translateService.use(language);
     this.cookieService.set('lang', language, { path: '/' });
-
-    if (this.isBrowser) {
-      localStorage.setItem('lang', language);
-    }
   }
 }

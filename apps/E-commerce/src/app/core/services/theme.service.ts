@@ -19,9 +19,6 @@ export class ThemeService {
             const currentTheme = this.theme();
             this.document.documentElement.classList.toggle('dark', currentTheme === Theme.DARK);
             this.cookieService.set('theme', currentTheme, { path: '/', sameSite: 'Lax' });
-            if (this.isBrowser) {
-                localStorage.setItem('theme', currentTheme);
-            }
         });
     }
 
@@ -31,8 +28,7 @@ export class ThemeService {
 
         if (!this.isBrowser) return Theme.LIGHT;
 
-        return (localStorage.getItem('theme') as Theme) ||
-            (this.document.documentElement.classList.contains('dark') ? Theme.DARK : Theme.LIGHT);
+        return this.document.documentElement.classList.contains('dark') ? Theme.DARK : Theme.LIGHT;
     }
 
     toggleTheme() {
