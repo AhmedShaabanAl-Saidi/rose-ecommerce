@@ -31,8 +31,12 @@ import {
   LucideAngularModule,
 } from 'lucide-angular';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
+import { provideThemeInitializer } from './core/initializers/theme.initializer';
+import { provideLanguageInitializer } from './core/initializers/language.initializer';
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideThemeInitializer(),
+    provideLanguageInitializer(),
     provideAnimations(),
     provideClientHydration(withEventReplay()),
     provideBrowserGlobalErrorListeners(),
