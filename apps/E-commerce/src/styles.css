@@ -548,3 +548,96 @@
 .p-select-custom :focus {
   @apply outline-none!;
 }
+
+.iti {
+  direction: ltr !important;
+  width: 100%;
+  position: relative;
+}
+
+.iti input {
+  @apply input-base input-status-normal;
+  padding-left: 55px !important;
+  height: 42px !important;
+}
+
+html[dir='rtl'] .iti input {
+  direction: rtl !important;
+  text-align: right !important;
+  padding-right: 55px !important;
+  padding-left: 12px !important;
+}
+
+html[dir='rtl'] .iti__flag-container {
+  position: absolute !important;
+  right: 0 !important;
+  left: auto !important;
+}
+
+html[dir='rtl'] .iti__country-list {
+  right: 0 !important;
+  left: auto !important;
+  text-align: right;
+}
+
+html[dir='rtl'] .iti--allow-dropdown input {
+  padding-right: 60px !important;
+  padding-left: 12px !important;
+}
+
+.iti__country:hover,
+.iti__country.iti__highlight {
+  background-color: var(--color-maroon-500) !important;
+  color: white !important;
+}
+
+.dark .iti__country:hover,
+.dark .iti__country.iti__highlight {
+  background-color: var(--color-soft-pink-500) !important;
+  color: var(--color-zinc-950) !important;
+}
+
+.iti__country:hover .iti__country-name,
+.iti__country:hover .iti__dial-code,
+.iti__country.iti__highlight .iti__country-name,
+.iti__country.iti__highlight .iti__dial-code {
+  color: inherit !important;
+}
+
+.dark .iti__country-list {
+  @apply bg-zinc-800 border-zinc-700;
+  color: var(--color-zinc-100);
+}
+
+html[dir='rtl'] .iti .iti__dropdown-content {
+  left: auto !important;
+  right: 0 !important;
+}
+
+.dark .iti__country-name {
+  color: var(--color-zinc-100) !important;
+}
+
+.dark .iti__dial-code {
+  color: var(--color-zinc-400) !important;
+}
+
+.dark .iti__country:hover .iti__country-name,
+.dark .iti__country:hover .iti__dial-code,
+.dark .iti__country.iti__highlight .iti__country-name,
+.dark .iti__country.iti__highlight .iti__dial-code {
+  color: var(--color-zinc-950) !important;
+}
+
+.dark .iti__country-list {
+  background-color: var(--color-zinc-800) !important;
+}
+
+.dark .iti__dropdown-content {
+  background-color: var(--color-zinc-800) !important;
+  border-color: var(--color-zinc-700) !important;
+}
+
+.dark .iti__divider {
+  border-bottom: 1px solid var(--color-zinc-700) !important;
+}
