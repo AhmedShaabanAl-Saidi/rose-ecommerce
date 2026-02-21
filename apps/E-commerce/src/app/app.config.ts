@@ -33,11 +33,15 @@ import {
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 import { provideThemeInitializer } from './core/initializers/theme.initializer';
 import { provideLanguageInitializer } from './core/initializers/language.initializer';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeuix/themes/aura';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideThemeInitializer(),
     provideLanguageInitializer(),
-    provideAnimations(),
+    provideAnimationsAsync(),
     provideClientHydration(withEventReplay()),
     provideBrowserGlobalErrorListeners(),
     provideRouter(appRoutes),
@@ -66,5 +70,18 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       LucideAngularModule.pick({ AlertCircle, Eye, EyeOff, ChevronDown, Lock })
     ),
+    providePrimeNG({
+      ripple: true,
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: '.dark',
+          cssLayer: {
+            name: 'primeng',
+            order: 'tailwind-base, primeng, tailwind-utilities',
+          },
+        },
+      },
+    }),
   ],
 };
