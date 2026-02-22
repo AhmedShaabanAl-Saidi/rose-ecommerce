@@ -164,58 +164,7 @@
   --color-card-bg: var(--color-zinc-800);
   --color-card-text: var(--color-zinc-100);
 }
-@layer base {
-  :root {
-    --p-primary-50: var(--color-maroon-50);
-    --p-primary-100: var(--color-maroon-100);
-    --p-primary-200: var(--color-maroon-200);
-    --p-primary-300: var(--color-maroon-300);
-    --p-primary-400: var(--color-maroon-400);
-    --p-primary-500: var(--color-maroon-500);
-    --p-primary-600: var(--color-maroon-600);
-    --p-primary-700: var(--color-maroon-700);
-    --p-primary-800: var(--color-maroon-800);
-    --p-primary-900: var(--color-maroon-900);
-    --p-primary-950: var(--color-maroon-950);
 
-    --p-surface-50: var(--color-zinc-50);
-    --p-surface-100: var(--color-zinc-100);
-    --p-surface-200: var(--color-zinc-200);
-    --p-surface-300: var(--color-zinc-300);
-    --p-surface-400: var(--color-zinc-400);
-    --p-surface-500: var(--color-zinc-500);
-    --p-surface-600: var(--color-zinc-600);
-    --p-surface-700: var(--color-zinc-700);
-    --p-surface-800: var(--color-zinc-800);
-    --p-surface-900: var(--color-zinc-900);
-    --p-surface-950: var(--color-zinc-950);
-  }
-  .dark {
-    --p-primary-50: var(--color-soft-pink-50);
-    --p-primary-100: var(--color-soft-pink-100);
-    --p-primary-200: var(--color-soft-pink-200);
-    --p-primary-300: var(--color-soft-pink-300);
-    --p-primary-400: var(--color-soft-pink-400);
-    --p-primary-500: var(--color-soft-pink-500);
-    --p-primary-600: var(--color-soft-pink-600);
-    --p-primary-700: var(--color-soft-pink-700);
-    --p-primary-800: var(--color-soft-pink-800);
-    --p-primary-900: var(--color-soft-pink-900);
-    --p-primary-950: var(--color-soft-pink-950);
-
-    --p-surface-50: var(--color-zinc-950);
-    --p-surface-100: var(--color-zinc-900);
-    --p-surface-200: var(--color-zinc-800);
-    --p-surface-300: var(--color-zinc-700);
-    --p-surface-400: var(--color-zinc-600);
-    --p-surface-500: var(--color-zinc-500);
-    --p-surface-600: var(--color-zinc-400);
-    --p-surface-700: var(--color-zinc-300);
-    --p-surface-800: var(--color-zinc-200);
-    --p-surface-900: var(--color-zinc-100);
-    --p-surface-950: var(--color-zinc-50);
-  }
-}
 /* ======================================
    GLOBAL STYLES
 ====================================== */
@@ -505,7 +454,7 @@
 }
 
 .p-select-custom {
-  @apply input-base p-0! flex! items-center! overflow-hidden! shadow-none!;
+  @apply input-base p-0! flex! items-center! overflow-hidden! shadow-none! dark:bg-zinc-600! bg-white!;
   border-width: 1px !important;
   min-height: 42px;
 }
