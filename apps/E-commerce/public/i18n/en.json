@@ -28,7 +28,8 @@
       "CONFIRM_PASSWORD": "Confirm Password",
       "SUBMIT": "Create Account",
       "FOOTER_TEXT": "Already have an account?",
-      "FOOTER_LINK": "Login now!"
+      "FOOTER_LINK": "Login now!",
+      "SUCCESS": "Your account has been successfully created. You can now log in."
     },
     "FORGOT_PASSWORD": {
       "TITLE": "Forgot Password?",

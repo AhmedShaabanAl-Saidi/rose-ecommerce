@@ -4,7 +4,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LucideAngularModule } from 'lucide-angular';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BaseInputComponent } from '../base/base-input.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { InputErrorComponent } from '../error/input-error.component';
 @Component({
   selector: 'lib-phone-input',
@@ -13,7 +12,6 @@ import { InputErrorComponent } from '../error/input-error.component';
     CommonModule,
     ReactiveFormsModule,
     NgxIntlTelInputModule,
-    BsDropdownModule,
     InputErrorComponent,
   ],
   templateUrl: './phone-input.component.html',

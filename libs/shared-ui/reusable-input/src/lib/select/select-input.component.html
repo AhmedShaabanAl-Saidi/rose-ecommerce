@@ -5,30 +5,37 @@
   </label>
   }
 
-  <div class="relative w-full flex items-center">
-    <select
+  <div class="relative w-full">
+    <p-select
       [id]="label()"
+      [options]="options()"
+      [(ngModel)]="value"
+      optionLabel="label"
+      autofocus="false"
+      optionValue="value"
+      [placeholder]="placeholder() || ('SHARED.SELECT_OPTION' | translate)"
       [disabled]="isDisabled"
-      (blur)="onTouched()"
-      (change)="onSelectChange($event)"
-      class="select-base"
-      [class.input-status-normal]="!Invalid"
-      [class.input-status-error]="Invalid"
+      (onBlur)="onTouched()"
+      (onChange)="onValueChange($event.value)"
+      appendTo="body"
+      class="w-full"
+      [styleClass]="
+        'p-select-custom ' +
+        (Invalid ? 'input-status-error' : 'input-status-normal')
+      "
     >
-      <option value="" disabled [selected]="!value">
-        {{ placeholder() || ('SHARED.SELECT_OPTION' | translate) }}
-      </option>
+      <ng-template pTemplate="dropdownicon">
+        <i-lucide
+          name="chevron-down"
+          size="18"
+          class="text-zinc-400"
+        ></i-lucide>
+      </ng-template>
 
-      @for (opt of options(); track opt.value) {
-      <option [value]="opt.value" [selected]="value === opt.value">
-        {{ opt.label }}
-      </option>
-      }
-    </select>
-
-    <div class="input-icon-container right-3 pointer-events-none">
-      <i-lucide name="chevron-down" size="18"></i-lucide>
-    </div>
+      <ng-template pTemplate="item" let-option>
+        <span class="text-sm">{{ option.label }}</span>
+      </ng-template>
+    </p-select>
   </div>
 
   <lib-input-error [control]="control"></lib-input-error>
