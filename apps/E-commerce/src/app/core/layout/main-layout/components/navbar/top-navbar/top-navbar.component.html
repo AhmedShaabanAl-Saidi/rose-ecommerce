@@ -1,0 +1,95 @@
+<section
+  class="relative z-50 px-4 py-3 bg-bg-main dark:text-zinc-50 text-zinc-500 text-sm font-medium"
+>
+  <div
+    class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4"
+  >
+    <div
+      class="flex flex-col lg:flex-row lg:items-center gap-3 w-full lg:flex-1"
+    >
+      <div class="flex items-center gap-3 w-full">
+        <img
+          src="images/navbar/logo.png"
+          class="w-12 h-12 lg:w-20 lg:h-20 shrink-0 cursor-pointer"
+          routerLink="/"
+          alt="logo"
+        />
+        @if (user()) {
+        <div class="hidden lg:block shrink-0">
+          <span class="dark:text-zinc-400 text-xs">
+            {{ 'NAVBAR.DELIVERTO' | translate }}
+          </span>
+          <h2
+            class="text-maroon-700 dark:text-soft-pink-200 flex items-center text-sm font-semibold"
+          >
+            <lucide-icon name="map-pin" class="w-4 h-4 mr-1"></lucide-icon>
+            Cairo
+          </h2>
+        </div>
+        }
+        <div class="flex-1">
+          <lib-text-input
+            class="w-full"
+            [placeholder]="'NAVBAR.SEARCH' | translate"
+            icon="search"
+          ></lib-text-input>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="flex items-center justify-between lg:justify-end gap-4 w-full lg:w-auto"
+    >
+      @if (user()) {
+      <button
+        type="button"
+        class="flex relative items-start flex-1 flex-col justify-start rounded-full cursor-pointer transition"
+        (click)="menu.toggle($event)"
+      >
+        <span>{{ 'NAVBAR.HELLO' | translate }}</span>
+        <div class="flex text-maroon-500 dark:text-soft-pink-200 ms-2">
+          <span> {{ user()?.firstName }} </span>
+          <lucide-icon class="w-5 h-5" name="chevron-down"></lucide-icon>
+        </div>
+      </button>
+
+      } @else {
+      <a
+        routerLink="/auth/login"
+        class="flex items-start flex-1 gap-1 hover:text-maroon-400 hover:dark:text-soft-pink-400"
+      >
+        <lucide-icon
+          strokeWidth="2"
+          class="w-5 h-5"
+          name="user-round"
+        ></lucide-icon>
+        <span>
+          {{ 'NAVBAR.LOGIN' | translate }}
+        </span>
+      </a>
+      }
+      <p-menu #menu [popup]="true" [model]="items()" appendTo="body"></p-menu>
+
+      <p-divider [layout]="'vertical'" class="m-0!"></p-divider>
+
+      <ul class="flex gap-4 items-center">
+        <li class="hover:text-maroon-400 cursor-pointer">
+          <lucide-icon class="w-5 h-5 lg:w-6 lg:h-6" name="heart"></lucide-icon>
+        </li>
+        <li class="hover:text-maroon-400 cursor-pointer">
+          <lucide-icon
+            class="w-5 h-5 lg:w-6 lg:h-6"
+            name="shopping-cart"
+          ></lucide-icon>
+        </li>
+        <li class="hover:text-maroon-400 cursor-pointer">
+          <lucide-icon class="w-5 h-5 lg:w-6 lg:h-6" name="bell"></lucide-icon>
+        </li>
+      </ul>
+      <p-divider [layout]="'vertical'" class="m-0!"></p-divider>
+      <app-language-switcher></app-language-switcher>
+      <p-divider [layout]="'vertical'" class="m-0!"></p-divider>
+      <app-theme-switcher></app-theme-switcher>
+    </div>
+  </div>
+</section>

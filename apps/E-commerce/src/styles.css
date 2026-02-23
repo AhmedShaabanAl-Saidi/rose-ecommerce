@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss';
+@import 'primeIcons/primeIcons.css';
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -589,4 +590,14 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 
 .dark .iti__divider {
   border-bottom: 1px solid var(--color-zinc-700) !important;
+}
+
+.p-menu {
+  z-index: 9999 !important;
+}
+.p-menu-overlay,
+.p-menu,
+.p-component-overlay,
+.p-motion {
+  display: block !important;
 }
