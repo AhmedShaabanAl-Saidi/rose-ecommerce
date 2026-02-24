@@ -63,7 +63,13 @@
     "LOGIN": "Login",
     "SEARCH": "What awesome gift are you looking for?",
     "DELIVERTO": "Deliver to:",
-    "HELLO":"Hello"
+    "HELLO":"Hello",
+    "HOME": "Home",
+    "PRODUCTS": "Products",
+    "CATEGORIES": "Categories",
+    "OCCASIONS": "Occasions",
+    "CONTACT": "Contact",
+    "ABOUT": "About"
   },
   "VALIDATION": {
     "REQUIRED": "Field is required",
