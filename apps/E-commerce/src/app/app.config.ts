@@ -27,8 +27,13 @@ import {
   ChevronDown,
   Eye,
   EyeOff,
+  Heart,
+  HeartMinus,
+  HeartPlus,
   Lock,
   LucideAngularModule,
+  ShoppingCart,
+  Star,
 } from 'lucide-angular';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 import { provideThemeInitializer } from './core/initializers/theme.initializer';
@@ -69,7 +74,18 @@ export const appConfig: ApplicationConfig = {
       NgxSpinnerModule.forRoot({ type: 'triangle-skew-spin' }),
     ]),
     importProvidersFrom(
-      LucideAngularModule.pick({ AlertCircle, Eye, EyeOff, ChevronDown, Lock })
+      LucideAngularModule.pick({
+        AlertCircle,
+        Eye,
+        EyeOff,
+        ChevronDown,
+        Lock,
+        ShoppingCart,
+        Star,
+        Heart,
+        HeartPlus,
+        HeartMinus,
+      })
     ),
     providePrimeNG({
       ripple: true,
