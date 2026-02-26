@@ -91,11 +91,6 @@
   --color-btn-destructive-hover: var(--color-red-700);
   --color-btn-destructive-text: var(--color-white);
 
-  /* Navigation */
-  --color-nav-bg: var(--color-bg-primary);
-  --color-nav-text: var(--color-white);
-  --color-nav-active: var(--color-soft-pink-200);
-
   /* Badges */
   --color-badge-bg: var(--color-maroon-50);
   --color-badge-text: var(--color-maroon-700);
@@ -590,4 +585,14 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 
 .dark .iti__divider {
   border-bottom: 1px solid var(--color-zinc-700) !important;
+}
+
+.p-menu {
+  z-index: 9999 !important;
+}
+.p-menu-overlay,
+.p-menu,
+.p-component-overlay,
+.p-motion {
+  display: block !important;
 }

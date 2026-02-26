@@ -1,29 +1,26 @@
-import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import {
   ApplicationConfig,
   importProvidersFrom,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { appRoutes } from './app.routes';
 import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import {
-  provideHttpClient,
-  withFetch,
-  withInterceptors,
-} from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideRouter } from '@angular/router';
+import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { provideToastr } from 'ngx-toastr';
-import { errorInterceptor } from './core/interceptors/error-interceptor';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   AlertCircle,
+  Bell,
   ChevronDown,
   Eye,
   EyeOff,
@@ -32,16 +29,21 @@ import {
   HeartPlus,
   Lock,
   LucideAngularModule,
+  MapPin,
+  Search,
   ShoppingCart,
   Star,
+  UserRound,
 } from 'lucide-angular';
-import { loadingInterceptor } from './core/interceptors/loading-interceptor';
-import { provideThemeInitializer } from './core/initializers/theme.initializer';
-import { provideLanguageInitializer } from './core/initializers/language.initializer';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { provideToastr } from 'ngx-toastr';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeuix/themes/aura';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import MyPreset from '../mypreset';
+import { appRoutes } from './app.routes';
+import { provideLanguageInitializer } from './core/initializers/language.initializer';
+import { provideThemeInitializer } from './core/initializers/theme.initializer';
+import { errorInterceptor } from './core/interceptors/error-interceptor';
+import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -85,6 +87,10 @@ export const appConfig: ApplicationConfig = {
         Heart,
         HeartPlus,
         HeartMinus,
+        Search,
+        UserRound,
+        Bell,
+        MapPin,
       })
     ),
     providePrimeNG({
