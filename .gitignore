@@ -52,5 +52,6 @@ vitest.config.*.timestamp*
 .opencode/
 .github/prompts/
 .github/skills/
+.github/agents/
 AGENTS.md
 opencode.json
