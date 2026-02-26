@@ -27,18 +27,19 @@
         'FOOTER.GET_DISCOUNT' | translate }}</h3>
       <p class="text-[10px] md:text-xs text-zinc-400 mb-6 md:mb-4">{{ 'FOOTER.SUBSCRIBE_NEWSLETTER' | translate }}</p>
 
-      <div
+      <form [formGroup]="subscriptionForm" (ngSubmit)="submitSubscription()"
         class="w-full max-w-sm mt-2 flex items-center bg-zinc-700/50 dark:bg-zinc-800 rounded-full border border-zinc-600 dark:border-zinc-700 p-0 focus-within:ring-1 focus-within:ring-soft-pink-300 transition-all h-12.5">
-        <input type="email" [placeholder]="'FOOTER.ENTER_EMAIL' | translate"
+        <input type="email" [placeholder]="'FOOTER.ENTER_EMAIL' | translate" formControlName="email"
+          [readonly]="isLoading()"
           class="grow bg-transparent text-white dark:text-zinc-300 placeholder-zinc-400 text-sm outline-none px-6 h-full min-w-0">
         <div class="shrink-0 h-full">
-          <lib-button
+          <lib-button type="submit" [loading]="isLoading()" [disabled]="isLoading() || subscriptionForm.invalid"
             class="[&>button]:rounded-full [&>button]:h-full [&>button]:py-0 [&>button]:px-6 [&>button]:bg-soft-pink-100 [&>button]:dark:bg-soft-pink-300 [&>button]:hover:bg-soft-pink-200 [&>button]:text-maroon-700 [&>button]:dark:text-zinc-800 block h-full"
             [icon]="translate.getCurrentLang() === 'ar' ? arrowLeft : arrowRight" iconPos="right">
             {{ 'FOOTER.SUBSCRIBE' | translate }}
           </lib-button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </footer>
