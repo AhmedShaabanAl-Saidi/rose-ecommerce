@@ -59,6 +59,18 @@
       "ERROR": "Something went wrong. Please try again."
     }
   },
+  "NAVBAR": {
+    "LOGIN": "Login",
+    "SEARCH": "What awesome gift are you looking for?",
+    "DELIVERTO": "Deliver to:",
+    "HELLO":"Hello",
+    "HOME": "Home",
+    "PRODUCTS": "Products",
+    "CATEGORIES": "Categories",
+    "OCCASIONS": "Occasions",
+    "CONTACT": "Contact",
+    "ABOUT": "About"
+  },
   "VALIDATION": {
     "REQUIRED": "Field is required",
     "EMAIL": "Please enter a valid email address",
