@@ -76,6 +76,11 @@
    "TRUSTED_COUNT": "4.5k+",
    "TRUSTED_PART2": "companies"
   },
+  "TESTIMONIALS": {
+   "HEADING": "Real Words from Happy Customers",
+   "TITLE": "Testimonials",
+   "NO_DATA": "No testimonials available at the moment. Check back later!"
+  },
   "VALIDATION": {
     "REQUIRED": "Field is required",
     "EMAIL": "Please enter a valid email address",
