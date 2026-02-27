@@ -71,6 +71,11 @@
     "CONTACT": "Contact",
     "ABOUT": "About"
   },
+  "TRUSTED":{
+   "TRUSTED_PART1": "Trusted by over",
+   "TRUSTED_COUNT": "4.5k+",
+   "TRUSTED_PART2": "companies"
+  },
   "VALIDATION": {
     "REQUIRED": "Field is required",
     "EMAIL": "Please enter a valid email address",

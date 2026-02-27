@@ -71,6 +71,11 @@
     "CONTACT": "اتصل بنا",
     "ABOUT": "من نحن"
   },
+   "TRUSTED":{
+    "TRUSTED_PART1": "موثوق من قبل أكثر من",
+    "TRUSTED_COUNT": "4.5 ألف",
+    "TRUSTED_PART2": "شركة"
+  },
   "VALIDATION": {
     "REQUIRED": "هذا الحقل مطلوب",
     "EMAIL": "يرجى إدخال بريد إلكتروني صحيح",
