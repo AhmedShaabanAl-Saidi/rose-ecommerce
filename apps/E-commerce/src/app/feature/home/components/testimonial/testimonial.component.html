@@ -8,7 +8,11 @@
   <app-heading-title
     [title]="'TESTIMONIALS.HEADING' | translate"
   ></app-heading-title>
-  @if (testimonials()!==null) {
+  @if (isLoading()) {
+  <div class="text-zinc-400 text-2xl">
+    Loading testimonials... <i class="pi pi-spin pi-spinner"></i>
+  </div>
+  } @else {
   <div
     class="bg-maroon-50 animate-fade-up opacity-0 dark:bg-zinc-700 flex flex-wrap justify-center gap-12 p-10"
   >
@@ -33,7 +37,7 @@
       </span>
 
       <div class="flex items-center justify-center mb-4">
-        @for (star of [1, 2, 3, 4, 5]; track star) {
+        @for (star of stars; track star) {
         <div class="relative">
           <i
             [class.pi-star-fill]="testimonial.rating >= star"
