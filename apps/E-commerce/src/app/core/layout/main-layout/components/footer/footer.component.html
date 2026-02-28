@@ -23,18 +23,20 @@
 
     <div
       class="flex flex-col items-center md:items-start col-span-2 md:col-span-4 lg:col-span-4 md:col-start-9 lg:col-start-9 w-full md:justify-self-end mt-4 md:mt-0">
-      <h3 class="text-soft-pink-200 dark:text-soft-pink-300 text-base md:text-lg font-bold mb-1">{{
-        'FOOTER.GET_DISCOUNT' | translate }}</h3>
+      <h3 class="text-soft-pink-200 dark:text-soft-pink-300 text-base md:text-lg font-bold mb-1">
+        {{ 'FOOTER.GET' | translate }}<span class="text-maroon-50">{{ 'FOOTER.DISCOUNT_VALUE' | translate }}</span>{{
+        'FOOTER.DISCOUNT_COUPON' | translate }}
+      </h3>
       <p class="text-[10px] md:text-xs text-zinc-400 mb-6 md:mb-4">{{ 'FOOTER.SUBSCRIBE_NEWSLETTER' | translate }}</p>
 
       <form [formGroup]="subscriptionForm" (ngSubmit)="submitSubscription()"
-        class="w-full max-w-sm mt-2 flex items-center bg-zinc-700/50 dark:bg-zinc-800 rounded-full border border-zinc-600 dark:border-zinc-700 p-0 focus-within:ring-1 focus-within:ring-soft-pink-300 transition-all h-12.5">
+        class="w-full max-w-93.75 mt-2 flex items-center bg-zinc-700/50 dark:bg-zinc-800 rounded-full border border-zinc-600 dark:border-zinc-700 p-0 focus-within:ring-1 focus-within:ring-soft-pink-300 transition-all h-9.5">
         <input type="email" [placeholder]="'FOOTER.ENTER_EMAIL' | translate" formControlName="email"
           [readonly]="isLoading()"
-          class="grow bg-transparent text-white dark:text-zinc-300 placeholder-zinc-400 text-sm outline-none px-6 h-full min-w-0">
+          class="grow bg-transparent text-white dark:text-zinc-300 placeholder-zinc-400 text-sm outline-none px-4 h-full min-w-0">
         <div class="shrink-0 h-full">
           <lib-button type="submit" [loading]="isLoading()" [disabled]="isLoading() || subscriptionForm.invalid"
-            class="[&>button]:rounded-full [&>button]:h-full [&>button]:py-0 [&>button]:px-6 [&>button]:bg-soft-pink-100 [&>button]:dark:bg-soft-pink-300 [&>button]:hover:bg-soft-pink-200 [&>button]:text-maroon-700 [&>button]:dark:text-zinc-800 block h-full"
+            class="[&>button]:rounded-full [&>button]:h-full [&>button]:py-0 [&>button]:px-4 [&>button]:bg-soft-pink-100 [&>button]:dark:bg-soft-pink-300 [&>button]:hover:bg-soft-pink-200 [&>button]:text-maroon-700 [&>button]:dark:text-zinc-800 [&>button]:text-xs lg:[&>button]:text-sm block h-full"
             [icon]="translate.getCurrentLang() === 'ar' ? arrowLeft : arrowRight" iconPos="right">
             {{ 'FOOTER.SUBSCRIBE' | translate }}
           </lib-button>
