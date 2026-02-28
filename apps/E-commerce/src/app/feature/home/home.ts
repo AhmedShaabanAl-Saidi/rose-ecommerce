@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { GallerySectionComponent } from './components/gallery-section/gallery-section.component';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [GallerySectionComponent],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
