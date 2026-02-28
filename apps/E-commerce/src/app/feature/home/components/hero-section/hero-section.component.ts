@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
 
 import { HeroBannerConfig } from '../../models/home.models';
-import { FeaturesBarComponent } from '../features-bar/features-bar.component';
 
 @Component({
   selector: 'app-hero-section',
   standalone: true,
-  imports: [CommonModule, CarouselModule, FeaturesBarComponent],
+  imports: [CommonModule, CarouselModule],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'
 })
