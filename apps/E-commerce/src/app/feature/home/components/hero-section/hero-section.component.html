@@ -1,0 +1,84 @@
+<section class="max-w-7xl mx-auto px-4 py-8">
+  <div class="flex flex-col gap-5">
+    
+    <!-- Top Row -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+       <!-- Left Banner -->
+      <a [href]="leftBanner().link" class="relative rounded-2xl overflow-hidden group h-[250px] md:h-[400px] block cursor-pointer">
+        <img [src]="leftBanner().imageSrc" [alt]="leftBanner().title" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+          <span class="bg-white text-maroon-600 text-[10px] md:text-xs font-bold px-2 py-1 rounded w-fit mb-3">{{ leftBanner().badge }}</span>
+          <h3 class="text-white text-xl md:text-2xl font-bold mb-4">{{ leftBanner().title }}</h3>
+          <button class="bg-soft-pink text-maroon-700 hover:bg-white font-semibold py-2 px-4 rounded-lg w-fit transition-colors flex items-center gap-2 text-sm z-10 pointer-events-none">
+            {{ leftBanner().ctaText }} <i class="pi pi-arrow-right text-xs"></i>
+          </button>
+        </div>
+      </a>
+
+      <!-- Main Banner (Col Span 2) -->
+      <a [href]="mainBanner().link" class="relative md:col-span-2 rounded-2xl overflow-hidden group h-[300px] md:h-[400px] block cursor-pointer">
+        <img [src]="mainBanner().imageSrc" [alt]="mainBanner().title" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex flex-col justify-center p-8 md:p-12">
+          <!-- Mock Carousel Indicators (Design details) -->
+          <div class="absolute top-6 right-6 flex gap-2">
+            <div class="w-6 h-1.5 bg-maroon-500 rounded-full"></div>
+            <div class="w-2 h-1.5 bg-white/50 rounded-full"></div>
+            <div class="w-2 h-1.5 bg-white/50 rounded-full"></div>
+          </div>
+          
+          <h2 class="text-white text-3xl md:text-5xl font-bold mb-3 md:mb-4">{{ mainBanner().title }}</h2>
+          <p class="text-zinc-200 text-sm md:text-base mb-6 md:mb-8 font-light max-w-sm">{{ mainBanner().subtitle }}</p>
+          <button class="bg-soft-pink text-maroon-700 hover:bg-white font-bold py-2.5 px-6 rounded-lg w-fit transition-colors text-sm md:text-base shadow-lg z-10 pointer-events-none">
+            {{ mainBanner().ctaText }}
+          </button>
+        </div>
+      </a>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- Bottom Left -->
+      <a [href]="bottomBanner1().link" class="relative rounded-2xl overflow-hidden group h-[200px] md:h-[240px] block cursor-pointer">
+        <img [src]="bottomBanner1().imageSrc" [alt]="bottomBanner1().badge" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-5">
+          <span class="bg-white text-maroon-600 text-[10px] md:text-xs font-bold px-2 py-0.5 rounded w-fit mb-2">{{ bottomBanner1().badge }}</span>
+          <h3 class="text-white text-sm md:text-lg font-bold leading-tight">{{ bottomBanner1().title }}</h3>
+        </div>
+      </a>
+
+      <!-- Bottom Center -->
+      <a [href]="bottomBanner2().link" class="relative rounded-2xl overflow-hidden group h-[200px] md:h-[240px] block cursor-pointer">
+        <img [src]="bottomBanner2().imageSrc" [alt]="bottomBanner2().badge" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-5">
+          <span class="bg-white text-maroon-600 text-[10px] md:text-xs font-bold px-2 py-0.5 rounded w-fit mb-2">{{ bottomBanner2().badge }}</span>
+          <h3 class="text-white text-sm md:text-lg font-bold leading-tight">{{ bottomBanner2().title }}</h3>
+        </div>
+      </a>
+
+      <!-- Bottom Right -->
+      <a [href]="bottomBanner3().link" class="relative rounded-2xl overflow-hidden group h-[200px] md:h-[240px] block cursor-pointer">
+        <img [src]="bottomBanner3().imageSrc" [alt]="bottomBanner3().badge" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-5">
+          <span class="bg-white text-maroon-600 text-[10px] md:text-xs font-bold px-2 py-0.5 rounded w-fit mb-2">{{ bottomBanner3().badge }}</span>
+          <h3 class="text-white text-sm md:text-lg font-bold leading-tight">{{ bottomBanner3().title }}</h3>
+        </div>
+      </a>
+    </div>
+
+    <!-- Features Bar -->
+    <div class="mt-4 bg-soft-pink rounded-2xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-4 dark:bg-zinc-800">
+      @for (feature of features; track feature.title) {
+        <div class="flex items-center gap-4 w-full md:w-auto justify-center md:justify-start">
+          <div class="bg-maroon-700 dark:bg-maroon-600 text-white w-12 h-12 rounded-full flex items-center justify-center shrink-0">
+            <i [class]="feature.icon" class="text-xl"></i>
+          </div>
+          <div>
+            <h4 class="text-maroon-800 dark:text-soft-pink font-bold text-sm md:text-base leading-tight">{{ feature.title }}</h4>
+            <p class="text-zinc-600 dark:text-zinc-400 text-xs md:text-sm mt-0.5">{{ feature.subtitle }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>
