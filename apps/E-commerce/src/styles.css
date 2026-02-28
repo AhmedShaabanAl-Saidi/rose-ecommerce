@@ -606,7 +606,7 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 }
 
 @utility about-feature-icon {
-  @apply text-maroon-700 dark:text-soft-pink-200 font-bold text-[10px];
+  @apply text-maroon-700 dark:text-soft-pink-400 font-bold text-[10px];
 }
 
 @utility about-feature-text {
