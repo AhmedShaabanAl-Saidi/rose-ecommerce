@@ -7,10 +7,10 @@
       <a [href]="leftBanner.link" class="relative rounded-2xl overflow-hidden group h-[250px] md:h-[400px] block cursor-pointer">
         <img [src]="leftBanner.imageSrc" [alt]="leftBanner.title" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-8">
-          <span class="bg-soft-pink-50 text-maroon-700 text-[10px] md:text-xs font-bold px-3 py-1.5 rounded-full w-fit mb-3">{{ leftBanner.badge }}</span>
-          <h3 class="text-white text-xl md:text-2xl lg:text-3xl leading-snug font-bold mb-6 max-w-[200px] drop-shadow-md">{{ leftBanner.title }}</h3>
+          <span class="bg-soft-pink-50 text-maroon-700 text-[10px] md:text-xs font-bold px-3 py-1.5 rounded-full w-fit mb-3">{{ leftBanner.badge | translate }}</span>
+          <h3 class="text-white text-xl md:text-2xl lg:text-3xl leading-snug font-bold mb-6 max-w-[200px] drop-shadow-md">{{ leftBanner.title | translate }}</h3>
           <button class="bg-soft-pink-50 text-maroon-700 hover:bg-white font-bold py-2.5 px-6 rounded-xl w-fit transition-colors flex items-center justify-center gap-3 text-sm z-10 pointer-events-none shadow-lg">
-            {{ leftBanner.ctaText }} <i class="pi pi-arrow-right text-sm"></i>
+            {{ leftBanner.ctaText | translate }} <i class="pi pi-arrow-right text-sm"></i>
           </button>
         </div>
       </a>
@@ -26,10 +26,10 @@
               <img [src]="banner.imageSrc" [alt]="banner.title" class="w-full h-full object-cover transition-transform duration-700 group-hover/slide:scale-105">
               
               <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex flex-col justify-center p-8 md:p-12">
-                <h2 class="text-white text-3xl md:text-[42px] font-bold mb-3 md:mb-4 tracking-tight">{{ banner.title }}</h2>
-                <p class="text-white text-sm md:text-base mb-6 md:mb-8 font-light max-w-sm">{{ banner.subtitle }}</p>
+                <h2 class="text-white text-3xl md:text-[42px] font-bold mb-3 md:mb-4 tracking-tight">{{ banner.title | translate }}</h2>
+                <p class="text-white text-sm md:text-base mb-6 md:mb-8 font-light max-w-sm">{{ banner.subtitle | translate }}</p>
                 <button class="bg-soft-pink-50 text-maroon-700 hover:bg-white font-semibold py-2.5 px-8 rounded-full w-fit transition-colors text-sm md:text-base shadow-sm z-10 pointer-events-none">
-                  {{ banner.ctaText }}
+                  {{ banner.ctaText | translate }}
                 </button>
               </div>
             </a>

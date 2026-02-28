@@ -84,5 +84,51 @@
   },
   "SHARED": {
     "SELECT_OPTION": "Select option"
+  },
+  "HERO_SECTION": {
+    "LEFT_BANNER": {
+      "TITLE": "Special Gifts For The People You Love",
+      "BADGE": "Starting from 10.99 EGP",
+      "CTA": "Shop Now"
+    },
+    "MAIN_BANNERS": {
+      "1": {
+        "TITLE": "Say It with Flowers",
+        "SUBTITLE": "Elegant gifts for every special moment.",
+        "CTA": "I'm buying!"
+      },
+      "2": {
+        "TITLE": "Perfect Gifts For Him",
+        "SUBTITLE": "Discover our curated luxury collection.",
+        "CTA": "Shop Collection"
+      },
+      "3": {
+        "TITLE": "Celebrate with Joy",
+        "SUBTITLE": "Make it unforgettable with the perfect surprise.",
+        "CTA": "Discover"
+      },
+      "4": {
+        "TITLE": "Love & Romance",
+        "SUBTITLE": "Express your feelings beautifully and deeply.",
+        "CTA": "View More"
+      }
+    },
+    "BOTTOM_BANNERS": {
+      "1": {
+        "TITLE": "Celebrate Her Forever with a Gift She'll Always Remember",
+        "BADGE": "Wedding",
+        "CTA": "Shop Collection"
+      },
+      "2": {
+        "TITLE": "Honor the Beginning of a Beautiful Journey Together",
+        "BADGE": "Engagement",
+        "CTA": "Shop Collection"
+      },
+      "3": {
+        "TITLE": "Mark Every Year of Love with a Meaningful Surprise",
+        "BADGE": "Anniversary",
+        "CTA": "Shop Collection"
+      }
+    }
   }
 }

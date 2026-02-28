@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { HeroBannerConfig } from '../../models/home.models';
 import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.component';
@@ -8,7 +9,7 @@ import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.
 @Component({
   selector: 'app-hero-section',
   standalone: true,
-  imports: [CommonModule, CarouselModule, BottomBannerComponent],
+  imports: [CommonModule, CarouselModule, BottomBannerComponent, TranslateModule],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'
 })
@@ -16,9 +17,9 @@ export class HeroSectionComponent {
   
   // Static Left Banner
   leftBanner: HeroBannerConfig = {
-    title: 'Special Gifts For The People You Love',
-    badge: 'Starting from 10.99 EGP',
-    ctaText: 'Shop Now',
+    title: 'HERO_SECTION.LEFT_BANNER.TITLE',
+    badge: 'HERO_SECTION.LEFT_BANNER.BADGE',
+    ctaText: 'HERO_SECTION.LEFT_BANNER.CTA',
     imageSrc: 'images/hero-section/hero1.webp',
     link: '/categories'
   };
@@ -26,30 +27,30 @@ export class HeroSectionComponent {
   // Static Array of 4 Main Banners for Carousel
   mainBanners: HeroBannerConfig[] = [
     {
-      title: 'Say It with Flowers',
-      subtitle: 'Elegant gifts for every special moment.',
-      ctaText: "I'm buying!",
+      title: 'HERO_SECTION.MAIN_BANNERS.1.TITLE',
+      subtitle: 'HERO_SECTION.MAIN_BANNERS.1.SUBTITLE',
+      ctaText: 'HERO_SECTION.MAIN_BANNERS.1.CTA',
       imageSrc: 'images/hero-section/hero2.webp',
       link: '/products'
     },
     {
-      title: 'Perfect Gifts For Him',
-      subtitle: 'Discover our curated luxury collection.',
-      ctaText: 'Shop Collection',
+      title: 'HERO_SECTION.MAIN_BANNERS.2.TITLE',
+      subtitle: 'HERO_SECTION.MAIN_BANNERS.2.SUBTITLE',
+      ctaText: 'HERO_SECTION.MAIN_BANNERS.2.CTA',
       imageSrc: 'images/hero-section/hero3.webp',
       link: '/products'
     },
     {
-      title: 'Celebrate with Joy',
-      subtitle: 'Make it unforgettable with the perfect surprise.',
-      ctaText: 'Discover',
+      title: 'HERO_SECTION.MAIN_BANNERS.3.TITLE',
+      subtitle: 'HERO_SECTION.MAIN_BANNERS.3.SUBTITLE',
+      ctaText: 'HERO_SECTION.MAIN_BANNERS.3.CTA',
       imageSrc: 'images/hero-section/hero4.webp',
       link: '/products'
     },
     {
-      title: 'Love & Romance',
-      subtitle: 'Express your feelings beautifully and deeply.',
-      ctaText: 'View More',
+      title: 'HERO_SECTION.MAIN_BANNERS.4.TITLE',
+      subtitle: 'HERO_SECTION.MAIN_BANNERS.4.SUBTITLE',
+      ctaText: 'HERO_SECTION.MAIN_BANNERS.4.CTA',
       imageSrc: 'images/hero-section/hero5.webp',
       link: '/products'
     }
@@ -58,23 +59,23 @@ export class HeroSectionComponent {
   // Static Bottom Banners
   bottomBanners: HeroBannerConfig[] = [
     {
-      title: "Celebrate Her Forever with a Gift She'll Always Remember",
-      badge: 'Wedding',
-      ctaText: 'Shop Collection',
+      title: 'HERO_SECTION.BOTTOM_BANNERS.1.TITLE',
+      badge: 'HERO_SECTION.BOTTOM_BANNERS.1.BADGE',
+      ctaText: 'HERO_SECTION.BOTTOM_BANNERS.1.CTA',
       imageSrc: 'images/hero-section/hero3.webp',
       link: '/occasions'
     },
     {
-      title: "Honor the Beginning of a Beautiful Journey Together",
-      badge: 'Engagement',
-      ctaText: 'Shop Collection',
+      title: 'HERO_SECTION.BOTTOM_BANNERS.2.TITLE',
+      badge: 'HERO_SECTION.BOTTOM_BANNERS.2.BADGE',
+      ctaText: 'HERO_SECTION.BOTTOM_BANNERS.2.CTA',
       imageSrc: 'images/hero-section/hero4.webp',
       link: '/occasions'
     },
     {
-      title: "Mark Every Year of Love with a Meaningful Surprise",
-      badge: 'Anniversary',
-      ctaText: 'Shop Collection',
+      title: 'HERO_SECTION.BOTTOM_BANNERS.3.TITLE',
+      badge: 'HERO_SECTION.BOTTOM_BANNERS.3.BADGE',
+      ctaText: 'HERO_SECTION.BOTTOM_BANNERS.3.CTA',
       imageSrc: 'images/hero-section/hero5.webp',
       link: '/occasions'
     }
