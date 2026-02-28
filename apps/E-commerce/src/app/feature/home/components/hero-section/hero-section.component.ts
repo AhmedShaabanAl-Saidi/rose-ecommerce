@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
 
 import { HeroBannerConfig } from '../../models/home.models';
+import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.component';
 
 @Component({
   selector: 'app-hero-section',
   standalone: true,
-  imports: [CommonModule, CarouselModule],
+  imports: [CommonModule, CarouselModule, BottomBannerComponent],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'
 })
@@ -55,27 +56,27 @@ export class HeroSectionComponent {
   ];
 
   // Static Bottom Banners
-  bottomBanner1: HeroBannerConfig = {
-    title: "Celebrate Her Forever with a Gift She'll Always Remember",
-    badge: 'Wedding',
-    ctaText: 'Shop Collection',
-    imageSrc: 'images/hero-section/hero3.webp',
-    link: '/occasions'
-  };
-
-  bottomBanner2: HeroBannerConfig = {
-    title: "Honor the Beginning of a Beautiful Journey Together",
-    badge: 'Engagement',
-    ctaText: 'Shop Collection',
-    imageSrc: 'images/hero-section/hero4.webp',
-    link: '/occasions'
-  };
-
-  bottomBanner3: HeroBannerConfig = {
-    title: "Mark Every Year of Love with a Meaningful Surprise",
-    badge: 'Anniversary',
-    ctaText: 'Shop Collection',
-    imageSrc: 'images/hero-section/hero5.webp',
-    link: '/occasions'
-  };
+  bottomBanners: HeroBannerConfig[] = [
+    {
+      title: "Celebrate Her Forever with a Gift She'll Always Remember",
+      badge: 'Wedding',
+      ctaText: 'Shop Collection',
+      imageSrc: 'images/hero-section/hero3.webp',
+      link: '/occasions'
+    },
+    {
+      title: "Honor the Beginning of a Beautiful Journey Together",
+      badge: 'Engagement',
+      ctaText: 'Shop Collection',
+      imageSrc: 'images/hero-section/hero4.webp',
+      link: '/occasions'
+    },
+    {
+      title: "Mark Every Year of Love with a Meaningful Surprise",
+      badge: 'Anniversary',
+      ctaText: 'Shop Collection',
+      imageSrc: 'images/hero-section/hero5.webp',
+      link: '/occasions'
+    }
+  ];
 }
