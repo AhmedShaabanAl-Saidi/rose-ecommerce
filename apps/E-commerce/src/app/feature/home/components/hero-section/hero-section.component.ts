@@ -3,24 +3,17 @@ import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
 
 import { HeroBannerConfig } from '../../models/home.models';
+import { FeaturesBarComponent } from '../features-bar/features-bar.component';
 
 @Component({
   selector: 'app-hero-section',
   standalone: true,
-  imports: [CommonModule, CarouselModule],
+  imports: [CommonModule, CarouselModule, FeaturesBarComponent],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'
 })
 export class HeroSectionComponent {
   
-  // Features bar (Static USPs)
-  features = [
-    { icon: 'pi pi-truck', title: 'Free Shipping', subtitle: 'For orders above 120 EGP' },
-    { icon: 'pi pi-sync', title: 'Money Back Guarantee', subtitle: 'Refunds within 30 days' },
-    { icon: 'pi pi-shield', title: 'Secure Payment', subtitle: '100% Secure Payment' },
-    { icon: 'pi pi-headphones', title: '24/7 Support', subtitle: 'Contact us at any time' }
-  ];
-
   // Static Left Banner
   leftBanner: HeroBannerConfig = {
     title: 'Special Gifts For The People You Love',
