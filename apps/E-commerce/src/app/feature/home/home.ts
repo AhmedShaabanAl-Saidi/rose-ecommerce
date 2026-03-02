@@ -4,11 +4,7 @@ import { FeaturesBarComponent } from './components/features-bar/features-bar.com
 
 @Component({
   selector: 'app-home',
-  imports: [AboutUs],
-@Component({
-  selector: 'app-home',
-  imports: [FeaturesBarComponent],
+  imports: [AboutUs, FeaturesBarComponent],
   templateUrl: './home.html',
-  styleUrl: './home.css',
 })
 export class Home {}
