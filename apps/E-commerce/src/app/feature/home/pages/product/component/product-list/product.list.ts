@@ -5,12 +5,13 @@ import { Paginator } from "primeng/paginator";
 import { ProductsSidebarComponent } from "../sidebar/sidebar";
 import { ProductCardComponent } from 'apps/E-commerce/src/app/shared/components/ui/product-card/product-card.component';
 import { Product } from 'apps/E-commerce/src/app/shared/components/ui/product-card/interface/product';
+import { FeaturesBarComponent } from "../../../../components/features-bar/features-bar.component";
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product.list.html',
   styleUrls: ['./product.list.css'],
-  imports: [ProductCardComponent, Paginator, ProductsSidebarComponent],
+  imports: [ProductCardComponent, Paginator, ProductsSidebarComponent, FeaturesBarComponent],
 })
 export class ProductList {
   private readonly _http = inject(HttpClient);

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ProductList } from "./pages/product/component/product-list/product.list";
 
+import { FeaturesBarComponent } from './components/features-bar/features-bar.component';
 @Component({
   selector: 'app-home',
-  imports: [ProductList],
+  imports: [FeaturesBarComponent],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
