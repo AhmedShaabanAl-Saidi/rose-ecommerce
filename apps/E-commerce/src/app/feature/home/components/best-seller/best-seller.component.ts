@@ -24,7 +24,7 @@ export class BestSellerComponent {
 
   activeCategory = signal<number>(1);
 
-  displayedProducts = computed(() => this.bestSellers());
+  displayedProducts = computed(() => this.bestSellers().slice(0, 12));
 
   selectCategory(index: number): void {
     this.activeCategory.set(index);
