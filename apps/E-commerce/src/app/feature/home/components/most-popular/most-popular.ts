@@ -22,8 +22,9 @@ export class MostPopular {
   readonly arrowRight = ArrowRight;
 
   private readonly homeService = inject(Home);
-
   private readonly homeData = toSignal(this.homeService.getHomeData());
+  readonly selectedId = signal<string | null>(null);
+  readonly isLoading = computed(() => this.homeData() === undefined);
 
   private readonly occasionIdsWithProducts = computed<Set<string>>(() => {
     const ids = (this.homeData()?.products ?? []).map((p) => p.occasion);
@@ -39,8 +40,6 @@ export class MostPopular {
   private readonly allProducts = computed<ProductCardModel[]>(() =>
     (this.homeData()?.products ?? []).map(mapToProductCard)
   );
-
-  readonly selectedId = signal<string | null>(null);
 
   readonly filteredProducts = computed<ProductCardModel[]>(() => {
     const id = this.selectedId();

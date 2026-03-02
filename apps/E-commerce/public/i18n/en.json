@@ -109,6 +109,7 @@
     "MOST_POPULAR_TITLE": "Most Popular",
     "VIEW_MORE": "View More",
     "ALL": "All",
-    "NO_PRODUCTS_FOUND": "No products found."
+    "NO_PRODUCTS_FOUND": "No products found.",
+    "LOADING_PRODUCTS": "Loading products..."
   }
 }

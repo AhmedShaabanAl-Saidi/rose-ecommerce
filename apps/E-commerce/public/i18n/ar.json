@@ -109,6 +109,7 @@
     "MOST_POPULAR_TITLE": "الأكثر شهرة",
     "VIEW_MORE": "عرض المزيد",
     "ALL": "الكل",
-    "NO_PRODUCTS_FOUND": "لم يتم العثور على منتجات."
+    "NO_PRODUCTS_FOUND": "لم يتم العثور على منتجات.",
+    "LOADING_PRODUCTS": "جاري تحميل المنتجات..."
   }
 }

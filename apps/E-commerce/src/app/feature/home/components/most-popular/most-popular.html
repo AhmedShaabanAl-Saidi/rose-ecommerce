@@ -21,12 +21,18 @@
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @if (isLoading()) {
+        <p class="col-span-full text-center text-zinc-400 py-12">
+            {{ 'MOST_POPULAR.LOADING_PRODUCTS' | translate }}
+        </p>
+        } @else {
         @for (product of filteredProducts(); track product._id) {
         <app-product-card [product]="product" />
         } @empty {
         <p class="col-span-full text-center text-zinc-400 py-12">
             {{ 'MOST_POPULAR.NO_PRODUCTS_FOUND' | translate }}
         </p>
+        }
         }
     </div>
 
