@@ -9,6 +9,7 @@ import { pategoryOrOccasion } from '../../interfaces/home';
 import { mapToProductCard } from './most-popular.config';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule, ArrowLeft, ArrowRight } from 'lucide-angular';
+
 @Component({
   selector: 'app-most-popular',
   imports: [RouterLink, HeaderTittle, ProductCardComponent, TranslateModule, LucideAngularModule],
@@ -44,8 +45,8 @@ export class MostPopular {
   readonly filteredProducts = computed<ProductCardModel[]>(() => {
     const id = this.selectedId();
     const products = this.allProducts();
-    if (!id) return products;
-    return products.filter((product) => product.occasion === id);
+    if (!id) return products.slice(0, 16);
+    return products.filter((product) => product.occasion === id).slice(0, 16);
   });
 
   selectFilter(id: string | null): void {
