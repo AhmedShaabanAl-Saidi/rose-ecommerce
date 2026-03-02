@@ -1,0 +1,35 @@
+<section class="max-w-7xl mx-auto px-4 py-12 md:py-16">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-8 md:mb-10">
+    <div>
+      <h2
+        class="text-2xl md:text-3xl font-bold text-maroon-700 dark:text-soft-pink-200 transition-colors duration-300"
+      >
+        {{ 'HOME.BEST_SELLER.TITLE' | translate }}
+      </h2>
+      <p class="text-zinc-500 dark:text-zinc-400 text-sm md:text-base mt-1">
+        {{ 'HOME.BEST_SELLER.SUBTITLE' | translate }}
+      </p>
+    </div>
+    <a
+      routerLink="/products"
+      class="text-soft-pink-500 hover:text-soft-pink-600 font-semibold text-sm md:text-base transition-colors"
+    >
+      {{ 'HOME.BEST_SELLER.VIEW_ALL' | translate }} →
+    </a>
+  </div>
+
+  <!-- Product Grid -->
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+  >
+    @for (product of bestSellers(); track product._id) {
+    <app-product-card [product]="product"></app-product-card>
+    } @empty {
+    <div class="col-span-full text-center py-10 text-zinc-400">
+      <i class="pi pi-box text-4xl mb-3"></i>
+      <p>{{ 'HOME.BEST_SELLER.NO_DATA' | translate }}</p>
+    </div>
+    }
+  </div>
+</section>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -9,7 +10,7 @@ import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.
 @Component({
   selector: 'app-hero-section',
   standalone: true,
-  imports: [CommonModule, CarouselModule, BottomBannerComponent, TranslateModule],
+  imports: [CommonModule, CarouselModule, BottomBannerComponent, TranslateModule, RouterLink],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'
 })
