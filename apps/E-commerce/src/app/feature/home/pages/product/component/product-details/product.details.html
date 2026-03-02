@@ -1,0 +1,269 @@
+@if (!isLoading && ProductById; as product) {
+
+<section class="my-15">
+  <div class="max-w-6xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-5">
+        <div
+          class="relative w-full h-[320px] sm:h-[400px] rounded-xg overflow-hidden bg-gray-50"
+        >
+          <img
+            [src]="mainImage"
+            class="h-full w-full object-cover shadow-lg"
+            [alt]="product.title"
+          />
+        </div>
+
+        <div class="flex gap-2 mt-4 overflow-x-auto">
+          @for (img of product.images; track img) {
+          <img
+            [src]="img"
+            (click)="changeImage(img)"
+            class="w-16 h-16 rounded cursor-pointer object-cover border"
+            [class.border-maroon-600]="mainImage === img"
+            [class.border-transparent]="mainImage !== img"
+            [alt]="product.title"
+          />
+          }
+        </div>
+      </div>
+
+      <!-- RIGHT: INFO -->
+      <div class="lg:col-span-7">
+        <h1 class="text-2xl font-bold text-gray-800 mb-3">
+          {{ product.title }}
+        </h1>
+
+        <!-- Stock -->
+        <div class="mb-3">
+          @if (product.quantity > 0 || product.quantity === -1) {
+          <span
+            class="text-sm font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full"
+          >
+            {{ product.quantity }} left in stock
+          </span>
+          } @else {
+          <span
+            class="text-xs font-medium text-red-600 bg-red-50 px-3 py-1 rounded-full"
+          >
+            Out of Stock
+          </span>
+          }
+        </div>
+
+        <!-- Price -->
+        <div class="flex items-center gap-4 mb-5">
+          <span class="text-3xl font-bold text-maroon-700">
+            {{ product.priceAfterDiscount | number:'1.2-2' }} EGP
+          </span>
+
+          @if (product.price > product.priceAfterDiscount) {
+          <span class="text-lg text-gray-400 line-through">
+            {{ product.price | number:'1.2-2' }} EGP
+          </span>
+          }
+        </div>
+
+        <!-- Rating -->
+        <div class="flex items-center gap-1 mb-4">
+          @for (star of getFullStars(product.rateAvg); track $index) {
+          <lucide-icon
+            name="star"
+            size="16"
+            strokeWidth="2"
+            color="#FBBF24"
+          ></lucide-icon>
+          } @for (star of getEmptyStars(product.rateAvg); track $index) {
+          <lucide-icon
+            name="star"
+            size="16"
+            strokeWidth="2"
+            color="#FBBF24"
+          ></lucide-icon>
+          }
+
+          <span class="text-sm text-gray-600 ml-2">
+            {{ product.rateAvg ?? 0 }} ({{ product.rateCount ?? 0 }} reviews)
+          </span>
+        </div>
+
+        <!-- Description -->
+        <p class="text-gray-600 leading-relaxed mb-6">
+          {{ product.description }}
+        </p>
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row items-stretch gap-3">
+          <button
+            (click)="addToCart()"
+            [disabled]="product.quantity <= 0"
+            class="flex-1 bg-maroon-600 hover:bg-maroon-700 text-white font-semibold py-4 px-4 rounded-xl transition disabled:bg-gray-400"
+          >
+            <lucide-icon
+              name="shopping-cart"
+              size="20"
+              class="mr-2"
+            ></lucide-icon>
+            Add to Cart
+          </button>
+
+          <button
+            (click)="addToWishList()"
+            class="w-12 h-12 flex items-center justify-center rounded-lg border-2 transition"
+            [class.bg-maroon-600]="localIsInWishlist"
+            [class.text-white]="localIsInWishlist"
+            [class.border-maroon-600]="localIsInWishlist"
+            [class.bg-white]="!localIsInWishlist"
+            [class.text-gray-500]="!localIsInWishlist"
+            [class.border-gray-200]="!localIsInWishlist"
+          >
+            <lucide-icon
+              name="{{ localIsInWishlist ? 'heart' : 'heart-plus' }}"
+              size="20"
+              strokeWidth="2"
+              [class.fill-white]="!localIsInWishlist"
+              [class.fill-maroon-600]="localIsInWishlist"
+              class="transition-colors text-white"
+            ></lucide-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= REVIEWS SECTION ================= -->
+
+    <div class="mt-20 border-t pt-12">
+      <!-- Title -->
+      <h2 class="text-xl font-bold text-maroon-700 mb-6">Product Reviews</h2>
+
+      <!-- General Rating -->
+      <div class="mb-8">
+        <p class="text-sm text-gray-600">General rating:</p>
+
+        <div class="flex items-center gap-2 mt-2">
+          <span class="text-lg font-semibold text-gray-800"> 4.5 </span>
+          <span class="text-sm text-gray-500"> (8 ratings) </span>
+        </div>
+      </div>
+
+      <!-- Reviews + Form Layout -->
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- LEFT: Reviews List -->
+        <div class="space-y-6">
+          <!-- Review Card -->
+          <div class="border rounded-xl p-5 shadow-sm">
+            <div class="flex items-center gap-3 mb-2">
+              <div
+                class="w-9 h-9 rounded-full bg-maroon-600 text-white flex items-center justify-center font-semibold"
+              >
+                A
+              </div>
+
+              <div>
+                <p class="font-semibold text-gray-800">Adrian</p>
+                <p class="text-xs text-gray-400">Apr 7, 2025</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-1 mb-2 text-yellow-400 text-sm">
+              ★★★★☆
+            </div>
+
+            <h4 class="font-semibold text-gray-800 mb-1">Awesome Bouquet!</h4>
+
+            <p class="text-sm text-gray-600 leading-relaxed">
+              I ordered this bouquet for a special occasion, and it absolutely
+              exceeded my expectations! The flowers were fresh, beautifully
+              arranged, and exactly as pictured. Highly recommend for anyone
+              looking to make a lasting impression.
+            </p>
+          </div>
+
+          <!-- Duplicate static review -->
+          <div class="border rounded-xl p-5 shadow-sm">
+            <div class="flex items-center gap-3 mb-2">
+              <div
+                class="w-9 h-9 rounded-full bg-maroon-600 text-white flex items-center justify-center font-semibold"
+              >
+                A
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800">Adrian</p>
+                <p class="text-xs text-gray-400">Apr 7, 2025</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-1 mb-2 text-yellow-400 text-sm">
+              ★★★★☆
+            </div>
+
+            <h4 class="font-semibold text-gray-800 mb-1">Awesome Bouquet!</h4>
+
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Delivery was right on time and the bouquet arrived in perfect
+              condition. Will definitely order again!
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT: Add Review Form -->
+        <div class="border rounded-xl p-6 shadow-sm">
+          <p class="text-sm font-semibold text-gray-700 mb-3">Your rating:</p>
+
+          <div class="flex gap-1 text-yellow-400 text-lg mb-4 cursor-pointer">
+            ★★★★★
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-600 mb-1">
+                Title
+              </label>
+              <input
+                type="text"
+                placeholder="Enter review title"
+                class="w-full border rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-600"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600 mb-1">
+                Review
+              </label>
+              <textarea
+                rows="4"
+                placeholder="What do you think of this product?"
+                class="w-full border rounded-lg p-2 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-600"
+              ></textarea>
+            </div>
+
+            <button
+              class="w-full bg-maroon-600 hover:bg-maroon-700 text-white font-semibold py-3 rounded-lg transition"
+            >
+              Add Review
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    @if (relatedProducts.length > 0) {
+    <div class="mt-20 border-t pt-12">
+      <h2 class="text-xl font-bold text-gray-800 mb-6">Related Products</h2>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @for (item of relatedProducts; track item._id) {
+        <app-product-card [product]="item"></app-product-card>
+        }
+      </div>
+    </div>
+    }
+  </div>
+</section>
+
+} @else {
+
+<div class="text-center py-20 text-gray-500">Loading product...</div>
+
+}
