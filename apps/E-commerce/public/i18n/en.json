@@ -2,6 +2,8 @@
   "HELLO": "Hello",
   "WELCOME": "Welcome to E-commerce",
   "SWITCH_LANGUAGE": "Switch Language",
+  "ADD_WISH": "Add to wishlist",
+  "REMOVE_WISH": "Remove from wishlist",
   "AUTH": {
     "LOGIN": {
       "TITLE": "Welcome back!",
@@ -70,6 +72,16 @@
     "OCCASIONS": "Occasions",
     "CONTACT": "Contact",
     "ABOUT": "About"
+  },
+  "TRUSTED":{
+   "TRUSTED_PART1": "Trusted by over",
+   "TRUSTED_COUNT": "4.5k+",
+   "TRUSTED_PART2": "companies"
+  },
+  "TESTIMONIALS": {
+   "HEADING": "Real Words from Happy Customers",
+   "TITLE": "Testimonials",
+   "NO_DATA": "No testimonials available at the moment. Check back later!"
   },
   "VALIDATION": {
     "REQUIRED": "Field is required",

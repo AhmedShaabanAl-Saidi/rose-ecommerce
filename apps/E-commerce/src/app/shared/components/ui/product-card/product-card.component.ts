@@ -3,10 +3,11 @@ import { Component, computed, input } from '@angular/core';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { LucideAngularModule } from 'lucide-angular';
 import { Product } from './interface/product';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-card',
-  imports: [LucideAngularModule, DecimalPipe, ButtonComponent],
+  imports: [LucideAngularModule, DecimalPipe, ButtonComponent, TranslatePipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css',
 })
@@ -18,8 +19,8 @@ export class ProductCardComponent {
   readonly EYE_ICON_SIZE = 22;
   readonly CART_ICON_SIZE = 20;
 
-  readonly ADD_WISH = 'Add to wishlist';
-  readonly REMOVE_WISH = 'Remove from wishlist';
+  readonly ADD_WISH = 'ADD_WISH';
+  readonly REMOVE_WISH = 'REMOVE_WISH';
 
   readonly BADGE_BASE =
     'text-[10px] font-bold px-3 py-1 rounded-full uppercase shadow-md';
