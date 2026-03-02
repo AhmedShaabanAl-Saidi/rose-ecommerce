@@ -1,35 +1,60 @@
-<section class="max-w-7xl mx-auto px-4 py-12 md:py-16">
-  <!-- Header -->
-  <div class="flex items-center justify-between mb-8 md:mb-10">
-    <div>
+<section
+  class="bg-white dark:bg-zinc-900 py-12 md:py-16 px-4 transition-colors duration-300"
+>
+  <div class="max-w-7xl mx-auto">
+    <!-- Header Row -->
+    <div
+      class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 md:mb-10 gap-4"
+    >
       <h2
-        class="text-2xl md:text-3xl font-bold text-maroon-700 dark:text-soft-pink-200 transition-colors duration-300"
+        class="text-2xl md:text-3xl font-bold italic text-maroon-700 dark:text-white transition-colors duration-300"
       >
         {{ 'HOME.BEST_SELLER.TITLE' | translate }}
       </h2>
-      <p class="text-zinc-500 dark:text-zinc-400 text-sm md:text-base mt-1">
-        {{ 'HOME.BEST_SELLER.SUBTITLE' | translate }}
-      </p>
-    </div>
-    <a
-      routerLink="/products"
-      class="text-soft-pink-500 hover:text-soft-pink-600 font-semibold text-sm md:text-base transition-colors"
-    >
-      {{ 'HOME.BEST_SELLER.VIEW_ALL' | translate }} →
-    </a>
-  </div>
 
-  <!-- Product Grid -->
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-  >
-    @for (product of bestSellers(); track product._id) {
-    <app-product-card [product]="product"></app-product-card>
-    } @empty {
-    <div class="col-span-full text-center py-10 text-zinc-400">
-      <i class="pi pi-box text-4xl mb-3"></i>
-      <p>{{ 'HOME.BEST_SELLER.NO_DATA' | translate }}</p>
+      <!-- Category Tabs -->
+      <div class="flex items-center gap-2 md:gap-4 flex-wrap">
+        @for (category of categories(); track $index) {
+        <button
+          (click)="selectCategory($index)"
+          [class]="
+            activeCategory() === $index
+              ? 'bg-soft-pink-500 text-white'
+              : 'bg-transparent text-zinc-500 dark:text-zinc-400 hover:text-maroon-700 dark:hover:text-white'
+          "
+          class="px-4 py-1.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 cursor-pointer"
+        >
+          {{ category | translate }}
+        </button>
+        }
+      </div>
     </div>
-    }
+
+    <!-- Product Grid -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
+    >
+      @for (product of displayedProducts(); track product._id) {
+      <app-product-card [product]="product"></app-product-card>
+      } @empty {
+      <div
+        class="col-span-full text-center py-10 text-zinc-400 dark:text-zinc-500"
+      >
+        <i class="pi pi-box text-4xl mb-3"></i>
+        <p>{{ 'HOME.BEST_SELLER.NO_DATA' | translate }}</p>
+      </div>
+      }
+    </div>
+
+    <!-- View More Link -->
+    <div class="flex justify-end mt-6">
+      <a
+        routerLink="/products"
+        class="text-maroon-600 dark:text-soft-pink-400 hover:text-soft-pink-500 dark:hover:text-soft-pink-300 font-semibold text-sm md:text-base transition-colors flex items-center gap-1"
+      >
+        {{ 'HOME.BEST_SELLER.VIEW_ALL' | translate }}
+        <i class="pi pi-arrow-right text-xs"></i>
+      </a>
+    </div>
   </div>
 </section>
