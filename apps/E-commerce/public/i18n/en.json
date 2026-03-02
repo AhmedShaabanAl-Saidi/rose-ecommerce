@@ -2,6 +2,8 @@
   "HELLO": "Hello",
   "WELCOME": "Welcome to E-commerce",
   "SWITCH_LANGUAGE": "Switch Language",
+  "ADD_WISH": "Add to wishlist",
+  "REMOVE_WISH": "Remove from wishlist",
   "AUTH": {
     "LOGIN": {
       "TITLE": "Welcome back!",
