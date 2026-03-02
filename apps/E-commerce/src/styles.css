@@ -612,3 +612,7 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 @utility about-feature-text {
   @apply text-zinc-700 dark:text-zinc-300 text-xs font-semibold;
 }
+
+@utility footer-link {
+  @apply hover:text-soft-pink-200 transition-colors;
+}
