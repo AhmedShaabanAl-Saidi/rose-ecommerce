@@ -1,1 +1,39 @@
-<p>most-popular works!</p>
+<section class="py-12">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-4">
+        <app-header-tittle title="Most Popular" />
+
+        <div class="flex items-center gap-6 flex-wrap">
+            <button (click)="selectFilter(null)"
+                class="text-sm font-bold transition-colors hover:text-maroon-600 cursor-pointer"
+                [class.text-maroon-600]="selectedId() === null"
+                [class.text-zinc-500]="selectedId() !== null">
+                All
+            </button>
+
+            @for (occasion of occasions(); track occasion._id) {
+            <button (click)="selectFilter(occasion._id)"
+                class="text-sm font-bold transition-colors hover:text-maroon-600 cursor-pointer"
+                [class.text-maroon-600]="selectedId() === occasion._id"
+                [class.text-zinc-500]="selectedId() !== occasion._id">
+                {{ occasion.name }}
+            </button>
+            }
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @for (product of filteredProducts(); track product._id) {
+        <app-product-card [product]="product" />
+        } @empty {
+        <p class="col-span-full text-center text-zinc-400 py-12">
+            No products found.
+        </p>
+        }
+    </div>
+
+    <div class="flex justify-end mt-10">
+        <a routerLink="/products" class="flex items-center gap-2 text-maroon-700 font-semibold">
+            View More →
+        </a>
+    </div>
+</section>

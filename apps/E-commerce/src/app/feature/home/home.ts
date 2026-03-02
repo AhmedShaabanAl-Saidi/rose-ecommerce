@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { MostPopular } from './components/most-popular/most-popular';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [MostPopular],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
