@@ -607,3 +607,7 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 .p-motion {
   display: block !important;
 }
+
+@utility footer-link {
+  @apply hover:text-soft-pink-200 transition-colors;
+}

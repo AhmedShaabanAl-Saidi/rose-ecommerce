@@ -63,7 +63,7 @@
     "LOGIN": "Login",
     "SEARCH": "What awesome gift are you looking for?",
     "DELIVERTO": "Deliver to:",
-    "HELLO":"Hello",
+    "HELLO": "Hello",
     "HOME": "Home",
     "PRODUCTS": "Products",
     "CATEGORIES": "Categories",
@@ -94,5 +94,25 @@
   },
   "SHARED": {
     "SELECT_OPTION": "Select option"
+  },
+  "FOOTER": {
+    "DISCOVER_WEBSITE": "Discover our website",
+    "HOME": "Home",
+    "PRODUCTS": "Products",
+    "CATEGORIES": "Categories",
+    "OCCASIONS": "Occasions",
+    "CONTACT": "Contact",
+    "ABOUT": "About",
+    "TERMS_CONDITIONS": "Terms & Conditions",
+    "PRIVACY_POLICY": "Privacy Policy",
+    "FAQS": "FAQs",
+    "GET": "Get ",
+    "DISCOUNT_VALUE": "20%",
+    "DISCOUNT_COUPON": " Off Discount Coupon",
+    "SUBSCRIBE_NEWSLETTER": "By subscribing to our newsletter",
+    "ENTER_EMAIL": "Enter Your Email",
+    "SUBSCRIBE": "Subscribe",
+    "APP_NAME": "Rose E-Commerce App",
+    "ALL_RIGHTS_RESERVED": "All rights reserved | 2025"
   }
 }
