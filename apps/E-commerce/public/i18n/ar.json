@@ -2,6 +2,8 @@
   "HELLO": "مرحبا",
   "WELCOME": "مرحبا بكم في التجارة الإلكترونية",
   "SWITCH_LANGUAGE": "تغيير اللغة",
+  "ADD_WISH": "إضافة لقائمة الأمنيات",
+  "REMOVE_WISH": "إزالة من قائمة الأمنيات",
   "AUTH": {
     "LOGIN": {
       "TITLE": "مرحبًا بعودتك!",
@@ -63,13 +65,23 @@
     "LOGIN": "تسجيل الدخول",
     "SEARCH": "ما هي الهدايا الرائعة التي تبحث عنها؟",
     "DELIVERTO": "توصيل إلى:",
-    "HELLO":"مرحبا",
+    "HELLO": "مرحبا",
     "HOME": "الرئيسية",
     "PRODUCTS": "المنتجات",
     "CATEGORIES": "التصنيفات",
     "OCCASIONS": "المناسبات",
     "CONTACT": "اتصل بنا",
     "ABOUT": "من نحن"
+  },
+  "TRUSTED": {
+    "TRUSTED_PART1": "موثوق من قبل أكثر من",
+    "TRUSTED_COUNT": "4.5 ألف",
+    "TRUSTED_PART2": "شركة"
+  },
+  "TESTIMONIALS": {
+    "HEADING": "آراء حقيقية من عملائنا السعداء",
+    "TITLE": "توصيات العملاء",
+    "NO_DATA": "لا توجد آراء عملاء حالياً. عد للزيارة قريباً!"
   },
   "VALIDATION": {
     "REQUIRED": "هذا الحقل مطلوب",
@@ -144,5 +156,25 @@
         "ENGAGEMENT": "خطوبة"
       }
     }
+  },
+  "FOOTER": {
+    "DISCOVER_WEBSITE": "اكتشف موقعنا",
+    "HOME": "الرئيسية",
+    "PRODUCTS": "المنتجات",
+    "CATEGORIES": "التصنيفات",
+    "OCCASIONS": "المناسبات",
+    "CONTACT": "اتصل بنا",
+    "ABOUT": "من نحن",
+    "TERMS_CONDITIONS": "الشروط والأحكام",
+    "PRIVACY_POLICY": "سياسة الخصوصية",
+    "FAQS": "الأسئلة الشائعة",
+    "GET": "احصل على قسيمة خصم ",
+    "DISCOUNT_VALUE": "20%",
+    "DISCOUNT_COUPON": "",
+    "SUBSCRIBE_NEWSLETTER": "من خلال الاشتراك في النشرة الإخبارية",
+    "ENTER_EMAIL": "أدخل بريدك الإلكتروني",
+    "SUBSCRIBE": "اشترك",
+    "APP_NAME": "روز للتجارة الإلكترونية",
+    "ALL_RIGHTS_RESERVED": "جميع الحقوق محفوظة | 2025"
   }
 }
