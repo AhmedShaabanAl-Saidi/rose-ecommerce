@@ -2,7 +2,7 @@
   class="group relative bg-white transition-all rounded-2xl dark:bg-zinc-900"
 >
   <div
-    class="absolute top-2 left-2 right-2 z-20 flex items-start justify-between"
+    class="absolute top-2 start-2 end-2 z-20 flex items-start justify-between"
   >
     <div class="relative min-w-10 h-10">
       <button
@@ -11,7 +11,7 @@
         [class.text-white]="isInWishlist()"
         [class.bg-zinc-800]="isInWishlist()"
         (click)="addToWishList(); $event.stopPropagation()"
-        class="group/btn absolute left-0 top-0 flex items-center overflow-hidden cursor-pointer p-2.5 rounded-full transition-all duration-300 ease-in-out shadow-md border border-transparent max-w-10.5 hover:max-w-50"
+        class="group/btn absolute start-0 top-0 flex items-center overflow-hidden cursor-pointer p-2.5 rounded-full transition-all duration-300 ease-in-out shadow-md border border-transparent max-w-10.5 hover:max-w-50"
       >
         <lucide-icon
           [name]="isInWishlist() ? 'heart-minus' : 'heart-plus'"
@@ -21,9 +21,11 @@
         ></lucide-icon>
 
         <span
-          class="opacity-0 group-hover/btn:opacity-100 ml-0 group-hover/btn:ml-2 whitespace-nowrap transition-all duration-300 text-xs font-bold"
+          class="opacity-0 group-hover/btn:opacity-100 ms-0 group-hover/btn:ms-2 whitespace-nowrap transition-all duration-300 text-xs font-bold"
         >
-          {{ isInWishlist() ? REMOVE_WISH : ADD_WISH }}
+          {{
+            isInWishlist() ? (REMOVE_WISH | translate) : (ADD_WISH | translate)
+          }}
         </span>
       </button>
     </div>
