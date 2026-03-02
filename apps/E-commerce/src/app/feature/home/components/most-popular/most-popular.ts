@@ -7,14 +7,19 @@ import { ProductCardComponent } from 'apps/E-commerce/src/app/shared/components/
 import { Product as ProductCardModel } from 'apps/E-commerce/src/app/shared/components/ui/product-card/interface/product';
 import { pategoryOrOccasion } from '../../interfaces/home';
 import { mapToProductCard } from './most-popular.config';
-
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LucideAngularModule, ArrowLeft, ArrowRight } from 'lucide-angular';
 @Component({
   selector: 'app-most-popular',
-  imports: [RouterLink, HeaderTittle, ProductCardComponent],
+  imports: [RouterLink, HeaderTittle, ProductCardComponent, TranslateModule, LucideAngularModule],
   templateUrl: './most-popular.html',
   styleUrl: './most-popular.css',
 })
 export class MostPopular {
+  translate = inject(TranslateService);
+  readonly arrowLeft = ArrowLeft;
+  readonly arrowRight = ArrowRight;
+
   private readonly homeService = inject(Home);
 
   private readonly homeData = toSignal(this.homeService.getHomeData());

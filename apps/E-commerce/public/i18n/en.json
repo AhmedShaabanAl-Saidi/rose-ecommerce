@@ -104,5 +104,11 @@
     "SUBSCRIBE": "Subscribe",
     "APP_NAME": "Rose E-Commerce App",
     "ALL_RIGHTS_RESERVED": "All rights reserved | 2025"
+  },
+  "MOST_POPULAR": {
+    "MOST_POPULAR_TITLE": "Most Popular",
+    "VIEW_MORE": "View More",
+    "ALL": "All",
+    "NO_PRODUCTS_FOUND": "No products found."
   }
 }

@@ -104,5 +104,11 @@
     "SUBSCRIBE": "اشترك",
     "APP_NAME": "روز للتجارة الإلكترونية",
     "ALL_RIGHTS_RESERVED": "جميع الحقوق محفوظة | 2025"
+  },
+  "MOST_POPULAR": {
+    "MOST_POPULAR_TITLE": "الأكثر شهرة",
+    "VIEW_MORE": "عرض المزيد",
+    "ALL": "الكل",
+    "NO_PRODUCTS_FOUND": "لم يتم العثور على منتجات."
   }
 }
