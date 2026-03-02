@@ -2,6 +2,8 @@
   "HELLO": "Hello",
   "WELCOME": "Welcome to E-commerce",
   "SWITCH_LANGUAGE": "Switch Language",
+  "ADD_WISH": "Add to wishlist",
+  "REMOVE_WISH": "Remove from wishlist",
   "AUTH": {
     "LOGIN": {
       "TITLE": "Welcome back!",
@@ -63,7 +65,7 @@
     "LOGIN": "Login",
     "SEARCH": "What awesome gift are you looking for?",
     "DELIVERTO": "Deliver to:",
-    "HELLO":"Hello",
+    "HELLO": "Hello",
     "HOME": "Home",
     "PRODUCTS": "Products",
     "CATEGORIES": "Categories",
@@ -84,6 +86,16 @@
       "ENGAGEMENT_CARD": "Congratulations on your Engagement card"
     }
   },
+  "TRUSTED":{
+   "TRUSTED_PART1": "Trusted by over",
+   "TRUSTED_COUNT": "4.5k+",
+   "TRUSTED_PART2": "companies"
+  },
+  "TESTIMONIALS": {
+   "HEADING": "Real Words from Happy Customers",
+   "TITLE": "Testimonials",
+   "NO_DATA": "No testimonials available at the moment. Check back later!"
+  },
   "VALIDATION": {
     "REQUIRED": "Field is required",
     "EMAIL": "Please enter a valid email address",
@@ -97,5 +109,25 @@
   },
   "SHARED": {
     "SELECT_OPTION": "Select option"
+  },
+  "FOOTER": {
+    "DISCOVER_WEBSITE": "Discover our website",
+    "HOME": "Home",
+    "PRODUCTS": "Products",
+    "CATEGORIES": "Categories",
+    "OCCASIONS": "Occasions",
+    "CONTACT": "Contact",
+    "ABOUT": "About",
+    "TERMS_CONDITIONS": "Terms & Conditions",
+    "PRIVACY_POLICY": "Privacy Policy",
+    "FAQS": "FAQs",
+    "GET": "Get ",
+    "DISCOUNT_VALUE": "20%",
+    "DISCOUNT_COUPON": " Off Discount Coupon",
+    "SUBSCRIBE_NEWSLETTER": "By subscribing to our newsletter",
+    "ENTER_EMAIL": "Enter Your Email",
+    "SUBSCRIBE": "Subscribe",
+    "APP_NAME": "Rose E-Commerce App",
+    "ALL_RIGHTS_RESERVED": "All rights reserved | 2025"
   }
 }
