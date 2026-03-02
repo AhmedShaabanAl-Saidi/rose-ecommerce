@@ -14,7 +14,6 @@ import { LucideAngularModule, ArrowLeft, ArrowRight } from 'lucide-angular';
   selector: 'app-most-popular',
   imports: [RouterLink, HeaderTittle, ProductCardComponent, TranslateModule, LucideAngularModule],
   templateUrl: './most-popular.html',
-  styleUrl: './most-popular.css',
 })
 export class MostPopular {
   translate = inject(TranslateService);
