@@ -73,6 +73,19 @@
     "CONTACT": "Contact",
     "ABOUT": "About"
   },
+  "GALLERY": {
+    "GALLERY_LABEL": "Gallery",
+    "CHECK_OUT": "Check Out",
+    "OUR_WONDERFUL_GALLERY": "our Wonderful Gallery",
+    "IMG_ALT": {
+      "GIFTS_ANNIVERSARY": "Gifts and Anniversary Presents",
+      "CHOCOLATES": "Heart shaped chocolate box with roses",
+      "RED_GIFTS": "Red gift boxes with roses",
+      "RING_BOX_FLOWERS": "Engagement ring box with flowers",
+      "RING_BOX_WHITE": "White engagement ring box",
+      "ENGAGEMENT_CARD": "Congratulations on your Engagement card"
+    }
+  },
   "TRUSTED":{
    "TRUSTED_PART1": "Trusted by over",
    "TRUSTED_COUNT": "4.5k+",

@@ -73,7 +73,20 @@
     "CONTACT": "اتصل بنا",
     "ABOUT": "من نحن"
   },
-   "TRUSTED":{
+  "GALLERY": {
+    "GALLERY_LABEL": "المعرض",
+    "CHECK_OUT": "اكتشف",
+    "OUR_WONDERFUL_GALLERY": "معرضنا الرائع",
+    "IMG_ALT": {
+      "GIFTS_ANNIVERSARY": "هدايا وتقديمات الذكرى السنوية",
+      "CHOCOLATES": "علبة شوكولاتة على شكل قلب مع ورود",
+      "RED_GIFTS": "علب هدايا حمراء مع ورود",
+      "RING_BOX_FLOWERS": "علبة خاتم خطوبة مع أزهار",
+      "RING_BOX_WHITE": "علبة خاتم خطوبة بيضاء",
+      "ENGAGEMENT_CARD": "بطاقة تهنئة بالخطوبة"
+    }
+  },
+  "TRUSTED":{
     "TRUSTED_PART1": "موثوق من قبل أكثر من",
     "TRUSTED_COUNT": "4.5 ألف",
     "TRUSTED_PART2": "شركة"
