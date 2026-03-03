@@ -608,6 +608,22 @@ html[dir='rtl'] .iti .iti__dropdown-content {
   display: block !important;
 }
 
+@utility about-feature-item {
+  @apply flex items-center gap-3;
+}
+
+@utility about-feature-icon-box {
+  @apply w-4 h-4 rounded-full flex items-center justify-center;
+}
+
+@utility about-feature-icon {
+  @apply text-maroon-700 dark:text-soft-pink-400 font-bold text-[10px];
+}
+
+@utility about-feature-text {
+  @apply text-zinc-700 dark:text-zinc-300 text-xs font-semibold;
+}
+
 @utility footer-link {
   @apply hover:text-soft-pink-200 transition-colors;
 }

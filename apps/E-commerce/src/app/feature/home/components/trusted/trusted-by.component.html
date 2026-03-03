@@ -1,4 +1,4 @@
-<section class="lg:px-20 pb-20">
+<section class="lg:px-20">
   <div class="bg-maroon-50 dark:bg-zinc-700 py-5 lg:py-10 lg:rounded-2xl">
     <h2
       class="text-center text-maroon-700 font-bold text-2xl lg:text-4xl dark:text-soft-pink-200"
@@ -14,7 +14,7 @@
     >
       @for (image of images(); track $index) {
       <img
-        class="opacity-100 hover:opacity-70 md:animate-bounce transition-all duration-300 hover:scale-110"
+        class="opacity-100 hover:opacity-70 transition-all duration-300 hover:scale-110"
         [src]="image"
         [alt]="`Trusted ${$index}` "
       />

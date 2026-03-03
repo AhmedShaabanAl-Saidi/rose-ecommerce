@@ -1,12 +1,13 @@
-::ng-deep lib-button button {
+:host ::ng-deep lib-button button {
   width: 45px !important;
   height: 45px !important;
   border-radius: 50% !important;
 }
 
-::ng-deep .dark lib-button button {
+:host ::ng-deep .dark lib-button button {
   background-color: var(--color-maroon-500) !important;
 }
-::ng-deep .dark lib-button button:hover {
+
+:host ::ng-deep .dark lib-button button:hover {
   background-color: var(--color-maroon-400) !important;
 }

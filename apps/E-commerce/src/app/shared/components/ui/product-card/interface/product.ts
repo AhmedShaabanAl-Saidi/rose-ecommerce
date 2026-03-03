@@ -6,7 +6,7 @@ export interface Product {
   imgCover: string;
   images: string[];
   price: number;
-  priceAfterDiscount: number;
+  priceAfterDiscount: number | null;
   quantity: number;
   category: string;
   occasion: string;
