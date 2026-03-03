@@ -1,4 +1,10 @@
-<app-about-us></app-about-us>
-<app-features-bar />
-<app-testimonial />
-<app-trusted-by />
+<div class="flex flex-col gap-20">
+  <app-hero-section />
+  <app-features-bar />
+  <app-best-seller [bestSellers]="bestSellers()" />
+  <!-- Most Popular -->
+  <app-about-us />
+  <app-gallery-section />
+  <app-testimonial />
+  <app-trusted-by />
+</div>
