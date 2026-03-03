@@ -1,0 +1,77 @@
+<section class="max-w-7xl mx-auto px-4 py-12 md:py-16">
+  <!-- Header -->
+  <div class="text-center mb-10 md:mb-14">
+    <p
+      class="text-soft-pink-500 uppercase tracking-[0.2em] text-xs font-bold mb-3"
+    >
+      {{ 'GALLERY.GALLERY_LABEL' | translate }}
+    </p>
+    <app-heading-title
+      [title]="
+        ('GALLERY.CHECK_OUT' | translate) +
+        ' ' +
+        ('GALLERY.OUR_WONDERFUL_GALLERY' | translate)
+      "
+    >
+    </app-heading-title>
+  </div>
+
+  <!-- Masonry Grid -->
+  <div
+    class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 h-[800px] md:h-[600px] lg:h-[700px]"
+  >
+    <!-- Column 1 -->
+    <div class="grid grid-rows-[3fr_2fr] gap-4 md:gap-6 h-full">
+      <div class="w-full h-full overflow-hidden rounded-xl shadow-sm relative">
+        <img
+          src="images/gallery-section/gallery1.webp"
+          class="absolute inset-0 w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500"
+          [alt]="'GALLERY.IMG_ALT.GIFTS_ANNIVERSARY' | translate"
+        />
+      </div>
+      <div class="w-full h-full overflow-hidden rounded-xl shadow-sm relative">
+        <img
+          src="images/gallery-section/gallery4.webp"
+          class="absolute inset-0 w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500"
+          [alt]="'GALLERY.IMG_ALT.CHOCOLATES' | translate"
+        />
+      </div>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="grid grid-rows-[2fr_3fr] gap-4 md:gap-6 h-full">
+      <div class="w-full h-full overflow-hidden rounded-xl shadow-sm relative">
+        <img
+          src="images/gallery-section/gallery2.webp"
+          class="absolute inset-0 w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500"
+          [alt]="'GALLERY.IMG_ALT.RED_GIFTS' | translate"
+        />
+      </div>
+      <div class="w-full h-full overflow-hidden rounded-xl shadow-sm relative">
+        <img
+          src="images/gallery-section/gallery5.webp"
+          class="absolute inset-0 w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500"
+          [alt]="'GALLERY.IMG_ALT.RING_BOX_FLOWERS' | translate"
+        />
+      </div>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="grid grid-rows-[2fr_3fr] gap-4 md:gap-6 h-full">
+      <div class="w-full h-full overflow-hidden rounded-xl shadow-sm relative">
+        <img
+          src="images/gallery-section/gallery3.webp"
+          class="absolute inset-0 w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500"
+          [alt]="'GALLERY.IMG_ALT.RING_BOX_WHITE' | translate"
+        />
+      </div>
+      <div class="w-full h-full overflow-hidden rounded-xl shadow-sm relative">
+        <img
+          src="images/gallery-section/gallery6.webp"
+          class="absolute inset-0 w-full h-full object-cover hover:scale-[1.03] transition-transform duration-500"
+          [alt]="'GALLERY.IMG_ALT.ENGAGEMENT_CARD' | translate"
+        />
+      </div>
+    </div>
+  </div>
+</section>
