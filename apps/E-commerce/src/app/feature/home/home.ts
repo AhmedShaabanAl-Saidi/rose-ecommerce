@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
 import { BestSellerComponent } from './components/best-seller/best-seller.component';
+import { GallerySectionComponent } from './components/gallery-section/gallery-section.component';
 import { TrustedByComponent } from './components/trusted/trusted-by.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
 import { FeaturesBarComponent } from './components/features-bar/features-bar.component';
@@ -16,6 +17,7 @@ import { Product } from '../../shared/components/ui/product-card/interface/produ
     TrustedByComponent,
     TestimonialComponent,
     FeaturesBarComponent,
+    GallerySectionComponent,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
