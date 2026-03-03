@@ -34,9 +34,9 @@
       } @if (newProduct()) {
       <span [class]="BADGE_BASE" class="bg-zinc-100 text-zinc-700">NEW</span>
       } @if (product().quantity <= 0) {
-      <span [class]="BADGE_BASE" class="bg-red-600 text-soft-pink-50"
-        >OUT OF STOCK</span
-      >
+      <span [class]="BADGE_BASE" class="bg-red-600 text-soft-pink-50">
+        OUT OF STOCK
+      </span>
       }
     </div>
   </div>
@@ -75,6 +75,7 @@
 
     <div class="flex items-center justify-between">
       <div class="flex flex-col gap-1">
+        <!-- ⭐ Rating -->
         <div class="flex items-center gap-0.5">
           @for (star of [1, 2, 3, 4, 5]; track star) {
           <div class="relative flex items-center justify-center">
@@ -87,15 +88,19 @@
           }
         </div>
 
+        @let discountPrice = product().priceAfterDiscount; @let originalPrice =
+        product().price; @let finalPrice = discountPrice ?? originalPrice;
+
         <span
           class="text-[1.25rem] font-medium text-maroon-700 dark:text-soft-pink-200 leading-none"
+          dir="ltr"
         >
-          {{ product().priceAfterDiscount | number : '1.2-2' }} EGP @if
-          (product().price > product().priceAfterDiscount) {
+          {{ finalPrice | number : '1.2-2' }} EGP @if (discountPrice !== null &&
+          discountPrice < originalPrice) {
           <span
             class="text-zinc-400 dark:text-zinc-500 ms-1 line-through font-medium text-sm"
           >
-            {{ product().price | number : '1.2-2' }} EGP
+            {{ originalPrice | number : '1.2-2' }} EGP
           </span>
           }
         </span>
