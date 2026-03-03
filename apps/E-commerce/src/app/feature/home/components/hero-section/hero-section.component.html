@@ -88,10 +88,9 @@
 
     <!-- Bottom Row -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      <app-bottom-banner
-        *ngFor="let banner of bottomBanners"
-        [banner]="banner"
-      ></app-bottom-banner>
+      @for (banner of bottomBanners; track $index) {
+      <app-bottom-banner [banner]="banner"></app-bottom-banner>
+      }
     </div>
   </div>
 </section>
