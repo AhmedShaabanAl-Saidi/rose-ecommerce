@@ -1,1 +1,1 @@
-export const TESTIMONIAL_ENDPOINT = 'api/v1/testimonials';
+export const TESTIMONIAL_ENDPOINT = '/testimonials';
