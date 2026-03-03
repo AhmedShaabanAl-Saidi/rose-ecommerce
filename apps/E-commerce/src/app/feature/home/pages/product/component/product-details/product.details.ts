@@ -1,10 +1,18 @@
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '../../services/product.service';
 import { ProductCardComponent } from 'apps/E-commerce/src/app/shared/components/ui/product-card/product-card.component';
 import { Product } from 'apps/E-commerce/src/app/shared/components/ui/product-card/interface/product';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-details',
@@ -18,6 +26,27 @@ import { LucideAngularModule } from 'lucide-angular';
   ],
 })
 export class ProductDetailsComponent implements OnInit {
+  reviews = [
+    {
+      author: 'Adrian',
+      initial: 'A',
+      date: 'Apr 7, 2025',
+      rating: 4,
+      title: 'Awesome Bouquet!',
+      comment:
+        'I ordered this bouquet for a special occasion, and it absolutely exceeded my expectations! The flowers were fresh, beautifully arranged.',
+    },
+    {
+      author: 'Karim',
+      initial: 'K',
+      date: 'May 10, 2025',
+      rating: 5,
+      title: 'Excellent Service',
+      comment:
+        'Delivery was right on time and the bouquet arrived in perfect condition. Will definitely order again!',
+    },
+  ];
+
   productId: string | null = null;
   ProductById: Product | null = null;
   relatedProducts: Product[] = [];
@@ -29,10 +58,10 @@ export class ProductDetailsComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly productService = inject(ProductsService);
   private readonly cdr = inject(ChangeDetectorRef);
-
+  private readonly crd = inject(DestroyRef);
 
   getproductId(): void {
-    this.activatedRouter.paramMap.subscribe({
+    this.activatedRouter.paramMap.pipe(takeUntilDestroyed(this.crd)).subscribe({
       next: (urlData) => {
         const id = urlData.get('id');
         if (id) {
@@ -48,34 +77,39 @@ export class ProductDetailsComponent implements OnInit {
   getProductById(id: string): void {
     this.isLoading = true;
 
-    this.productService.getProductById(id).subscribe({
-      next: (res) => {
-        this.ProductById = res.product;
-        this.mainImage = res.product.imgCover ?? '';
-        this.localIsInWishlist = res.product.isInWishlist ?? false;
+    this.productService
+      .getProductById(id)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          this.ProductById = res.product;
+          this.mainImage = res.product.imgCover ?? '';
+          this.localIsInWishlist = res.product.isInWishlist ?? false;
+          this.getRelatedProducts(res.product.category);
 
-        this.getRelatedProducts(res.product.category);
-
-        setTimeout(() => {
+          setTimeout(() => {
+            this.isLoading = false;
+            this.cdr.detectChanges();
+          }, 0);
+        },
+        error: () => {
           this.isLoading = false;
-          this.cdr.detectChanges();
-        }, 0);
-      },
-      error: () => {
-        this.isLoading = false;
-        this.router.navigate(['/products']);
-      },
-    });
+          this.router.navigate(['/products']);
+        },
+      });
   }
 
   getRelatedProducts(categoryId: string): void {
-    this.productService.getProducts(1, categoryId).subscribe({
-      next: (res) => {
-        this.relatedProducts = res.products
-          .filter((p: Product) => p._id !== this.ProductById?._id)
-          .slice(0, 4);
-      },
-    });
+    this.productService
+      .getProducts(1, categoryId)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          this.relatedProducts = res.products
+            .filter((p: Product) => p._id !== this.ProductById?._id)
+            .slice(0, 4);
+        },
+      });
   }
 
   getFullStars(rate: number = 0): number[] {
@@ -95,12 +129,10 @@ export class ProductDetailsComponent implements OnInit {
     this.localIsInWishlist = !this.localIsInWishlist;
 
     this.productService.addToWishlist(this.productId).subscribe({
-      next: () => {
-        this.localIsInWishlist = !this.localIsInWishlist;
-      },
+      next: () => {},
       error: (err) => {
-        console.error('Failed to update wishlist:', err);
         this.localIsInWishlist = !this.localIsInWishlist;
+        console.error('Failed to update wishlist:', err);
       },
     });
   }
