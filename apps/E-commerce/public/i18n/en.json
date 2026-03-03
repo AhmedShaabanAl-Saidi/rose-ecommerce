@@ -145,16 +145,11 @@
   },
   "HOME": {
     "BEST_SELLER": {
-      "TITLE": "Most Popular",
-      "SUBTITLE": "Our most popular products based on sales",
-      "VIEW_ALL": "View More",
-      "NO_DATA": "No best sellers available at the moment.",
-      "CATEGORIES": {
-        "WEDDING": "Wedding",
-        "ANNIVERSARY": "Anniversary",
-        "BIRTHDAY": "Birthday",
-        "ENGAGEMENT": "Engagement"
-      }
+      "BADGE": "Best Selling",
+      "TITLE": "Check Out What Everyone's Buying Right Now",
+      "SUBTITLE": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+      "CTA": "Explore gifts",
+      "NO_DATA": "No best sellers available at the moment."
     }
   },
   "FOOTER": {

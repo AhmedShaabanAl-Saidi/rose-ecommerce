@@ -2,59 +2,59 @@
   class="bg-white dark:bg-zinc-900 py-12 md:py-16 px-4 transition-colors duration-300"
 >
   <div class="max-w-7xl mx-auto">
-    <!-- Header Row -->
-    <div
-      class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 md:mb-10 gap-4"
-    >
-      <h2
-        class="text-2xl md:text-3xl font-bold italic text-maroon-700 dark:text-white transition-colors duration-300"
-      >
-        {{ 'HOME.BEST_SELLER.TITLE' | translate }}
-      </h2>
-
-      <!-- Category Tabs -->
-      <div class="flex items-center gap-2 md:gap-4 flex-wrap">
-        @for (category of categories(); track $index) {
-        <button
-          (click)="selectCategory($index)"
-          [class]="
-            activeCategory() === $index
-              ? 'bg-soft-pink-500 text-white'
-              : 'bg-transparent text-zinc-500 dark:text-zinc-400 hover:text-maroon-700 dark:hover:text-white'
-          "
-          class="px-4 py-1.5 rounded-full text-xs md:text-sm font-medium transition-all duration-300 cursor-pointer"
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+      <!-- Left Text Block -->
+      <div class="lg:w-[280px] shrink-0 flex flex-col gap-4">
+        <span
+          class="text-soft-pink-500 font-bold text-xs md:text-sm uppercase tracking-widest"
         >
-          {{ category | translate }}
-        </button>
+          {{ 'HOME.BEST_SELLER.BADGE' | translate }}
+        </span>
+        <h2
+          class="text-2xl md:text-3xl lg:text-[2.1rem] font-bold leading-tight text-maroon-700 dark:text-white transition-colors duration-300"
+        >
+          {{ 'HOME.BEST_SELLER.TITLE' | translate }}
+        </h2>
+        <p class="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+          {{ 'HOME.BEST_SELLER.SUBTITLE' | translate }}
+        </p>
+        <a
+          routerLink="/products"
+          class="mt-2 inline-flex items-center gap-2 border-2 border-maroon-600 dark:border-soft-pink-400 text-maroon-600 dark:text-soft-pink-400 hover:bg-maroon-600 hover:text-white dark:hover:bg-soft-pink-500 dark:hover:text-white font-semibold py-2.5 px-6 rounded-full text-sm transition-all duration-300 w-fit"
+        >
+          {{ 'HOME.BEST_SELLER.CTA' | translate }}
+          <i class="pi pi-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <!-- Right Carousel -->
+      <div class="flex-1 min-w-0 w-full">
+        @if (bestSellers().length > 0) {
+        <p-carousel
+          [value]="bestSellers()"
+          [numVisible]="3"
+          [numScroll]="1"
+          [circular]="true"
+          [responsiveOptions]="responsiveOptions"
+          [showIndicators]="false"
+        >
+          <ng-template let-product pTemplate="item">
+            <div class="px-2.5">
+              <app-product-card [product]="product"></app-product-card>
+            </div>
+          </ng-template>
+        </p-carousel>
+        } @else {
+        <div
+          class="flex items-center justify-center h-40 text-zinc-400 dark:text-zinc-500"
+        >
+          <div class="text-center">
+            <i class="pi pi-box text-4xl mb-3"></i>
+            <p>{{ 'HOME.BEST_SELLER.NO_DATA' | translate }}</p>
+          </div>
+        </div>
         }
       </div>
-    </div>
-
-    <!-- Product Grid -->
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
-    >
-      @for (product of displayedProducts(); track product._id) {
-      <app-product-card [product]="product"></app-product-card>
-      } @empty {
-      <div
-        class="col-span-full text-center py-10 text-zinc-400 dark:text-zinc-500"
-      >
-        <i class="pi pi-box text-4xl mb-3"></i>
-        <p>{{ 'HOME.BEST_SELLER.NO_DATA' | translate }}</p>
-      </div>
-      }
-    </div>
-
-    <!-- View More Link -->
-    <div class="flex justify-end mt-6">
-      <a
-        routerLink="/products"
-        class="text-maroon-600 dark:text-soft-pink-400 hover:text-soft-pink-500 dark:hover:text-soft-pink-300 font-semibold text-sm md:text-base transition-colors flex items-center gap-1"
-      >
-        {{ 'HOME.BEST_SELLER.VIEW_ALL' | translate }}
-        <i class="pi pi-arrow-right text-xs"></i>
-      </a>
     </div>
   </div>
 </section>
