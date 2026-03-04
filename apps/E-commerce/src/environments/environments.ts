@@ -1,6 +1,3 @@
 export const environment = {
-
-    baseUrl: 'https://flower.elevateegy.com/api/v1',
+  baseUrl: 'https://flower.elevateegy.com/api/v1',
 };
-
-

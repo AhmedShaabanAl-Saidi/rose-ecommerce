@@ -1,0 +1,59 @@
+<section
+  class="bg-transparent px-4 py-8 lg:py-16 transition-colors duration-300"
+>
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+      <!-- Left Text Block -->
+      <div class="lg:w-50 shrink-0 flex flex-col gap-4">
+        <span
+          class="text-soft-pink-500 font-bold text-xs md:text-sm uppercase tracking-widest"
+        >
+          {{ 'HOME.BEST_SELLER.BADGE' | translate }}
+        </span>
+        <h2
+          class="text-2xl md:text-3xl lg:text-[2.1rem] font-bold leading-tight text-maroon-700 dark:text-white transition-colors duration-300"
+          [innerHTML]="'HOME.BEST_SELLER.TITLE' | translate"
+        ></h2>
+        <p class="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+          {{ 'HOME.BEST_SELLER.SUBTITLE' | translate }}
+        </p>
+        <a
+          routerLink="/products"
+          class="mt-2 inline-flex items-center gap-2 bg-maroon-700 text-white dark:bg-soft-pink-200 dark:text-maroon-900 hover:bg-maroon-800 dark:hover:bg-soft-pink-300 font-semibold py-2.5 px-6 rounded-full text-sm transition-all duration-300 w-fit"
+        >
+          {{ 'HOME.BEST_SELLER.CTA' | translate }}
+          <i class="pi pi-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <!-- Right Carousel -->
+      <div class="flex-1 min-w-0 w-full relative">
+        @if (bestSellers().length > 0) {
+        <p-carousel
+          [value]="bestSellers()"
+          [numVisible]="3"
+          [numScroll]="1"
+          [circular]="true"
+          [responsiveOptions]="responsiveOptions"
+          [showIndicators]="false"
+        >
+          <ng-template let-product pTemplate="item">
+            <div class="mx-2 h-full py-4">
+              <app-product-card [product]="product"></app-product-card>
+            </div>
+          </ng-template>
+        </p-carousel>
+        } @else {
+        <div
+          class="flex items-center justify-center h-40 text-zinc-400 dark:text-zinc-500"
+        >
+          <div class="text-center">
+            <i class="pi pi-box text-4xl mb-3"></i>
+            <p>{{ 'HOME.BEST_SELLER.NO_DATA' | translate }}</p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

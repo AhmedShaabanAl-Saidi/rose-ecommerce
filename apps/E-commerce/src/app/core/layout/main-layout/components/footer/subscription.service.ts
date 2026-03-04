@@ -12,6 +12,6 @@ export class SubscriptionService {
     private readonly baseUrl = environment.baseUrl;
 
     subscribeToNewsletter(payload: SubscriptionReq): Observable<SubscriptionRes> {
-        return this.http.post<SubscriptionRes>(`${this.baseUrl}/api/v1/subscriptions/subscribe`, payload);
+        return this.http.post<SubscriptionRes>(`${this.baseUrl}/subscriptions/subscribe`, payload);
     }
 }

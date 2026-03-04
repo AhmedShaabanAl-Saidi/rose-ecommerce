@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '../../services/product.service';
-import { ProductCardComponent } from 'apps/E-commerce/src/app/shared/components/ui/product-card/product-card.component';
-import { Product } from 'apps/E-commerce/src/app/shared/components/ui/product-card/interface/product';
+import { ProductCardComponent } from '../../../../../../shared/components/ui/product-card/product-card.component';
+import { Product } from '../../../../../../shared/components/ui/product-card/interface/product';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -16,7 +16,7 @@ import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-details',
-  templateUrl: './product.details.html',
+  template: '',
   styleUrls: ['./product.details.css'],
   imports: [
     ProductCardComponent,

@@ -1,10 +1,39 @@
-import { Component } from '@angular/core';
+import { MostPopular } from './components/most-popular/most-popular';
+import { AboutUs } from './components/about-us/about-us';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { HeroSectionComponent } from './components/hero-section/hero-section.component';
+import { BestSellerComponent } from './components/best-seller/best-seller.component';
+import { GallerySectionComponent } from './components/gallery-section/gallery-section.component';
+import { TrustedByComponent } from './components/trusted/trusted-by.component';
+import { TestimonialComponent } from './components/testimonial/testimonial.component';
+import { HomeService } from './services/home.service';
+import { Product } from '../../shared/components/ui/product-card/interface/product';
 
 import { FeaturesBarComponent } from './components/features-bar/features-bar.component';
 @Component({
   selector: 'app-home',
-  imports: [FeaturesBarComponent],
+  standalone: true,
+  imports: [
+    HeroSectionComponent,
+    BestSellerComponent,
+    TrustedByComponent,
+    TestimonialComponent,
+    FeaturesBarComponent,
+    GallerySectionComponent,
+    AboutUs,
+    MostPopular,
+  ],
   templateUrl: './home.html',
-  styleUrl: './home.css',
 })
-export class Home {}
+export class Home implements OnInit {
+  private readonly homeService = inject(HomeService);
+  bestSellers = signal<Product[]>([]);
+
+  ngOnInit(): void {
+    this.homeService.getHomeData().subscribe((res) => {
+      if (res.bestSeller) {
+        this.bestSellers.set(res.bestSeller as unknown as Product[]);
+      }
+    });
+  }
+}

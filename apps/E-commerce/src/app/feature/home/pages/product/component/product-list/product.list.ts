@@ -6,10 +6,10 @@ import { Paginator } from 'primeng/paginator';
 import { ProductsSidebarComponent } from '../sidebar/sidebar';
 import { ProductCardComponent } from 'apps/E-commerce/src/app/shared/components/ui/product-card/product-card.component';
 import { Product } from 'apps/E-commerce/src/app/shared/components/ui/product-card/interface/product';
-import { FooterComponent } from "apps/E-commerce/src/app/core/layout/main-layout/components/footer/footer.component";
-import { TopNavbarComponent } from "apps/E-commerce/src/app/core/layout/main-layout/components/navbar/top-navbar/top-navbar.component";
-import { AuthLayoutComponent } from "apps/E-commerce/src/app/core/layout/auth-layout/auth-layout.component";
-import { MainNavbarComponent } from "apps/E-commerce/src/app/core/layout/main-layout/components/navbar/main-navbar/main-navbar.component";
+import { FooterComponent } from 'apps/E-commerce/src/app/core/layout/main-layout/components/footer/footer.component';
+import { TopNavbarComponent } from 'apps/E-commerce/src/app/core/layout/main-layout/components/navbar/top-navbar/top-navbar.component';
+import { AuthLayoutComponent } from 'apps/E-commerce/src/app/core/layout/auth-layout/auth-layout.component';
+import { MainNavbarComponent } from 'apps/E-commerce/src/app/core/layout/main-layout/components/navbar/main-navbar/main-navbar.component';
 
 @Component({
   selector: 'app-product-list',
@@ -22,8 +22,8 @@ import { MainNavbarComponent } from "apps/E-commerce/src/app/core/layout/main-la
     FooterComponent,
     TopNavbarComponent,
     AuthLayoutComponent,
-    MainNavbarComponent
-],
+    MainNavbarComponent,
+  ],
 })
 export class ProductList {
   private readonly _http = inject(HttpClient);

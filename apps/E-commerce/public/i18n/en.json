@@ -2,6 +2,8 @@
   "HELLO": "Hello",
   "WELCOME": "Welcome to E-commerce",
   "SWITCH_LANGUAGE": "Switch Language",
+  "ADD_WISH": "Add to wishlist",
+  "REMOVE_WISH": "Remove from wishlist",
   "AUTH": {
     "LOGIN": {
       "TITLE": "Welcome back!",
@@ -71,6 +73,29 @@
     "CONTACT": "Contact",
     "ABOUT": "About"
   },
+  "GALLERY": {
+    "GALLERY_LABEL": "Gallery",
+    "CHECK_OUT": "Check Out",
+    "OUR_WONDERFUL_GALLERY": "our Wonderful Gallery",
+    "IMG_ALT": {
+      "GIFTS_ANNIVERSARY": "Gifts and Anniversary Presents",
+      "CHOCOLATES": "Heart shaped chocolate box with roses",
+      "RED_GIFTS": "Red gift boxes with roses",
+      "RING_BOX_FLOWERS": "Engagement ring box with flowers",
+      "RING_BOX_WHITE": "White engagement ring box",
+      "ENGAGEMENT_CARD": "Congratulations on your Engagement card"
+    }
+  },
+  "TRUSTED": {
+    "TRUSTED_PART1": "Trusted by over",
+    "TRUSTED_COUNT": "4.5k+",
+    "TRUSTED_PART2": "companies"
+  },
+  "TESTIMONIALS": {
+    "HEADING": "Real Words from Happy Customers",
+    "TITLE": "Testimonials",
+    "NO_DATA": "No testimonials available at the moment. Check back later!"
+  },
   "VALIDATION": {
     "REQUIRED": "Field is required",
     "EMAIL": "Please enter a valid email address",
@@ -84,6 +109,89 @@
   },
   "SHARED": {
     "SELECT_OPTION": "Select option"
+  },
+  "ABOUT_SECTION": {
+    "LABEL": "ABOUT",
+    "TITLE": "Delivering the <span class='text-soft-pink-500 dark:text-maroon-400'>Finest</span> Gift Boxes for Your <span class='text-soft-pink-500 dark:text-maroon-400'>Special</span> Moments",
+    "DESCRIPTION": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's for a birthday, wedding, or a simple 'thank you,' our gift boxes are crafted to leave a lasting impression — because thoughtful gifting starts here.",
+    "DISCOVER": "Discover",
+    "FEATURE_1": "Competitive Prices & Easy Shopping",
+    "FEATURE_2": "Premium Quality & Elegant Packaging",
+    "FEATURE_3": "Perfect for Every Occasion",
+    "FEATURE_4": "Fast & Reliable Delivery"
+  },
+  "HERO_SECTION": {
+    "LEFT_BANNER": {
+      "TITLE": "Special Gifts For The People You Love",
+      "BADGE": "Starting from 10.99 EGP",
+      "CTA": "Shop Now"
+    },
+    "MAIN_BANNERS": {
+      "1": {
+        "TITLE": "Say It with Flowers",
+        "SUBTITLE": "Elegant gifts for every special moment.",
+        "CTA": "I'm buying!"
+      },
+      "2": {
+        "TITLE": "Perfect Gifts For Him",
+        "SUBTITLE": "Discover our curated luxury collection.",
+        "CTA": "Shop Collection"
+      },
+      "3": {
+        "TITLE": "Celebrate with Joy",
+        "SUBTITLE": "Make it unforgettable with the perfect surprise.",
+        "CTA": "Discover"
+      },
+      "4": {
+        "TITLE": "Love & Romance",
+        "SUBTITLE": "Express your feelings beautifully and deeply.",
+        "CTA": "View More"
+      }
+    },
+    "BOTTOM_BANNERS": {
+      "1": {
+        "TITLE": "Celebrate Her Forever with a Gift She'll Always Remember",
+        "BADGE": "Wedding",
+        "CTA": "Shop Collection"
+      },
+      "2": {
+        "TITLE": "Honor the Beginning of a Beautiful Journey Together",
+        "BADGE": "Engagement",
+        "CTA": "Shop Collection"
+      },
+      "3": {
+        "TITLE": "Mark Every Year of Love with a Meaningful Surprise",
+        "BADGE": "Anniversary",
+        "CTA": "Shop Collection"
+      }
+    }
+  },
+  "HOME": {
+    "BEST_SELLER": {
+      "BADGE": "Best Selling",
+      "TITLE": "<span class='text-soft-pink-500'>Check Out</span> What Everyone's <span class='text-soft-pink-500'>Buying</span> Right Now",
+      "SUBTITLE": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+      "CTA": "Explore gifts",
+      "NO_DATA": "No best sellers available at the moment."
+    },
+    "FEATURES": {
+      "FREE_DELIVERY": {
+        "TITLE": "Free Delivery",
+        "SUBTITLE": "For orders above 120 EGP"
+      },
+      "GET_REFUND": {
+        "TITLE": "Get Refund",
+        "SUBTITLE": "Refunds within 30 days"
+      },
+      "SAFE_PAYMENT": {
+        "TITLE": "Safe Payment",
+        "SUBTITLE": "100% Secure Payment"
+      },
+      "SUPPORT": {
+        "TITLE": "24/7 Support",
+        "SUBTITLE": "Contact us at any time"
+      }
+    }
   },
   "FOOTER": {
     "DISCOVER_WEBSITE": "Discover our website",
@@ -104,5 +212,18 @@
     "SUBSCRIBE": "Subscribe",
     "APP_NAME": "Rose E-Commerce App",
     "ALL_RIGHTS_RESERVED": "All rights reserved | 2025"
-  }
+  },
+  "MOST_POPULAR": {
+    "MOST_POPULAR_TITLE": "Most Popular",
+    "VIEW_MORE": "View More",
+    "ALL": "All",
+    "NO_PRODUCTS_FOUND": "No products found.",
+    "LOADING_PRODUCTS": "Loading products..."
+  },
+  "PRODUCT_BADGES": {
+    "HOT": "HOT",
+    "NEW": "NEW",
+    "OUT_OF_STOCK": "OUT OF STOCK"
+  },
+  "CURRENCY": "EGP"
 }
