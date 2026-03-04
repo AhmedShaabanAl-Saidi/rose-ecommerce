@@ -219,5 +219,11 @@
     "ALL": "الكل",
     "NO_PRODUCTS_FOUND": "لم يتم العثور على منتجات.",
     "LOADING_PRODUCTS": "جاري تحميل المنتجات..."
-  }
+  },
+  "PRODUCT_BADGES": {
+    "HOT": "الأكثر طلباً",
+    "NEW": "جديد",
+    "OUT_OF_STOCK": "نفد من المخزن"
+  },
+  "CURRENCY": "ج.م"
 }

@@ -219,5 +219,11 @@
     "ALL": "All",
     "NO_PRODUCTS_FOUND": "No products found.",
     "LOADING_PRODUCTS": "Loading products..."
-  }
+  },
+  "PRODUCT_BADGES": {
+    "HOT": "HOT",
+    "NEW": "NEW",
+    "OUT_OF_STOCK": "OUT OF STOCK"
+  },
+  "CURRENCY": "EGP"
 }
