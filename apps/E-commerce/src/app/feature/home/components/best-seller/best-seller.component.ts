@@ -9,7 +9,13 @@ import { Product } from '../../../../shared/components/ui/product-card/interface
 @Component({
   selector: 'app-best-seller',
   standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule, CarouselModule, ProductCardComponent],
+  imports: [
+    CommonModule,
+    RouterLink,
+    TranslateModule,
+    CarouselModule,
+    ProductCardComponent,
+  ],
   templateUrl: './best-seller.component.html',
   styleUrl: './best-seller.component.css',
 })
@@ -18,17 +24,17 @@ export class BestSellerComponent {
 
   responsiveOptions = [
     {
-      breakpoint: '1280px',
+      breakpoint: '1400px',
       numVisible: 3,
       numScroll: 1,
     },
     {
-      breakpoint: '768px',
+      breakpoint: '1200px',
       numVisible: 2,
       numScroll: 1,
     },
     {
-      breakpoint: '480px',
+      breakpoint: '768px',
       numVisible: 1,
       numScroll: 1,
     },

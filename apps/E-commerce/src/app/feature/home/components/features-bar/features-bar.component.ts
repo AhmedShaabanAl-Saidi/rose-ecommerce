@@ -1,18 +1,35 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-features-bar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './features-bar.component.html',
-  styleUrl: './features-bar.component.css'
+  styleUrl: './features-bar.component.css',
 })
 export class FeaturesBarComponent {
   features = [
-    { icon: 'pi pi-truck', title: 'Free Delivery', subtitle: 'For orders above 120 EGP' },
-    { icon: 'pi pi-sync', title: 'Get Refund', subtitle: 'Refunds within 30 days' },
-    { icon: 'pi pi-shield', title: 'Safe Payment', subtitle: '100% Secure Payment' },
-    { icon: 'pi pi-headphones', title: '24/7 Support', subtitle: 'Contact us at any time' }
+    {
+      icon: 'pi pi-truck',
+      title: 'HOME.FEATURES.FREE_DELIVERY.TITLE',
+      subtitle: 'HOME.FEATURES.FREE_DELIVERY.SUBTITLE',
+    },
+    {
+      icon: 'pi pi-sync',
+      title: 'HOME.FEATURES.GET_REFUND.TITLE',
+      subtitle: 'HOME.FEATURES.GET_REFUND.SUBTITLE',
+    },
+    {
+      icon: 'pi pi-shield',
+      title: 'HOME.FEATURES.SAFE_PAYMENT.TITLE',
+      subtitle: 'HOME.FEATURES.SAFE_PAYMENT.SUBTITLE',
+    },
+    {
+      icon: 'pi pi-headphones',
+      title: 'HOME.FEATURES.SUPPORT.TITLE',
+      subtitle: 'HOME.FEATURES.SUPPORT.SUBTITLE',
+    },
   ];
 }

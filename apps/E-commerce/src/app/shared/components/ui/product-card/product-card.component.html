@@ -1,4 +1,6 @@
-<div class="group relative transition-all rounded-2xl bg-transparent">
+<div
+  class="group relative flex flex-col h-full transition-all rounded-2xl bg-transparent"
+>
   <div
     class="absolute top-2 start-2 end-2 z-20 flex items-start justify-between"
   >
@@ -28,21 +30,27 @@
       </button>
     </div>
 
-    <div class="flex flex-col items-end gap-1.5 shrink-0 pointer-events-none">
+    <div
+      class="flex flex-col items-end gap-1.5 pt-1 shrink-0 pointer-events-none"
+    >
       @if (hotProduct()) {
-      <span [class]="BADGE_BASE" class="bg-maroon-50 text-maroon-600">HOT</span>
+      <span [class]="BADGE_BASE" class="bg-maroon-50 text-maroon-600">
+        {{ 'PRODUCT_BADGES.HOT' | translate }}
+      </span>
       } @if (newProduct()) {
-      <span [class]="BADGE_BASE" class="bg-zinc-100 text-zinc-700">NEW</span>
+      <span [class]="BADGE_BASE" class="bg-zinc-100 text-zinc-700">
+        {{ 'PRODUCT_BADGES.NEW' | translate }}
+      </span>
       } @if (product().quantity <= 0) {
       <span [class]="BADGE_BASE" class="bg-red-600 text-soft-pink-50">
-        OUT OF STOCK
+        {{ 'PRODUCT_BADGES.OUT_OF_STOCK' | translate }}
       </span>
       }
     </div>
   </div>
 
   <div
-    class="aspect-square relative overflow-hidden rounded-2xl mb-3 bg-gray-50 group/image"
+    class="aspect-square relative overflow-hidden rounded-2xl mb-3 bg-gray-50 group/image shrink-0"
   >
     <img
       [src]="product().imgCover"
@@ -66,16 +74,15 @@
     </div>
   </div>
 
-  <div class="px-1">
+  <div class="px-1 flex flex-col grow">
     <h3
-      class="text-[1rem] font-bold text-maroon-700 dark:text-soft-pink-200 truncate mb-1"
+      class="text-[1rem] rtl:text-end font-bold text-maroon-700 dark:text-soft-pink-200 line-clamp-2 h-[2.5rem] mb-1 truncate-none leading-tight"
     >
       {{ product().title }}
     </h3>
 
-    <div class="flex items-center justify-between">
+    <div class="mt-auto flex items-center justify-between">
       <div class="flex flex-col gap-1">
-        <!-- ⭐ Rating -->
         <div class="flex items-center gap-0.5">
           @for (star of [1, 2, 3, 4, 5]; track star) {
           <div class="relative flex items-center justify-center">
@@ -93,14 +100,14 @@
 
         <span
           class="text-[1.25rem] font-medium text-maroon-700 dark:text-soft-pink-200 leading-none"
-          dir="ltr"
         >
-          {{ finalPrice | number : '1.2-2' }} EGP @if (discountPrice !== null &&
-          discountPrice < originalPrice) {
+          {{ finalPrice | number : '1.2-2' }} {{ 'CURRENCY' | translate }}
+
+          @if (discountPrice !== null && discountPrice < originalPrice) {
           <span
             class="text-zinc-400 dark:text-zinc-500 ms-1 line-through font-medium text-sm"
           >
-            {{ originalPrice | number : '1.2-2' }} EGP
+            {{ originalPrice | number : '1.2-2' }} {{ 'CURRENCY' | translate }}
           </span>
           }
         </span>
@@ -109,6 +116,7 @@
       <lib-button
         (buttonClick)="addToCart()"
         [disabled]="product().quantity === 0"
+        class="shrink-0"
       >
         <lucide-icon
           name="shopping-cart"

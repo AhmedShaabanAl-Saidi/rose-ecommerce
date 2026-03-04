@@ -169,10 +169,28 @@
   "HOME": {
     "BEST_SELLER": {
       "BADGE": "Best Selling",
-      "TITLE": "Check Out What Everyone's Buying Right Now",
+      "TITLE": "<span class='text-soft-pink-500'>Check Out</span> What Everyone's <span class='text-soft-pink-500'>Buying</span> Right Now",
       "SUBTITLE": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
       "CTA": "Explore gifts",
       "NO_DATA": "No best sellers available at the moment."
+    },
+    "FEATURES": {
+      "FREE_DELIVERY": {
+        "TITLE": "Free Delivery",
+        "SUBTITLE": "For orders above 120 EGP"
+      },
+      "GET_REFUND": {
+        "TITLE": "Get Refund",
+        "SUBTITLE": "Refunds within 30 days"
+      },
+      "SAFE_PAYMENT": {
+        "TITLE": "Safe Payment",
+        "SUBTITLE": "100% Secure Payment"
+      },
+      "SUPPORT": {
+        "TITLE": "24/7 Support",
+        "SUBTITLE": "Contact us at any time"
+      }
     }
   },
   "FOOTER": {
@@ -201,5 +219,11 @@
     "ALL": "All",
     "NO_PRODUCTS_FOUND": "No products found.",
     "LOADING_PRODUCTS": "Loading products..."
-  }
+  },
+  "PRODUCT_BADGES": {
+    "HOT": "HOT",
+    "NEW": "NEW",
+    "OUT_OF_STOCK": "OUT OF STOCK"
+  },
+  "CURRENCY": "EGP"
 }
