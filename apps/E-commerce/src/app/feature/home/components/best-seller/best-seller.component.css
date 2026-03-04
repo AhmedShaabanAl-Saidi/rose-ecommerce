@@ -1,52 +1,31 @@
-::ng-deep .p-carousel-content {
-  position: relative !important;
+:host ::ng-deep .p-carousel-prev-button,
+:host ::ng-deep .p-carousel-next-button {
+  background-color: var(--color-maroon-500);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
 }
-
-::ng-deep .p-carousel-prev,
-::ng-deep .p-carousel-next {
-  background-color: var(--color-white) !important;
-  color: var(--color-zinc-600) !important;
-  width: 2.5rem !important;
-  height: 2.5rem !important;
-  border: 1px solid var(--color-zinc-200) !important;
-  transition-property: color, background-color, border-color, shadow !important;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition-duration: 300ms !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 50% !important;
-  position: absolute !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  margin: 0 !important;
-  z-index: 10 !important;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+:host ::ng-deep .p-carousel-prev-button .p-icon,
+:host ::ng-deep .p-carousel-next-button .p-icon {
+  color: var(--color-maroon-50);
 }
-
-::ng-deep .dark .p-carousel-prev,
-::ng-deep .dark .p-carousel-next {
-  background-color: var(--color-zinc-800) !important;
-  color: var(--color-zinc-300) !important;
-  border: 1px solid var(--color-zinc-700) !important;
+:host ::ng-deep .p-carousel-prev-button:hover .p-button,
+:host ::ng-deep .p-carousel-next-button:hover .p-button {
+  background-color: var(--color-maroon-600) !important;
 }
-
-::ng-deep .p-carousel-prev {
-  left: -20px !important;
+:host ::ng-deep .p-carousel-prev-button:hover .p-icon,
+:host ::ng-deep .p-carousel-next-button:hover .p-icon {
+  color: var(--color-maroon-50) !important;
 }
-
-::ng-deep .p-carousel-next {
-  right: -20px !important;
+:host ::ng-deep .p-carousel-prev-button {
+  left: -15px;
 }
-
-::ng-deep .p-carousel-prev:hover,
-::ng-deep .p-carousel-next:hover {
-  background-color: var(--color-zinc-50) !important;
-  color: var(--color-zinc-900) !important;
-}
-
-::ng-deep .dark .p-carousel-prev:hover,
-::ng-deep .dark .p-carousel-next:hover {
-  background-color: var(--color-zinc-700) !important;
-  color: var(--color-white) !important;
+:host ::ng-deep .p-carousel-next-button {
+  right: -15px;
 }
