@@ -13,5 +13,7 @@
       (toggleWishlist)="handleToggleWishlist($event)"
     />
   </div>
+  <app-product-reviews [reviews]="reviews()" />
+  <app-related-product [products]="relatedProducts()" />
 </section>
 }

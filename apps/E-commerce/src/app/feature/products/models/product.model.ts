@@ -1,27 +1,14 @@
-
-
 export interface Category {
-   _id: string;
-   name: string;
-   slug: string;
-   image: string;
+  _id: string;
+  name: string;
+  slug: string;
+  image: string;
 }
 
 export interface Brand {
-   _id: string;
-   name: string;
-   image: string;
-}
-
-export interface Review {
-   _id: string;
-   comment: string;
-   ratings: number;
-   user: {
-     name: string;
-     avatar?: string;
-  };
-   createdAt: string;
+  _id: string;
+  name: string;
+  image: string;
 }
 
 export interface Product {
@@ -48,31 +35,20 @@ export interface Product {
 }
 
 export interface PaginationMetadata {
-   currentPage: number;
-   numberOfPages: number;
-   limit: number;
-   next?: number;
-   prev?: number;
+  currentPage: number;
+  numberOfPages: number;
+  limit: number;
+  next?: number;
+  prev?: number;
 }
 
 export interface ProductsResponse {
   message: string;
-  metadata:{
+  metadata: {
     currentPage: number;
     totalPages: number;
     limit: number;
     totalItems: number;
   };
   products: Product[];
-}
-
-
-export interface ProductFilters {
-  page?: number;
-  limit?: number;
-  sort?: string;
-  category?: string;
-  'price[gte]'?: number; 
-  'price[lte]'?: number;
-  keyword?: string;
 }

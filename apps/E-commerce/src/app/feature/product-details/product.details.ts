@@ -6,12 +6,20 @@ import { Product } from '../../shared/components/ui/product-card/interface/produ
 import { ProductsService } from '../products/services/product.service';
 import { ProductGalleryComponent } from './components/product-gallery/product-gallery.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
+import { Review } from '../products/models/review.models';
+import { ProductReviewsComponent } from './components/product-reviews/product-reviews.component';
+import { RelatedProductComponent } from './components/related-product/related-product.component';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product.details.html',
   styleUrls: ['./product.details.css'],
-  imports: [ProductInfoComponent, ProductGalleryComponent],
+  imports: [
+    ProductInfoComponent,
+    ProductGalleryComponent,
+    ProductReviewsComponent,
+    RelatedProductComponent,
+  ],
 })
 export class ProductDetailsComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
@@ -35,6 +43,8 @@ export class ProductDetailsComponent implements OnInit {
         if (id) {
           this.productId.set(id);
           this.loadProductDetails(id);
+          this.loadProductReviews(id);
+          this.loadRelatedProducts(id);
         } else {
           this.router.navigate(['/products']);
         }
@@ -49,12 +59,36 @@ export class ProductDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.product.set(res.product);
-          console.log(res.product);
           this.isLoading.set(false);
         },
         error: () => {
           this.isLoading.set(false);
           this.router.navigate(['/products']);
+        },
+      });
+  }
+  reviews = signal<Review[]>([]);
+
+  private loadProductReviews(id: string): void {
+    this.productService
+      .getProductReviews(id)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          this.reviews.set(res.reviews);
+        },
+      });
+  }
+  relatedProducts = signal<Product[]>([]);
+
+  private loadRelatedProducts(id: string): void {
+    this.productService
+      .getRelatedProductByID(id)
+      .pipe(take(1))
+      .subscribe({
+        next: (res) => {
+          this.relatedProducts.set(res.relatedProducts);
+          console.log(res.relatedProducts);
         },
       });
   }
