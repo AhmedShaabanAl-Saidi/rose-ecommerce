@@ -22,9 +22,9 @@ export const mainRoutes: Routes = [
       {
         path: 'products-details/:id',
         loadComponent: () =>
-          import(
-            '../../../feature/products/component/product-details/product.details'
-          ).then((m) => m.ProductDetailsComponent),
+          import('../../../feature/product-details/product.details').then(
+            (m) => m.ProductDetailsComponent
+          ),
       },
     ],
   },

@@ -1,0 +1,17 @@
+@if (isLoading()) {
+<div class="flex justify-center items-center min-h-100">
+  <div class="animate-pulse text-zinc-400">Loading Product Details...</div>
+</div>
+} @else if (product()) {
+<section class="container mx-auto py-8">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <app-product-gallery [product]="product()" />
+
+    <app-product-info
+      [product]="product()"
+      (addToCart)="handleAddToCart($event)"
+      (toggleWishlist)="handleToggleWishlist($event)"
+    />
+  </div>
+</section>
+}

@@ -12,11 +12,15 @@ export class ProductsService {
   private baseUrl = environment.baseUrl;
   private _http = inject(HttpClient);
 
-  getProducts(
+  getProducts({
     page = 1,
     limit = 12,
-    categoryId?: string
-  ): Observable<ProductsResponse> {
+    categoryId,
+  }: {
+    page?: number;
+    limit?: number;
+    categoryId?: string;
+  } = {}): Observable<ProductsResponse> {
     let params = `?page=${page}&limit=${limit}`;
     if (categoryId) {
       params += `&category=${categoryId}`;

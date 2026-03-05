@@ -24,7 +24,7 @@ export class ProductList implements OnInit {
   }
   getproducts(page = 1, limit: number = this.rows()) {
     this.productsService
-      .getProducts(page, limit)
+      .getProducts({ page, limit })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (data) => {

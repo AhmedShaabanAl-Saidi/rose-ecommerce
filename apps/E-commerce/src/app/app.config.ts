@@ -30,6 +30,7 @@ import {
   Lock,
   LucideAngularModule,
   MapPin,
+  Package,
   Search,
   ShoppingCart,
   Star,
@@ -91,6 +92,7 @@ export const appConfig: ApplicationConfig = {
         UserRound,
         Bell,
         MapPin,
+        Package,
       })
     ),
     providePrimeNG({
