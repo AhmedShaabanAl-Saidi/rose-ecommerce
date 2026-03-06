@@ -225,5 +225,29 @@
     "NEW": "NEW",
     "OUT_OF_STOCK": "OUT OF STOCK"
   },
-  "CURRENCY": "EGP"
+  "CURRENCY": "EGP",
+  "PRODUCT_DETAILS": {
+    "LOADING": "Loading Product Details...",
+    "CURRENCY": "EGP",
+    "LEFT_IN_STOCK": "left in stock",
+    "OUT_OF_STOCK": "Out of stock",
+    "RATING": "Rating",
+    "RATINGS": "ratings",
+    "ADD_TO_WISHLIST": "Add to Wishlist",
+    "ADD_TO_CART": "Add to Cart"
+  },
+  "PRODUCT_REVIEWS": {
+    "TITLE": "Product Reviews",
+    "NO_REVIEWS": "No reviews yet. Be the first to share your thoughts!",
+    "YOUR_RATING": "Your rating:",
+    "REVIEW_TITLE": "Title",
+    "REVIEW_TITLE_PLACEHOLDER": "Enter review title",
+    "REVIEW": "Review",
+    "REVIEW_PLACEHOLDER": "What do you think of this product?",
+    "ADD_REVIEW": "Add Review"
+  },
+  "RELATED_PRODUCTS": {
+    "TITLE": "Related Products",
+    "NO_DATA": "No Related Products available at the moment."
+  }
 }

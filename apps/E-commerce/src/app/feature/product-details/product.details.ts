@@ -2,6 +2,7 @@ import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { TranslateModule } from '@ngx-translate/core';
 import { Product } from '../../shared/components/ui/product-card/interface/product';
 import { ProductsService } from '../products/services/product.service';
 import { ProductGalleryComponent } from './components/product-gallery/product-gallery.component';
@@ -19,6 +20,7 @@ import { RelatedProductComponent } from './components/related-product/related-pr
     ProductGalleryComponent,
     ProductReviewsComponent,
     RelatedProductComponent,
+    TranslateModule,
   ],
 })
 export class ProductDetailsComponent implements OnInit {

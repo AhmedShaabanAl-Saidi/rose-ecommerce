@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, input } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { HeadingTitleComponent } from '../../../../shared/components/ui/heading/heading-title.component';
 import { Review } from '../../../products/models/review.models';
 import { TextInputComponent } from '@elevate/reusable-input';
@@ -12,6 +13,7 @@ import { ButtonComponent } from '@elevate/reusable-ui';
     HeadingTitleComponent,
     TextInputComponent,
     ButtonComponent,
+    TranslateModule,
   ],
   templateUrl: './product-reviews.component.html',
   styleUrl: './product-reviews.component.css',

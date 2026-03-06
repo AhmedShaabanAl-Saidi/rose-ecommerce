@@ -15,7 +15,7 @@
           {{ product()?.priceAfterDiscount | number : '1.2-2' }}
         </span>
         <span class="text-zinc-800 dark:text-zinc-50 font-semibold text-sm"
-          >EGP</span
+          >{{ 'PRODUCT_DETAILS.CURRENCY' | translate }}</span
         >
       </p>
 
@@ -24,14 +24,14 @@
         class="bg-zinc-100 text-zinc-700 text-xs font-medium px-3 py-1.5 rounded-full flex items-center gap-1"
       >
         <lucide-icon name="package" size="14"></lucide-icon>
-        {{ product()?.quantity }} left in stock
+        {{ product()?.quantity }} {{ 'PRODUCT_DETAILS.LEFT_IN_STOCK' | translate }}
       </span>
       } @else {
       <span
         class="bg-red-50 text-red-600 text-xs font-medium px-3 py-1.5 rounded-full flex items-center gap-1"
       >
         <lucide-icon name="package" size="14"></lucide-icon>
-        Out of stock
+        {{ 'PRODUCT_DETAILS.OUT_OF_STOCK' | translate }}
       </span>
       }
     </div>
@@ -40,9 +40,9 @@
 
     <div class="flex items-center gap-2">
       <i class="pi pi-star-fill text-amber-500"></i>
-      <span class="font-medium">Rating: {{ product()?.rateAvg }}/5</span>
+      <span class="font-medium">{{ 'PRODUCT_DETAILS.RATING' | translate }}: {{ product()?.rateAvg }}/5</span>
       <span class="text-blue-600 cursor-pointer hover:underline"
-        >({{ product()?.rateCount }} ratings)</span
+        >({{ product()?.rateCount }} {{ 'PRODUCT_DETAILS.RATINGS' | translate }})</span
       >
     </div>
 
@@ -57,7 +57,7 @@
     <button
       (click)="toggleWishlist.emit(product()?._id!)"
       class="bg-zinc-100 dark:bg-transparent dark:border-zinc-500 dark:border hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-xl p-2 cursor-pointer transition-colors"
-      title="Add to Wishlist"
+      [title]="'PRODUCT_DETAILS.ADD_TO_WISHLIST' | translate"
     >
       <lucide-icon
         [name]="product()?.isInWishlist ? 'heart-minus' : 'heart-plus'"
@@ -71,7 +71,7 @@
       [block]="true"
       [icon]="'shopping-cart'"
     >
-      Add to Cart
+      {{ 'PRODUCT_DETAILS.ADD_TO_CART' | translate }}
     </lib-button>
   </div>
 </div>

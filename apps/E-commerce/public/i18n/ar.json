@@ -225,5 +225,30 @@
     "NEW": "جديد",
     "OUT_OF_STOCK": "نفد من المخزن"
   },
-  "CURRENCY": "ج.م"
+  "CURRENCY": "ج.م",
+  "PRODUCT_DETAILS": {
+    "LOADING": "جاري تحميل تفاصيل المنتج...",
+    "CURRENCY": "ج.م",
+    "LEFT_IN_STOCK": "قطعة متوفرة",
+    "OUT_OF_STOCK": "نفد من المخزن",
+    "RATING": "التقييم",
+    "RATINGS": "تقييمات",
+    "ADD_TO_WISHLIST": "إضافة لقائمة الأمنيات",
+    "ADD_TO_CART": "إضافة للسلة"
+  },
+  "PRODUCT_REVIEWS": {
+    "TITLE": "تقييمات المنتج",
+    "NO_REVIEWS": "لا توجد تقييمات بعد. كن أول من يشارك رأيه!",
+    "YOUR_RATING": "تقييمك:",
+    "REVIEW_TITLE": "العنوان",
+    "REVIEW_TITLE_PLACEHOLDER": "أدخل عنوان التقييم",
+    "REVIEW": "التقييم",
+    "REVIEW_PLACEHOLDER": "ما رأيك في هذا المنتج؟",
+    "ADD_REVIEW": "إضافة تقييم"
+  },
+  "RELATED_PRODUCTS": {
+    "TITLE": "منتجات ذات صلة",
+    "NO_DATA": "لا توجد منتجات ذات صلة حالياً."
+
+  }
 }

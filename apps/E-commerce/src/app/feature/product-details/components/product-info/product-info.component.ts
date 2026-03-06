@@ -4,10 +4,11 @@ import { LucideAngularModule } from 'lucide-angular';
 import { Divider } from 'primeng/divider';
 import { DecimalPipe } from '@angular/common';
 import { ButtonComponent } from '@elevate/reusable-ui';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-info',
-  imports: [LucideAngularModule, Divider, DecimalPipe, ButtonComponent],
+  imports: [LucideAngularModule, Divider, DecimalPipe, ButtonComponent, TranslateModule],
   templateUrl: './product-info.component.html',
   styleUrl: './product-info.component.css',
 })
