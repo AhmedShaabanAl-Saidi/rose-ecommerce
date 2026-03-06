@@ -6,10 +6,10 @@ import { BestSellerComponent } from './components/best-seller/best-seller.compon
 import { GallerySectionComponent } from './components/gallery-section/gallery-section.component';
 import { TrustedByComponent } from './components/trusted/trusted-by.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
-import { FeaturesBarComponent } from './components/features-bar/features-bar.component';
 import { HomeService } from './services/home.service';
 import { Product } from '../../shared/components/ui/product-card/interface/product';
 
+import { FeaturesBarComponent } from './components/features-bar/features-bar.component';
 @Component({
   selector: 'app-home',
   standalone: true,

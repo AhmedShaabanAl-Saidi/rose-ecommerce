@@ -1,10 +1,10 @@
-import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { CarouselModule } from 'primeng/carousel';
-import { ProductCardComponent } from '../../../../shared/components/ui/product-card/product-card.component';
 import { Product } from '../../../../shared/components/ui/product-card/interface/product';
+import { ProdcutCarousalComponent } from '../../../../shared/components/ui/product-carousal/prodcut-carousal.component';
 
 @Component({
   selector: 'app-best-seller',
@@ -14,7 +14,7 @@ import { Product } from '../../../../shared/components/ui/product-card/interface
     RouterLink,
     TranslateModule,
     CarouselModule,
-    ProductCardComponent,
+    ProdcutCarousalComponent,
   ],
   templateUrl: './best-seller.component.html',
   styleUrl: './best-seller.component.css',

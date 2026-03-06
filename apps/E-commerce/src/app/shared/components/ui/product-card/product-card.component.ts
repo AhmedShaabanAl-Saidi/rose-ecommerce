@@ -1,9 +1,10 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ButtonComponent } from '@elevate/reusable-ui';
+import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { Product } from './interface/product';
-import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-card',
@@ -40,8 +41,10 @@ export class ProductCardComponent {
     );
   });
 
+  private readonly router = inject(Router);
+
   getStarClip(starIndex: number): string {
-    const rating = this.product().rateAvg;
+    const rating = this.product().rateAvg ?? 0;
     if (starIndex <= Math.floor(rating)) return 'inset(0 0 0 0)';
     if (starIndex === Math.ceil(rating)) {
       const partial = (rating % 1) * 100;
@@ -49,13 +52,16 @@ export class ProductCardComponent {
     }
     return 'inset(0 100% 0 0)';
   }
+
   addToCart(): void {
-    // add To Cart
+    // Implement add to cart functionality here
   }
+
   addToWishList(): void {
-    // add to wishlist
+    // Implement add to WishlIst functionality here
   }
+
   showProductDetails(): void {
-    // show product
+    this.router.navigate(['products-details', this.product()._id]);
   }
 }

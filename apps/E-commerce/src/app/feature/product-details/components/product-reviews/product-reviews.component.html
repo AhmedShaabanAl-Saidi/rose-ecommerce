@@ -1,0 +1,114 @@
+<section class="pt-20">
+  <app-heading-title [title]="'PRODUCT_REVIEWS.TITLE' | translate"></app-heading-title>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+    <div
+      class="lg:col-span-2 max-h-175 overflow-y-auto pr-6 custom-scrollbar space-y-8"
+    >
+      @if (reviews().length > 0) { @for (review of reviews(); track review._id)
+      {
+      <div
+        class="flex gap-5 pb-8 border-b border-zinc-100 dark:border-zinc-800 last:border-0"
+      >
+        <div
+          class="w-14 h-14 rounded-full overflow-hidden bg-zinc-100 shrink-0 shadow-sm"
+        >
+          <img
+            [src]="review.user.photo"
+            [alt]="review.user.firstName"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <div class="flex-1">
+          <div class="flex justify-between items-center">
+            <h4 class="font-bold text-zinc-800 dark:text-zinc-100 text-lg">
+              {{ review.user.firstName }} {{ review.user.lastName }}
+            </h4>
+            <span
+              class="text-xs text-zinc-400 font-medium bg-zinc-50 dark:bg-zinc-800 px-2 py-1 rounded"
+            >
+              {{ review.createdAt | date : 'MMM d, y' }}
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2 mt-1.5">
+            <div class="flex text-amber-500 text-xs">
+              @for (s of getStars(review.rating); track $index) {
+              <i class="pi pi-star-fill"></i>
+              } @for (s of getEmptyStars(review.rating); track $index) {
+              <i class="pi pi-star text-zinc-200 dark:text-zinc-700"></i>
+              }
+            </div>
+            <span class="text-xs font-bold text-zinc-500 dark:text-zinc-400">
+              ({{ review.rating }}/5)
+            </span>
+          </div>
+
+          <h5 class="font-bold text-zinc-800 dark:text-zinc-200 mt-3">
+            {{ review.title }}
+          </h5>
+          <p
+            class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mt-1"
+          >
+            {{ review.comment }}
+          </p>
+        </div>
+      </div>
+      } } @else {
+      <div
+        class="py-20 text-center flex flex-col items-center justify-center bg-zinc-50 dark:bg-zinc-900/50 rounded-3xl"
+      >
+        <i class="pi pi-comments text-4xl text-zinc-300 mb-3"></i>
+        <p class="text-zinc-400 italic font-medium">
+          {{ 'PRODUCT_REVIEWS.NO_REVIEWS' | translate }}
+        </p>
+      </div>
+      }
+    </div>
+
+    <div class="sticky top-24 rounded-3xl p-8 shadow h-fit">
+      <div class="space-y-5">
+        <div>
+          <label
+            for=""
+            class="block text-sm font-medium text-zinc-700 mb-2 dark:text-white"
+            >{{ 'PRODUCT_REVIEWS.YOUR_RATING' | translate }}</label
+          >
+
+          <div class="flex gap-1 text-amber-400">
+            @for (star of [1,2,3,4,5]; track $index) {
+
+            <i
+              class="pi pi-star text-xl cursor-pointer hover:text-amber-500 transition-colors"
+            ></i>
+
+            }
+          </div>
+        </div>
+
+        <lib-text-input
+          [label]="'PRODUCT_REVIEWS.REVIEW_TITLE' | translate"
+          [placeholder]="'PRODUCT_REVIEWS.REVIEW_TITLE_PLACEHOLDER' | translate"
+        ></lib-text-input>
+
+        <div>
+          <label
+            for="kk"
+            class="block text-sm font-medium text-zinc-700 mb-1 dark:text-white"
+            >{{ 'PRODUCT_REVIEWS.REVIEW' | translate }}</label
+          >
+
+          <textarea
+            id="kk"
+            rows="4"
+            [placeholder]="'PRODUCT_REVIEWS.REVIEW_PLACEHOLDER' | translate"
+            class="w-full border border-zinc-400 rounded-lg px-4 py-2.5 text-sm focus:border-2 dark:bg-zinc-600 dark:focus:border-soft-pink-300 dark:placeholder:text-zinc-400 focus:border-maroon-500 placeholder:text-zinc-500 outline-none resize-none"
+          ></textarea>
+        </div>
+
+        <lib-button [block]="true"> {{ 'PRODUCT_REVIEWS.ADD_REVIEW' | translate }} </lib-button>
+      </div>
+    </div>
+  </div>
+</section>
