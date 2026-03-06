@@ -1,13 +1,14 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
 import { TranslateModule } from '@ngx-translate/core';
+import { forkJoin } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { Product } from '../../shared/components/ui/product-card/interface/product';
+import { Review } from '../products/models/review.models';
 import { ProductsService } from '../products/services/product.service';
 import { ProductGalleryComponent } from './components/product-gallery/product-gallery.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
-import { Review } from '../products/models/review.models';
 import { ProductReviewsComponent } from './components/product-reviews/product-reviews.component';
 import { RelatedProductComponent } from './components/related-product/related-product.component';
 
@@ -31,7 +32,11 @@ export class ProductDetailsComponent implements OnInit {
 
   productId = signal<string | null>(null);
   product = signal<Product | null>(null);
+  reviews = signal<Review[]>([]);
+  relatedProducts = signal<Product[]>([]);
   isLoading = signal<boolean>(true);
+  isLoadingReviews = signal<boolean>(false);
+  isLoadingRelated = signal<boolean>(false);
 
   ngOnInit(): void {
     this.watchRouteParams();
@@ -44,60 +49,49 @@ export class ProductDetailsComponent implements OnInit {
         const id = params.get('id');
         if (id) {
           this.productId.set(id);
-          this.loadProductDetails(id);
-          this.loadProductReviews(id);
-          this.loadRelatedProducts(id);
+          this.loadProductData(id);
         } else {
-          this.router.navigate(['/products']);
+          this.handleInvalidProductId();
         }
       });
   }
 
-  private loadProductDetails(id: string): void {
+  private loadProductData(id: string): void {
     this.isLoading.set(true);
-    this.productService
-      .getProductById(id)
-      .pipe(take(1))
-      .subscribe({
-        next: (res) => {
-          this.product.set(res.product);
-          this.isLoading.set(false);
-        },
-        error: () => {
-          this.isLoading.set(false);
-          this.router.navigate(['/products']);
-        },
-      });
-  }
-  reviews = signal<Review[]>([]);
+    this.isLoadingReviews.set(true);
+    this.isLoadingRelated.set(true);
 
-  private loadProductReviews(id: string): void {
-    this.productService
-      .getProductReviews(id)
-      .pipe(take(1))
+    forkJoin({
+      product: this.productService.getProductById(id),
+      reviews: this.productService.getProductReviews(id),
+      related: this.productService.getRelatedProductByID(id),
+    })
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => {
+          this.isLoading.set(false);
+          this.isLoadingReviews.set(false);
+          this.isLoadingRelated.set(false);
+        })
+      )
       .subscribe({
-        next: (res) => {
-          this.reviews.set(res.reviews);
+        next: ({ product, reviews, related }) => {
+          this.product.set(product.product);
+          this.reviews.set(reviews.reviews || []);
+          this.relatedProducts.set(related.relatedProducts || []);
         },
       });
   }
-  relatedProducts = signal<Product[]>([]);
 
-  private loadRelatedProducts(id: string): void {
-    this.productService
-      .getRelatedProductByID(id)
-      .pipe(take(1))
-      .subscribe({
-        next: (res) => {
-          this.relatedProducts.set(res.relatedProducts);
-          console.log(res.relatedProducts);
-        },
-      });
+  private handleInvalidProductId(): void {
+    this.router.navigate([`/products`]);
   }
-  handleToggleWishlist(id: string) {
-    //Implementaion wishlist
+
+  handleToggleWishlist(id: string): void {
+    //Implement Add to wishlist
   }
-  handleAddToCart(id: string) {
-    //Implementation Add to cart
+
+  handleAddToCart(id: string): void {
+    //Implement Add to Cart
   }
 }
