@@ -1,50 +1,59 @@
-/* Override PrimeNG default carousel padding/margins to achieve edge-to-edge aesthetic */
-:host ::ng-deep p-carousel .p-carousel {
+:host ::ng-deep .hero-main-carousel.p-carousel {
   height: 100%;
 }
 
-:host ::ng-deep p-carousel .p-carousel-content {
+:host ::ng-deep .hero-main-carousel .p-carousel-content-container,
+:host ::ng-deep .hero-main-carousel .p-carousel-content,
+:host ::ng-deep .hero-main-carousel .p-carousel-viewport,
+:host ::ng-deep .hero-main-carousel .p-carousel-item-list,
+:host ::ng-deep .hero-main-carousel .p-carousel-item {
   height: 100%;
+}
+
+:host ::ng-deep .hero-main-carousel .p-carousel-content,
+:host ::ng-deep .hero-main-carousel .p-carousel-viewport {
   overflow: hidden !important;
 }
 
-:host ::ng-deep p-carousel .p-carousel-container {
-  height: 100%;
+:host ::ng-deep .hero-main-carousel .p-carousel-item {
+  display: flex;
 }
 
-:host ::ng-deep p-carousel .p-carousel-item {
-  height: 100%;
+:host ::ng-deep .hero-main-carousel .p-carousel-item>* {
+  flex: 1 1 auto;
+  min-height: 100%;
 }
 
-:host ::ng-deep p-carousel .p-carousel-items-content {
-  height: 100%;
-  border-radius: 1rem;
-  overflow: hidden !important;
+.hero-indicator {
+  border: 0;
+  padding: 0;
 }
 
-/* Custom PrimeNG Carousel Indicators */
-:host ::ng-deep .p-carousel-indicators {
-  margin: 0 !important;
-  padding: 0 !important;
-  display: flex !important;
-  gap: 0.5rem !important;
+.hero-indicator-active {
+  width: 1.5rem;
+  height: 0.625rem;
+  background-color: var(--color-maroon-600);
 }
 
-:host ::ng-deep .p-carousel-indicator {
-  margin: 0 !important;
+.hero-indicator-inactive {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: rgb(255 255 255 / 0.78);
 }
 
-:host ::ng-deep .p-carousel-indicator button {
-  width: 0.5rem !important;
-  height: 0.375rem !important;
-  border-radius: 9999px !important;
-  background-color: rgb(255 255 255 / 0.5) !important;
-  border: none !important;
-  transition: all 0.3s ease !important;
-  padding: 0 !important;
+.hero-nav-button {
+  border: 0;
 }
 
-:host ::ng-deep .p-carousel-indicator.p-highlight button {
-  width: 1.5rem !important;
-  background-color: var(--color-maroon-600) !important;
+.hero-nav-button-active {
+  color: var(--color-maroon-700);
+}
+
+.hero-nav-button-active:hover {
+  background-color: var(--color-maroon-50);
+}
+
+.hero-nav-button-disabled {
+  color: var(--color-zinc-300);
+  cursor: not-allowed;
 }

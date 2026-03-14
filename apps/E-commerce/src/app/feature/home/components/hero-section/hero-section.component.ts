@@ -1,20 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ButtonComponent } from '@elevate/reusable-ui';
 import { CarouselModule } from 'primeng/carousel';
 import { TranslateModule } from '@ngx-translate/core';
+import { ArrowLeft, ArrowRight } from 'lucide-angular';
+import { languageService } from '../../../../core/services/language-service';
 import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.component';
 import { heroBannerConfig } from '../../interfaces/home';
 
 @Component({
   selector: 'app-hero-section',
-  imports: [CommonModule, RouterLink, CarouselModule, BottomBannerComponent, TranslateModule],
+  imports: [CommonModule, RouterLink, ButtonComponent, CarouselModule, BottomBannerComponent, TranslateModule],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'
 })
 export class HeroSectionComponent {
-  
-  // Static Left Banner
+  private readonly langService = inject(languageService);
+
+  readonly activeMainBanner = signal(0);
+  readonly ctaArrowIcon = computed(() =>
+    this.langService.isRTL() ? ArrowLeft : ArrowRight
+  );
+  readonly isFirstMainBanner = computed(() => this.activeMainBanner() === 0);
+  readonly isLastMainBanner = computed(
+    () => this.activeMainBanner() === this.mainBanners.length - 1
+  );
+
   leftBanner: heroBannerConfig = {
     title: 'HERO_SECTION.LEFT_BANNER.TITLE',
     badge: 'HERO_SECTION.LEFT_BANNER.BADGE',
@@ -23,7 +35,6 @@ export class HeroSectionComponent {
     link: '/categories'
   };
 
-  // Static Array of 4 Main Banners for Carousel
   mainBanners: heroBannerConfig[] = [
     {
       title: 'HERO_SECTION.MAIN_BANNERS.1.TITLE',
@@ -55,7 +66,6 @@ export class HeroSectionComponent {
     }
   ];
 
-  // Static Bottom Banners
   bottomBanners: heroBannerConfig[] = [
     {
       title: 'HERO_SECTION.BOTTOM_BANNERS.1.TITLE',
@@ -79,4 +89,22 @@ export class HeroSectionComponent {
       link: '/occasions'
     }
   ];
+
+  setActiveMainBanner(page: number | undefined): void {
+    if (page === undefined) return;
+
+    this.activeMainBanner.set(page);
+  }
+
+  showPreviousMainBanner(): void {
+    if (this.isFirstMainBanner()) return;
+
+    this.activeMainBanner.update((page) => page - 1);
+  }
+
+  showNextMainBanner(): void {
+    if (this.isLastMainBanner()) return;
+
+    this.activeMainBanner.update((page) => page + 1);
+  }
 }
