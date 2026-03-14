@@ -15,7 +15,6 @@ import { RelatedProductComponent } from './components/related-product/related-pr
 @Component({
   selector: 'app-product-details',
   templateUrl: './product.details.html',
-  styleUrls: ['./product.details.css'],
   imports: [
     ProductInfoComponent,
     ProductGalleryComponent,

@@ -10,7 +10,6 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-product-info',
   imports: [LucideAngularModule, Divider, DecimalPipe, ButtonComponent, TranslateModule],
   templateUrl: './product-info.component.html',
-  styleUrl: './product-info.component.css',
 })
 export class ProductInfoComponent {
   product = input.required<Product | null>();
