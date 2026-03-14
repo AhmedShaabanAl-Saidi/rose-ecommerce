@@ -6,7 +6,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   selector: 'app-main-navbar',
   imports: [RouterModule, TranslatePipe],
   templateUrl: './main-navbar.component.html',
-  styleUrl: './main-navbar.component.css',
 })
 export class MainNavbarComponent {
   isMenuOpen = false;

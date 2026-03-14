@@ -24,7 +24,6 @@ import { ThemeSwitcherComponent } from '../../../../auth-layout/components/theme
     ThemeSwitcherComponent,
   ],
   templateUrl: './top-navbar.component.html',
-  styleUrl: './top-navbar.component.css',
 })
 export class TopNavbarComponent {
   private readonly authState = inject(AuthState);
