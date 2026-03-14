@@ -15,13 +15,17 @@
         <p class="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
           {{ 'HOME.BEST_SELLER.SUBTITLE' | translate }}
         </p>
-        <a
-          routerLink="/products"
-          class="mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-maroon-700 px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-maroon-800 dark:bg-soft-pink-200 dark:text-maroon-900 dark:hover:bg-soft-pink-300 lg:mt-auto"
-        >
-          {{ 'HOME.BEST_SELLER.CTA' | translate }}
-          <i class="pi pi-arrow-right text-xs"></i>
-        </a>
+        <div class="mt-2 w-fit lg:mt-auto">
+          <lib-button
+            routerLink="/products"
+            variant="primary"
+            size="md"
+            [icon]="ctaArrowIcon()"
+            iconPos="right"
+          >
+            {{ 'HOME.BEST_SELLER.CTA' | translate }}
+          </lib-button>
+        </div>
       </div>
 
       <!-- Right Carousel -->
