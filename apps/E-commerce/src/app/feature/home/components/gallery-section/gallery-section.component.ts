@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { HeadingTitleComponent } from '../../../../shared/components/ui/heading/heading-title.component';
@@ -8,7 +8,6 @@ import { GalleryColumn } from './interfaces/gallery';
   selector: 'app-gallery-section',
   imports: [NgOptimizedImage, TranslatePipe, HeadingTitleComponent],
   templateUrl: './gallery-section.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GallerySectionComponent {
   readonly galleryColumns: GalleryColumn[] = [
