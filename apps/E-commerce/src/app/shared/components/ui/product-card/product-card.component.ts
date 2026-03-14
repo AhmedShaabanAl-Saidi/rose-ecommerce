@@ -24,7 +24,7 @@ export class ProductCardComponent {
   readonly REMOVE_WISH = 'REMOVE_WISH';
 
   readonly BADGE_BASE =
-    'text-[10px] font-bold px-3 py-1 rounded-full uppercase shadow-md';
+    'inline-block w-fit max-w-full rounded-full px-2 py-0.5 text-[8px] font-bold uppercase shadow-md sm:px-3 sm:py-1 sm:text-[10px]';
 
   isInWishlist = computed(() => this.product().isInWishlist);
 
