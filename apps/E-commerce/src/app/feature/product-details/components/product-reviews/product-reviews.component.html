@@ -2,7 +2,8 @@
   <app-heading-title [title]="'PRODUCT_REVIEWS.TITLE' | translate"></app-heading-title>
 
   <div class="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-3 lg:gap-12">
-    <div class="custom-scrollbar space-y-6 sm:space-y-8 lg:col-span-2 lg:max-h-175 lg:overflow-y-auto lg:pe-6">
+    <div
+      class="space-y-6 sm:space-y-8 lg:col-span-2 lg:max-h-175 lg:overflow-y-auto lg:pe-6 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-zinc-200 [&::-webkit-scrollbar-thumb:hover]:bg-zinc-300 dark:[&::-webkit-scrollbar-thumb]:bg-zinc-700 dark:[&::-webkit-scrollbar-thumb:hover]:bg-zinc-600">
       @if (reviews().length > 0) { @for (review of reviews(); track review._id)
       {
       <div

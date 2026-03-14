@@ -6,11 +6,7 @@
   </div>
 
   <div class="flex justify-center mt-10">
-    <p-paginator
-      (onPageChange)="onPageChange($event)"
-      [first]="first()"
-      [rows]="rows()"
-      [totalRecords]="totalProducts()"
-    ></p-paginator>
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first()" [rows]="rows()"
+      [totalRecords]="totalProducts()"></p-paginator>
   </div>
 </section>

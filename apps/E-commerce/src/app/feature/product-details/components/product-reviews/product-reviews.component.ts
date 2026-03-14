@@ -16,7 +16,6 @@ import { ButtonComponent } from '@elevate/reusable-ui';
     TranslateModule,
   ],
   templateUrl: './product-reviews.component.html',
-  styleUrl: './product-reviews.component.css',
 })
 export class ProductReviewsComponent {
   reviews = input.required<Review[]>();

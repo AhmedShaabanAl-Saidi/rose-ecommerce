@@ -6,4 +6,4 @@ import { ProductList } from './components/product-list/product.list';
   imports: [ProductList],
   templateUrl: './products.component.html',
 })
-export class ProductsComponent {}
+export class ProductsComponent { }
