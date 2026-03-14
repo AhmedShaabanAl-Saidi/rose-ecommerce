@@ -1,0 +1,63 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "apps",
+  "projects": {
+    "E-commerce": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "apps/E-commerce",
+      "sourceRoot": "apps/E-commerce/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "outputPath": "dist/apps/E-commerce",
+            "index": "apps/E-commerce/src/index.html",
+            "browser": "apps/E-commerce/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "apps/E-commerce/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "apps/E-commerce/public"
+              }
+            ],
+            "styles": [
+              "apps/E-commerce/src/styles.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/triangle-skew-spin.css",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css"
+            ],
+            "scripts": [
+              "node_modules/intl-tel-input/build/js/utils.js"
+            ],
+            "server": "apps/E-commerce/src/main.server.ts",
+            "ssr": {
+              "entry": "apps/E-commerce/src/server.ts"
+            },
+            "outputMode": "server"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    }
+  }
+}
