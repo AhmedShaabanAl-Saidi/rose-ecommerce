@@ -5,7 +5,6 @@ import { Product } from '../../../../shared/components/ui/product-card/interface
   selector: 'app-product-gallery',
   imports: [],
   templateUrl: './product-gallery.component.html',
-  styleUrl: './product-gallery.component.css',
 })
 export class ProductGalleryComponent {
   product = input.required<Product | null>();

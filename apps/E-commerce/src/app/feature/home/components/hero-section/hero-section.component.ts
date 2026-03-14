@@ -1,23 +1,57 @@
-import { Component } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  afterNextRender,
+  Component,
+  computed,
+  inject,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ButtonComponent } from '@elevate/reusable-ui';
 import { CarouselModule } from 'primeng/carousel';
 import { TranslateModule } from '@ngx-translate/core';
-
-import { HeroBannerConfig } from '../../models/home.models';
+import { ArrowLeft, ArrowRight } from 'lucide-angular';
+import { languageService } from '../../../../core/services/language-service';
 import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.component';
+import { heroBannerConfig } from '../../interfaces/home';
 
 @Component({
   selector: 'app-hero-section',
-  standalone: true,
-  imports: [CommonModule, RouterLink, CarouselModule, BottomBannerComponent, TranslateModule],
+  imports: [CommonModule, RouterLink, ButtonComponent, CarouselModule, BottomBannerComponent, TranslateModule],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'
 })
 export class HeroSectionComponent {
-  
-  // Static Left Banner
-  leftBanner: HeroBannerConfig = {
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly langService = inject(languageService);
+
+  readonly activeMainBanner = signal(0);
+  readonly isHeroCarouselReady = signal(false);
+  readonly isRTL = this.langService.isRTL;
+  readonly ctaArrowIcon = computed(() =>
+    this.langService.isRTL() ? ArrowLeft : ArrowRight
+  );
+  readonly currentMainBanner = computed(
+    () => this.mainBanners[this.activeMainBanner()] ?? this.mainBanners[0]
+  );
+  readonly isFirstMainBanner = computed(() => this.activeMainBanner() === 0);
+  readonly isLastMainBanner = computed(
+    () => this.activeMainBanner() === this.mainBanners.length - 1
+  );
+
+  constructor() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    afterNextRender(() => {
+      this.isHeroCarouselReady.set(true);
+    });
+  }
+
+  leftBanner: heroBannerConfig = {
     title: 'HERO_SECTION.LEFT_BANNER.TITLE',
     badge: 'HERO_SECTION.LEFT_BANNER.BADGE',
     ctaText: 'HERO_SECTION.LEFT_BANNER.CTA',
@@ -25,8 +59,7 @@ export class HeroSectionComponent {
     link: '/categories'
   };
 
-  // Static Array of 4 Main Banners for Carousel
-  mainBanners: HeroBannerConfig[] = [
+  mainBanners: heroBannerConfig[] = [
     {
       title: 'HERO_SECTION.MAIN_BANNERS.1.TITLE',
       subtitle: 'HERO_SECTION.MAIN_BANNERS.1.SUBTITLE',
@@ -57,8 +90,7 @@ export class HeroSectionComponent {
     }
   ];
 
-  // Static Bottom Banners
-  bottomBanners: HeroBannerConfig[] = [
+  bottomBanners: heroBannerConfig[] = [
     {
       title: 'HERO_SECTION.BOTTOM_BANNERS.1.TITLE',
       badge: 'HERO_SECTION.BOTTOM_BANNERS.1.BADGE',
@@ -81,4 +113,22 @@ export class HeroSectionComponent {
       link: '/occasions'
     }
   ];
+
+  setActiveMainBanner(page: number | undefined): void {
+    if (page === undefined) return;
+
+    this.activeMainBanner.set(page);
+  }
+
+  showPreviousMainBanner(): void {
+    if (this.isFirstMainBanner()) return;
+
+    this.activeMainBanner.update((page) => page - 1);
+  }
+
+  showNextMainBanner(): void {
+    if (this.isLastMainBanner()) return;
+
+    this.activeMainBanner.update((page) => page + 1);
+  }
 }

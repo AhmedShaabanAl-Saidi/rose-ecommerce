@@ -2,10 +2,10 @@ import { environment } from '../../../../environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductsResponse } from '../models/product.model';
+import { ProductsResponse } from '../interfaces/product';
 import { Product } from '../../../shared/components/ui/product-card/interface/product';
-import { ReviewResponse } from '../models/review.models';
-import { RelatedProductsResponse } from '../models/related-product';
+import { ReviewResponse } from '../interfaces/review';
+import { RelatedProductsResponse } from '../interfaces/related';
 
 @Injectable({
   providedIn: 'root',

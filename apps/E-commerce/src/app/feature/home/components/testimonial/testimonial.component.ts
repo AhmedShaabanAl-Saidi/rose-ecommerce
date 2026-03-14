@@ -4,7 +4,6 @@ import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { environment } from '../../../../../environments/environments';
 import { HeadingTitleComponent } from '../../../../shared/components/ui/heading/heading-title.component';
-import { TESTIMONIAL_ENDPOINT } from './constants/testimonial.constant';
 import {
   Testimonial,
   TestimonialResponse,
@@ -16,7 +15,6 @@ import { finalize } from 'rxjs';
   selector: 'app-testimonial',
   imports: [DatePipe, HeadingTitleComponent, TranslatePipe],
   templateUrl: './testimonial.component.html',
-  styleUrl: './testimonial.component.css',
 })
 export class TestimonialComponent implements OnInit {
   testimonials = signal<Testimonial[]>([]);
@@ -30,7 +28,7 @@ export class TestimonialComponent implements OnInit {
   private getTestimonials(): void {
     this.isLoading.set(true);
     this.httpClient
-      .get<TestimonialResponse>(environment.baseUrl + TESTIMONIAL_ENDPOINT)
+      .get<TestimonialResponse>(environment.baseUrl + '/testimonials')
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         finalize(() => this.isLoading.set(false))
@@ -38,8 +36,7 @@ export class TestimonialComponent implements OnInit {
       .subscribe({
         next: (data: TestimonialResponse) => {
           this.testimonials.set(data.testimonials ?? []);
-        },
-        error: () => this.testimonials.set([]),
+        }
       });
   }
 }

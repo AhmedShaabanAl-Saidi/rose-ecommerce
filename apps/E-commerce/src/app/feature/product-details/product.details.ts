@@ -5,8 +5,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Product } from '../../shared/components/ui/product-card/interface/product';
-import { Review } from '../products/models/review.models';
-import { ProductsService } from '../products/services/product.service';
+import { Review } from '../products/interfaces/review';
+import { ProductsService } from '../products/services/product';
 import { ProductGalleryComponent } from './components/product-gallery/product-gallery.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { ProductReviewsComponent } from './components/product-reviews/product-reviews.component';
@@ -15,7 +15,6 @@ import { RelatedProductComponent } from './components/related-product/related-pr
 @Component({
   selector: 'app-product-details',
   templateUrl: './product.details.html',
-  styleUrls: ['./product.details.css'],
   imports: [
     ProductInfoComponent,
     ProductGalleryComponent,

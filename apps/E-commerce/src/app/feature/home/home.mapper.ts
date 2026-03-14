@@ -1,7 +1,7 @@
-import { product } from '../../interfaces/home';
-import { Product as ProductCardModel } from 'apps/E-commerce/src/app/shared/components/ui/product-card/interface/product';
+import { Product as ProductCardModel } from '../../shared/components/ui/product-card/interface/product';
+import { product as HomeProduct } from './interfaces/home';
 
-export function mapToProductCard(product: product): ProductCardModel {
+export function mapToProductCard(product: HomeProduct): ProductCardModel {
   return {
     _id: product._id,
     title: product.title,

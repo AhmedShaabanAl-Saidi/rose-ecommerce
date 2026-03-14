@@ -7,7 +7,7 @@ import { homeApiRes } from '../interfaces/home';
 @Injectable({
   providedIn: 'root'
 })
-export class Home {
+export class HomeService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = environment.baseUrl;
 

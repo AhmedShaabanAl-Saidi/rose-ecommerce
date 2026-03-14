@@ -1,26 +1,29 @@
-import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslateModule } from '@ngx-translate/core';
-import { CarouselModule } from 'primeng/carousel';
+import { ArrowLeft, ArrowRight } from 'lucide-angular';
+import { languageService } from '../../../../core/services/language-service';
 import { Product } from '../../../../shared/components/ui/product-card/interface/product';
 import { ProdcutCarousalComponent } from '../../../../shared/components/ui/product-carousal/prodcut-carousal.component';
 
 @Component({
   selector: 'app-best-seller',
-  standalone: true,
   imports: [
-    CommonModule,
     RouterLink,
+    ButtonComponent,
     TranslateModule,
-    CarouselModule,
     ProdcutCarousalComponent,
   ],
   templateUrl: './best-seller.component.html',
-  styleUrl: './best-seller.component.css',
 })
 export class BestSellerComponent {
+  private readonly langService = inject(languageService);
+
   bestSellers = input.required<Product[]>();
+  readonly ctaArrowIcon = computed(() =>
+    this.langService.isRTL() ? ArrowLeft : ArrowRight
+  );
 
   responsiveOptions = [
     {

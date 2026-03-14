@@ -65,7 +65,15 @@
     "LOGIN": "تسجيل الدخول",
     "SEARCH": "ما هي الهدايا الرائعة التي تبحث عنها؟",
     "DELIVERTO": "توصيل إلى:",
+    "DELIVERY_CITY": "القاهرة",
     "HELLO": "مرحبا",
+    "ACCOUNT_MENU": {
+      "PROFILE": "ملفي الشخصي",
+      "ADDRESSES": "عناويني",
+      "ORDERS": "طلباتي",
+      "DASHBOARD": "لوحة التحكم",
+      "LOGOUT": "تسجيل الخروج"
+    },
     "HOME": "الرئيسية",
     "PRODUCTS": "المنتجات",
     "CATEGORIES": "التصنيفات",

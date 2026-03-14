@@ -4,10 +4,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-navbar',
-  standalone: true,
   imports: [RouterModule, TranslatePipe],
   templateUrl: './main-navbar.component.html',
-  styleUrl: './main-navbar.component.css',
 })
 export class MainNavbarComponent {
   isMenuOpen = false;

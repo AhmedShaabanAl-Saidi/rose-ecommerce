@@ -11,7 +11,6 @@ import {PaginatorModule} from 'primeng/paginator';
   ],
   selector: 'app-root',
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
 export class App {
   protected title = 'E-commerce';
