@@ -8,7 +8,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './features-bar.component.html',
 })
 export class FeaturesBarComponent {
-  features = [
+  readonly features = [
     {
       icon: 'pi pi-truck',
       title: 'HOME.FEATURES.FREE_DELIVERY.TITLE',
