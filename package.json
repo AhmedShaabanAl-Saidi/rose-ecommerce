@@ -3,14 +3,17 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "build": "nx build E-commerce",
     "serve": "nx serve E-commerce",
     "test": "nx test E-commerce",
-    "vercel-build": "nx build E-commerce"
+    "vercel-build": "npx ng build E-commerce"
   },
   "dependencies": {
-    "@angular/animations": "^21.1.3",
+    "@angular/animations": "20.3.1",
     "@angular/common": "20.3.1",
     "@angular/compiler": "20.3.1",
     "@angular/core": "20.3.1",
