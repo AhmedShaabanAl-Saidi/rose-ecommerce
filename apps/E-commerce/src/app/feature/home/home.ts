@@ -9,6 +9,7 @@ import { TestimonialComponent } from './components/testimonial/testimonial.compo
 import { Product } from '../../shared/components/ui/product-card/interface/product';
 import { FeaturesBarComponent } from './components/features-bar/features-bar.component';
 import { HomeService } from './services/home';
+import { mapToProductCard } from './home.mapper';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +32,7 @@ export class Home implements OnInit {
   ngOnInit(): void {
     this.homeService.getHomeData().subscribe((res) => {
       if (res.bestSeller) {
-        this.bestSellers.set(res.bestSeller);
+        this.bestSellers.set(res.bestSeller.map(mapToProductCard));
       }
     });
   }

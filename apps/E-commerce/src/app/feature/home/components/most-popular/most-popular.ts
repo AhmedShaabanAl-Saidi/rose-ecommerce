@@ -5,10 +5,10 @@ import { HeaderTittle } from 'apps/E-commerce/src/app/shared/components/ui/heade
 import { ProductCardComponent } from 'apps/E-commerce/src/app/shared/components/ui/product-card/product-card.component';
 import { Product as ProductCardModel } from 'apps/E-commerce/src/app/shared/components/ui/product-card/interface/product';
 import { pategoryOrOccasion } from '../../interfaces/home';
-import { mapToProductCard } from './most-popular.config';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule, ArrowLeft, ArrowRight } from 'lucide-angular';
 import { HomeService } from '../../services/home';
+import { mapToProductCard } from '../../home.mapper';
 
 @Component({
   selector: 'app-most-popular',
