@@ -23,7 +23,7 @@
       </a>
 
       <div
-        class="relative isolate md:col-span-2 overflow-hidden rounded-[1.75rem] bg-[#f4dfd8] shadow-[0_22px_60px_rgba(78,18,29,0.18)] h-[300px] md:h-[400px] block">
+        class="relative isolate block h-[300px] overflow-hidden rounded-[1.75rem] border-0 bg-transparent shadow-[0_22px_60px_rgba(78,18,29,0.18)] md:col-span-2 md:h-[400px]">
         <div class="absolute top-5 right-5 z-20 flex items-center gap-2">
           @for (banner of mainBanners; track $index) {
           <button type="button" class="hero-indicator rounded-full transition-all duration-300 ease-out"
@@ -72,7 +72,7 @@
                   </p>
                 </div>
 
-                <div class="mt-5 w-fit pointer-events-none">
+                <div class="hero-cta-button mt-5 w-fit pointer-events-none">
                   <lib-button variant="secondary" size="sm" [icon]="ctaArrowIcon()" iconPos="right">
                     {{ banner.ctaText | translate }}
                   </lib-button>

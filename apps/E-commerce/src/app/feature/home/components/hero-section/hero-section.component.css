@@ -1,5 +1,8 @@
 :host ::ng-deep .hero-main-carousel.p-carousel {
   height: 100%;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 :host ::ng-deep .hero-main-carousel .p-carousel-content-container,
@@ -8,6 +11,11 @@
 :host ::ng-deep .hero-main-carousel .p-carousel-item-list,
 :host ::ng-deep .hero-main-carousel .p-carousel-item {
   height: 100%;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 0 !important;
 }
 
 :host ::ng-deep .hero-main-carousel .p-carousel-content,
@@ -56,4 +64,13 @@
 .hero-nav-button-disabled {
   color: var(--color-zinc-300);
   cursor: not-allowed;
+}
+
+:host-context(.dark) ::ng-deep .hero-cta-button lib-button button {
+  background-color: var(--color-maroon-50) !important;
+  color: var(--color-maroon-700) !important;
+}
+
+:host-context(.dark) ::ng-deep .hero-cta-button lib-button button:hover {
+  background-color: var(--color-maroon-100) !important;
 }
