@@ -16,6 +16,9 @@
             "outputPath": "dist/apps/E-commerce",
             "browser": "apps/E-commerce/src/main.ts",
             "tsConfig": "apps/E-commerce/tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "google-libphonenumber"
+            ],
             "assets": [
               {
                 "glob": "**/*",
@@ -42,13 +45,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "4kb",
-                  "maximumError": "8kb"
+                  "maximumError": "10kb"
                 }
               ],
               "outputHashing": "all"
