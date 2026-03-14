@@ -2,16 +2,20 @@
 :host ::ng-deep p-carousel .p-carousel {
   height: 100%;
 }
+
 :host ::ng-deep p-carousel .p-carousel-content {
   height: 100%;
   overflow: hidden !important;
 }
+
 :host ::ng-deep p-carousel .p-carousel-container {
   height: 100%;
 }
+
 :host ::ng-deep p-carousel .p-carousel-item {
   height: 100%;
 }
+
 :host ::ng-deep p-carousel .p-carousel-items-content {
   height: 100%;
   border-radius: 1rem;

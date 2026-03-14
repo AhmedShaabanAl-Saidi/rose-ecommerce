@@ -7,9 +7,9 @@ import { GallerySectionComponent } from './components/gallery-section/gallery-se
 import { TrustedByComponent } from './components/trusted/trusted-by.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
 import { Product } from '../../shared/components/ui/product-card/interface/product';
-
 import { FeaturesBarComponent } from './components/features-bar/features-bar.component';
 import { HomeService } from './services/home';
+
 @Component({
   selector: 'app-home',
   imports: [

@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeroBannerConfig } from '../../../../models/home.models';
+import { heroBannerConfig } from '../../../../interfaces/home';
 
 @Component({
   selector: 'app-bottom-banner',
@@ -10,5 +10,5 @@ import { HeroBannerConfig } from '../../../../models/home.models';
   templateUrl: './bottom-banner.component.html'
 })
 export class BottomBannerComponent {
-  @Input({ required: true }) banner!: HeroBannerConfig;
+  @Input({ required: true }) banner!: heroBannerConfig;
 }

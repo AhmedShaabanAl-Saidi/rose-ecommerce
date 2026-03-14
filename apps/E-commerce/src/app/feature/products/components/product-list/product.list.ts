@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Paginator } from 'primeng/paginator';
 import { Product } from '../../../../shared/components/ui/product-card/interface/product';
 import { ProductCardComponent } from '../../../../shared/components/ui/product-card/product-card.component';
-import { ProductsService } from '../../services/product.service';
+import { ProductsService } from '../../services/product';
 
 @Component({
   selector: 'app-product-list',

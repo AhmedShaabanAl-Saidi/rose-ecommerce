@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 import { TranslateModule } from '@ngx-translate/core';
-
-import { HeroBannerConfig } from '../../models/home.models';
 import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.component';
+import { heroBannerConfig } from '../../interfaces/home';
 
 @Component({
   selector: 'app-hero-section',
@@ -16,7 +15,7 @@ import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.
 export class HeroSectionComponent {
   
   // Static Left Banner
-  leftBanner: HeroBannerConfig = {
+  leftBanner: heroBannerConfig = {
     title: 'HERO_SECTION.LEFT_BANNER.TITLE',
     badge: 'HERO_SECTION.LEFT_BANNER.BADGE',
     ctaText: 'HERO_SECTION.LEFT_BANNER.CTA',
@@ -25,7 +24,7 @@ export class HeroSectionComponent {
   };
 
   // Static Array of 4 Main Banners for Carousel
-  mainBanners: HeroBannerConfig[] = [
+  mainBanners: heroBannerConfig[] = [
     {
       title: 'HERO_SECTION.MAIN_BANNERS.1.TITLE',
       subtitle: 'HERO_SECTION.MAIN_BANNERS.1.SUBTITLE',
@@ -57,7 +56,7 @@ export class HeroSectionComponent {
   ];
 
   // Static Bottom Banners
-  bottomBanners: HeroBannerConfig[] = [
+  bottomBanners: heroBannerConfig[] = [
     {
       title: 'HERO_SECTION.BOTTOM_BANNERS.1.TITLE',
       badge: 'HERO_SECTION.BOTTOM_BANNERS.1.BADGE',
