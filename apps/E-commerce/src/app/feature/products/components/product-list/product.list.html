@@ -5,8 +5,10 @@
     }
   </div>
 
+  @if (showPaginator()) {
   <div class="flex justify-center mt-10">
     <app-paginator [first]="first()" [rows]="rows()" [totalRecords]="totalProducts()"
       (pageChange)="onPageChange($event)"></app-paginator>
   </div>
+  }
 </section>

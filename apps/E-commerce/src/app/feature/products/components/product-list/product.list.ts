@@ -1,11 +1,13 @@
 import {
   Component,
   DestroyRef,
+  computed,
   inject,
   OnInit,
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { finalize } from 'rxjs';
 import { PaginatorState } from 'primeng/paginator';
 import { Product } from '../../../../shared/components/ui/product-card/interface/product';
 import { PaginatorComponent } from '../../../../shared/components/ui/paginator/paginator.component';
@@ -25,14 +27,21 @@ export class ProductList implements OnInit {
   rows = signal(12);
   totalProducts = signal(0);
   allProducts = signal<Product[]>([]);
+  isLoading = signal(true);
+  showPaginator = computed(
+    () => !this.isLoading() && this.totalProducts() > this.rows()
+  );
 
   ngOnInit(): void {
     this.getproducts();
   }
 
   getproducts(page = 1, limit: number = this.rows()): void {
+    this.isLoading.set(true);
+
     this.productsService
       .getProducts({ page, limit })
+      .pipe(finalize(() => this.isLoading.set(false)))
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (data) => {
