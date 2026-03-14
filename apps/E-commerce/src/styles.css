@@ -181,6 +181,18 @@
   gap: 5rem;
 }
 
+@media (width >= 80rem) {
+  .route-page-content {
+    max-width: 75rem;
+  }
+}
+
+@media (width >= 96rem) {
+  .route-page-content {
+    max-width: 90rem;
+  }
+}
+
 .sarabun-thin {
   font-family: 'Sarabun', sans-serif;
   font-weight: 100;
