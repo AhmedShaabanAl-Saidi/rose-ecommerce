@@ -1,8 +1,8 @@
 <section>
   <div>
-    <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-4 lg:gap-8 xl:gap-10">
       <!-- Left Text Block -->
-      <div class="lg:w-50 shrink-0 flex flex-col gap-4">
+      <div class="flex h-full flex-col gap-4 lg:col-span-1">
         <span
           class="text-soft-pink-500 font-bold text-xs md:text-sm uppercase tracking-widest"
         >
@@ -17,7 +17,7 @@
         </p>
         <a
           routerLink="/products"
-          class="mt-2 inline-flex items-center gap-2 bg-maroon-700 text-white dark:bg-soft-pink-200 dark:text-maroon-900 hover:bg-maroon-800 dark:hover:bg-soft-pink-300 font-semibold py-2.5 px-6 rounded-full text-sm transition-all duration-300 w-fit"
+          class="mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-maroon-700 px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-maroon-800 dark:bg-soft-pink-200 dark:text-maroon-900 dark:hover:bg-soft-pink-300 lg:mt-auto"
         >
           {{ 'HOME.BEST_SELLER.CTA' | translate }}
           <i class="pi pi-arrow-right text-xs"></i>
@@ -26,7 +26,7 @@
 
       <!-- Right Carousel -->
 
-      <div class="flex-1 min-w-0 w-full relative">
+      <div class="relative min-w-0 w-full lg:col-span-3">
         <app-prodcut-carousal
           [products]="bestSellers()"
           [responsiveOptions]="responsiveOptions"
