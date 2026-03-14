@@ -1,8 +1,10 @@
-<div class="min-h-screen flex flex-col w-full">
+<div class="min-h-screen flex flex-col">
   <app-top-navbar></app-top-navbar>
   <app-main-navbar></app-main-navbar>
-  <main class="grow w-full px-4 pb-20 pt-45">
-    <router-outlet></router-outlet>
+  <main class="grow pb-24 sm:pb-32 lg:pb-50 pt-42 sm:pt-44 lg:pt-45">
+    <div class="route-page-content container mx-auto px-4 sm:px-6 lg:px-8">
+      <router-outlet></router-outlet>
+    </div>
   </main>
   <app-footer></app-footer>
 </div>

@@ -8,7 +8,6 @@ import { HeadingTitleComponent } from '../../../../shared/components/ui/heading/
   standalone: true,
   imports: [CommonModule, TranslateModule, HeadingTitleComponent],
   templateUrl: './gallery-section.component.html',
-  styleUrl: './gallery-section.component.css'
 })
 export class GallerySectionComponent {
 

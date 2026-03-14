@@ -16,7 +16,6 @@ import { finalize } from 'rxjs';
   selector: 'app-testimonial',
   imports: [DatePipe, HeadingTitleComponent, TranslatePipe],
   templateUrl: './testimonial.component.html',
-  styleUrl: './testimonial.component.css',
 })
 export class TestimonialComponent implements OnInit {
   testimonials = signal<Testimonial[]>([]);

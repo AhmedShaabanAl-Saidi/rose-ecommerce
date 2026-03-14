@@ -17,7 +17,6 @@ import { ProdcutCarousalComponent } from '../../../../shared/components/ui/produ
     ProdcutCarousalComponent,
   ],
   templateUrl: './best-seller.component.html',
-  styleUrl: './best-seller.component.css',
 })
 export class BestSellerComponent {
   bestSellers = input.required<Product[]>();

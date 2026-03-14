@@ -5,7 +5,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   selector: 'app-trusted-by',
   imports: [TranslatePipe],
   templateUrl: './trusted-by.component.html',
-  styleUrl: './trusted-by.component.css',
 })
 export class TrustedByComponent {
   readonly images = signal<string[]>([

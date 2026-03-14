@@ -7,7 +7,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './features-bar.component.html',
-  styleUrl: './features-bar.component.css',
 })
 export class FeaturesBarComponent {
   features = [

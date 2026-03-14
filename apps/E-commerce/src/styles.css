@@ -175,6 +175,12 @@
 /* ======================================
    GLOBAL STYLES
 ====================================== */
+.route-page-content > router-outlet + * {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
 .sarabun-thin {
   font-family: 'Sarabun', sans-serif;
   font-weight: 100;

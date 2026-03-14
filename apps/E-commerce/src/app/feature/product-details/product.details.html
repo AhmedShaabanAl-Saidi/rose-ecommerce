@@ -3,7 +3,7 @@
   <div class="animate-pulse text-zinc-400">{{ 'PRODUCT_DETAILS.LOADING' | translate }}</div>
 </div>
 } @else if (product()) {
-<section class="container mx-auto py-8">
+<section>
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
     <app-product-gallery [product]="product()" />
 
