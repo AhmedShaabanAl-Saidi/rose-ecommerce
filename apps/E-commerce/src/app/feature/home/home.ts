@@ -31,7 +31,7 @@ export class Home implements OnInit {
   ngOnInit(): void {
     this.homeService.getHomeData().subscribe((res) => {
       if (res.bestSeller) {
-        this.bestSellers.set(res.bestSeller as unknown as Product[]);
+        this.bestSellers.set(res.bestSeller);
       }
     });
   }
