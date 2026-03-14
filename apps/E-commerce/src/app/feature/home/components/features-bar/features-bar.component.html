@@ -1,12 +1,12 @@
 <section>
   <div
-    class="grid grid-cols-1 gap-4 rounded-2xl border border-white/70 bg-[linear-gradient(135deg,rgba(251,234,234,0.96)_0%,rgba(255,241,245,0.98)_100%)] px-5 py-6 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-[1.15rem] sm:px-7 sm:py-7 xl:grid-cols-4 xl:gap-5 xl:px-8 xl:py-[1.8rem] dark:border-white/5 dark:bg-[linear-gradient(135deg,rgba(50,33,39,0.98)_0%,rgba(39,26,31,0.98)_100%)]">
+    class="grid grid-cols-1 gap-4 rounded-2xl bg-maroon-50 px-5 py-6 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-[1.15rem] sm:px-7 sm:py-7 xl:grid-cols-4 xl:gap-5 xl:px-8 xl:py-[1.8rem] dark:bg-none dark:bg-zinc-700">
     @for (feature of features; track feature.title) {
     <article class="flex min-w-0 items-center gap-4 px-[0.45rem] py-[0.35rem] xl:px-1">
       <div
-        class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-maroon-600 text-white dark:bg-soft-pink-300 dark:text-maroon-800"
+        class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-maroon-600 text-white dark:bg-soft-pink-200 dark:text-zinc-700"
         aria-hidden="true">
-        <i [class]="feature.icon" class="text-[1.4rem]"></i>
+        <i [class]="feature.icon"></i>
       </div>
 
       <div class="min-w-0">
