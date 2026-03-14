@@ -66,6 +66,13 @@
     "SEARCH": "What awesome gift are you looking for?",
     "DELIVERTO": "Deliver to:",
     "HELLO": "Hello",
+    "ACCOUNT_MENU": {
+      "PROFILE": "My Profile",
+      "ADDRESSES": "My Addresses",
+      "ORDERS": "My Orders",
+      "DASHBOARD": "Dashboard",
+      "LOGOUT": "Log out"
+    },
     "HOME": "Home",
     "PRODUCTS": "Products",
     "CATEGORIES": "Categories",
