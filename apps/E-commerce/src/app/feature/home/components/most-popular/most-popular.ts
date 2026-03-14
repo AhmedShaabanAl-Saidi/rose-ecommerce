@@ -1,7 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Home } from '../../services/home';
 import { HeaderTittle } from 'apps/E-commerce/src/app/shared/components/ui/header-tittle/header-tittle';
 import { ProductCardComponent } from 'apps/E-commerce/src/app/shared/components/ui/product-card/product-card.component';
 import { Product as ProductCardModel } from 'apps/E-commerce/src/app/shared/components/ui/product-card/interface/product';
@@ -9,6 +8,7 @@ import { pategoryOrOccasion } from '../../interfaces/home';
 import { mapToProductCard } from './most-popular.config';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule, ArrowLeft, ArrowRight } from 'lucide-angular';
+import { HomeService } from '../../services/home';
 
 @Component({
   selector: 'app-most-popular',
@@ -20,7 +20,7 @@ export class MostPopular {
   readonly arrowLeft = ArrowLeft;
   readonly arrowRight = ArrowRight;
 
-  private readonly homeService = inject(Home);
+  private readonly homeService = inject(HomeService);
   private readonly homeData = toSignal(this.homeService.getHomeData());
   readonly selectedId = signal<string | null>(null);
   readonly isLoading = computed(() => this.homeData() === undefined);
