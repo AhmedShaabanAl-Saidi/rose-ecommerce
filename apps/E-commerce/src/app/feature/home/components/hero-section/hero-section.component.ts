@@ -19,6 +19,7 @@ export class HeroSectionComponent {
   private readonly langService = inject(languageService);
 
   readonly activeMainBanner = signal(0);
+  readonly isRTL = this.langService.isRTL;
   readonly ctaArrowIcon = computed(() =>
     this.langService.isRTL() ? ArrowLeft : ArrowRight
   );

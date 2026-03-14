@@ -17,7 +17,7 @@
           <button
             class="bg-soft-pink-50 text-maroon-700 hover:bg-white font-bold py-2.5 px-6 rounded-xl w-fit transition-colors flex items-center justify-center gap-3 text-sm z-10 pointer-events-none shadow-lg">
             {{ leftBanner.ctaText | translate }}
-            <i class="pi pi-arrow-right text-sm"></i>
+            <i class="pi text-sm" [class.pi-arrow-left]="isRTL()" [class.pi-arrow-right]="!isRTL()"></i>
           </button>
         </div>
       </a>
@@ -35,18 +35,60 @@
         </div>
 
         <div
-          class="absolute bottom-5 right-5 z-20 inline-flex items-center overflow-hidden rounded-full border border-white/80 bg-white/95 shadow-[0_14px_35px_rgba(79,22,31,0.18)] backdrop-blur-sm">
-          <button type="button" class="hero-nav-button flex h-10 w-11 items-center justify-center transition-colors"
-            [class.hero-nav-button-disabled]="isFirstMainBanner()" [class.hero-nav-button-active]="!isFirstMainBanner()"
-            aria-label="Previous banner" [disabled]="isFirstMainBanner()" (click)="showPreviousMainBanner()">
+          class="absolute bottom-5 z-20 inline-flex items-center overflow-hidden rounded-full border border-white/80 bg-white/95 shadow-[0_14px_35px_rgba(79,22,31,0.18)] backdrop-blur-sm"
+          [class.left-5]="isRTL()"
+          [class.right-5]="!isRTL()"
+          dir="ltr"
+        >
+          @if (isRTL()) {
+          <button
+            type="button"
+            class="hero-nav-button flex h-10 w-11 items-center justify-center transition-colors"
+            [class.hero-nav-button-disabled]="isLastMainBanner()"
+            [class.hero-nav-button-active]="!isLastMainBanner()"
+            aria-label="Next banner"
+            [disabled]="isLastMainBanner()"
+            (click)="showNextMainBanner()"
+          >
             <i class="pi pi-angle-left text-sm"></i>
           </button>
           <span class="h-5 w-px bg-zinc-200"></span>
-          <button type="button" class="hero-nav-button flex h-10 w-11 items-center justify-center transition-colors"
-            [class.hero-nav-button-disabled]="isLastMainBanner()" [class.hero-nav-button-active]="!isLastMainBanner()"
-            aria-label="Next banner" [disabled]="isLastMainBanner()" (click)="showNextMainBanner()">
+          <button
+            type="button"
+            class="hero-nav-button flex h-10 w-11 items-center justify-center transition-colors"
+            [class.hero-nav-button-disabled]="isFirstMainBanner()"
+            [class.hero-nav-button-active]="!isFirstMainBanner()"
+            aria-label="Previous banner"
+            [disabled]="isFirstMainBanner()"
+            (click)="showPreviousMainBanner()"
+          >
             <i class="pi pi-angle-right text-sm"></i>
           </button>
+          } @else {
+          <button
+            type="button"
+            class="hero-nav-button flex h-10 w-11 items-center justify-center transition-colors"
+            [class.hero-nav-button-disabled]="isFirstMainBanner()"
+            [class.hero-nav-button-active]="!isFirstMainBanner()"
+            aria-label="Previous banner"
+            [disabled]="isFirstMainBanner()"
+            (click)="showPreviousMainBanner()"
+          >
+            <i class="pi pi-angle-left text-sm"></i>
+          </button>
+          <span class="h-5 w-px bg-zinc-200"></span>
+          <button
+            type="button"
+            class="hero-nav-button flex h-10 w-11 items-center justify-center transition-colors"
+            [class.hero-nav-button-disabled]="isLastMainBanner()"
+            [class.hero-nav-button-active]="!isLastMainBanner()"
+            aria-label="Next banner"
+            [disabled]="isLastMainBanner()"
+            (click)="showNextMainBanner()"
+          >
+            <i class="pi pi-angle-right text-sm"></i>
+          </button>
+          }
         </div>
 
         <p-carousel class="hero-main-carousel h-full w-full" [value]="mainBanners" [page]="activeMainBanner()"
@@ -73,7 +115,12 @@
                 </div>
 
                 <div class="hero-cta-button mt-5 w-fit pointer-events-none">
-                  <lib-button variant="secondary" size="sm" [icon]="ctaArrowIcon()" iconPos="right">
+                  <lib-button
+                    variant="secondary"
+                    size="sm"
+                    [icon]="ctaArrowIcon()"
+                    iconPos="right"
+                  >
                     {{ banner.ctaText | translate }}
                   </lib-button>
                 </div>
