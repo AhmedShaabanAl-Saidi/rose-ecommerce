@@ -11,7 +11,6 @@ import {
   template: '<ng-content></ng-content>',
   templateUrl: './lable.component.html',
   styleUrl: './lable.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'computedClass()',
   },

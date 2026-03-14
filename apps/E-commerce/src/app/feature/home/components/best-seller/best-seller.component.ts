@@ -16,7 +16,6 @@ import { ProdcutCarousalComponent } from '../../../../shared/components/ui/produ
     ProdcutCarousalComponent,
   ],
   templateUrl: './best-seller.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BestSellerComponent {
   private readonly langService = inject(languageService);
