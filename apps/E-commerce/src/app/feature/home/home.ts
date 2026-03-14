@@ -12,7 +12,6 @@ import { Product } from '../../shared/components/ui/product-card/interface/produ
 import { FeaturesBarComponent } from './components/features-bar/features-bar.component';
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [
     HeroSectionComponent,
     BestSellerComponent,

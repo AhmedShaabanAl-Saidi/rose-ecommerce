@@ -5,7 +5,6 @@ import { HeadingTitleComponent } from '../../../../shared/components/ui/heading/
 
 @Component({
   selector: 'app-gallery-section',
-  standalone: true,
   imports: [CommonModule, TranslateModule, HeadingTitleComponent],
   templateUrl: './gallery-section.component.html',
 })

@@ -6,7 +6,6 @@ import { HeroBannerConfig } from '../../../../models/home.models';
 
 @Component({
   selector: 'app-bottom-banner',
-  standalone: true,
   imports: [CommonModule, RouterLink, TranslateModule],
   templateUrl: './bottom-banner.component.html'
 })

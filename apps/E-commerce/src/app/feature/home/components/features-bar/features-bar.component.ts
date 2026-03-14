@@ -4,7 +4,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-features-bar',
-  standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './features-bar.component.html',
 })

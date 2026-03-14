@@ -9,7 +9,6 @@ import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.
 
 @Component({
   selector: 'app-hero-section',
-  standalone: true,
   imports: [CommonModule, RouterLink, CarouselModule, BottomBannerComponent, TranslateModule],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'

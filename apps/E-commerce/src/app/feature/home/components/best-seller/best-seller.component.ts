@@ -8,7 +8,6 @@ import { ProdcutCarousalComponent } from '../../../../shared/components/ui/produ
 
 @Component({
   selector: 'app-best-seller',
-  standalone: true,
   imports: [
     CommonModule,
     RouterLink,
