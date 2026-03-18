@@ -73,8 +73,16 @@
       <p-divider [layout]="'vertical'" class="m-0!"></p-divider>
 
       <ul class="flex gap-4 items-center">
-        <li class="hover:text-maroon-400 cursor-pointer">
-          <lucide-icon class="w-5 h-5 lg:w-6 lg:h-6" name="heart"></lucide-icon>
+        <li class="hover:text-maroon-400 cursor-pointer relative">
+          <a routerLink="/wishlist" class="relative block">
+            <lucide-icon class="w-5 h-5 lg:w-6 lg:h-6" name="heart"></lucide-icon>
+            @if (wishlistService.wishlistCount() > 0) {
+            <span
+              class="absolute -top-2 -end-2 min-w-[18px] h-[18px] flex items-center justify-center rounded-full bg-maroon-600 text-white text-[10px] font-bold px-1 leading-none">
+              {{ wishlistService.wishlistCount() }}
+            </span>
+            }
+          </a>
         </li>
         <li
           role="button"

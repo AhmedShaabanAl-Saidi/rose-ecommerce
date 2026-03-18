@@ -273,5 +273,20 @@
     "UPDATE_SUCCESS": "Product Updated Successfully",
     "REMOVE_SUCCESS": "Product Removed Successfully",
     "CLEAR_SUCCESS": "Clear Cart Successfully"
+  },
+  "WISHLIST": {
+    "TITLE": "My Wishlist",
+    "ITEMS_COUNT": "items",
+    "EMPTY_TITLE": "Your wishlist is empty",
+    "EMPTY_SUBTITLE": "Browse our products and add your favorites here to save them for later",
+    "BROWSE_PRODUCTS": "Browse Products",
+    "REMOVE": "Remove",
+    "MOVE_TO_CART": "Move to Cart",
+    "ADDED_TO_CART": "Product moved to cart successfully",
+    "REMOVED": "Removed from wishlist",
+    "ADDED": "Added to wishlist",
+    "CONTINUE_SHOPPING": "Continue Shopping",
+    "PRODUCTS_YOU_MAY_LIKE": "Products You May Like",
+    "NO_RECOMMENDATIONS": "No products available at the moment."
   }
 }

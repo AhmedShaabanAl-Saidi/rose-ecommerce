@@ -45,6 +45,7 @@ import {
   Trash,
   Trash2,
   UserRound,
+  ArrowLeft,
 } from 'lucide-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
@@ -117,6 +118,7 @@ export const appConfig: ApplicationConfig = {
         Trash2,
         Minus,
         Plus,
+        ArrowLeft,
       })
     ),
     providePrimeNG({

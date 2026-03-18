@@ -35,6 +35,13 @@ export const mainRoutes: Routes = [
             (m) => m.CartComponent
           ),
       },
+      {
+        path: 'wishlist',
+        loadComponent: () =>
+          import('../../../feature/wishlist/wishlist.component').then(
+            (m) => m.WishlistComponent
+          ),
+      },
     ],
   },
 ];

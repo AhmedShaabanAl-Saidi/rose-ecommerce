@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
-import { Component, computed, inject } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, computed, effect, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { AuthRepo, AuthState } from '@elevate/auth-domain';
 import { TextInputComponent } from '@elevate/reusable-input';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -13,6 +13,7 @@ import { LanguageSwitcherComponent } from '../../../../auth-layout/components/la
 import { ThemeSwitcherComponent } from '../../../../auth-layout/components/theme-switcher/theme-switcher.component';
 import { CartService } from '../../../../../../../app/feature/cart/services/cart.service';
 import { take, tap } from 'rxjs';
+import { WishlistService } from '../../../../../../shared/services/wishlist.service';
 @Component({
   selector: 'app-top-navbar',
   imports: [
@@ -35,7 +36,16 @@ export class TopNavbarComponent {
   private readonly language = inject(languageService);
   private readonly cartService = inject(CartService);
   cartCount = computed(() => this.cartService.cartCount());
+  readonly wishlistService = inject(WishlistService);
   user = this.authState.currentUser;
+
+  constructor() {
+    effect(() => {
+      if (this.user()) {
+        this.wishlistService.loadWishlist();
+      }
+    });
+  }
 
   items = computed<MenuItem[]>(() => {
     this.language.currentLang();
