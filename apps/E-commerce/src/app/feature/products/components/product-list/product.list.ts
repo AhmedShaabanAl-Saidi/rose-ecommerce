@@ -51,7 +51,13 @@ export class ProductList {
       .subscribe({
         next: (data) => {
           this.allProducts.set(data.products);
-          this.totalProducts.set(data.metadata.totalItems);
+
+          let actualTotal = data.metadata.totalItems;
+          if (data.products.length < data.metadata.limit) {
+            actualTotal = (page - 1) * data.metadata.limit + data.products.length;
+          }
+
+          this.totalProducts.set(actualTotal);
           this.rows.set(data.metadata.limit);
         },
       });
