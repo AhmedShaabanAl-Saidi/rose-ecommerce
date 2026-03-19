@@ -257,6 +257,9 @@
   "RELATED_PRODUCTS": {
     "TITLE": "منتجات ذات صلة",
     "NO_DATA": "لا توجد منتجات ذات صلة حالياً."
-
-  }
+  },
+  "Category": "التصنيف",
+  "Reset": "إعادة ضبط",
+  "There are no products in this Category": "لا توجد منتجات في هذا التصنيف",
+  "There are no products available": "لا توجد منتجات متاحة"
 }

@@ -257,5 +257,9 @@
   "RELATED_PRODUCTS": {
     "TITLE": "Related Products",
     "NO_DATA": "No Related Products available at the moment."
-  }
+  },
+  "Category": "Category",
+  "Reset": "Reset",
+  "There are no products in this Category": "There are no products in this Category",
+  "There are no products available": "There are no products available"
 }
