@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, output, signal, viewChild } from '@angular/core';
+import { Component, computed, output, signal, viewChild } from '@angular/core';
 import { CategoryFilterComponent } from './category-filter/category-filter.component';
 import { OccasionFilterComponent } from './occasion-filter/occasion-filter.component';
 import { RatingFilterComponent } from './rating-filter/rating-filter.component';

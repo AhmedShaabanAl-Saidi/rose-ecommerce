@@ -10,7 +10,6 @@ import { LucideAngularModule } from 'lucide-angular';
   selector: 'app-category-filter',
   imports: [FilterResetBtnComponent, TranslatePipe, LucideAngularModule],
   templateUrl: './category-filter.component.html',
-  styleUrl: './category-filter.component.css',
 })
 export class CategoryFilterComponent implements OnInit {
   private readonly productsService = inject(ProductsService);
