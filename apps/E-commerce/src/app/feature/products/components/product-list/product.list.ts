@@ -7,13 +7,16 @@ import { Product } from '../../../../shared/components/ui/product-card/interface
 import { PaginatorComponent } from '../../../../shared/components/ui/paginator/paginator.component';
 import { ProductCardComponent } from '../../../../shared/components/ui/product-card/product-card.component';
 import { ProductsService } from '../../services/product';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LucideAngularModule, SearchX } from 'lucide-angular';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product.list.html',
-  imports: [ProductCardComponent, PaginatorComponent],
+  imports: [ProductCardComponent, PaginatorComponent, TranslatePipe, LucideAngularModule],
 })
 export class ProductList {
+  readonly SearchXIcon = SearchX;
   private readonly productsService = inject(ProductsService);
   private readonly destroyRef = inject(DestroyRef);
 
