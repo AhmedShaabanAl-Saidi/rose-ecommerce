@@ -21,8 +21,8 @@ export interface CategoriesRes {
 }
 
 export interface FilterState {
-  categoryId?: string;
-  occasionId?: string;
+  categoryIds?: string[];
+  occasionIds?: string[];
   rating?: number;
   priceFrom?: number;
   priceTo?: number;
@@ -79,8 +79,8 @@ export interface ProductsResponse {
 export interface ProductQueryParams {
   page?: number;
   limit?: number;
-  categoryId?: string;
-  occasionId?: string;
+  categoryIds?: string[];
+  occasionIds?: string[];
   rating?: number;
   priceFrom?: number;
   priceTo?: number;

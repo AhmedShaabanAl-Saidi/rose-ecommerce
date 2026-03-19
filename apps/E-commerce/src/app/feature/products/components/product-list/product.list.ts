@@ -20,24 +20,24 @@ export class ProductList {
   private readonly productsService = inject(ProductsService);
   private readonly destroyRef = inject(DestroyRef);
 
-  categoryId = input<string | undefined>(undefined);
-  occasionId = input<string | undefined>(undefined);
+  categoryIds = input<string[] | undefined>(undefined);
+  occasionIds = input<string[] | undefined>(undefined);
   rating = input<number | undefined>(undefined);
   priceFrom = input<number | undefined>(undefined);
   priceTo = input<number | undefined>(undefined);
 
   emptyMessageKey = computed(() => {
     let activeFilters = 0;
-    if (this.categoryId()) activeFilters++;
-    if (this.occasionId()) activeFilters++;
+    if (this.categoryIds()?.length) activeFilters++;
+    if (this.occasionIds()?.length) activeFilters++;
     if (this.rating() !== undefined) activeFilters++;
     if (this.priceFrom() !== undefined || this.priceTo() !== undefined)
       activeFilters++;
 
     if (activeFilters === 0) return 'There are no products available';
     if (activeFilters === 1) {
-      if (this.categoryId()) return 'There are no products in this Category';
-      if (this.occasionId()) return 'There are no products for this Occasion';
+      if (this.categoryIds()?.length) return 'There are no products in this Category';
+      if (this.occasionIds()?.length) return 'There are no products for this Occasion';
       if (this.rating() !== undefined)
         return 'There are no products with this Rating';
       if (this.priceFrom() !== undefined || this.priceTo() !== undefined)
@@ -57,8 +57,8 @@ export class ProductList {
 
   constructor() {
     effect(() => {
-      const categoryId = this.categoryId();
-      const occasionId = this.occasionId();
+      const categoryIds = this.categoryIds();
+      const occasionIds = this.occasionIds();
       const rating = this.rating();
       const priceFrom = this.priceFrom();
       const priceTo = this.priceTo();
@@ -66,8 +66,8 @@ export class ProductList {
       this.getproducts({
         page: 1,
         limit: this.rows(),
-        categoryId,
-        occasionId,
+        categoryIds,
+        occasionIds,
         rating,
         priceFrom,
         priceTo,
@@ -78,8 +78,8 @@ export class ProductList {
   getproducts(params: ProductQueryParams = {}): void {
     const page = params.page ?? 1;
     const limit = params.limit ?? this.rows();
-    const categoryId = params.categoryId;
-    const occasionId = params.occasionId;
+    const categoryIds = params.categoryIds;
+    const occasionIds = params.occasionIds;
     const rating = params.rating;
     const priceFrom = params.priceFrom;
     const priceTo = params.priceTo;
@@ -90,8 +90,8 @@ export class ProductList {
       .getProducts({
         page,
         limit,
-        categoryId,
-        occasionId,
+        categoryIds,
+        occasionIds,
         rating,
         priceFrom,
         priceTo,
@@ -126,8 +126,8 @@ export class ProductList {
     this.getproducts({
       page,
       limit: rows,
-      categoryId: this.categoryId(),
-      occasionId: this.occasionId(),
+      categoryIds: this.categoryIds(),
+      occasionIds: this.occasionIds(),
       rating: this.rating(),
       priceFrom: this.priceFrom(),
       priceTo: this.priceTo(),

@@ -16,9 +16,9 @@ export class OccasionFilterComponent implements OnInit {
 
   occasions = signal<Occasion[]>([]);
   isLoading = signal(true);
-  selectedOccasionId = signal<string | null>(null);
+  selectedOccasionIds = signal<Set<string>>(new Set());
 
-  occasionChange = output<string | null>();
+  occasionChange = output<string[]>();
 
   ngOnInit(): void {
     this.fetchOccasions();
@@ -42,16 +42,21 @@ export class OccasionFilterComponent implements OnInit {
   }
 
   onSelectOccasion(id: string): void {
-    const newId = this.selectedOccasionId() === id ? null : id;
-    this.selectedOccasionId.set(newId);
-    this.occasionChange.emit(newId);
+    const current = new Set(this.selectedOccasionIds());
+    if (current.has(id)) {
+      current.delete(id);
+    } else {
+      current.add(id);
+    }
+    this.selectedOccasionIds.set(current);
+    this.occasionChange.emit([...current]);
   }
 
   onReset(emitChange = true): void {
-    this.selectedOccasionId.set(null);
+    this.selectedOccasionIds.set(new Set());
 
     if (emitChange) {
-      this.occasionChange.emit(null);
+      this.occasionChange.emit([]);
     }
   }
 }

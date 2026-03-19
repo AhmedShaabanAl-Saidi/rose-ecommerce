@@ -1,7 +1,15 @@
 <section class="flex flex-col gap-4 pb-6 border-b border-zinc-100 dark:border-zinc-700">
   <div class="flex items-center justify-between mb-1">
-    <h3 class="m-0 text-[20px] font-semibold text-zinc-800 dark:text-soft-pink-200">{{ 'Occasion' | translate }}</h3>
-    @if (selectedOccasionId()) {
+    <div class="flex items-center gap-2">
+      <h3 class="m-0 text-[20px] font-semibold text-zinc-800 dark:text-soft-pink-200">{{ 'Occasion' | translate }}</h3>
+      @if (selectedOccasionIds().size > 0) {
+      <span
+        class="flex h-5 min-w-5 items-center justify-center rounded-full bg-maroon-600 px-1.5 text-[11px] font-bold text-white dark:bg-soft-pink-400 dark:text-zinc-900">
+        {{ selectedOccasionIds().size }}
+      </span>
+      }
+    </div>
+    @if (selectedOccasionIds().size > 0) {
     <app-filter-reset-btn (reset)="onReset()"></app-filter-reset-btn>
     }
   </div>
@@ -16,14 +24,14 @@
     @for (occasion of occasions(); track occasion._id) {
     <button type="button" (click)="onSelectOccasion(occasion._id)"
       class="relative h-16.25 w-full overflow-hidden rounded-lg border-2 transition-transform duration-200 hover:scale-[1.02]"
-      [class.border-transparent]="selectedOccasionId() !== occasion._id"
-      [class.dark:border-zinc-800]="selectedOccasionId() !== occasion._id"
-      [class.border-maroon-600]="selectedOccasionId() === occasion._id"
-      [class.dark:border-soft-pink-300]="selectedOccasionId() === occasion._id">
+      [class.border-transparent]="!selectedOccasionIds().has(occasion._id)"
+      [class.dark:border-zinc-800]="!selectedOccasionIds().has(occasion._id)"
+      [class.border-maroon-600]="selectedOccasionIds().has(occasion._id)"
+      [class.dark:border-soft-pink-300]="selectedOccasionIds().has(occasion._id)">
       <img [src]="occasionImageUrl(occasion.image)" [alt]="occasion.name"
         class="absolute inset-0 w-full h-full object-cover z-0" crossorigin="anonymous" />
       <div class="absolute inset-0 z-10 bg-black/45 transition-colors duration-200 dark:bg-zinc-950/60"
-        [class.bg-maroon-900/40]="selectedOccasionId() === occasion._id"></div>
+        [class.bg-maroon-900/40]="selectedOccasionIds().has(occasion._id)"></div>
       <span class="absolute inset-0 flex items-center justify-center text-white text-[14px] font-medium z-20">{{
         occasion.name }}</span>
     </button>

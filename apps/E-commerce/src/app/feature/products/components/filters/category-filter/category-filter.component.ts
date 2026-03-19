@@ -16,10 +16,10 @@ export class CategoryFilterComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   categories = signal<Category[]>([]);
-  selectedCategoryId = signal<string | null>(null);
+  selectedCategoryIds = signal<Set<string>>(new Set());
   isLoading = signal(true);
 
-  categoryChange = output<string | null>();
+  categoryChange = output<string[]>();
 
   ngOnInit(): void {
     this.fetchCategories();
@@ -42,20 +42,21 @@ export class CategoryFilterComponent implements OnInit {
   }
 
   selectCategory(id: string): void {
-    if (this.selectedCategoryId() === id) {
-      this.selectedCategoryId.set(null);
-      this.categoryChange.emit(null);
+    const current = new Set(this.selectedCategoryIds());
+    if (current.has(id)) {
+      current.delete(id);
     } else {
-      this.selectedCategoryId.set(id);
-      this.categoryChange.emit(id);
+      current.add(id);
     }
+    this.selectedCategoryIds.set(current);
+    this.categoryChange.emit([...current]);
   }
 
   onReset(emitChange = true): void {
-    this.selectedCategoryId.set(null);
+    this.selectedCategoryIds.set(new Set());
 
     if (emitChange) {
-      this.categoryChange.emit(null);
+      this.categoryChange.emit([]);
     }
   }
 }

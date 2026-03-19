@@ -39,8 +39,8 @@ export class FiltersComponent {
   readonly hasActiveFilters = computed(() => {
     const state = this.currentState();
     return (
-      state.categoryId !== undefined ||
-      state.occasionId !== undefined ||
+      (state.categoryIds?.length ?? 0) > 0 ||
+      (state.occasionIds?.length ?? 0) > 0 ||
       state.rating !== undefined ||
       state.priceFrom !== undefined ||
       state.priceTo !== undefined
@@ -76,12 +76,12 @@ export class FiltersComponent {
     this.filterChange.emit(nextState);
   }
 
-  onCategoryChange(categoryId: string | null): void {
-    this.updateFilterState({ categoryId: categoryId ?? undefined });
+  onCategoryChange(categoryIds: string[]): void {
+    this.updateFilterState({ categoryIds: categoryIds.length ? categoryIds : undefined });
   }
 
-  onOccasionChange(occasionId: string | null): void {
-    this.updateFilterState({ occasionId: occasionId ?? undefined });
+  onOccasionChange(occasionIds: string[]): void {
+    this.updateFilterState({ occasionIds: occasionIds.length ? occasionIds : undefined });
   }
 
   onRatingChange(rating: number | null): void {

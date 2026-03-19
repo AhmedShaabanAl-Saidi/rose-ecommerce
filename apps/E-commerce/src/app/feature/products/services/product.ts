@@ -14,13 +14,13 @@ export class ProductsService {
   private baseUrl = environment.baseUrl;
   private http = inject(HttpClient);
 
-  getProducts({ page = 1, limit = 12, categoryId, occasionId, rating, priceFrom, priceTo }: ProductQueryParams = {}): Observable<ProductsResponse> {
+  getProducts({ page = 1, limit = 12, categoryIds, occasionIds, rating, priceFrom, priceTo }: ProductQueryParams = {}): Observable<ProductsResponse> {
     let params = `?page=${page}&limit=${limit}`;
-    if (categoryId) {
-      params += `&category=${categoryId}`;
+    if (categoryIds?.length) {
+      categoryIds.forEach(id => { params += `&category=${id}`; });
     }
-    if (occasionId) {
-      params += `&occasion=${occasionId}`;
+    if (occasionIds?.length) {
+      occasionIds.forEach(id => { params += `&occasion=${id}`; });
     }
     if (rating) {
       params += `&rateAvg=${rating}`;
@@ -47,16 +47,19 @@ export class ProductsService {
       `${this.baseUrl}/categories?page=${page}&limit=${limit}`
     );
   }
+
   getProductById(id: string) {
     return this.http.get<{ product: Product }>(
       `${this.baseUrl}/products/${id}`
     );
   }
+
   getProductReviews(productId: string) {
     return this.http.get<ReviewResponse>(
       `${this.baseUrl}/products/${productId}/reviews`
     );
   }
+  
   getRelatedProductByID(product_id: string) {
     return this.http.get<RelatedProductsResponse>(
       `${this.baseUrl}/related/category/${product_id}`
