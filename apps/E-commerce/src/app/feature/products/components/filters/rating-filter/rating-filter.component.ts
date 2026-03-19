@@ -61,8 +61,11 @@ export class RatingFilterComponent {
     this.ratingChange.emit(newRating);
   }
 
-  onReset(): void {
+  onReset(emitChange = true): void {
     this.selectedRating.set(null);
-    this.ratingChange.emit(null);
+
+    if (emitChange) {
+      this.ratingChange.emit(null);
+    }
   }
 }

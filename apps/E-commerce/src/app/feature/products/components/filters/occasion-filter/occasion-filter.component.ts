@@ -47,8 +47,11 @@ export class OccasionFilterComponent implements OnInit {
     this.occasionChange.emit(newId);
   }
 
-  onReset(): void {
+  onReset(emitChange = true): void {
     this.selectedOccasionId.set(null);
-    this.occasionChange.emit(null);
+
+    if (emitChange) {
+      this.occasionChange.emit(null);
+    }
   }
 }

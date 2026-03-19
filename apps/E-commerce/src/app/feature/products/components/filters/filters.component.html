@@ -1,6 +1,14 @@
-<section class="flex flex-col gap-6 pr-6 border-r border-zinc-100 h-full">
+<section class="flex h-full flex-col gap-6 border-r border-zinc-100 pr-6 dark:border-zinc-800">
   <app-category-filter (categoryChange)="onCategoryChange($event)"></app-category-filter>
   <app-occasion-filter (occasionChange)="onOccasionChange($event)"></app-occasion-filter>
   <app-rating-filter (ratingChange)="onRatingChange($event)"></app-rating-filter>
   <app-price-filter (priceChange)="onPriceChange($event)"></app-price-filter>
+
+  <div class="border-t border-zinc-100 pt-5 dark:border-zinc-800">
+    <lib-button
+      class="[&>button]:min-h-12 [&>button]:rounded-2xl [&>button]:border [&>button]:border-transparent [&>button]:bg-maroon-50 [&>button]:text-maroon-500 [&>button]:shadow-none [&>button]:gap-2.5 [&>button]:px-6 [&>button]:text-lg [&>button]:font-medium [&>button:hover]:bg-maroon-100 [&>button:hover]:text-maroon-600 [&>button>lucide-icon]:h-5 [&>button>lucide-icon]:w-5 dark:[&>button]:border-zinc-600 dark:[&>button]:bg-zinc-700 dark:[&>button]:text-soft-pink-200 dark:[&>button:hover]:bg-zinc-600 dark:[&>button:hover]:text-soft-pink-100"
+      variant="secondary" size="lg" [block]="true" [icon]="ResetAllIcon" (buttonClick)="resetAllFilters()">
+      {{ 'Reset All' | translate }}
+    </lib-button>
+  </div>
 </section>

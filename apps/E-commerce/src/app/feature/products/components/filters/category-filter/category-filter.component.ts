@@ -52,8 +52,11 @@ export class CategoryFilterComponent implements OnInit {
     }
   }
 
-  onReset(): void {
+  onReset(emitChange = true): void {
     this.selectedCategoryId.set(null);
-    this.categoryChange.emit(null);
+
+    if (emitChange) {
+      this.categoryChange.emit(null);
+    }
   }
 }

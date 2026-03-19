@@ -48,9 +48,12 @@ export class PriceFilterComponent {
     }
   }
 
-  onReset(): void {
+  onReset(emitChange = true): void {
     this.priceFrom.set(null);
     this.priceTo.set(null);
-    this.priceChange.emit(null);
+
+    if (emitChange) {
+      this.priceChange.emit(null);
+    }
   }
 }
