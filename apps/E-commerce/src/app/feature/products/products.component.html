@@ -1,8 +1,8 @@
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-  <div class="col-span-1">
+<section class="grid grid-cols-1 gap-6 lg:grid-cols-4">
+  <div class="min-w-0 lg:col-span-1">
     <app-filters (filterChange)="onFilterChange($event)"></app-filters>
   </div>
-  <app-product-list class="col-span-1 md:col-span-3" [categoryId]="selectedCategoryId()"
-    [occasionId]="selectedOccasionId()" [rating]="selectedRating()" 
-    [priceFrom]="selectedPriceFrom()" [priceTo]="selectedPriceTo()"></app-product-list>
-</div>
+  <app-product-list class="min-w-0 lg:col-span-3" [categoryId]="appliedFilters().categoryId"
+    [occasionId]="appliedFilters().occasionId" [rating]="appliedFilters().rating"
+    [priceFrom]="appliedFilters().priceFrom" [priceTo]="appliedFilters().priceTo"></app-product-list>
+</section>

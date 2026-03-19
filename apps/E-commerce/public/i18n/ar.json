@@ -271,5 +271,22 @@
   "There are no products with this Rating": "لا توجد منتجات بهذا التقييم",
   "There are no products in this Price range": "لا توجد منتجات في هذا النطاق السعري",
   "No products match the selected filters": "لا توجد منتجات تطابق الفلاتر المحددة",
-  "There are no products available": "لا توجد منتجات متاحة"
+  "There are no products available": "لا توجد منتجات متاحة",
+  "PRODUCT_FILTERS": {
+    "TITLE": "الفلاتر",
+    "SUBTITLE": "خصص النتائج واعثر على الهدية المناسبة بسرعة.",
+    "ACTIVE": "{{count}} فلاتر مفعلة",
+    "ALL_CATEGORIES": "كل التصنيفات",
+    "ALL_OCCASIONS": "كل المناسبات",
+    "PRICE_RANGE": "نطاق السعر",
+    "PRICE_HINT": "حرّك المؤشرين لتحديد الميزانية المناسبة.",
+    "MIN_PRICE": "الحد الأدنى",
+    "MAX_PRICE": "الحد الأقصى",
+    "OPEN": "الفلاتر",
+    "SHOW_TABLET": "إظهار الفلاتر",
+    "HIDE_TABLET": "إخفاء الفلاتر",
+    "APPLY": "تطبيق",
+    "RESET": "إعادة ضبط",
+    "RESET_ALL": "إعادة ضبط الكل"
+  }
 }

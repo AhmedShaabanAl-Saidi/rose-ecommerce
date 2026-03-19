@@ -31,14 +31,17 @@ export class ProductList {
     if (this.categoryId()) activeFilters++;
     if (this.occasionId()) activeFilters++;
     if (this.rating() !== undefined) activeFilters++;
-    if (this.priceFrom() !== undefined || this.priceTo() !== undefined) activeFilters++;
-    
+    if (this.priceFrom() !== undefined || this.priceTo() !== undefined)
+      activeFilters++;
+
     if (activeFilters === 0) return 'There are no products available';
     if (activeFilters === 1) {
       if (this.categoryId()) return 'There are no products in this Category';
       if (this.occasionId()) return 'There are no products for this Occasion';
-      if (this.rating() !== undefined) return 'There are no products with this Rating';
-      if (this.priceFrom() !== undefined || this.priceTo() !== undefined) return 'There are no products in this Price range';
+      if (this.rating() !== undefined)
+        return 'There are no products with this Rating';
+      if (this.priceFrom() !== undefined || this.priceTo() !== undefined)
+        return 'There are no products in this Price range';
     }
     return 'No products match the selected filters';
   });
@@ -48,7 +51,9 @@ export class ProductList {
   totalProducts = signal(0);
   allProducts = signal<Product[]>([]);
   isLoading = signal(true);
-  showPaginator = computed(() => !this.isLoading() && this.totalProducts() > this.rows());
+  showPaginator = computed(
+    () => !this.isLoading() && this.totalProducts() > this.rows()
+  );
 
   constructor() {
     effect(() => {
@@ -58,7 +63,15 @@ export class ProductList {
       const priceFrom = this.priceFrom();
       const priceTo = this.priceTo();
       this.first.set(0);
-      this.getproducts({ page: 1, limit: this.rows(), categoryId, occasionId, rating, priceFrom, priceTo });
+      this.getproducts({
+        page: 1,
+        limit: this.rows(),
+        categoryId,
+        occasionId,
+        rating,
+        priceFrom,
+        priceTo,
+      });
     });
   }
 
@@ -74,7 +87,15 @@ export class ProductList {
     this.isLoading.set(true);
 
     this.productsService
-      .getProducts({ page, limit, categoryId, occasionId, rating, priceFrom, priceTo })
+      .getProducts({
+        page,
+        limit,
+        categoryId,
+        occasionId,
+        rating,
+        priceFrom,
+        priceTo,
+      })
       .pipe(finalize(() => this.isLoading.set(false)))
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -83,7 +104,8 @@ export class ProductList {
 
           let actualTotal = data.metadata.totalItems;
           if (data.products.length < data.metadata.limit) {
-            actualTotal = (page - 1) * data.metadata.limit + data.products.length;
+            actualTotal =
+              (page - 1) * data.metadata.limit + data.products.length;
           }
 
           this.totalProducts.set(actualTotal);
@@ -101,6 +123,14 @@ export class ProductList {
 
     const page = event.page !== undefined ? event.page + 1 : first / rows + 1;
 
-    this.getproducts({ page, limit: rows, categoryId: this.categoryId(), occasionId: this.occasionId(), rating: this.rating(), priceFrom: this.priceFrom(), priceTo: this.priceTo() });
+    this.getproducts({
+      page,
+      limit: rows,
+      categoryId: this.categoryId(),
+      occasionId: this.occasionId(),
+      rating: this.rating(),
+      priceFrom: this.priceFrom(),
+      priceTo: this.priceTo(),
+    });
   }
 }

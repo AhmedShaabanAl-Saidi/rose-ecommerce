@@ -9,18 +9,13 @@ import { FilterState } from './interfaces/product';
   templateUrl: './products.component.html',
 })
 export class ProductsComponent {
-  selectedCategoryId = signal<string | undefined>(undefined);
-  selectedOccasionId = signal<string | undefined>(undefined);
-  selectedRating = signal<number | undefined>(undefined);
-  selectedPriceFrom = signal<number | undefined>(undefined);
-  selectedPriceTo = signal<number | undefined>(undefined);
+  readonly appliedFilters = signal<FilterState>({});
 
   onFilterChange(filter: FilterState): void {
-    this.selectedCategoryId.set(filter.categoryId);
-    this.selectedOccasionId.set(filter.occasionId);
-    this.selectedRating.set(filter.rating);
-    this.selectedPriceFrom.set(filter.priceFrom);
-    this.selectedPriceTo.set(filter.priceTo);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.appliedFilters.set(filter);
+
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 }
