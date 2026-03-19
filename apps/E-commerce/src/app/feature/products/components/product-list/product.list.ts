@@ -23,18 +23,22 @@ export class ProductList {
   categoryId = input<string | undefined>(undefined);
   occasionId = input<string | undefined>(undefined);
   rating = input<number | undefined>(undefined);
+  priceFrom = input<number | undefined>(undefined);
+  priceTo = input<number | undefined>(undefined);
 
   emptyMessageKey = computed(() => {
     let activeFilters = 0;
     if (this.categoryId()) activeFilters++;
     if (this.occasionId()) activeFilters++;
     if (this.rating() !== undefined) activeFilters++;
+    if (this.priceFrom() !== undefined || this.priceTo() !== undefined) activeFilters++;
     
     if (activeFilters === 0) return 'There are no products available';
     if (activeFilters === 1) {
       if (this.categoryId()) return 'There are no products in this Category';
       if (this.occasionId()) return 'There are no products for this Occasion';
       if (this.rating() !== undefined) return 'There are no products with this Rating';
+      if (this.priceFrom() !== undefined || this.priceTo() !== undefined) return 'There are no products in this Price range';
     }
     return 'No products match the selected filters';
   });
@@ -51,8 +55,10 @@ export class ProductList {
       const categoryId = this.categoryId();
       const occasionId = this.occasionId();
       const rating = this.rating();
+      const priceFrom = this.priceFrom();
+      const priceTo = this.priceTo();
       this.first.set(0);
-      this.getproducts({ page: 1, limit: this.rows(), categoryId, occasionId, rating });
+      this.getproducts({ page: 1, limit: this.rows(), categoryId, occasionId, rating, priceFrom, priceTo });
     });
   }
 
@@ -62,11 +68,13 @@ export class ProductList {
     const categoryId = params.categoryId;
     const occasionId = params.occasionId;
     const rating = params.rating;
+    const priceFrom = params.priceFrom;
+    const priceTo = params.priceTo;
 
     this.isLoading.set(true);
 
     this.productsService
-      .getProducts({ page, limit, categoryId, occasionId, rating })
+      .getProducts({ page, limit, categoryId, occasionId, rating, priceFrom, priceTo })
       .pipe(finalize(() => this.isLoading.set(false)))
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -93,6 +101,6 @@ export class ProductList {
 
     const page = event.page !== undefined ? event.page + 1 : first / rows + 1;
 
-    this.getproducts({ page, limit: rows, categoryId: this.categoryId(), occasionId: this.occasionId(), rating: this.rating() });
+    this.getproducts({ page, limit: rows, categoryId: this.categoryId(), occasionId: this.occasionId(), rating: this.rating(), priceFrom: this.priceFrom(), priceTo: this.priceTo() });
   }
 }

@@ -2,11 +2,12 @@ import { Component, output } from '@angular/core';
 import { CategoryFilterComponent } from './category-filter/category-filter.component';
 import { OccasionFilterComponent } from './occasion-filter/occasion-filter.component';
 import { RatingFilterComponent } from './rating-filter/rating-filter.component';
+import { PriceFilterComponent } from './price-filter/price-filter.component';
 import { FilterState } from '../../interfaces/product';
 
 @Component({
   selector: 'app-filters',
-  imports: [CategoryFilterComponent, OccasionFilterComponent, RatingFilterComponent],
+  imports: [CategoryFilterComponent, OccasionFilterComponent, RatingFilterComponent, PriceFilterComponent],
   templateUrl: './filters.component.html',
 })
 export class FiltersComponent {
@@ -26,6 +27,15 @@ export class FiltersComponent {
 
   onRatingChange(rating: number | null): void {
     this.currentState = { ...this.currentState, rating: rating ?? undefined };
+    this.filterChange.emit(this.currentState);
+  }
+
+  onPriceChange(priceRange: { from?: number; to?: number } | null): void {
+    this.currentState = { 
+      ...this.currentState, 
+      priceFrom: priceRange?.from, 
+      priceTo: priceRange?.to 
+    };
     this.filterChange.emit(this.currentState);
   }
 }

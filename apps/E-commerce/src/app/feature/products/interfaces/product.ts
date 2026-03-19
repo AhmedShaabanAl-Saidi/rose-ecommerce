@@ -82,6 +82,8 @@ export interface ProductQueryParams {
   categoryId?: string;
   occasionId?: string;
   rating?: number;
+  priceFrom?: number;
+  priceTo?: number;
 }
 
 export interface Occasion {

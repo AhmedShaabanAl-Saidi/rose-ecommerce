@@ -262,9 +262,13 @@
   "Reset": "إعادة ضبط",
   "Occasion": "المناسبة",
   "Rating": "التقييم",
+  "Price": "السعر",
+  "from": "من",
+  "to": "إلى",
   "There are no products in this Category": "لا توجد منتجات في هذا التصنيف",
   "There are no products for this Occasion": "لا توجد منتجات لهذه المناسبة",
   "There are no products with this Rating": "لا توجد منتجات بهذا التقييم",
+  "There are no products in this Price range": "لا توجد منتجات في هذا النطاق السعري",
   "No products match the selected filters": "لا توجد منتجات تطابق الفلاتر المحددة",
   "There are no products available": "لا توجد منتجات متاحة"
 }

@@ -262,9 +262,13 @@
   "Reset": "Reset",
   "Occasion": "Occasion",
   "Rating": "Rating",
+  "Price": "Price",
+  "from": "from",
+  "to": "to",
   "There are no products in this Category": "There are no products in this Category",
   "There are no products for this Occasion": "There are no products for this Occasion",
   "There are no products with this Rating": "There are no products with this Rating",
+  "There are no products in this Price range": "There are no products in this Price range",
   "No products match the selected filters": "No products match the selected filters",
   "There are no products available": "There are no products available"
 }

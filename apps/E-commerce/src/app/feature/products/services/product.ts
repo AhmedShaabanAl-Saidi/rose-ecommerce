@@ -14,7 +14,7 @@ export class ProductsService {
   private baseUrl = environment.baseUrl;
   private http = inject(HttpClient);
 
-  getProducts({ page = 1, limit = 12, categoryId, occasionId, rating }: ProductQueryParams = {}): Observable<ProductsResponse> {
+  getProducts({ page = 1, limit = 12, categoryId, occasionId, rating, priceFrom, priceTo }: ProductQueryParams = {}): Observable<ProductsResponse> {
     let params = `?page=${page}&limit=${limit}`;
     if (categoryId) {
       params += `&category=${categoryId}`;
@@ -24,6 +24,12 @@ export class ProductsService {
     }
     if (rating) {
       params += `&rateAvg=${rating}`;
+    }
+    if (priceFrom !== undefined) {
+      params += `&price[gte]=${priceFrom}`;
+    }
+    if (priceTo !== undefined) {
+      params += `&price[lte]=${priceTo}`;
     }
     return this.http.get<ProductsResponse>(
       `${this.baseUrl}/products${params}`

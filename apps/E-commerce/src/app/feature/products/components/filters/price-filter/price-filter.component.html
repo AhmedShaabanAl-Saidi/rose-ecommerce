@@ -1,0 +1,24 @@
+<section class="flex flex-col gap-4 pb-6 border-b border-zinc-100">
+  <div class="flex items-center justify-between mb-1">
+    <h3 class="text-[20px] font-semibold text-zinc-800 m-0">{{ 'Price' | translate }}</h3>
+    @if (priceFrom() !== null || priceTo() !== null) {
+    <app-filter-reset-btn (reset)="onReset()"></app-filter-reset-btn>
+    }
+  </div>
+
+  <div class="flex items-center gap-3 w-full">
+    <div class="flex flex-col gap-1.5 w-1/2">
+      <label class="text-[14px] text-zinc-600 font-medium">{{ 'from' | translate }}</label>
+      <input type="number" [ngModel]="priceFrom()" (ngModelChange)="priceFrom.set($event)" (change)="onPriceChange()"
+        placeholder="0" min="0"
+        class="w-full border border-zinc-200 rounded-lg px-3 py-2 text-[14px] text-zinc-800 focus:outline-none focus:border-maroon-600 focus:ring-1 focus:ring-maroon-600 transition-colors bg-transparent" />
+    </div>
+
+    <div class="flex flex-col gap-1.5 w-1/2">
+      <label class="text-[14px] text-zinc-600 font-medium">{{ 'to' | translate }}</label>
+      <input type="number" [ngModel]="priceTo()" (ngModelChange)="priceTo.set($event)" (change)="onPriceChange()"
+        placeholder="1000000" min="0"
+        class="w-full border border-zinc-200 rounded-lg px-3 py-2 text-[14px] text-zinc-800 focus:outline-none focus:border-maroon-600 focus:ring-1 focus:ring-maroon-600 transition-colors bg-transparent" />
+    </div>
+  </div>
+</section>
