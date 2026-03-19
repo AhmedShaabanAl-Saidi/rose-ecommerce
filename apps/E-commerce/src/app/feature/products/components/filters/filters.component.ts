@@ -1,15 +1,25 @@
 import { Component, output } from '@angular/core';
 import { CategoryFilterComponent } from './category-filter/category-filter.component';
+import { OccasionFilterComponent } from './occasion-filter/occasion-filter.component';
+import { FilterState } from '../../interfaces/product';
 
 @Component({
   selector: 'app-filters',
-  imports: [CategoryFilterComponent],
+  imports: [CategoryFilterComponent, OccasionFilterComponent],
   templateUrl: './filters.component.html',
 })
 export class FiltersComponent {
-  filterChange = output<{ categoryId?: string }>();
+  filterChange = output<FilterState>();
+
+  private currentState: FilterState = {};
 
   onCategoryChange(categoryId: string | null): void {
-    this.filterChange.emit({ categoryId: categoryId ?? undefined });
+    this.currentState = { ...this.currentState, categoryId: categoryId ?? undefined };
+    this.filterChange.emit(this.currentState);
+  }
+
+  onOccasionChange(occasionId: string | null): void {
+    this.currentState = { ...this.currentState, occasionId: occasionId ?? undefined };
+    this.filterChange.emit(this.currentState);
   }
 }

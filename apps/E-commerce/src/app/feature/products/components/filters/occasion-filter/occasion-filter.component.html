@@ -1,0 +1,30 @@
+<section class="flex flex-col gap-4 pb-6 border-b border-zinc-100">
+  <div class="flex items-center justify-between mb-1">
+    <h3 class="text-[20px] font-semibold text-zinc-800 m-0">{{ 'Occasion' | translate }}</h3>
+    @if (selectedOccasionId()) {
+    <app-filter-reset-btn (reset)="onReset()"></app-filter-reset-btn>
+    }
+  </div>
+
+  <div class="grid grid-cols-2 gap-3 max-h-62.5 overflow-y-auto pr-1 custom-scrollbar">
+    @if (isLoading()) {
+    @for (i of [1,2,3,4,5,6]; track i) {
+    <div class="w-full h-16.25 rounded-lg animate-pulse bg-zinc-200"></div>
+    }
+    } @else {
+    @for (occasion of occasions(); track occasion._id) {
+    <button type="button" (click)="onSelectOccasion(occasion._id)"
+      class="relative w-full h-16.25 rounded-lg overflow-hidden transition-transform duration-200 hover:scale-[1.02] border-2"
+      [class.border-transparent]="selectedOccasionId() !== occasion._id"
+      [class.border-maroon-600]="selectedOccasionId() === occasion._id">
+      <img [src]="occasionImageUrl(occasion.image)" [alt]="occasion.name"
+        class="absolute inset-0 w-full h-full object-cover z-0" crossorigin="anonymous" />
+      <div class="absolute inset-0 bg-black/45 z-10 transition-colors duration-200"
+        [class.bg-maroon-900/40]="selectedOccasionId() === occasion._id"></div>
+      <span class="absolute inset-0 flex items-center justify-center text-white text-[14px] font-medium z-20">{{
+        occasion.name }}</span>
+    </button>
+    }
+    }
+  </div>
+</section>

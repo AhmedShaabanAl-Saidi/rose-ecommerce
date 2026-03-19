@@ -2,7 +2,7 @@ import { environment } from '../../../../environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductQueryParams, ProductsResponse, CategoriesRes } from '../interfaces/product';
+import { ProductQueryParams, ProductsResponse, CategoriesRes, OccasionsRes } from '../interfaces/product';
 import { Product } from '../../../shared/components/ui/product-card/interface/product';
 import { ReviewResponse } from '../interfaces/review';
 import { RelatedProductsResponse } from '../interfaces/related';
@@ -14,13 +14,22 @@ export class ProductsService {
   private baseUrl = environment.baseUrl;
   private http = inject(HttpClient);
 
-  getProducts({ page = 1, limit = 12, categoryId }: ProductQueryParams = {}): Observable<ProductsResponse> {
+  getProducts({ page = 1, limit = 12, categoryId, occasionId }: ProductQueryParams = {}): Observable<ProductsResponse> {
     let params = `?page=${page}&limit=${limit}`;
     if (categoryId) {
       params += `&category=${categoryId}`;
     }
+    if (occasionId) {
+      params += `&occasion=${occasionId}`;
+    }
     return this.http.get<ProductsResponse>(
       `${this.baseUrl}/products${params}`
+    );
+  }
+
+  getOccasions(page = 1, limit = 100): Observable<OccasionsRes> {
+    return this.http.get<OccasionsRes>(
+      `${this.baseUrl}/occasions?page=${page}&limit=${limit}`
     );
   }
 

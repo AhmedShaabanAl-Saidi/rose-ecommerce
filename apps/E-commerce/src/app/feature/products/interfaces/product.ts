@@ -80,4 +80,22 @@ export interface ProductQueryParams {
   page?: number;
   limit?: number;
   categoryId?: string;
+  occasionId?: string;
+}
+
+export interface Occasion {
+  _id: string;
+  name: string;
+  slug: string;
+  image: string;
+  createdAt?: string;
+  updatedAt?: string;
+  isSuperAdmin?: boolean;
+  productsCount?: number;
+}
+
+export interface OccasionsRes {
+  message: string;
+  metadata: PaginationMetadata;
+  occasions: Occasion[];
 }

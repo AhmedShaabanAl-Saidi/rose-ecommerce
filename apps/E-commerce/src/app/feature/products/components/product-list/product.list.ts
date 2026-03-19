@@ -21,6 +21,20 @@ export class ProductList {
   private readonly destroyRef = inject(DestroyRef);
 
   categoryId = input<string | undefined>(undefined);
+  occasionId = input<string | undefined>(undefined);
+
+  emptyMessageKey = computed(() => {
+    let activeFilters = 0;
+    if (this.categoryId()) activeFilters++;
+    if (this.occasionId()) activeFilters++;
+
+    if (activeFilters === 0) return 'There are no products available';
+    if (activeFilters === 1) {
+      if (this.categoryId()) return 'There are no products in this Category';
+      if (this.occasionId()) return 'There are no products for this Occasion';
+    }
+    return 'No products match the selected filters';
+  });
 
   first = signal(0);
   rows = signal(12);
@@ -32,8 +46,9 @@ export class ProductList {
   constructor() {
     effect(() => {
       const categoryId = this.categoryId();
+      const occasionId = this.occasionId();
       this.first.set(0);
-      this.getproducts({ page: 1, limit: this.rows(), categoryId });
+      this.getproducts({ page: 1, limit: this.rows(), categoryId, occasionId });
     });
   }
 
@@ -41,11 +56,12 @@ export class ProductList {
     const page = params.page ?? 1;
     const limit = params.limit ?? this.rows();
     const categoryId = params.categoryId;
+    const occasionId = params.occasionId;
 
     this.isLoading.set(true);
 
     this.productsService
-      .getProducts({ page, limit, categoryId })
+      .getProducts({ page, limit, categoryId, occasionId })
       .pipe(finalize(() => this.isLoading.set(false)))
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -72,6 +88,6 @@ export class ProductList {
 
     const page = event.page !== undefined ? event.page + 1 : first / rows + 1;
 
-    this.getproducts({ page, limit: rows, categoryId: this.categoryId() });
+    this.getproducts({ page, limit: rows, categoryId: this.categoryId(), occasionId: this.occasionId() });
   }
 }

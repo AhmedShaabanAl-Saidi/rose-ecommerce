@@ -16,11 +16,7 @@
   <div class="flex flex-col items-center justify-center py-24 text-center">
     <lucide-icon [img]="SearchXIcon" [size]="120" [strokeWidth]="1" class="text-zinc-300 mb-6"></lucide-icon>
     <p class="text-[18px] text-zinc-400">
-      @if (categoryId()) {
-      {{ 'There are no products in this Category' | translate }}
-      } @else {
-      {{ 'There are no products available' | translate }}
-      }
+      {{ emptyMessageKey() | translate }}
     </p>
   </div>
   }
