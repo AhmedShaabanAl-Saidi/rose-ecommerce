@@ -17,5 +17,6 @@ export class ProductsComponent {
     this.selectedCategoryId.set(filter.categoryId);
     this.selectedOccasionId.set(filter.occasionId);
     this.selectedRating.set(filter.rating);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
