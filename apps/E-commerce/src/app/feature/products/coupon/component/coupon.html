@@ -1,0 +1,64 @@
+
+<section>
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-12 gap-8">
+      <div class="col-span-8"></div>
+<div class="col-span-4">
+  <div class="bg-white rounded-2xl border p-5 space-y-5">
+
+  <h3 class="text-lg font-semibold">Summary</h3>
+
+  <!-- Coupon -->
+  <div class="flex gap-2">
+    <input
+      type="text"
+      [(ngModel)]="couponCode"
+      placeholder="Coupon Code"
+      class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm"
+    />
+
+    <button
+      (click)="applyCoupon()"
+      class="bg-red-600 hover:bg-red-700 text-white px-4 rounded-lg text-sm"
+    >
+      Apply Coupon
+    </button>
+  </div>
+
+  <!-- Empty state -->
+  <div class="border rounded-xl h-32 flex items-center justify-center text-gray-400 text-sm">
+    No coupons applied
+  </div>
+
+  <!-- Prices -->
+  <div class="space-y-2 text-sm">
+    <div class="flex justify-between">
+      <span>Subtotal</span>
+      <span>{{ subtotal }} EGP</span>
+    </div>
+
+    <div class="flex justify-between text-green-600">
+      <span>Discount</span>
+      <span>-{{ discountAmount }} EGP</span>
+    </div>
+
+    <div class="flex justify-between font-semibold text-base">
+      <span>Total</span>
+      <span>{{ subtotal - discountAmount }} EGP</span>
+    </div>
+  </div>
+
+  <!-- Checkout -->
+  <button
+    [disabled]="!isCouponValid"
+    class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg transition disabled:bg-gray-300"
+  >
+    Checkout →
+  </button>
+
+</div>
+
+</div>
+    </div>
+  </div>
+</section>

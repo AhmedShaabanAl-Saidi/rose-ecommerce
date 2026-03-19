@@ -18,4 +18,10 @@ export const appRoutes: Route[] = [
     redirectTo: 'auth',
     pathMatch: 'full',
   },
+
+  {
+  path: 'test-coupon',
+  loadComponent: () =>
+    import('./feature/products/coupon/component/coupon').then(m => m.CouponComponent)
+}
 ];
