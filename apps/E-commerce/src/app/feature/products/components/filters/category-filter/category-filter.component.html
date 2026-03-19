@@ -1,0 +1,32 @@
+<section class="flex flex-col gap-4 pb-6 border-b border-zinc-100">
+  <div class="flex items-center justify-between mb-1">
+    <h3 class="text-[20px] font-semibold text-zinc-800 m-0">{{ 'Category' | translate }}</h3>
+    @if (selectedCategoryId()) {
+    <app-filter-reset-btn (reset)="onReset()"></app-filter-reset-btn>
+    }
+  </div>
+
+  <div class="flex flex-col gap-1.5 max-h-62.5 overflow-y-auto pr-1 custom-scrollbar">
+    @if (isLoading()) {
+    @for (i of [1,2,3,4,5]; track i) {
+    <div class="w-full h-10 rounded-md animate-pulse bg-zinc-200"></div>
+    }
+    } @else {
+    @for (category of categories(); track category._id) {
+    <button
+      class="flex items-center gap-3 w-full pr-3 rounded-md cursor-pointer transition-colors duration-150 text-left overflow-hidden h-10 min-h-10 shrink-0 {{ selectedCategoryId() === category._id ? 'bg-[#fdf2f4]' : 'bg-zinc-200 hover:bg-zinc-300' }}"
+      type="button" (click)="selectCategory(category._id)">
+      <div class="w-10 h-10 shrink-0 rounded flex items-center justify-center overflow-hidden bg-zinc-500">
+        @if (category.image) {
+        <img [src]="category.image" [alt]="category.name" class="w-full h-full object-cover block" />
+        } @else {
+        <lucide-icon name="image" class="w-5 h-5 stroke-white"></lucide-icon>
+        }
+      </div>
+      <span class="text-[13px] whitespace-nowrap overflow-hidden text-ellipsis text-zinc-800 font-medium">{{
+        category.name | translate }}</span>
+    </button>
+    }
+    }
+  </div>
+</section>

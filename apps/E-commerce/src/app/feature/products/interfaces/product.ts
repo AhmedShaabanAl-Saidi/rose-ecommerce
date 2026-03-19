@@ -3,6 +3,29 @@ export interface Category {
   name: string;
   slug: string;
   image: string;
+  productsCount?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  isSuperAdmin?: boolean;
+}
+
+export interface CategoriesRes {
+  message: string;
+  metadata: {
+    currentPage: number;
+    limit: number;
+    totalPages: number;
+    totalItems: number;
+  };
+  categories: Category[];
+}
+
+export interface FilterState {
+  categoryId?: string;
+  occasionId?: string;
+  rating?: number;
+  priceFrom?: number;
+  priceTo?: number;
 }
 
 export interface Brand {
@@ -51,4 +74,10 @@ export interface ProductsResponse {
     totalItems: number;
   };
   products: Product[];
+}
+
+export interface ProductQueryParams {
+  page?: number;
+  limit?: number;
+  categoryId?: string;
 }

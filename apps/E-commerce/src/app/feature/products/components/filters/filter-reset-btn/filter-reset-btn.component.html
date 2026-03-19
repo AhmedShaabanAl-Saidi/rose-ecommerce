@@ -1,0 +1,6 @@
+<button
+  class="flex items-center gap-1 bg-transparent border-none cursor-pointer text-[16px] text-red-600 p-0 transition-opacity duration-200 hover:opacity-75"
+  type="button" (click)="reset.emit()">
+  <lucide-icon [img]="XIcon" [size]="18" [strokeWidth]="2" class="shrink-0"></lucide-icon>
+  <span>{{ 'Reset' | translate }}</span>
+</button>
