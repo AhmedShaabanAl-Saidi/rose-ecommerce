@@ -14,13 +14,16 @@ export class ProductsService {
   private baseUrl = environment.baseUrl;
   private http = inject(HttpClient);
 
-  getProducts({ page = 1, limit = 12, categoryId, occasionId }: ProductQueryParams = {}): Observable<ProductsResponse> {
+  getProducts({ page = 1, limit = 12, categoryId, occasionId, rating }: ProductQueryParams = {}): Observable<ProductsResponse> {
     let params = `?page=${page}&limit=${limit}`;
     if (categoryId) {
       params += `&category=${categoryId}`;
     }
     if (occasionId) {
       params += `&occasion=${occasionId}`;
+    }
+    if (rating) {
+      params += `&rateAvg=${rating}`;
     }
     return this.http.get<ProductsResponse>(
       `${this.baseUrl}/products${params}`

@@ -3,5 +3,5 @@
     <app-filters (filterChange)="onFilterChange($event)"></app-filters>
   </div>
   <app-product-list class="col-span-1 md:col-span-3" [categoryId]="selectedCategoryId()"
-    [occasionId]="selectedOccasionId()"></app-product-list>
+    [occasionId]="selectedOccasionId()" [rating]="selectedRating()"></app-product-list>
 </div>

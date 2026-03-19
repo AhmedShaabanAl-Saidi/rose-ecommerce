@@ -22,16 +22,19 @@ export class ProductList {
 
   categoryId = input<string | undefined>(undefined);
   occasionId = input<string | undefined>(undefined);
+  rating = input<number | undefined>(undefined);
 
   emptyMessageKey = computed(() => {
     let activeFilters = 0;
     if (this.categoryId()) activeFilters++;
     if (this.occasionId()) activeFilters++;
-
+    if (this.rating() !== undefined) activeFilters++;
+    
     if (activeFilters === 0) return 'There are no products available';
     if (activeFilters === 1) {
       if (this.categoryId()) return 'There are no products in this Category';
       if (this.occasionId()) return 'There are no products for this Occasion';
+      if (this.rating() !== undefined) return 'There are no products with this Rating';
     }
     return 'No products match the selected filters';
   });
@@ -47,8 +50,9 @@ export class ProductList {
     effect(() => {
       const categoryId = this.categoryId();
       const occasionId = this.occasionId();
+      const rating = this.rating();
       this.first.set(0);
-      this.getproducts({ page: 1, limit: this.rows(), categoryId, occasionId });
+      this.getproducts({ page: 1, limit: this.rows(), categoryId, occasionId, rating });
     });
   }
 
@@ -57,11 +61,12 @@ export class ProductList {
     const limit = params.limit ?? this.rows();
     const categoryId = params.categoryId;
     const occasionId = params.occasionId;
+    const rating = params.rating;
 
     this.isLoading.set(true);
 
     this.productsService
-      .getProducts({ page, limit, categoryId, occasionId })
+      .getProducts({ page, limit, categoryId, occasionId, rating })
       .pipe(finalize(() => this.isLoading.set(false)))
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -88,6 +93,6 @@ export class ProductList {
 
     const page = event.page !== undefined ? event.page + 1 : first / rows + 1;
 
-    this.getproducts({ page, limit: rows, categoryId: this.categoryId(), occasionId: this.occasionId() });
+    this.getproducts({ page, limit: rows, categoryId: this.categoryId(), occasionId: this.occasionId(), rating: this.rating() });
   }
 }
