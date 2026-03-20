@@ -11,6 +11,7 @@ import { ProductGalleryComponent } from './components/product-gallery/product-ga
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { ProductReviewsComponent } from './components/product-reviews/product-reviews.component';
 import { RelatedProductComponent } from './components/related-product/related-product.component';
+import { CartService } from '../cart/services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -28,7 +29,7 @@ export class ProductDetailsComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly productService = inject(ProductsService);
   private readonly destroyRef = inject(DestroyRef);
-
+  private readonly cartService = inject(CartService);
   productId = signal<string | null>(null);
   product = signal<Product | null>(null);
   reviews = signal<Review[]>([]);
@@ -91,6 +92,9 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   handleAddToCart(id: string): void {
-    //Implement Add to Cart
+    this.cartService
+      .addToCart(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 }

@@ -10,6 +10,8 @@ import { MenuModule } from 'primeng/menu';
 import { languageService } from '../../../../../services/language-service';
 import { LanguageSwitcherComponent } from '../../../../auth-layout/components/language-switcher/language-switcher.component';
 import { ThemeSwitcherComponent } from '../../../../auth-layout/components/theme-switcher/theme-switcher.component';
+import { CartService } from '../../../../../../../app/feature/cart/services/cart.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-top-navbar',
@@ -30,7 +32,8 @@ export class TopNavbarComponent {
   private readonly authRepo = inject(AuthRepo);
   private readonly translate = inject(TranslateService);
   private readonly language = inject(languageService);
-
+  private readonly cartService = inject(CartService);
+  cartCount = computed(() => this.cartService.cartCount());
   user = this.authState.currentUser;
 
   items = computed<MenuItem[]>(() => {
@@ -66,7 +69,12 @@ export class TopNavbarComponent {
           {
             label: this.translate.instant('NAVBAR.ACCOUNT_MENU.LOGOUT'),
             icon: 'pi pi-sign-out',
-            command: () => this.authRepo.logout().subscribe(),
+            command: () => {
+              this.authRepo
+                .logout()
+                .pipe(tap(() => this.cartService.setDefaultCart()))
+                .subscribe();
+            },
           },
         ],
       },
