@@ -1,5 +1,6 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, computed, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthRepo, AuthState } from '@elevate/auth-domain';
 import { TextInputComponent } from '@elevate/reusable-input';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -11,14 +12,14 @@ import { languageService } from '../../../../../services/language-service';
 import { LanguageSwitcherComponent } from '../../../../auth-layout/components/language-switcher/language-switcher.component';
 import { ThemeSwitcherComponent } from '../../../../auth-layout/components/theme-switcher/theme-switcher.component';
 import { CartService } from '../../../../../../../app/feature/cart/services/cart.service';
-import { tap } from 'rxjs';
-
+import { take, tap } from 'rxjs';
 @Component({
   selector: 'app-top-navbar',
   imports: [
     TextInputComponent,
     LucideAngularModule,
     RouterLink,
+    RouterLinkActive,
     DividerModule,
     LanguageSwitcherComponent,
     TranslatePipe,
@@ -59,7 +60,7 @@ export class TopNavbarComponent {
           {
             label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ORDERS'),
             icon: 'pi pi-shopping-cart',
-            routerLink: '/',
+            routerLink: '/shopping-cart',
           },
           {
             label: this.translate.instant('NAVBAR.ACCOUNT_MENU.DASHBOARD'),
@@ -72,7 +73,10 @@ export class TopNavbarComponent {
             command: () => {
               this.authRepo
                 .logout()
-                .pipe(tap(() => this.cartService.setDefaultCart()))
+                .pipe(
+                  tap(() => this.cartService.setDefaultCart()),
+                  take(1)
+                )
                 .subscribe();
             },
           },
@@ -80,4 +84,13 @@ export class TopNavbarComponent {
       },
     ];
   });
+  private readonly router = inject(Router);
+  private readonly toastrService = inject(ToastrService);
+  navigateToCart() {
+    if (this.user()) {
+      this.router.navigate(['/shopping-cart']);
+    } else {
+      this.toastrService.error('Please Login...');
+    }
+  }
 }

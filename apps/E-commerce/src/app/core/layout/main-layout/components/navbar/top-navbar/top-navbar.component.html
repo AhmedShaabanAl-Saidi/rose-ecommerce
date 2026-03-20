@@ -76,16 +76,25 @@
         <li class="hover:text-maroon-400 cursor-pointer">
           <lucide-icon class="w-5 h-5 lg:w-6 lg:h-6" name="heart"></lucide-icon>
         </li>
-        <li class="hover:text-maroon-400 cursor-pointer relative">
+        <li
+          role="button"
+          tabindex="0"
+          (keydown.enter)="navigateToCart()"
+          (keydown.space)="$event.preventDefault(); navigateToCart()"
+          class="hover:text-maroon-400 cursor-pointer relative"
+          (click)="navigateToCart()"
+          routerLinkActive="text-maroon-400"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           <lucide-icon
             class="w-5 h-5 lg:w-6 lg:h-6"
             name="shopping-cart"
           ></lucide-icon>
           @if (cartCount() > 0) {
           <span
-            class="absolute -top-3 -right-2 bg-red-500 w-full text-center rounded-2xl text-white text-[10px]"
+            class="absolute -top-2 -right-2 bg-red-500 min-w-5 h-5 flex items-center justify-center rounded-full text-white text-[10px] px-1 font-bold border-2 border-bg-main"
           >
-            {{ cartCount() }}
+            {{ cartCount() > 99 ? '99+' : cartCount() }}
           </span>
           }
         </li>
