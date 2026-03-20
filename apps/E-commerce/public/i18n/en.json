@@ -275,6 +275,8 @@
   "PRODUCT_FILTERS": {
     "TITLE": "Filters",
     "SUBTITLE": "Narrow down the catalog and find the right gift faster.",
+    "ERROR_NEGATIVE": "Price cannot be less than 0.",
+    "ERROR_RANGE": "Maximum price must be greater than or equal to minimum price.",
     "ACTIVE": "{{count}} active",
     "ALL_CATEGORIES": "All categories",
     "ALL_OCCASIONS": "All occasions",

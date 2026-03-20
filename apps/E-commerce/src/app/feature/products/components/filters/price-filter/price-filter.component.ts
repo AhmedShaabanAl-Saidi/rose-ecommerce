@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, output, signal } from '@angular/core';
+import { Component, computed, output, signal } from '@angular/core';
 import { FilterResetBtnComponent } from '../filter-reset-btn/filter-reset-btn.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
+
+type PriceError = 'negative' | 'range' | null;
 
 @Component({
   selector: 'app-price-filter',
@@ -9,37 +11,43 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './price-filter.component.html'
 })
 export class PriceFilterComponent {
-  private readonly minPriceGap = 1;
-
   priceFrom = signal<number | null>(null);
-  priceTo = signal<number | null>(null);
-  minimumPriceTo = computed(() => this.priceFrom() === null ? 0 : this.priceFrom()! + this.minPriceGap);
+  priceTo   = signal<number | null>(null);
 
   priceChange = output<{ from?: number; to?: number } | null>();
 
+  readonly validationError = computed<PriceError>(() => {
+    const from = this.priceFrom();
+    const to   = this.priceTo();
+
+    if ((from !== null && from < 0) || (to !== null && to < 0)) {
+      return 'negative';
+    }
+    if (from !== null && to !== null && to < from) {
+      return 'range';
+    }
+    return null;
+  });
+
+  readonly hasValues = computed(
+    () => this.priceFrom() !== null || this.priceTo() !== null
+  );
+
   onPriceFromInput(value: number | null): void {
     this.priceFrom.set(value);
-
-    const currentTo = this.priceTo();
-    if (value !== null && currentTo !== null && currentTo <= value) {
-      this.priceTo.set(value + this.minPriceGap);
-    }
   }
 
   onPriceToInput(value: number | null): void {
-    const currentFrom = this.priceFrom();
-
-    if (value !== null && currentFrom !== null && value <= currentFrom) {
-      this.priceTo.set(currentFrom + this.minPriceGap);
-      return;
-    }
-
     this.priceTo.set(value);
   }
 
   onPriceChange(): void {
+    if (this.validationError()) {
+      return;
+    }
+
     const from = this.priceFrom() ?? undefined;
-    const to = this.priceTo() ?? undefined;
+    const to   = this.priceTo()   ?? undefined;
 
     if (from === undefined && to === undefined) {
       this.priceChange.emit(null);
