@@ -31,7 +31,10 @@
           </span>
         </span>
         <span class="text-blue-600 dark:text-blue-400 font-medium">
-          {{ 'CART.RATINGS_COUNT' | translate: { count: cartItem().product.rateCount } }}
+          {{
+            'CART.RATINGS_COUNT'
+              | translate : { count: cartItem().product.rateCount }
+          }}
         </span>
       </div>
     </div>
@@ -45,7 +48,8 @@
       >
         {{ cartItem().price }}
       </span>
-      <span class="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase"
+      <span
+        class="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase"
         >{{ 'CURRENCY' | translate }}</span
       >
     </div>
@@ -64,12 +68,8 @@
     <div class="flex items-center gap-3">
       <lib-button
         [disabled]="cartItem().quantity <= 1"
-        (click)="
-          cartItem().quantity > 1 &&
-            updateProductQuantity(
-              cartItem().product._id,
-              cartItem().quantity - 1
-            )
+        (buttonClick)="
+          updateProductQuantity(cartItem().product._id, cartItem().quantity - 1)
         "
         [icon]="'minus'"
         [variant]="'secondary'"
@@ -83,7 +83,7 @@
 
       <lib-button
         [disabled]="cartItem().quantity === cartItem().product.quantity"
-        (click)="
+        (buttonClick)="
           updateProductQuantity(cartItem().product._id, cartItem().quantity + 1)
         "
         [icon]="'plus'"
