@@ -1,11 +1,13 @@
 <div class="flex justify-between items-center">
   <div class="flex items-baseline gap-2">
     <h2
-      class="text-5xl font-bold text-zinc-800 dark:text-zinc-100 transition-colors"
+      class="text-2xl lg:text-5xl font-bold text-zinc-800 dark:text-zinc-100 transition-colors"
     >
-      Cart
+      {{ 'CART.TITLE' | translate }}
     </h2>
-    <span class="text-zinc-400">{{ cartCount() }} Products</span>
+    <span class="text-zinc-400">{{
+      'CART.PRODUCTS_COUNT' | translate : { count: cartCount() }
+    }}</span>
   </div>
 
   @if (cart()?.cartItems && cart()?.cartItems!.length > 0) {
@@ -15,7 +17,7 @@
     [icon]="'brush-cleaning'"
     class="custom-btn"
   >
-    Clear Cart
+    {{ 'CART.CLEAR_CART' | translate }}
   </lib-button>
   }
 </div>
@@ -33,7 +35,7 @@
 }
 
 <div class="mt-4">
-  <lib-button [icon]="'move-left'" [routerLink]="'/products'"
-    >Continue Shopping</lib-button
-  >
+  <lib-button [icon]="'move-left'" [routerLink]="'/products'">{{
+    'CART.CONTINUE_SHOPPING' | translate
+  }}</lib-button>
 </div>

@@ -25,13 +25,13 @@
           class="text-orange-400 fill-amber-500 w-4 h-4"
         ></lucide-icon>
         <span class="text-zinc-600 dark:text-zinc-400">
-          Rating:
+          {{ 'CART.RATING' | translate }}
           <span class="font-medium text-zinc-800 dark:text-zinc-200">
             {{ cartItem().product.rateAvg }}/5
           </span>
         </span>
         <span class="text-blue-600 dark:text-blue-400 font-medium">
-          ({{ cartItem().product.rateCount }} ratings)
+          {{ 'CART.RATINGS_COUNT' | translate: { count: cartItem().product.rateCount } }}
         </span>
       </div>
     </div>
@@ -46,7 +46,7 @@
         {{ cartItem().price }}
       </span>
       <span class="text-sm font-bold text-zinc-600 dark:text-zinc-400 uppercase"
-        >EGP</span
+        >{{ 'CURRENCY' | translate }}</span
       >
     </div>
   </div>
@@ -58,7 +58,7 @@
       [block]="true"
       [variant]="'destructive'"
     >
-      Remove
+      {{ 'CART.REMOVE_ITEM' | translate }}
     </lib-button>
 
     <div class="flex items-center gap-3">

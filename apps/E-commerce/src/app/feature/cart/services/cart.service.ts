@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
@@ -11,6 +12,7 @@ import { Cart, ICartResponse, IClearCart } from '../interfaces/cart.interface';
 export class CartService {
   private readonly _httpClient = inject(HttpClient);
   private _toastrService = inject(ToastrService);
+  private _translateService = inject(TranslateService);
   private _cart = signal<Cart | null>(null);
   private _cartCount = signal<number>(0);
 
@@ -31,7 +33,9 @@ export class CartService {
       .pipe(
         tap((res) => {
           this.updateState(res);
-          this._toastrService.success(`Product Added Successfully`);
+          this._toastrService.success(
+            this._translateService.instant('CART.ADD_SUCCESS')
+          );
         })
       );
   }
@@ -44,7 +48,9 @@ export class CartService {
       .pipe(
         tap((res) => {
           this.updateState(res);
-          this._toastrService.success(`Product Updated Successfully`);
+          this._toastrService.success(
+            this._translateService.instant('CART.UPDATE_SUCCESS')
+          );
         })
       );
   }
@@ -65,7 +71,9 @@ export class CartService {
       .pipe(
         tap((res) => {
           this.updateState(res);
-          this._toastrService.success(`Product Removed Successfully`);
+          this._toastrService.success(
+            this._translateService.instant('CART.REMOVE_SUCCESS')
+          );
         })
       );
   }
@@ -76,7 +84,9 @@ export class CartService {
       .pipe(
         tap(() => {
           this.setDefaultCart();
-          this._toastrService.success(`Clear Cart Successfully`);
+          this._toastrService.success(
+            this._translateService.instant('CART.CLEAR_SUCCESS')
+          );
         })
       );
   }
