@@ -86,10 +86,9 @@ export class TopNavbarComponent {
   });
   private readonly router = inject(Router);
   private readonly toastrService = inject(ToastrService);
-  navigateToCart() {
-    if (this.user()) {
-      this.router.navigate(['/shopping-cart']);
-    } else {
+  navigateToCart(event: Event) {
+    if (!this.user()) {
+      event.preventDefault();
       this.toastrService.error('Please Login...');
     }
   }

@@ -79,11 +79,12 @@
         <li
           role="button"
           tabindex="0"
-          (keydown.enter)="navigateToCart()"
-          (keydown.space)="$event.preventDefault(); navigateToCart()"
+          (keydown.enter)="navigateToCart($event)"
+          (keydown.space)="$event.preventDefault(); navigateToCart($event)"
           class="hover:text-maroon-400 cursor-pointer relative"
-          (click)="navigateToCart()"
+          (click)="navigateToCart($event)"
           routerLinkActive="text-maroon-400"
+          routerLink="/shopping-cart"
           [routerLinkActiveOptions]="{ exact: true }"
         >
           <lucide-icon

@@ -9,6 +9,10 @@ import { CartService } from './../../../../services/cart.service';
 @Component({
   selector: 'app-cart-item',
   imports: [LucideAngularModule, ButtonComponent, NgOptimizedImage],
+  host: {
+    class:
+      'block border-b border-zinc-200 dark:border-zinc-800 last:border-0 pb-5 last:pb-0 transition-colors',
+  },
   templateUrl: './cart-item.component.html',
 })
 export class CartItemComponent {
