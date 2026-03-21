@@ -1,0 +1,32 @@
+<div class="flex justify-between items-center">
+  <div class="flex items-baseline gap-2">
+    <h2 class="text-5xl font-bold text-zinc-800">Cart</h2>
+    <span class="text-zinc-400">{{ cartCount() }} Products</span>
+  </div>
+  @if (cart()?.cartItems && cart()?.cartItems!.length > 0) {
+  <lib-button
+    (click)="clearCart()"
+    [variant]="'secondary'"
+    [icon]="'brush-cleaning'"
+    class="custom-btn"
+  >
+    Clear Cart
+  </lib-button>
+  }
+</div>
+
+@if (cart()?.cartItems && cart()?.cartItems!.length > 0) {
+<div class="flex flex-col gap-5 my-5 border border-zinc-200 rounded-2xl p-5">
+  @for (item of cart()?.cartItems; track item._id; let first = $first) {
+  <app-cart-item [cartItem]="item" [isFirst]="first" />
+  }
+</div>
+} @else {
+<app-empty-cart />
+}
+
+<div class="mt-4">
+  <lib-button [icon]="'move-left'" [routerLink]="'/products'"
+    >Continue Shopping</lib-button
+  >
+</div>

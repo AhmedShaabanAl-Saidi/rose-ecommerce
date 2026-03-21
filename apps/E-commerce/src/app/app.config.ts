@@ -25,6 +25,7 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   AlertCircle,
   Bell,
+  BrushCleaning,
   ChevronDown,
   Eye,
   EyeOff,
@@ -34,10 +35,15 @@ import {
   Lock,
   LucideAngularModule,
   MapPin,
+  Minus,
+  MoveLeft,
   Package,
+  Plus,
   Search,
   ShoppingCart,
   Star,
+  Trash,
+  Trash2,
   UserRound,
 } from 'lucide-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -106,6 +112,11 @@ export const appConfig: ApplicationConfig = {
         Bell,
         MapPin,
         Package,
+        BrushCleaning,
+        MoveLeft,
+        Trash2,
+        Minus,
+        Plus,
       })
     ),
     providePrimeNG({
