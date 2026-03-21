@@ -14,13 +14,18 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withInMemoryScrolling,
+} from '@angular/router';
 import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   AlertCircle,
   Bell,
+  BrushCleaning,
   ChevronDown,
   Eye,
   EyeOff,
@@ -30,10 +35,15 @@ import {
   Lock,
   LucideAngularModule,
   MapPin,
+  Minus,
+  MoveLeft,
   Package,
+  Plus,
   Search,
   ShoppingCart,
   Star,
+  Trash,
+  Trash2,
   UserRound,
 } from 'lucide-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -45,11 +55,13 @@ import { provideLanguageInitializer } from './core/initializers/language.initial
 import { provideThemeInitializer } from './core/initializers/theme.initializer';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
+import { provideCartInitializer } from './core/initializers/cart.initializer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideThemeInitializer(),
     provideLanguageInitializer(),
+    provideCartInitializer(),
     provideAnimationsAsync(),
     provideClientHydration(withEventReplay()),
     provideBrowserGlobalErrorListeners(),
@@ -100,6 +112,11 @@ export const appConfig: ApplicationConfig = {
         Bell,
         MapPin,
         Package,
+        BrushCleaning,
+        MoveLeft,
+        Trash2,
+        Minus,
+        Plus,
       })
     ),
     providePrimeNG({

@@ -1,0 +1,41 @@
+<div class="flex justify-between items-center">
+  <div class="flex items-baseline gap-2">
+    <h2
+      class="text-2xl lg:text-5xl font-bold text-zinc-800 dark:text-zinc-100 transition-colors"
+    >
+      {{ 'CART.TITLE' | translate }}
+    </h2>
+    <span class="text-zinc-400">{{
+      'CART.PRODUCTS_COUNT' | translate : { count: cartCount() }
+    }}</span>
+  </div>
+
+  @if (cart()?.cartItems && cart()?.cartItems!.length > 0) {
+  <lib-button
+    (click)="clearCart()"
+    [variant]="'secondary'"
+    [icon]="'brush-cleaning'"
+    class="custom-btn"
+  >
+    {{ 'CART.CLEAR_CART' | translate }}
+  </lib-button>
+  }
+</div>
+
+@if (cart()?.cartItems && cart()?.cartItems!.length > 0) {
+<div
+  class="flex flex-col gap-5 my-5 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 bg-white dark:bg-zinc-900/50 transition-all"
+>
+  @for (item of cart()?.cartItems; track item._id; let first = $first) {
+  <app-cart-item [cartItem]="item" [isFirst]="first" />
+  }
+</div>
+} @else {
+<app-empty-cart />
+}
+
+<div class="mt-4">
+  <lib-button [icon]="'move-left'" [routerLink]="'/products'">{{
+    'CART.CONTINUE_SHOPPING' | translate
+  }}</lib-button>
+</div>

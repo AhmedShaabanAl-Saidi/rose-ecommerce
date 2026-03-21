@@ -290,5 +290,21 @@
     "APPLY": "Apply",
     "RESET": "Reset",
     "RESET_ALL": "Reset all"
+  },
+  "CART": {
+    "TITLE": "Cart",
+    "PRODUCTS_COUNT": "{{count}} Products",
+    "CLEAR_CART": "Clear Cart",
+    "CONTINUE_SHOPPING": "Continue Shopping",
+    "EMPTY_MESSAGE": "Your cart is empty, wanna try shopping?",
+    "REMOVE_ITEM": "Remove",
+    "RATING": "Rating:",
+    "RATINGS_COUNT": "({{count}} ratings)",
+    "LIKED_PRODUCTS_TITLE": "Products You May Like",
+    "LIKED_PRODUCT_NOT_FOUND":"No Products available at the moment.",
+    "ADD_SUCCESS": "Product Added Successfully",
+    "UPDATE_SUCCESS": "Product Updated Successfully",
+    "REMOVE_SUCCESS": "Product Removed Successfully",
+    "CLEAR_SUCCESS": "Clear Cart Successfully"
   }
 }
