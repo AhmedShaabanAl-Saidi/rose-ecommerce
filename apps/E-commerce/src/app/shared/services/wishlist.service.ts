@@ -62,7 +62,8 @@ export class WishlistService {
             }
           }
 
-          const ids = new Set(productsArray.map((p) => p._id || p.id));
+          const rawIds = productsArray.map((p) => p._id || (p as unknown as {id?: string}).id);
+          const ids = new Set(rawIds.filter((id): id is string => !!id));
           this._wishlistIds.set(ids);
           this._wishlistProducts.set(productsArray);
           this._isLoading.set(false);
