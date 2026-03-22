@@ -42,7 +42,7 @@ export class TopNavbarComponent {
   constructor() {
     effect(() => {
       if (this.user()) {
-        this.wishlistService.loadWishlist();
+        this.wishlistService.loadWishlist().pipe(take(1)).subscribe();
       }
     });
   }

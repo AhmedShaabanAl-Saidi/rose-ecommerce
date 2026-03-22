@@ -1,4 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
@@ -20,20 +21,25 @@ export class WishlistComponent implements OnInit {
   readonly wishlistService = inject(WishlistService);
   private readonly router = inject(Router);
   readonly productsService = inject(ProductsService);
+  private readonly destroyRef = inject(DestroyRef);
 
   recommendedProducts = signal<Product[]>([]);
 
   ngOnInit(): void {
-    this.wishlistService.loadWishlist();
+    this.wishlistService.loadWishlist()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
     this.loadRecommendedProducts();
   }
 
   loadRecommendedProducts(): void {
-    this.productsService.getProducts({ limit: 8 }).subscribe({
-      next: (res) => {
-        this.recommendedProducts.set(res.products);
-      }
-    });
+    this.productsService.getProducts({ limit: 8 })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          this.recommendedProducts.set(res.products);
+        }
+      });
   }
 
   browseProducts(): void {

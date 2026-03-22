@@ -91,7 +91,9 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   handleToggleWishlist(id: string): void {
-    this.wishlistService.toggleWishlist(id);
+    this.wishlistService.toggleWishlist(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 
   handleAddToCart(id: string): void {

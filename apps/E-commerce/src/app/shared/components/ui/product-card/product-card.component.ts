@@ -68,7 +68,9 @@ export class ProductCardComponent {
   }
 
   addToWishList(): void {
-    this.wishlistService.toggleWishlist(this.product()._id);
+    this.wishlistService.toggleWishlist(this.product()._id)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe();
   }
 
   showProductDetails(): void {
