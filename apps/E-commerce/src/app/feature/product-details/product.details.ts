@@ -8,7 +8,6 @@ import { Product } from '../../shared/components/ui/product-card/interface/produ
 import { Review } from '../products/interfaces/review';
 import { ProductsService } from '../products/services/product';
 import { WishlistService } from '../../shared/services/wishlist.service';
-import { CartService } from '../../shared/services/cart.service';
 import { ProductGalleryComponent } from './components/product-gallery/product-gallery.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { ProductReviewsComponent } from './components/product-reviews/product-reviews.component';
