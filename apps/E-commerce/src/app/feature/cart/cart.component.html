@@ -1,14 +1,17 @@
 <section>
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-15">
-    <div class="col-span-3">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-5 mb-15">
+    <div class="md:col-span-8">
       <app-cart-details
         [cart]="cart()"
         [cartCount]="cartCount()"
       ></app-cart-details>
     </div>
-    <!-- 
+    <!--
     Copunouns
     -->
+    <div class="md:col-span-4">
+      <app-coupon />
+    </div>
   </div>
   <app-product-liked></app-product-liked>
 </section>

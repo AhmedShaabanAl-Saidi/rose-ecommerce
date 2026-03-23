@@ -2,10 +2,11 @@ import { Component, computed, inject } from '@angular/core';
 import { CartService } from './services/cart.service';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { ProductLikedComponent } from './components/product-liked/product-liked.component';
+import { CouponComponent } from '../products/coupon/component/coupon';
 
 @Component({
   selector: 'app-cart',
-  imports: [CartDetailsComponent, ProductLikedComponent],
+  imports: [CartDetailsComponent, ProductLikedComponent,CouponComponent],
   templateUrl: './cart.component.html',
 })
 export class CartComponent {
