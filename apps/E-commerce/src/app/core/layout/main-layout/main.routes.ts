@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from '@elevate/auth-data-access';
 import { MainLayoutComponent } from './main-layout.component';
 
 export const mainRoutes: Routes = [
@@ -14,16 +15,29 @@ export const mainRoutes: Routes = [
       },
       {
         path: 'products',
-        loadComponent: () =>
-          import('../../../feature/products/products.component').then(
-            (m) => m.ProductsComponent
-          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('../../../feature/products/products.component').then(
+                (m) => m.ProductsComponent
+              ),
+          },
+          {
+            path: ':id',
+            loadComponent: () =>
+              import('../../../feature/product-details/product.details').then(
+                (m) => m.ProductDetailsComponent
+              ),
+          },
+        ],
       },
       {
-        path: 'products-details/:id',
+        path: 'shopping-cart',
+        canActivate: [authGuard],
         loadComponent: () =>
-          import('../../../feature/product-details/product.details').then(
-            (m) => m.ProductDetailsComponent
+          import('../../../feature/cart/cart.component').then(
+            (m) => m.CartComponent
           ),
       },
     ],

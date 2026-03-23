@@ -55,3 +55,6 @@ vitest.config.*.timestamp*
 .github/agents/
 AGENTS.md
 opencode.json
+.nx/polygraph
+.claude/worktrees
+.claude/settings.local.json

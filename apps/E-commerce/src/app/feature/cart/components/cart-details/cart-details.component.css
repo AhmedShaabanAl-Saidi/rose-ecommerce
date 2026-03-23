@@ -1,0 +1,3 @@
+:host ::ng-deep lib-button.custom-btn button {
+  padding-inline: 40px;
+}

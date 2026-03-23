@@ -252,11 +252,73 @@
     "REVIEW_TITLE_PLACEHOLDER": "أدخل عنوان التقييم",
     "REVIEW": "التقييم",
     "REVIEW_PLACEHOLDER": "ما رأيك في هذا المنتج؟",
+    "LOGIN_TO_REVIEW": "يرجى تسجيل الدخول لإضافة تقييم",
     "ADD_REVIEW": "إضافة تقييم"
   },
   "RELATED_PRODUCTS": {
     "TITLE": "منتجات ذات صلة",
     "NO_DATA": "لا توجد منتجات ذات صلة حالياً."
-
+  },
+  "Category": "التصنيف",
+  "Reset": "إعادة ضبط",
+  "Reset All": "إعادة ضبط الكل",
+  "Occasion": "المناسبة",
+  "Rating": "التقييم",
+  "Price": "السعر",
+  "from": "من",
+  "to": "إلى",
+  "There are no products in this Category": "لا توجد منتجات في هذا التصنيف",
+  "There are no products for this Occasion": "لا توجد منتجات لهذه المناسبة",
+  "There are no products with this Rating": "لا توجد منتجات بهذا التقييم",
+  "There are no products in this Price range": "لا توجد منتجات في هذا النطاق السعري",
+  "No products match the selected filters": "لا توجد منتجات تطابق الفلاتر المحددة",
+  "There are no products available": "لا توجد منتجات متاحة",
+  "PRODUCT_FILTERS": {
+    "TITLE": "الفلاتر",
+    "SUBTITLE": "خصص النتائج واعثر على الهدية المناسبة بسرعة.",
+    "ERROR_NEGATIVE": "لا يمكن أن يكون السعر أقل من صفر.",
+    "ERROR_RANGE": "الحد الأقصى للسعر يجب أن يكون أكبر من الحد الأدنى.",
+    "ACTIVE": "{{count}} فلاتر مفعلة",
+    "ALL_CATEGORIES": "كل التصنيفات",
+    "ALL_OCCASIONS": "كل المناسبات",
+    "PRICE_RANGE": "نطاق السعر",
+    "PRICE_HINT": "حرّك المؤشرين لتحديد الميزانية المناسبة.",
+    "MIN_PRICE": "الحد الأدنى",
+    "MAX_PRICE": "الحد الأقصى",
+    "OPEN": "الفلاتر",
+    "SHOW_TABLET": "إظهار الفلاتر",
+    "HIDE_TABLET": "إخفاء الفلاتر",
+    "APPLY": "تطبيق",
+    "RESET": "إعادة ضبط",
+    "RESET_ALL": "إعادة ضبط الكل"
+  },
+  "CART": {
+    "TITLE": "عربة التسوق",
+    "PRODUCTS_COUNT": "{{count}} منتجات",
+    "CLEAR_CART": "مسح العربة",
+    "CONTINUE_SHOPPING": "متابعة التسوق",
+    "EMPTY_MESSAGE": "عربة التسوق فارغة، هل تود تجربة التسوق؟",
+    "REMOVE_ITEM": "إزالة",
+    "RATING": "التقييم:",
+    "RATINGS_COUNT": "({{count}} تقييمات)",
+    "LIKED_PRODUCTS_TITLE": "منتجات قد تعجبك",
+    "LIKED_PRODUCT_NOT_FOUND":"لا توجد منتجات حالياً.",
+    "ADD_SUCCESS": "تم إضافة المنتج بنجاح",
+    "UPDATE_SUCCESS": "تم تحديث المنتج بنجاح",
+    "REMOVE_SUCCESS": "تم إزالة المنتج بنجاح",
+    "CLEAR_SUCCESS": "تم مسح العربة بنجاح"
+  },
+  "NOT_FOUND": {
+    "TITLE": "هل ضللت الطريق؟",
+    "DESCRIPTION": "الصفحة التي تبحث عنها قد تم نقلها أو لم تعد موجودة. دعنا نساعدك في العودة لتجد الهدية المثالية.",
+    "BACK_TO_HOME": "العودة للرئيسية",
+    "BROWSE_PRODUCTS": "تصفح المنتجات"
+  },
+  "ERRORS": {
+      "UNEXPECTED": "حدث خطأ غير متوقع",
+      "NETWORK": "خطأ في الشبكة: يرجى التحقق من اتصالك",
+      "SERVER": "خطأ في الخادم: يرجى المحاولة مرة أخرى لاحقاً",
+      "UNAUTHORIZED": "يرجى تسجيل الدخول أولاً",
+      "FORBIDDEN": "ليس لديك صلاحية الوصول إلى هذه الصفحة"
   }
 }

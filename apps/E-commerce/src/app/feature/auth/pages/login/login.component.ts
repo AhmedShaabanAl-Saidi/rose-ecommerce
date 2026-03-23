@@ -1,3 +1,4 @@
+import { CartService } from './../../../cart/services/cart.service';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
@@ -15,7 +16,7 @@ import {
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { finalize } from 'rxjs';
+import { finalize, switchMap } from 'rxjs';
 import {
   AuthPage,
   AuthPageData,
@@ -39,7 +40,7 @@ export class LoginComponent implements AuthPage {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private readonly toastr = inject(ToastrService);
-
+  private readonly cartService = inject(CartService);
   readonly authData = signal<AuthPageData>(authConfig.login);
 
   readonly isLoading = signal(false);
@@ -63,19 +64,22 @@ export class LoginComponent implements AuthPage {
     }
 
     this.isLoading.set(true);
-
     const { rememberMe, ...payload } = this.loginForm.getRawValue();
 
     this.auth
       .login(payload, rememberMe)
       .pipe(
+        switchMap((res: AuthModel) => {
+          this.toastr.success(res.message);
+          this.loginForm.reset();
+
+          return this.cartService.getLoggedUserCart();
+        }),
         takeUntilDestroyed(this.destroyRef),
         finalize(() => this.isLoading.set(false))
       )
       .subscribe({
-        next: (res: AuthModel) => {
-          this.loginForm.reset();
-          this.toastr.success(res.message);
+        next: () => {
           this.router.navigate(['/home']);
         },
       });

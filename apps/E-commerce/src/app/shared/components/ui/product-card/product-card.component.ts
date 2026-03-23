@@ -1,10 +1,12 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, DestroyRef, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { Product } from './interface/product';
+import { CartService } from '../../../../../app/feature/cart/services/cart.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-product-card',
@@ -14,7 +16,8 @@ import { Product } from './interface/product';
 })
 export class ProductCardComponent {
   product = input.required<Product>();
-
+  private readonly _cartService = inject(CartService);
+  private readonly _destroyRef = inject(DestroyRef);
   readonly ICON_SIZE = 18;
   readonly ICON_STROKE = 2;
   readonly EYE_ICON_SIZE = 22;
@@ -54,7 +57,10 @@ export class ProductCardComponent {
   }
 
   addToCart(): void {
-    // Implement add to cart functionality here
+    this._cartService
+      .addToCart(this.product()._id)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe();
   }
 
   addToWishList(): void {
@@ -62,6 +68,6 @@ export class ProductCardComponent {
   }
 
   showProductDetails(): void {
-    this.router.navigate(['products-details', this.product()._id]);
+    this.router.navigate(['/products', this.product()._id]);
   }
 }
