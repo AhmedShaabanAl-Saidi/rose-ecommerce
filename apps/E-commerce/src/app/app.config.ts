@@ -27,11 +27,13 @@ import {
   Bell,
   BrushCleaning,
   ChevronDown,
+  Compass,
   Eye,
   EyeOff,
   Heart,
   HeartMinus,
   HeartPlus,
+  House,
   Lock,
   LucideAngularModule,
   MapPin,
@@ -40,11 +42,13 @@ import {
   Package,
   Plus,
   Search,
+  ShoppingBag,
   ShoppingCart,
   Star,
   Trash,
   Trash2,
   UserRound,
+  Zap,
 } from 'lucide-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
@@ -117,6 +121,10 @@ export const appConfig: ApplicationConfig = {
         Trash2,
         Minus,
         Plus,
+        Compass,
+        Zap,
+        House,
+        ShoppingBag,
       })
     ),
     providePrimeNG({
