@@ -88,7 +88,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideToastr({
       closeButton: true,
-      timeOut: 3000,
+      timeOut: 1500,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),

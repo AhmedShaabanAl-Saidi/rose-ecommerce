@@ -279,5 +279,12 @@
     "TITLE": "Lost in the Gift Shop?",
     "DESCRIPTION": "The page you're looking for has moved or no longer exists. Let's get you back to finding the perfect gift.",
     "BACK_TO_HOME": "Back to Home"
+  },
+  "ERRORS": {
+      "UNEXPECTED": "An unexpected error occurred",
+      "NETWORK": "Network error: Please check your connection",
+      "SERVER": "Server error: Please try again later",
+      "UNAUTHORIZED": "Please login first",
+      "FORBIDDEN": "You don't have permission to access this page"
   }
 }

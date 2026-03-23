@@ -23,5 +23,6 @@ export const appRoutes: Route[] = [
   {
     path: '**',
     redirectTo: 'not-found',
+    pathMatch: 'full',
   },
 ];
