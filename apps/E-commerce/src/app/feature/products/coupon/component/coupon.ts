@@ -1,44 +1,48 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, signal, computed } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { CouponService } from "../services/coupon";
+import { TranslateModule } from "@ngx-translate/core";
+import { ButtonComponent } from "@elevate/reusable-ui";
+import { CartService } from "../../../cart/services/cart.service";
 
 @Component({
   selector: 'app-coupon',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TranslateModule, ButtonComponent],
   templateUrl: './coupon.html'
 })
 export class CouponComponent {
+  private readonly couponService = inject(CouponService);
+  private readonly cartService = inject(CartService);
 
 
-  couponCode: string = '';
-  isCouponValid: boolean = false;
-  couponError: string = '';
-  discountAmount: number = 125;
-  subtotal: number = 250;
-  isApplying: boolean = false;
+  couponCode = signal('');
+  isApplying = signal(false);
+  couponError = signal('');
 
-  private couponService = inject(CouponService);
+  cart = computed(() => this.cartService.cart());
+
+  subtotal = computed(() => this.cart()?.totalPrice ??0);
+  discount = computed(() => this.cart()?.discount ?? 0);
+  total = computed(() => this.cart()?.totalPriceAfterDiscount ?? this.subtotal());
+
+  appliedCoupons = computed(() => this.cart()?.appliedCoupons ?? []);
 
   applyCoupon(): void {
-    if (!this.couponCode) return;
+    const code = this.couponCode().trim();
+    if (!code) return;
 
-    this.isApplying = true;
+    this.isApplying.set(true);
+    this.couponError.set('');
 
-    this.couponService.validateCoupon(this.couponCode).subscribe({
-      next: (res: any) => {
-        this.isCouponValid = true;
-        this.couponError = '';
-        this.discountAmount = res.discountValue || 0;
-
-        this.isApplying = false;
+    this.couponService.applyCoupon(code).subscribe({
+      next: () => {
+        this.isApplying.set(false);
+        this.couponCode.set('');
       },
-      error: () => {
-        this.isCouponValid = false;
-        this.couponError = 'Invalid coupon';
-        this.discountAmount = 0;
-
-        this.isApplying = false;
+      error: (err) => {
+        this.isApplying.set(false);
+        this.couponError.set(err.error?.message || 'Invalid Coupon');
       }
     });
   }

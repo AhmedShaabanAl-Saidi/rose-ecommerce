@@ -1,33 +1,26 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
+import { computed, inject, Injectable, signal } from "@angular/core";
 import { environment } from "apps/E-commerce/src/environments/environments";
+import { Observable, tap } from "rxjs";
+import { CartService } from "../../../cart/services/cart.service";
+import { Cart, ICartResponse } from "../../../cart/interfaces/cart.interface";
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class CouponService {
-   private baseUrl = environment.baseUrl;
-  private _http = inject(HttpClient);
+  private readonly baseUrl = environment.baseUrl;
+  private readonly _http = inject(HttpClient);
+  private readonly _cartService = inject(CartService);
 
 
-  validateCoupon(code: string) {
-  const token = localStorage.getItem('token');
-  return this._http.post(
-    `${this.baseUrl}/coupons/validate`,
-    { code },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
-  );
+
+  applyCoupon(code: string): Observable<ICartResponse> {
+    return this._http.post<ICartResponse>(`${this.baseUrl}/cart/applyCoupon`, { code })
+      .pipe(
+        tap(() => {
+          this._cartService.getLoggedUserCart().subscribe();
+        })
+      );
+  }
 }
-
-applyCoupon(code: string) {
-  return this._http.post(`${this.baseUrl}/coupons/apply`, { code });
-}
-
-}
-
-

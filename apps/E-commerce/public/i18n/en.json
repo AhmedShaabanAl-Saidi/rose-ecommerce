@@ -306,8 +306,17 @@
     "ADD_SUCCESS": "Product Added Successfully",
     "UPDATE_SUCCESS": "Product Updated Successfully",
     "REMOVE_SUCCESS": "Product Removed Successfully",
-    "CLEAR_SUCCESS": "Clear Cart Successfully"
+    "CLEAR_SUCCESS": "Clear Cart Successfully",
+    "SUMMARY": "Summary",
+    "COUPON_PLACHOLDER": "Coupon Code",
+    "APPLY_BTN": "Apply Coupon",
+    "NO_COUPON": "No coupons applied",
+    "SUBTOTAL": "Subtotal",
+    "TOTAL_DISCOUNT": "Discount",
+    "ORDER_TOTAL": "Total",
+    "PROCEED_CHECKOUT": "Checkout"
   },
+
   "NOT_FOUND": {
     "TITLE": "Lost in the Gift Shop?",
     "DESCRIPTION": "The page you're looking for has moved or no longer exists. Let's get you back to finding the perfect gift.",

@@ -1,59 +1,69 @@
-<section>
-  <div class="col-span-4">
-    <div
-      class="bg-white rounded-2xl border border-gray-200 p-5 space-y-6 shadow-sm"
-    >
-      <h3 class="text-lg font-semibold">Summary</h3>
+<div class="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 space-y-6 shadow-sm">
+  <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">
+    {{ 'CART.SUMMARY_TITLE' | translate }}
+  </h3>
 
-      <!-- Coupon -->
-      <div class="flex gap-2">
-        <input
-          type="text"
-          [(ngModel)]="couponCode"
-          placeholder="Coupon Code"
-          class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:right-2 focus:ring-red-400"
-        />
+  <div class="space-y-2">
+    <div class="flex gap-2">
+      <input
+        type="text"
+        [ngModel]="couponCode()"
+        (ngModelChange)="couponCode.set($event)"
+        [placeholder]="'CART.COUPON_PLACEHOLDER' | translate"
+        class="flex-1 border border-zinc-200 dark:border-zinc-700 rounded-lg px-4 py-2 text-sm bg-transparent focus:ring-2 focus:ring-maroon-500 outline-none transition-all"
+      />
 
-        <button
-          (click)="applyCoupon()"
-          class="bg-red-600 hover:bg-red-700 text-white px-4 rounded-lg text-sm font-medium"
-        >
-          Apply Coupon
-        </button>
-      </div>
-
-      <!-- Empty state -->
-      <div
-        class="border rounded-xl h-32 flex items-center justify-center text-gray-400 text-sm"
+      <lib-button
+        (buttonClick)="applyCoupon()"
+        [loading]="isApplying()"
+        [variant]="'primary'"
+        class="whitespace-nowrap"
       >
-        No coupons applied
+        {{ 'CART.APPLY_BTN' | translate }}
+      </lib-button>
+    </div>
+    @if (couponError()) {
+      <p class="text-xs text-red-500 font-medium">{{ couponError() }}</p>
+    }
+  </div>
+
+  <div class="flex flex-wrap gap-2">
+    @for (applied of appliedCoupons(); track applied._id) {
+      <div class="flex items-center gap-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 px-3 py-1 rounded-full text-xs font-bold border border-green-200 dark:border-green-800">
+        <i class="lucide-ticket size-3"></i>
+        {{ applied.coupon.code }}
+        <span>(-{{ applied.discountAmount }} {{ 'CURRENCY' | translate }})</span>
       </div>
+    }
+  </div>
 
-      <!-- Prices -->
-      <div class="space-y-2 text-sm">
-        <div class="flex justify-between">
-          <span>Subtotal</span>
-          <span>{{ subtotal }} EGP</span>
-        </div>
+  <div class="space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+    <div class="flex justify-between text-sm">
+      <span class="text-zinc-500">{{ 'CART.SUBTOTAL' | translate }}</span>
+      <span class="font-semibold text-zinc-800 dark:text-zinc-200">{{ subtotal() }} {{ 'CURRENCY' | translate }}</span>
+    </div>
 
-        <div class="flex justify-between text-green-600">
-          <span>Discount</span>
-          <span>-{{ discountAmount }} EGP</span>
-        </div>
-
-        <div class="flex justify-between font-semibold text-base">
-          <span>Total</span>
-          <span>{{ subtotal - discountAmount }} EGP</span>
-        </div>
+    @if (discount() > 0) {
+      <div class="flex justify-between text-sm text-green-600 font-bold">
+        <span>{{ 'CART.TOTAL_DISCOUNT' | translate }}</span>
+        <span>-{{ discount() }} {{ 'CURRENCY' | translate }}</span>
       </div>
+    }
 
-      <!-- Checkout -->
-      <button
-        [disabled]="!isCouponValid"
-        class="w-full mt-3 py-3 rounded-xl text-white font-semibold transition bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
-      >
-        Checkout →
-      </button>
+    <div class="flex justify-between items-center pt-2 border-t border-zinc-100 dark:border-zinc-800">
+      <span class="text-base font-bold text-zinc-800 dark:text-zinc-100">{{ 'CART.ORDER_TOTAL' | translate }}</span>
+      <span class="text-2xl font-black text-maroon-700 dark:text-maroon-400">
+        {{ total() }} {{ 'CURRENCY' | translate }}
+      </span>
     </div>
   </div>
-</section>
+
+  <lib-button
+    [block]="true"
+    [variant]="'primary'"
+    size="lg"
+    class="w-full mt-4"
+  >
+    {{ 'CART.PROCEED_CHECKOUT' | translate }}
+  </lib-button>
+</div>
