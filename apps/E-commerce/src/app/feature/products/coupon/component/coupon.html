@@ -1,6 +1,6 @@
-<div class="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 space-y-6 shadow-sm">
+<div class="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 space-y-6 shadow-sm transition-colors duration-300">
   <h3 class="text-lg font-bold text-zinc-800 dark:text-zinc-100">
-    {{ 'CART.SUMMARY_TITLE' | translate }}
+    {{ 'SUMMARY' | translate }}
   </h3>
 
   <div class="space-y-2">
@@ -10,7 +10,7 @@
         [ngModel]="couponCode()"
         (ngModelChange)="couponCode.set($event)"
         [placeholder]="'CART.COUPON_PLACEHOLDER' | translate"
-        class="flex-1 border border-zinc-200 dark:border-zinc-700 rounded-lg px-4 py-2 text-sm bg-transparent focus:ring-2 focus:ring-maroon-500 outline-none transition-all"
+        class="flex-1 border border-zinc-200 dark:border-zinc-700 rounded-lg px-4 py-2 text-sm bg-transparent text-zinc-900 dark:text-zinc-100 focus:ring-2 focus:ring-maroon-500 outline-none transition-all"
       />
 
       <lib-button
@@ -22,8 +22,9 @@
         {{ 'CART.APPLY_BTN' | translate }}
       </lib-button>
     </div>
+
     @if (couponError()) {
-      <p class="text-xs text-red-500 font-medium">{{ couponError() }}</p>
+      <p class="text-xs text-red-500 font-medium">{{ couponError() | translate }}</p>
     }
   </div>
 
@@ -39,12 +40,14 @@
 
   <div class="space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
     <div class="flex justify-between text-sm">
-      <span class="text-zinc-500">{{ 'CART.SUBTOTAL' | translate }}</span>
-      <span class="font-semibold text-zinc-800 dark:text-zinc-200">{{ subtotal() }} {{ 'CURRENCY' | translate }}</span>
+      <span class="text-zinc-500 dark:text-zinc-400">{{ 'CART.SUBTOTAL' | translate }}</span>
+      <span class="font-semibold text-zinc-800 dark:text-zinc-200">
+        {{ subtotal() }} {{ 'CURRENCY' | translate }}
+      </span>
     </div>
 
     @if (discount() > 0) {
-      <div class="flex justify-between text-sm text-green-600 font-bold">
+      <div class="flex justify-between text-sm text-green-600 dark:text-green-400 font-bold">
         <span>{{ 'CART.TOTAL_DISCOUNT' | translate }}</span>
         <span>-{{ discount() }} {{ 'CURRENCY' | translate }}</span>
       </div>

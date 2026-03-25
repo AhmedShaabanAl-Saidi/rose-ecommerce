@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
-import { computed, inject, Injectable, signal } from "@angular/core";
+import { computed, inject, Injectable } from "@angular/core";
 import { environment } from "apps/E-commerce/src/environments/environments";
 import { Observable, tap } from "rxjs";
 import { CartService } from "../../../cart/services/cart.service";
-import { Cart, ICartResponse } from "../../../cart/interfaces/cart.interface";
+import {  ICartResponse } from "../../../cart/interfaces/cart.interface";
 
 @Injectable({
   providedIn: 'root',

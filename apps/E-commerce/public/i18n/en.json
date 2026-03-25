@@ -308,7 +308,7 @@
     "REMOVE_SUCCESS": "Product Removed Successfully",
     "CLEAR_SUCCESS": "Clear Cart Successfully",
     "SUMMARY": "Summary",
-    "COUPON_PLACHOLDER": "Coupon Code",
+    "COUPON_PLACEHOLDER": "Enter Coupon Code",
     "APPLY_BTN": "Apply Coupon",
     "NO_COUPON": "No coupons applied",
     "SUBTOTAL": "Subtotal",

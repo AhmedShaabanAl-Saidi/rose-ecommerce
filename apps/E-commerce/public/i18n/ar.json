@@ -308,13 +308,14 @@
     "REMOVE_SUCCESS": "تم إزالة المنتج بنجاح",
     "CLEAR_SUCCESS": "تم مسح العربة بنجاح",
     "SUMMARY": "الملخص",
-    "COUPON_CODE": "كود الخصم",
-    "APPLY_COUPON": "تطبيق الكوبون",
-    "NO_COUPON": "لا يوجد كوبونات مضافة",
-    "SUBTOTAL": "الإجمالي قبل الخصم",
-    "DISCOUNT": "الخصم",
-    "TOTAL": "الإجمالي",
-    "CHECKOUT": "الدفع"
+  "COUPON_PLACEHOLDER": "أدخل كود الخصم",
+  "APPLY_BTN": "تطبيق الكوبون",
+  "NO_COUPON": "لا يوجد كوبونات مضافة",
+  "SUBTOTAL": "الإجمالي قبل الخصم",
+  "TOTAL_DISCOUNT": "الخصم",
+  "ORDER_TOTAL": "الإجمالي",
+  "PROCEED_CHECKOUT": "الدفع",
+  "CURRENCY": "جنيه"
   },
   "NOT_FOUND": {
     "TITLE": "هل ضللت الطريق؟",
