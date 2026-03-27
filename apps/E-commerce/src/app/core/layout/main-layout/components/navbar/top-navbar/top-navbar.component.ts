@@ -84,7 +84,10 @@ export class TopNavbarComponent {
               this.authRepo
                 .logout()
                 .pipe(
-                  tap(() => this.cartService.setDefaultCart()),
+                  tap(() => {
+                    this.cartService.setDefaultCart();
+                    this.wishlistService.clearWishlist();
+                  }),
                   take(1)
                 )
                 .subscribe();

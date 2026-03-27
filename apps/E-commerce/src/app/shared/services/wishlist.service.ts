@@ -121,4 +121,9 @@ export class WishlistService {
         ))
       );
   }
+
+  clearWishlist(): void {
+    this._wishlistIds.set([]);
+    this._wishlistProducts.set([]);
+  }
 }

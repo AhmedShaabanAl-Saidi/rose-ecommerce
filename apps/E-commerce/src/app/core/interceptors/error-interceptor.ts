@@ -1,5 +1,6 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthRepo } from '@elevate/auth-domain';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +10,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const toast = inject(ToastrService);
   const router = inject(Router);
   const auth = inject(AuthRepo);
+  const platformId = inject(PLATFORM_ID);
+
   return next(req).pipe(
     catchError((err: HttpErrorResponse) => {
       let message = 'An unexpected error occurred';
@@ -30,13 +33,15 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         (message.toLowerCase().includes('jwt') ||
           message.toLowerCase().includes('token'));
 
-      if (isTokenError) {
-        message = 'Your session has expired. Please log in again.';
-        auth.cleanData();
-        router.navigateByUrl('/login', { replaceUrl: true });
-      }
+      if (isPlatformBrowser(platformId)) {
+        if (isTokenError) {
+          message = 'Your session has expired. Please log in again.';
+          auth.cleanData();
+          router.navigateByUrl('/auth/login', { replaceUrl: true });
+        }
 
-      toast.error(message);
+        toast.error(message);
+      }
 
       return throwError(() => ({ message, status: err.status }));
     })
