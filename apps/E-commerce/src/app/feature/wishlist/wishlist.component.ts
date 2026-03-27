@@ -33,7 +33,7 @@ export class WishlistComponent implements OnInit {
   }
 
   loadRecommendedProducts(): void {
-    this.productsService.getProducts({ limit: 8 })
+    this.productsService.getProducts()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (res) => {
