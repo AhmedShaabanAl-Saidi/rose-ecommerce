@@ -2,7 +2,7 @@ import { Component, computed, inject } from '@angular/core';
 import { CartService } from './services/cart.service';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { ProductLikedComponent } from './components/product-liked/product-liked.component';
-import { CouponComponent } from '../products/coupon/component/coupon';
+import { CouponComponent } from '../products/coupon/component/cartSummary';
 
 @Component({
   selector: 'app-cart',

@@ -7,9 +7,8 @@ import { CartService } from "../../../cart/services/cart.service";
 
 @Component({
   selector: 'app-coupon',
-  standalone: true,
   imports: [FormsModule, TranslateModule, ButtonComponent],
-  templateUrl: './coupon.html'
+  templateUrl: './cartSummary.html'
 })
 export class CouponComponent {
   private readonly couponService = inject(CouponService);
@@ -24,7 +23,9 @@ export class CouponComponent {
 
   subtotal = computed(() => this.cart()?.totalPrice ??0);
   discount = computed(() => this.cart()?.discount ?? 0);
-  total = computed(() => this.cart()?.totalPriceAfterDiscount ?? this.subtotal());
+  total = computed(() => {
+    return this.appliedCoupons().reduce((acc,curr)=>acc + curr.discountAmount,0)
+  });
 
   appliedCoupons = computed(() => this.cart()?.appliedCoupons ?? []);
 

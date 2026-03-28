@@ -20,6 +20,7 @@ export class CartService {
   readonly cartCount = computed(() => this._cartCount());
 
   private updateState(res: ICartResponse) {
+
     this._cart.set(res.cart);
     this._cartCount.set(res.numOfCartItems);
   }
@@ -77,6 +78,10 @@ export class CartService {
         })
       );
   }
+
+updateCartFromResponse(res: ICartResponse): void {
+  this.updateState(res);
+}
 
   clearUserCart(): Observable<IClearCart> {
     return this._httpClient
