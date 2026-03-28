@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject, Injector, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthRepo } from '@elevate/auth-domain';
@@ -16,33 +16,37 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((err: HttpErrorResponse) => {
       const translate = injector.get(TranslateService);
-      let message = translate.instant('ERRORS.UNEXPECTED');
 
+      const hasAuthHeader = req.headers.has('Authorization');
+      const isSignInRequest = req.url.includes('/auth/');
+
+      let serverError =
+        typeof err.error === 'string'
+          ? err.error
+          : err.error?.message || err.error?.error;
       switch (err.status) {
         case 0:
-          message = translate.instant('ERRORS.NETWORK');
+          serverError = translate.instant('ERRORS.NETWORK');
           break;
         case 401:
-          message = translate.instant('ERRORS.UNAUTHORIZED');
-          auth.cleanData();
-          if (isPlatformBrowser(platFormId)) router.navigate(['/auth/login']);
+          if (hasAuthHeader || !isSignInRequest) {
+            serverError = translate.instant('ERRORS.UNAUTHORIZED');
+            auth.cleanData();
+            if (isPlatformBrowser(platFormId)) router.navigate(['/auth/login']);
+          }
           break;
         case 403:
-          message = translate.instant('ERRORS.FORBIDDEN');
+          serverError = translate.instant('ERRORS.FORBIDDEN');
           break;
         default:
           if (err.status >= 500) {
-            message = translate.instant('ERRORS.SERVER');
-          } else {
-            message =
-              typeof err.error === 'string'
-                ? err.error
-                : err.error?.message || err.error?.error || message;
+            serverError = translate.instant('ERRORS.SERVER');
           }
       }
-      if (isPlatformBrowser(platFormId)) toast.error(message);
 
-      return throwError(() => ({ message, status: err.status }));
+      if (isPlatformBrowser(platFormId)) toast.error(serverError);
+
+      return throwError(() => ({ serverError, status: err.status }));
     })
   );
 };

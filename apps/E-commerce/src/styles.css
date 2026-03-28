@@ -292,8 +292,13 @@
 .font-edwardian {
   font-family: 'Pinyon Script', cursive;
 }
-
+#toast-container {
+  position: fixed !important;
+  z-index: 9999 !important;
+  pointer-events: none;
+}
 #toast-container > div {
+  pointer-events: none;
   display: flex !important;
   align-items: center !important;
   position: relative !important;
@@ -309,8 +314,17 @@
   transition: all 0.2s ease-in-out;
   width: calc(100vw - 32px) !important;
   max-width: 447px !important;
+  margin: 0 auto 12px auto !important;
 }
-
+@media (max-width: 640px) {
+  #toast-container {
+    top: auto !important;
+    bottom: 20px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+  }
+}
 #toast-container > div .toast-message {
   flex-grow: 1 !important;
   padding: 0 !important;

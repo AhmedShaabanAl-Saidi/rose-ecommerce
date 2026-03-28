@@ -7,6 +7,7 @@ import { LucideAngularModule } from 'lucide-angular';
 import { Product } from './interface/product';
 import { CartService } from '../../../../../app/feature/cart/services/cart.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { WishlistService } from '../../../services/wishlist.service';
 
 @Component({
   selector: 'app-product-card',
@@ -29,7 +30,12 @@ export class ProductCardComponent {
   readonly BADGE_BASE =
     'inline-block w-fit max-w-full rounded-full px-2 py-0.5 text-[8px] font-bold uppercase shadow-md sm:px-3 sm:py-1 sm:text-[10px]';
 
-  isInWishlist = computed(() => this.product().isInWishlist);
+  private readonly router = inject(Router);
+  private readonly wishlistService = inject(WishlistService);
+
+  isInWishlist = computed(() =>
+    this.wishlistService.isInWishlist(this.product()._id)
+  );
 
   hotProduct = computed(
     () => !!(this.product().sold && this.product().sold >= 500)
@@ -43,8 +49,6 @@ export class ProductCardComponent {
       new Date(this.product().createdAt) > new Date(Date.now() - ninetyDaysInMs)
     );
   });
-
-  private readonly router = inject(Router);
 
   getStarClip(starIndex: number): string {
     const rating = this.product().rateAvg ?? 0;
@@ -64,7 +68,9 @@ export class ProductCardComponent {
   }
 
   addToWishList(): void {
-    // Implement add to WishlIst functionality here
+    this.wishlistService.toggleWishlist(this.product()._id)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe();
   }
 
   showProductDetails(): void {

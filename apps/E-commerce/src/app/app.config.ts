@@ -48,6 +48,7 @@ import {
   Trash,
   Trash2,
   UserRound,
+  ArrowLeft,
   Zap,
 } from 'lucide-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -95,6 +96,9 @@ export const appConfig: ApplicationConfig = {
       timeOut: 1500,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
+      countDuplicates: true,
+      resetTimeoutOnDuplicate: true,
+      newestOnTop: true,
     }),
     importProvidersFrom([
       NgxSpinnerModule.forRoot({ type: 'triangle-skew-spin' }),
@@ -121,6 +125,7 @@ export const appConfig: ApplicationConfig = {
         Trash2,
         Minus,
         Plus,
+        ArrowLeft,
         Compass,
         Zap,
         House,
