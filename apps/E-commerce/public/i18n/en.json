@@ -79,7 +79,9 @@
     "CATEGORIES": "Categories",
     "OCCASIONS": "Occasions",
     "CONTACT": "Contact",
-    "ABOUT": "About"
+    "ABOUT": "About",
+    "CART.LOGIN_TO_ACCESS": "Please login to access your cart",
+    "WISHLIST.LOGIN_TO_ACCESS": "Please login to access your wishlist"
   },
   "GALLERY": {
     "GALLERY_LABEL": "Gallery",

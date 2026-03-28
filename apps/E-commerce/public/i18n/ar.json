@@ -79,7 +79,9 @@
     "CATEGORIES": "التصنيفات",
     "OCCASIONS": "المناسبات",
     "CONTACT": "اتصل بنا",
-    "ABOUT": "من نحن"
+    "ABOUT": "من نحن",
+    "CART.LOGIN_TO_ACCESS": "يرجى تسجيل الدخول للوصول إلى عربة التسوق",
+    "WISHLIST.LOGIN_TO_ACCESS": "يرجى تسجيل الدخول للوصول إلى قائمة الرغبات"
   },
   "GALLERY": {
     "GALLERY_LABEL": "المعرض",

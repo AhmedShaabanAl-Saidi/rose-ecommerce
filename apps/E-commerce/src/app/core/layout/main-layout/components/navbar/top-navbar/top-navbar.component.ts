@@ -102,7 +102,18 @@ export class TopNavbarComponent {
   navigateToCart(event: Event) {
     if (!this.user()) {
       event.preventDefault();
-      this.toastrService.error('Please Login...');
+      this.toastrService.error(
+        this.translate.instant('NAVBAR.CART.LOGIN_TO_ACCESS')
+      );
+    }
+  }
+
+  navigateToWishlist(event: Event) {
+    if (!this.user()) {
+      event.preventDefault();
+      this.toastrService.error(
+        this.translate.instant('NAVBAR.WISHLIST.LOGIN_TO_ACCESS')
+      );
     }
   }
 }
