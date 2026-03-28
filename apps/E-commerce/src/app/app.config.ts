@@ -27,11 +27,13 @@ import {
   Bell,
   BrushCleaning,
   ChevronDown,
+  Compass,
   Eye,
   EyeOff,
   Heart,
   HeartMinus,
   HeartPlus,
+  House,
   Lock,
   LucideAngularModule,
   MapPin,
@@ -40,12 +42,14 @@ import {
   Package,
   Plus,
   Search,
+  ShoppingBag,
   ShoppingCart,
   Star,
   Trash,
   Trash2,
   UserRound,
   ArrowLeft,
+  Zap,
 } from 'lucide-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
@@ -89,7 +93,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideToastr({
       closeButton: true,
-      timeOut: 3000,
+      timeOut: 1500,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
@@ -119,6 +123,10 @@ export const appConfig: ApplicationConfig = {
         Minus,
         Plus,
         ArrowLeft,
+        Compass,
+        Zap,
+        House,
+        ShoppingBag,
       })
     ),
     providePrimeNG({

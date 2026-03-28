@@ -3,6 +3,29 @@ export interface Category {
   name: string;
   slug: string;
   image: string;
+  productsCount?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  isSuperAdmin?: boolean;
+}
+
+export interface CategoriesRes {
+  message: string;
+  metadata: {
+    currentPage: number;
+    limit: number;
+    totalPages: number;
+    totalItems: number;
+  };
+  categories: Category[];
+}
+
+export interface FilterState {
+  categoryIds?: string[];
+  occasionIds?: string[];
+  rating?: number;
+  priceFrom?: number;
+  priceTo?: number;
 }
 
 export interface Brand {
@@ -51,4 +74,31 @@ export interface ProductsResponse {
     totalItems: number;
   };
   products: Product[];
+}
+
+export interface ProductQueryParams {
+  page?: number;
+  limit?: number;
+  categoryIds?: string[];
+  occasionIds?: string[];
+  rating?: number;
+  priceFrom?: number;
+  priceTo?: number;
+}
+
+export interface Occasion {
+  _id: string;
+  name: string;
+  slug: string;
+  image: string;
+  createdAt?: string;
+  updatedAt?: string;
+  isSuperAdmin?: boolean;
+  productsCount?: number;
+}
+
+export interface OccasionsRes {
+  message: string;
+  metadata: PaginationMetadata;
+  occasions: Occasion[];
 }

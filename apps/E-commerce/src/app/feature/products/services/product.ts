@@ -2,7 +2,7 @@ import { environment } from '../../../../environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductsResponse } from '../interfaces/product';
+import { ProductQueryParams, ProductsResponse, CategoriesRes, OccasionsRes } from '../interfaces/product';
 import { Product } from '../../../shared/components/ui/product-card/interface/product';
 import { ReviewResponse } from '../interfaces/review';
 import { RelatedProductsResponse } from '../interfaces/related';
@@ -12,37 +12,56 @@ import { RelatedProductsResponse } from '../interfaces/related';
 })
 export class ProductsService {
   private baseUrl = environment.baseUrl;
-  private _http = inject(HttpClient);
+  private http = inject(HttpClient);
 
-  getProducts({
-    page = 1,
-    limit = 12,
-    categoryId,
-  }: {
-    page?: number;
-    limit?: number;
-    categoryId?: string;
-  } = {}): Observable<ProductsResponse> {
+  getProducts({ page = 1, limit = 12, categoryIds, occasionIds, rating, priceFrom, priceTo }: ProductQueryParams = {}): Observable<ProductsResponse> {
     let params = `?page=${page}&limit=${limit}`;
-    if (categoryId) {
-      params += `&category=${categoryId}`;
+    if (categoryIds?.length) {
+      categoryIds.forEach(id => { params += `&category=${id}`; });
     }
-    return this._http.get<ProductsResponse>(
+    if (occasionIds?.length) {
+      occasionIds.forEach(id => { params += `&occasion=${id}`; });
+    }
+    if (rating) {
+      params += `&rateAvg=${rating}`;
+    }
+    if (priceFrom !== undefined) {
+      params += `&price[gte]=${priceFrom}`;
+    }
+    if (priceTo !== undefined) {
+      params += `&price[lte]=${priceTo}`;
+    }
+    return this.http.get<ProductsResponse>(
       `${this.baseUrl}/products${params}`
     );
   }
+
+  getOccasions(page = 1, limit = 100): Observable<OccasionsRes> {
+    return this.http.get<OccasionsRes>(
+      `${this.baseUrl}/occasions?page=${page}&limit=${limit}`
+    );
+  }
+
+  getCategories(page = 1, limit = 100): Observable<CategoriesRes> {
+    return this.http.get<CategoriesRes>(
+      `${this.baseUrl}/categories?page=${page}&limit=${limit}`
+    );
+  }
+
   getProductById(id: string) {
-    return this._http.get<{ product: Product }>(
+    return this.http.get<{ product: Product }>(
       `${this.baseUrl}/products/${id}`
     );
   }
+
   getProductReviews(productId: string) {
-    return this._http.get<ReviewResponse>(
+    return this.http.get<ReviewResponse>(
       `${this.baseUrl}/products/${productId}/reviews`
     );
   }
+  
   getRelatedProductByID(product_id: string) {
-    return this._http.get<RelatedProductsResponse>(
+    return this.http.get<RelatedProductsResponse>(
       `${this.baseUrl}/related/category/${product_id}`
     );
   }

@@ -3,7 +3,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import {
+  catchError,
+  filter,
+  finalize,
+  map,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs/operators';
+import { EMPTY, of } from 'rxjs';
 import { Product } from '../../shared/components/ui/product-card/interface/product';
 import { Review } from '../products/interfaces/review';
 import { ProductsService } from '../products/services/product';
@@ -30,74 +39,69 @@ export class ProductDetailsComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly productService = inject(ProductsService);
   private readonly wishlistService = inject(WishlistService);
-  private readonly destroyRef = inject(DestroyRef);
   private readonly cartService = inject(CartService);
-  productId = signal<string | null>(null);
+  private readonly destroyRef = inject(DestroyRef);
+
   product = signal<Product | null>(null);
   reviews = signal<Review[]>([]);
   relatedProducts = signal<Product[]>([]);
+
   isLoading = signal<boolean>(true);
-  isLoadingReviews = signal<boolean>(false);
-  isLoadingRelated = signal<boolean>(false);
 
   ngOnInit(): void {
-    this.watchRouteParams();
+    this.initDataStream();
   }
 
-  private watchRouteParams(): void {
+  private initDataStream(): void {
     this.activatedRoute.paramMap
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((params) => {
-        const id = params.get('id');
-        if (id) {
-          this.productId.set(id);
-          this.loadProductData(id);
-        } else {
-          this.handleInvalidProductId();
-        }
-      });
-  }
-
-  private loadProductData(id: string): void {
-    this.isLoading.set(true);
-    this.isLoadingReviews.set(true);
-    this.isLoadingRelated.set(true);
-
-    forkJoin({
-      product: this.productService.getProductById(id),
-      reviews: this.productService.getProductReviews(id),
-      related: this.productService.getRelatedProductByID(id),
-    })
       .pipe(
         takeUntilDestroyed(this.destroyRef),
-        finalize(() => {
-          this.isLoading.set(false);
-          this.isLoadingReviews.set(false);
-          this.isLoadingRelated.set(false);
-        })
+        map((params) => params.get('id')),
+        tap((id) => {
+          if (!id || !this.isValidMongoId(id)) {
+            this.handleInvalidProductId();
+          }
+          this.isLoading.set(true);
+        }),
+        filter((id): id is string => !!id && this.isValidMongoId(id)),
+        switchMap((id) =>
+          forkJoin({
+            product: this.productService.getProductById(id).pipe(
+              catchError(() => {
+                this.handleInvalidProductId();
+                return EMPTY;
+              })
+            ),
+            reviews: this.productService
+              .getProductReviews(id)
+              .pipe(catchError(() => of({ reviews: [] }))),
+            related: this.productService
+              .getRelatedProductByID(id)
+              .pipe(catchError(() => of({ relatedProducts: [] }))),
+          }).pipe(finalize(() => this.isLoading.set(false)))
+        )
       )
-      .subscribe({
-        next: ({ product, reviews, related }) => {
-          this.product.set(product.product);
-          this.reviews.set(reviews.reviews || []);
-          this.relatedProducts.set(related.relatedProducts || []);
-        },
+      .subscribe((data) => {
+        this.product.set(data.product.product);
+        this.reviews.set(data.reviews.reviews || []);
+        this.relatedProducts.set(data.related.relatedProducts || []);
       });
+  }
+
+  private isValidMongoId(id: string): boolean {
+    return /^[a-f\d]{24}$/i.test(id);
   }
 
   private handleInvalidProductId(): void {
-    this.router.navigate([`/products`]);
+    this.router.navigate(['/not-found']);
+  }
+
+  handleAddToCart(id: string): void {
+    this.cartService.addToCart(id).pipe(take(1)).subscribe();
   }
 
   handleToggleWishlist(id: string): void {
     this.wishlistService.toggleWishlist(id)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
-  }
-
-  handleAddToCart(id: string): void {
-    this.cartService
-      .addToCart(id)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }

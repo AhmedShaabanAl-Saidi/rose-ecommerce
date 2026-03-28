@@ -252,11 +252,45 @@
     "REVIEW_TITLE_PLACEHOLDER": "Enter review title",
     "REVIEW": "Review",
     "REVIEW_PLACEHOLDER": "What do you think of this product?",
+    "LOGIN_TO_REVIEW": "Please login to be able to review the product",
     "ADD_REVIEW": "Add Review"
   },
   "RELATED_PRODUCTS": {
     "TITLE": "Related Products",
     "NO_DATA": "No Related Products available at the moment."
+  },
+  "Category": "Category",
+  "Reset": "Reset",
+  "Reset All": "Reset All",
+  "Occasion": "Occasion",
+  "Rating": "Rating",
+  "Price": "Price",
+  "from": "from",
+  "to": "to",
+  "There are no products in this Category": "There are no products in this Category",
+  "There are no products for this Occasion": "There are no products for this Occasion",
+  "There are no products with this Rating": "There are no products with this Rating",
+  "There are no products in this Price range": "There are no products in this Price range",
+  "No products match the selected filters": "No products match the selected filters",
+  "There are no products available": "There are no products available",
+  "PRODUCT_FILTERS": {
+    "TITLE": "Filters",
+    "SUBTITLE": "Narrow down the catalog and find the right gift faster.",
+    "ERROR_NEGATIVE": "Price cannot be less than 0.",
+    "ERROR_RANGE": "Maximum price must be greater than or equal to minimum price.",
+    "ACTIVE": "{{count}} active",
+    "ALL_CATEGORIES": "All categories",
+    "ALL_OCCASIONS": "All occasions",
+    "PRICE_RANGE": "Price range",
+    "PRICE_HINT": "Drag the handles to set the budget that fits your order.",
+    "MIN_PRICE": "Min",
+    "MAX_PRICE": "Max",
+    "OPEN": "Filters",
+    "SHOW_TABLET": "Show filters",
+    "HIDE_TABLET": "Hide filters",
+    "APPLY": "Apply",
+    "RESET": "Reset",
+    "RESET_ALL": "Reset all"
   },
   "CART": {
     "TITLE": "Cart",
@@ -288,5 +322,18 @@
     "CONTINUE_SHOPPING": "Continue Shopping",
     "PRODUCTS_YOU_MAY_LIKE": "Products You May Like",
     "NO_RECOMMENDATIONS": "No products available at the moment."
+  },
+  "NOT_FOUND": {
+    "TITLE": "Lost in the Gift Shop?",
+    "DESCRIPTION": "The page you're looking for has moved or no longer exists. Let's get you back to finding the perfect gift.",
+    "BACK_TO_HOME": "Back to Home",
+    "BROWSE_PRODUCTS": "Browse Products"
+  },
+  "ERRORS": {
+    "UNEXPECTED": "An unexpected error occurred",
+    "NETWORK": "Network error: Please check your connection",
+    "SERVER": "Server error: Please try again later",
+    "UNAUTHORIZED": "Please login first",
+    "FORBIDDEN": "You don't have permission to access this page"
   }
 }
