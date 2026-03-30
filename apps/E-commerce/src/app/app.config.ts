@@ -39,12 +39,14 @@ import {
   MapPin,
   Minus,
   MoveLeft,
+  MoveRight,
   Package,
   Plus,
   Search,
   ShoppingBag,
   ShoppingCart,
   Star,
+  TicketPercent,
   Trash,
   Trash2,
   UserRound,
@@ -125,6 +127,8 @@ export const appConfig: ApplicationConfig = {
         Zap,
         House,
         ShoppingBag,
+        MoveRight,
+        TicketPercent,
       })
     ),
     providePrimeNG({

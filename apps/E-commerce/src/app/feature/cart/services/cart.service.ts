@@ -20,7 +20,6 @@ export class CartService {
   readonly cartCount = computed(() => this._cartCount());
 
   private updateState(res: ICartResponse) {
-
     this._cart.set(res.cart);
     this._cartCount.set(res.numOfCartItems);
   }
@@ -79,10 +78,6 @@ export class CartService {
       );
   }
 
-updateCartFromResponse(res: ICartResponse): void {
-  this.updateState(res);
-}
-
   clearUserCart(): Observable<IClearCart> {
     return this._httpClient
       .delete<IClearCart>(`${environment.baseUrl}/cart`)
@@ -98,5 +93,17 @@ updateCartFromResponse(res: ICartResponse): void {
   setDefaultCart() {
     this._cart.set(null);
     this._cartCount.set(0);
+  }
+  applyCoupon(code: string): Observable<ICartResponse> {
+    return this._httpClient
+      .post<ICartResponse>(`${environment.baseUrl}/coupons/apply`, { code })
+      .pipe(
+        tap((res) => {
+          this.updateState(res);
+          this._toastrService.success(
+            this._translateService.instant('CART.COUPON_APPLIED')
+          );
+        })
+      );
   }
 }
