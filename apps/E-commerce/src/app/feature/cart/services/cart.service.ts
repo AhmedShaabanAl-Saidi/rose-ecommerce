@@ -94,4 +94,16 @@ export class CartService {
     this._cart.set(null);
     this._cartCount.set(0);
   }
+  applyCoupon(code: string): Observable<ICartResponse> {
+    return this._httpClient
+      .post<ICartResponse>(`${environment.baseUrl}/coupons/apply`, { code })
+      .pipe(
+        tap((res) => {
+          this.updateState(res);
+          this._toastrService.success(
+            this._translateService.instant('CART.COUPON_APPLIED')
+          );
+        })
+      );
+  }
 }

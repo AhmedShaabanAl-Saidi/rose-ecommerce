@@ -308,7 +308,17 @@
     "ADD_SUCCESS": "تم إضافة المنتج بنجاح",
     "UPDATE_SUCCESS": "تم تحديث المنتج بنجاح",
     "REMOVE_SUCCESS": "تم إزالة المنتج بنجاح",
-    "CLEAR_SUCCESS": "تم مسح العربة بنجاح"
+    "CLEAR_SUCCESS": "تم مسح العربة بنجاح",
+    "SUMMARY": "الملخص",
+  "COUPON_PLACEHOLDER": "كود الخصم",
+  "APPLY_BTN": "تطبيق الكوبون",
+  "COUPON_APPLIED": "تم تطبيق الكوبون بنجاح",
+  "NO_COUPON": "لا يوجد كوبونات مضافة",
+  "SUBTOTAL": "الإجمالي قبل الخصم",
+  "TOTAL_DISCOUNT": "الخصم",
+  "ORDER_TOTAL": "الإجمالي",
+  "PROCEED_CHECKOUT": "الدفع",
+  "CURRENCY": "جنيه"
   },
   "WISHLIST": {
     "TITLE": "قائمة أمنياتي",

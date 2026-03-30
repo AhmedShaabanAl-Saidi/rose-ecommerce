@@ -308,8 +308,18 @@
     "ADD_SUCCESS": "Product Added Successfully",
     "UPDATE_SUCCESS": "Product Updated Successfully",
     "REMOVE_SUCCESS": "Product Removed Successfully",
-    "CLEAR_SUCCESS": "Clear Cart Successfully"
+    "CLEAR_SUCCESS": "Clear Cart Successfully",
+    "SUMMARY": "Summary",
+    "COUPON_PLACEHOLDER": "Coupon Code",
+    "APPLY_BTN": "Apply Coupon",
+    "COUPON_APPLIED": "Coupon applied successfully",
+    "NO_COUPON": "No coupons applied",
+    "SUBTOTAL": "Subtotal",
+    "TOTAL_DISCOUNT": "Discount",
+    "ORDER_TOTAL": "Total",
+    "PROCEED_CHECKOUT": "Checkout"
   },
+
   "WISHLIST": {
     "TITLE": "My Wishlist",
     "ITEMS_COUNT": "items",
