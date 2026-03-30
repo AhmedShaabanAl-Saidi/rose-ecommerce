@@ -40,6 +40,14 @@ export const mainRoutes: Routes = [
             (m) => m.CartComponent
           ),
       },
+      {
+        path: 'wishlist',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('../../../feature/wishlist/wishlist.component').then(
+            (m) => m.WishlistComponent
+          ),
+      },
     ],
   },
 ];
