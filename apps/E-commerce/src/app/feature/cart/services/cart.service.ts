@@ -3,8 +3,13 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environments';
-import { Observable, tap } from 'rxjs';
-import { Cart, ICartResponse, IClearCart } from '../interfaces/cart.interface';
+import { Observable, switchMap, tap, of } from 'rxjs';
+import {
+  AppliedCoupon,
+  Cart,
+  ICartResponse,
+  IClearCart,
+} from '../interfaces/cart.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,14 +19,25 @@ export class CartService {
   private _toastrService = inject(ToastrService);
   private _translateService = inject(TranslateService);
   private _cart = signal<Cart | null>(null);
-  private _cartCount = signal<number>(0);
-
   readonly cart = computed(() => this._cart());
-  readonly cartCount = computed(() => this._cartCount());
+  readonly cartCount = computed(() => this.cart()?.cartItems.length ?? 0);
+
+  private getLastAppliedCoupon(appliedCoupons: AppliedCoupon[]): string | null {
+    if (!appliedCoupons?.length) return null;
+    const lastCoupon = appliedCoupons[appliedCoupons.length - 1];
+    return lastCoupon?.coupon?.code || null;
+  }
+
+  private reapplyCouponIfExists(res: ICartResponse): Observable<ICartResponse> {
+    const couponCode = this.getLastAppliedCoupon(res.cart?.appliedCoupons);
+    if (couponCode) {
+      return this.applyCoupon(couponCode, true);
+    }
+    return of(res);
+  }
 
   private updateState(res: ICartResponse) {
     this._cart.set(res.cart);
-    this._cartCount.set(res.numOfCartItems);
   }
 
   addToCart(productId: string, quantity = 1): Observable<ICartResponse> {
@@ -36,7 +52,8 @@ export class CartService {
           this._toastrService.success(
             this._translateService.instant('CART.ADD_SUCCESS')
           );
-        })
+        }),
+        switchMap((res) => this.reapplyCouponIfExists(res))
       );
   }
 
@@ -51,7 +68,8 @@ export class CartService {
           this._toastrService.success(
             this._translateService.instant('CART.UPDATE_SUCCESS')
           );
-        })
+        }),
+        switchMap((res) => this.reapplyCouponIfExists(res))
       );
   }
 
@@ -74,7 +92,8 @@ export class CartService {
           this._toastrService.success(
             this._translateService.instant('CART.REMOVE_SUCCESS')
           );
-        })
+        }),
+        switchMap((res) => this.reapplyCouponIfExists(res))
       );
   }
 
@@ -92,17 +111,18 @@ export class CartService {
   }
   setDefaultCart() {
     this._cart.set(null);
-    this._cartCount.set(0);
   }
-  applyCoupon(code: string): Observable<ICartResponse> {
+  applyCoupon(code: string, silent = false): Observable<ICartResponse> {
     return this._httpClient
       .post<ICartResponse>(`${environment.baseUrl}/coupons/apply`, { code })
       .pipe(
         tap((res) => {
           this.updateState(res);
-          this._toastrService.success(
-            this._translateService.instant('CART.COUPON_APPLIED')
-          );
+          if (!silent) {
+            this._toastrService.success(
+              this._translateService.instant('CART.COUPON_APPLIED')
+            );
+          }
         })
       );
   }

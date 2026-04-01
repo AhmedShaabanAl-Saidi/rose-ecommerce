@@ -34,7 +34,6 @@ export class CopounComponent {
 
   readonly couponForm = new FormGroup({
     code: new FormControl('', {
-      validators: [Validators.required],
       nonNullable: true,
     }),
   });
@@ -43,6 +42,11 @@ export class CopounComponent {
   readonly total = computed(
     () => this.cart()?.totalPriceAfterDiscount ?? this.subtotal()
   );
+
+  readonly lastAppliedCoupon = computed(() => {
+    const coupons = this.cart()?.appliedCoupons;
+    return coupons && coupons.length > 0 ? coupons[coupons.length - 1] : null;
+  });
 
   readonly totalDiscountAmount = computed(() => {
     const diff = this.subtotal() - this.total();

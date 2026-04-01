@@ -22,6 +22,7 @@
         [loading]="isApplyingCoupon()"
         [disabled]="isApplyingCoupon() || !hasItems()"
         [icon]="'ticket-percent'"
+        [block]="true"
         class="sm:min-w-38"
       >
         {{ 'CART.APPLY_BTN' | translate }}
@@ -29,34 +30,31 @@
     </form>
 
     <div
-      class="mt-4 max-h-60 overflow-y-auto rounded-sm border border-zinc-300 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-950/40 custom-scrollbar"
+      class="mt-4 rounded-xl border border-zinc-300 min-h-45 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-950/40"
     >
-      @if (cart()?.appliedCoupons?.length) {
-      <ul class="space-y-3">
-        @for (appliedCoupon of cart()?.appliedCoupons; track appliedCoupon._id)
-        {
-        <li
-          class="rounded-lg bg-white p-3 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800 shadow-sm"
-        >
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-semibold text-zinc-800 dark:text-zinc-200">
-              {{ appliedCoupon.coupon.code }}
-            </span>
-            <span
-              class="text-sm font-bold text-maroon-700 dark:text-soft-pink-400"
-            >
-              -{{ appliedCoupon.discountAmount | number : '1.0-2' }}
-              {{ 'CURRENCY' | translate }}
-            </span>
-          </div>
-        </li>
-        }
-      </ul>
+      @if (lastAppliedCoupon()) {
+      <div class="min-h-45 flex items-center justify-center text-center">
+        <div class="w-full max-w-xs rounded-xl p-5">
+          <p
+            class="text-xs uppercase tracking-[0.15em] text-maroon-700 dark:text-soft-pink-400"
+          >
+            {{ 'CART.APPLY_BTN' | translate }}
+          </p>
+          <p
+            class="mt-2 text-base font-bold text-maroon-700 dark:text-soft-pink-400"
+          >
+            -{{ lastAppliedCoupon()!.discountAmount | number : '1.0-2' }}
+            {{ 'CURRENCY' | translate }}
+          </p>
+        </div>
+      </div>
       } @else {
-      <div class="h-full min-h-40 flex items-center justify-center">
-        <p class="text-zinc-400 dark:text-zinc-500 italic text-[16px]">
-          {{ 'CART.NO_COUPON' | translate }}
-        </p>
+      <div class="min-h-45 flex items-center justify-center text-center">
+        <div class="w-full max-w-xs rounded-xl p-5">
+          <p class="text-zinc-400 dark:text-zinc-500 italic text-[16px]">
+            {{ 'CART.NO_COUPON' | translate }}
+          </p>
+        </div>
       </div>
       }
     </div>
