@@ -83,6 +83,12 @@
     "CART.LOGIN_TO_ACCESS": "Please login to access your cart",
     "WISHLIST.LOGIN_TO_ACCESS": "Please login to access your wishlist"
   },
+  "SHIPPING_ADDRESS": {
+    "TITLE": "Shipping Address",
+    "ADD_NEW_ADDRESS": "Add a New Address",
+    "NEXT": "Next",
+    "OR": "Or"
+  },
   "GALLERY": {
     "GALLERY_LABEL": "Gallery",
     "CHECK_OUT": "Check Out",

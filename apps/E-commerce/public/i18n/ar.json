@@ -83,6 +83,12 @@
     "CART.LOGIN_TO_ACCESS": "يرجى تسجيل الدخول للوصول إلى عربة التسوق",
     "WISHLIST.LOGIN_TO_ACCESS": "يرجى تسجيل الدخول للوصول إلى قائمة الرغبات"
   },
+  "SHIPPING_ADDRESS": {
+    "TITLE": "عنوان الشحن",
+    "ADD_NEW_ADDRESS": "إضافة عنوان جديد",
+    "NEXT": "التالي",
+    "OR": "أو"
+  },
   "GALLERY": {
     "GALLERY_LABEL": "المعرض",
     "CHECK_OUT": "اكتشف",

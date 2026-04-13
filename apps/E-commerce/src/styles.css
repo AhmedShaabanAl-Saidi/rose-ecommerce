@@ -660,3 +660,6 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 @utility footer-link {
   @apply hover:text-soft-pink-200 transition-colors;
 }
+.next-btn button {
+  @apply px-10 mt-5;
+}
