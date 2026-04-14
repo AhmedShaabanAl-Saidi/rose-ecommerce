@@ -14,6 +14,7 @@ import { CartService } from '../cart/services/cart.service';
 import { ShippingAddressSectionComponent } from './components/shipping-address/shipping-address.component';
 import { PaymentMethodSectionComponent, PaymentMethod } from './components/payment-method/payment-method.component';
 import { CheckoutSummaryComponent } from './components/checkout-summary/checkout-summary.component';
+import { ProductLikedComponent } from '../cart/components/product-liked/product-liked.component';
 import { Address, OrderInput } from './interfaces/checkout.interface';
 
 @Component({
@@ -27,6 +28,7 @@ import { Address, OrderInput } from './interfaces/checkout.interface';
     ShippingAddressSectionComponent,
     PaymentMethodSectionComponent,
     CheckoutSummaryComponent,
+    ProductLikedComponent,
   ],
   templateUrl: './checkout.component.html',
 })
