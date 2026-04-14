@@ -1,12 +1,8 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { TextInputComponent } from '@elevate/reusable-input';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -21,41 +17,29 @@ import { CartService } from '../../services/cart.service';
     TranslatePipe,
     ReactiveFormsModule,
     TextInputComponent,
+    RouterLink,
   ],
   templateUrl: './copoun.component.html',
 })
 export class CopounComponent {
-  private readonly cartService = inject(CartService);
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly _cartService = inject(CartService);
+  private readonly _destroyRef = inject(DestroyRef);
 
   readonly isApplyingCoupon = signal(false);
-  readonly cart = computed(() => this.cartService.cart());
-  readonly hasItems = computed(() => (this.cart()?.cartItems?.length ?? 0) > 0);
+
+  // Consume centralized signals — single source of truth
+  readonly cart = this._cartService.cart;
+  readonly hasItems = this._cartService.hasItems;
+  readonly subtotal = this._cartService.subtotal;
+  readonly total = this._cartService.total;
+  readonly totalDiscountAmount = this._cartService.totalDiscount;
+  readonly discountPercent = this._cartService.discountPercent;
+  readonly lastAppliedCoupon = this._cartService.lastAppliedCoupon;
 
   readonly couponForm = new FormGroup({
     code: new FormControl('', {
       nonNullable: true,
     }),
-  });
-
-  readonly subtotal = computed(() => this.cart()?.totalPrice ?? 0);
-  readonly total = computed(
-    () => this.cart()?.totalPriceAfterDiscount ?? this.subtotal()
-  );
-
-  readonly lastAppliedCoupon = computed(() => {
-    const coupons = this.cart()?.appliedCoupons;
-    return coupons && coupons.length > 0 ? coupons[coupons.length - 1] : null;
-  });
-
-  readonly totalDiscountAmount = computed(() => {
-    const diff = this.subtotal() - this.total();
-    return diff > 0 ? diff : 0;
-  });
-
-  readonly discountPercent = computed(() => {
-    if (this.subtotal() === 0) return 0;
-    return Math.round((this.totalDiscountAmount() / this.subtotal()) * 100);
   });
 
   applyCoupon(): void {
@@ -73,10 +57,10 @@ export class CopounComponent {
 
     this.isApplyingCoupon.set(true);
 
-    this.cartService
+    this._cartService
       .applyCoupon(code)
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
+        takeUntilDestroyed(this._destroyRef),
         finalize(() => this.isApplyingCoupon.set(false))
       )
       .subscribe({

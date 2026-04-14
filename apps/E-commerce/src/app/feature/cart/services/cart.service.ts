@@ -21,6 +21,24 @@ export class CartService {
   private _cart = signal<Cart | null>(null);
   readonly cart = computed(() => this._cart());
   readonly cartCount = computed(() => this.cart()?.cartItems.length ?? 0);
+  readonly hasItems = computed(() => this.cartCount() > 0);
+
+  readonly subtotal = computed(() => this.cart()?.totalPrice ?? 0);
+  readonly total = computed(
+    () => this.cart()?.totalPriceAfterDiscount ?? this.subtotal()
+  );
+  readonly totalDiscount = computed(() => {
+    const diff = this.subtotal() - this.total();
+    return diff > 0 ? diff : 0;
+  });
+  readonly discountPercent = computed(() => {
+    if (this.subtotal() === 0) return 0;
+    return Math.round((this.totalDiscount() / this.subtotal()) * 100);
+  });
+  readonly lastAppliedCoupon = computed(() => {
+    const coupons = this.cart()?.appliedCoupons;
+    return coupons && coupons.length > 0 ? coupons[coupons.length - 1] : null;
+  });
 
   private getLastAppliedCoupon(appliedCoupons: AppliedCoupon[]): string | null {
     if (!appliedCoupons?.length) return null;
