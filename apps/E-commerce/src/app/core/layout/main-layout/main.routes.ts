@@ -48,6 +48,14 @@ export const mainRoutes: Routes = [
             (m) => m.WishlistComponent
           ),
       },
+      {
+        path: 'checkout',
+        canActivate: [authGuard],
+        loadChildren: () =>
+          import('../../../feature/checkout/checkout.routes').then(
+            (m) => m.checkoutRoutes
+          ),
+      },
     ],
   },
 ];

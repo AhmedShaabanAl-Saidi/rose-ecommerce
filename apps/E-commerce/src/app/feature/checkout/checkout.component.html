@@ -1,0 +1,53 @@
+<div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+  <!-- Stepper -->
+  <div class="mb-12">
+    <lib-stepper
+      [steps]="checkoutSteps"
+      [currentStep]="currentStep()"
+    ></lib-stepper>
+  </div>
+
+  <!-- Back Button -->
+  <div class="mb-6">
+    <button
+      (click)="onBack()"
+      class="flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-maroon-600 dark:text-zinc-400 dark:hover:text-maroon-400 transition-colors"
+    >
+      <lucide-angular name="arrow-left" [size]="16"></lucide-angular>
+      {{ currentStep() === 1 ? 'Back to Cart' : 'Back to Shipping' }}
+    </button>
+  </div>
+
+  <!-- Main Content Grid -->
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
+    <!-- Left Section: Steps Content (8 Cols) -->
+    <div class="lg:col-span-8">
+      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-950 dark:ring-zinc-800 sm:p-8">
+        @if (currentStep() === 1) {
+          <app-shipping-address-section
+            (addressSelected)="onAddressSelected($event)"
+            (addAddressClick)="onAddAddress()"
+          ></app-shipping-address-section>
+        } @else {
+          <!-- Step 2 will be implemented in T1-79 -->
+          <div class="flex flex-col items-center justify-center p-12 text-center text-zinc-500">
+             <lucide-angular name="credit-card" [size]="48" class="mb-4 opacity-20"></lucide-angular>
+             <p>Payment method selection coming soon...</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Right Section: Order Summary (4 Cols) -->
+    <div class="lg:col-span-4">
+      <app-checkout-summary
+        [btnLabel]="btnLabel()"
+        [isLoading]="isLoading()"
+        [canProceed]="canProceed()"
+        (btnClick)="onNext()"
+      ></app-checkout-summary>
+    </div>
+  </div>
+
+  <!-- Products You May Like will be integrated in T1-80 -->
+</div>
