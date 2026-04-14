@@ -29,11 +29,9 @@
             (addAddressClick)="onAddAddress()"
           ></app-shipping-address-section>
         } @else {
-          <!-- Step 2 will be implemented in T1-79 -->
-          <div class="flex flex-col items-center justify-center p-12 text-center text-zinc-500">
-             <lucide-angular name="credit-card" [size]="48" class="mb-4 opacity-20"></lucide-angular>
-             <p>Payment method selection coming soon...</p>
-          </div>
+          <app-payment-method-section
+            (methodSelected)="onPaymentMethodSelected($event)"
+          ></app-payment-method-section>
         }
       </div>
     </div>

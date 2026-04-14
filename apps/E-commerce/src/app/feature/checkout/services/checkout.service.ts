@@ -22,4 +22,25 @@ export class CheckoutService {
       `${environment.baseUrl}/addresses`
     );
   }
+
+  placeCashOrder(cartId: string, orderData: OrderInput): Observable<OrderRes> {
+    return this._httpClient.post<OrderRes>(
+      `${environment.baseUrl}/orders/${cartId}`,
+      orderData
+    );
+  }
+
+  placeOnlineOrder(
+    cartId: string,
+    orderData: OrderInput
+  ): Observable<CheckoutSessionRes> {
+    const origin = isPlatformBrowser(this._platformId)
+      ? window.location.origin
+      : environment.baseUrl;
+
+    return this._httpClient.post<CheckoutSessionRes>(
+      `${environment.baseUrl}/orders/checkout-session/${cartId}?url=${origin}`,
+      orderData
+    );
+  }
 }

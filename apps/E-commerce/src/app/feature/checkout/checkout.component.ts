@@ -12,8 +12,9 @@ import { StepperComponent, StepperStep } from '@elevate/reusable-ui';
 import { CheckoutService } from './services/checkout.service';
 import { CartService } from '../cart/services/cart.service';
 import { ShippingAddressSectionComponent } from './components/shipping-address/shipping-address.component';
+import { PaymentMethodSectionComponent, PaymentMethod } from './components/payment-method/payment-method.component';
 import { CheckoutSummaryComponent } from './components/checkout-summary/checkout-summary.component';
-import { Address } from './interfaces/checkout.interface';
+import { Address, OrderInput } from './interfaces/checkout.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -24,6 +25,7 @@ import { Address } from './interfaces/checkout.interface';
     LucideAngularModule,
     StepperComponent,
     ShippingAddressSectionComponent,
+    PaymentMethodSectionComponent,
     CheckoutSummaryComponent,
   ],
   templateUrl: './checkout.component.html',
@@ -44,6 +46,7 @@ export class CheckoutComponent {
 
   currentStep = signal<number>(1);
   selectedAddress = signal<Address | null>(null);
+  selectedPaymentMethod = signal<PaymentMethod>('card');
   isLoading = signal<boolean>(false);
 
   cart = this._cartService.cart;
@@ -65,9 +68,15 @@ export class CheckoutComponent {
     this.selectedAddress.set(address);
   }
 
+  onPaymentMethodSelected(method: PaymentMethod) {
+    this.selectedPaymentMethod.set(method);
+  }
+
   onNext() {
     if (this.currentStep() === 1) {
       this.currentStep.set(2);
+    } else {
+      this.placeOrder();
     }
   }
 
@@ -84,5 +93,71 @@ export class CheckoutComponent {
       this._translateService.instant('CHECKOUT.ADD_ADDRESS_MODAL') ||
         'Add New Address modal coming soon.'
     );
+  }
+
+  placeOrder() {
+    const cartId = this.cart()?._id;
+    const address = this.selectedAddress();
+
+    if (!cartId || !address) return;
+
+    const orderData: OrderInput = {
+      shippingAddress: {
+        details: address.street,
+        phone: address.phone,
+        city: address.city,
+      },
+    };
+
+    this.isLoading.set(true);
+
+    if (this.selectedPaymentMethod() === 'cash') {
+      this._checkoutService
+        .placeCashOrder(cartId, orderData)
+        .pipe(
+          takeUntilDestroyed(this._destroyRef),
+          finalize(() => this.isLoading.set(false))
+        )
+        .subscribe({
+          next: () => {
+            this._toastrService.success(
+              this._translateService.instant('CHECKOUT.ORDER_SUCCESS') ||
+                'Order placed successfully!'
+            );
+            this._cartService.clearUserCart().pipe(
+              takeUntilDestroyed(this._destroyRef)
+            ).subscribe();
+            this._router.navigate(['/home']);
+          },
+          error: (err) => {
+            this._toastrService.error(
+              err.error?.message ||
+                this._translateService.instant('CHECKOUT.ORDER_FAILED') ||
+                'Payment failed, please try again or choose another method'
+            );
+          },
+        });
+    } else {
+      this._checkoutService
+        .placeOnlineOrder(cartId, orderData)
+        .pipe(
+          takeUntilDestroyed(this._destroyRef),
+          finalize(() => this.isLoading.set(false))
+        )
+        .subscribe({
+          next: (res) => {
+            if (isPlatformBrowser(this._platformId) && res.session.url) {
+              window.location.href = res.session.url;
+            }
+          },
+          error: (err) => {
+            this._toastrService.error(
+              err.error?.message ||
+                this._translateService.instant('CHECKOUT.ORDER_FAILED') ||
+                'Payment failed, please try again or choose another method'
+            );
+          },
+        });
+    }
   }
 }
