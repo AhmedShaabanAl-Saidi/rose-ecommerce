@@ -1,13 +1,12 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { environment } from '../../../../environments/environments';
 import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environments';
 import {
   CheckoutSessionRes,
   OrderInput,
   OrderRes,
-  ShippingAddressRes,
 } from '../interfaces/checkout.interface';
 
 @Injectable({
@@ -16,12 +15,6 @@ import {
 export class CheckoutService {
   private readonly _httpClient = inject(HttpClient);
   private readonly _platformId = inject(PLATFORM_ID);
-
-  getAddresses(): Observable<ShippingAddressRes> {
-    return this._httpClient.get<ShippingAddressRes>(
-      `${environment.baseUrl}/addresses`
-    );
-  }
 
   placeCashOrder(cartId: string, orderData: OrderInput): Observable<OrderRes> {
     return this._httpClient.post<OrderRes>(

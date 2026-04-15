@@ -4,6 +4,7 @@ import {
   DestroyRef,
   inject,
   OnInit,
+  output,
   signal,
 } from '@angular/core';
 import { ShippingAddressService } from './services/shipping-address.service';
@@ -26,6 +27,7 @@ export class ShippingAddressComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly languageService = inject(languageService);
   private readonly dialogUiService = inject(AddressUiService);
+  readonly proceedToPayment = output<ShippingAddress>();
   shippingAddresses = signal<ShippingAddress[]>([]);
   selectedAddress = signal<ShippingAddress | null>(null);
   nextIcon = computed(() =>
@@ -52,7 +54,11 @@ export class ShippingAddressComponent implements OnInit {
     this.selectedAddress.set(address);
   }
   next() {
-    // TODO: navigate to the next step in the checkout process, passing the selected address information
+    const selectedAddress = this.selectedAddress();
+
+    if (selectedAddress) {
+      this.proceedToPayment.emit(selectedAddress);
+    }
   }
   addAddress() {
     const address = this.selectedAddress();

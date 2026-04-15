@@ -1,4 +1,11 @@
-import { Component, computed, DestroyRef, inject, PLATFORM_ID, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,11 +18,15 @@ import { StepperComponent, StepperStep } from '@elevate/reusable-ui';
 
 import { CheckoutService } from './services/checkout.service';
 import { CartService } from '../cart/services/cart.service';
-import { ShippingAddressSectionComponent } from './components/shipping-address/shipping-address.component';
-import { PaymentMethodSectionComponent, PaymentMethod } from './components/payment-method/payment-method.component';
+import {
+  PaymentMethodSectionComponent,
+  PaymentMethod,
+} from './components/payment-method/payment-method.component';
 import { CheckoutSummaryComponent } from './components/checkout-summary/checkout-summary.component';
 import { ProductLikedComponent } from '../cart/components/product-liked/product-liked.component';
-import { Address, OrderInput } from './interfaces/checkout.interface';
+import { OrderInput } from './interfaces/checkout.interface';
+import { ShippingAddressComponent } from '../shipping-address/shipping-address.component';
+import { ShippingAddress } from '../shipping-address/interfaces/shipping-address.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -25,10 +36,10 @@ import { Address, OrderInput } from './interfaces/checkout.interface';
     TranslateModule,
     LucideAngularModule,
     StepperComponent,
-    ShippingAddressSectionComponent,
     PaymentMethodSectionComponent,
     CheckoutSummaryComponent,
     ProductLikedComponent,
+    ShippingAddressComponent,
   ],
   templateUrl: './checkout.component.html',
 })
@@ -47,7 +58,7 @@ export class CheckoutComponent {
   ];
 
   currentStep = signal<number>(1);
-  selectedAddress = signal<Address | null>(null);
+  selectedAddress = signal<ShippingAddress | null>(null);
   selectedPaymentMethod = signal<PaymentMethod>('card');
   isLoading = signal<boolean>(false);
 
@@ -66,8 +77,13 @@ export class CheckoutComponent {
     return true;
   });
 
-  onAddressSelected(address: Address) {
+  onAddressSelected(address: ShippingAddress) {
     this.selectedAddress.set(address);
+  }
+
+  onAddressProceed(address: ShippingAddress) {
+    this.selectedAddress.set(address);
+    this.currentStep.set(2);
   }
 
   onPaymentMethodSelected(method: PaymentMethod) {
@@ -104,11 +120,7 @@ export class CheckoutComponent {
     if (!cartId || !address) return;
 
     const orderData: OrderInput = {
-      shippingAddress: {
-        details: address.street,
-        phone: address.phone,
-        city: address.city,
-      },
+      shippingAddress: address,
     };
 
     this.isLoading.set(true);
@@ -126,9 +138,10 @@ export class CheckoutComponent {
               this._translateService.instant('CHECKOUT.ORDER_SUCCESS') ||
                 'Order placed successfully!'
             );
-            this._cartService.clearUserCart().pipe(
-              takeUntilDestroyed(this._destroyRef)
-            ).subscribe();
+            this._cartService
+              .clearUserCart()
+              .pipe(takeUntilDestroyed(this._destroyRef))
+              .subscribe();
             this._router.navigate(['/home']);
           },
           error: (err) => {

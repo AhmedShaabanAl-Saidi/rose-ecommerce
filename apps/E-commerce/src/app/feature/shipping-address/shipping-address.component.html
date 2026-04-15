@@ -96,7 +96,7 @@
         [block]="true"
         [iconPos]="'right'"
         [icon]="nextIcon()"
-        [disabled]="!selectedAddress()"
+        [disabled]="shippingAddresses().length === 0 || !selectedAddress()"
         class="next-btn dark:brightness-110"
         (click)="next()"
       >

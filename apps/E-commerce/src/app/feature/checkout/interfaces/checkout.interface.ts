@@ -1,22 +1,7 @@
-export interface Address {
-  _id: string;
-  city: string;
-  phone: string;
-  street: string;
-}
-
-export interface ShippingAddressRes {
-  status: string;
-  message: string;
-  addresses: Address[];
-}
+import { ShippingAddress } from '../../shipping-address/interfaces/shipping-address.interface';
 
 export interface OrderInput {
-  shippingAddress: {
-    details: string;
-    phone: string;
-    city: string;
-  };
+  shippingAddress: Omit<ShippingAddress, 'id' | 'userId'>;
 }
 
 export interface OrderRes {

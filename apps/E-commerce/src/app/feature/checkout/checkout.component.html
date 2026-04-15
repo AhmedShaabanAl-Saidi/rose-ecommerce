@@ -22,16 +22,17 @@
   <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
     <!-- Left Section: Steps Content (8 Cols) -->
     <div class="lg:col-span-8">
-      <div class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-950 dark:ring-zinc-800 sm:p-8">
+      <div
+        class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-950 dark:ring-zinc-800 sm:p-8"
+      >
         @if (currentStep() === 1) {
-          <app-shipping-address-section
-            (addressSelected)="onAddressSelected($event)"
-            (addAddressClick)="onAddAddress()"
-          ></app-shipping-address-section>
+        <app-shipping-address
+          (proceedToPayment)="onAddressProceed($event)"
+        ></app-shipping-address>
         } @else {
-          <app-payment-method-section
-            (methodSelected)="onPaymentMethodSelected($event)"
-          ></app-payment-method-section>
+        <app-payment-method-section
+          (methodSelected)="onPaymentMethodSelected($event)"
+        ></app-payment-method-section>
         }
       </div>
     </div>
