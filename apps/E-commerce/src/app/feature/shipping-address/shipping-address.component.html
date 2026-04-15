@@ -1,0 +1,107 @@
+<div class="p-4">
+  <h2 class="text-[30px] font-semibold mb-4 text-black dark:text-white">
+    {{ 'SHIPPING_ADDRESS.TITLE' | translate }}
+  </h2>
+  @if (shippingAddresses().length===0) {
+  <div class="flex items-center justify-center p-10">
+    <p class="text-zinc-500 dark:text-zinc-400 font-medium text-[18px]">
+      {{ 'SHIPPING_ADDRESS.NO_ADDRESSES' | translate }}
+    </p>
+  </div>
+  }
+  <div class="space-y-3">
+    @for (address of shippingAddresses(); track address._id) {
+    <div
+      role="button"
+      tabindex="0"
+      (click)="selectAddress(address)"
+      class="flex justify-between items-start border px-3.5 py-4 rounded-2xl cursor-pointer transition-all duration-200"
+      [class]="
+        selectedAddress()?._id === address._id
+          ? 'bg-maroon-600 border-maroon-600 dark:bg-maroon-700 dark:border-maroon-700'
+          : 'bg-white dark:bg-zinc-900 border-zinc-300 dark:border-zinc-800 hover:border-rose-400 dark:hover:border-rose-500'
+      "
+    >
+      <div class="space-y-2">
+        <p
+          class="font-semibold text-[24px]"
+          [class.text-white]="selectedAddress()?._id === address._id"
+          [class.text-zinc-800]="selectedAddress()?._id !== address._id"
+          [class.dark:text-zinc-100]="selectedAddress()?._id !== address._id"
+        >
+          {{ address.city }}
+        </p>
+        <p
+          class="font-medium rounded-2xl text-center px-4 inline-block"
+          [class]="
+            selectedAddress()?._id === address._id
+              ? 'bg-zinc-800/50 text-zinc-50'
+              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300'
+          "
+        >
+          {{ address.street }}
+        </p>
+      </div>
+
+      <div
+        class="flex items-center gap-3 font-medium ltr:flex-row rtl:flex-row-reverse"
+      >
+        <div
+          class="rounded-full w-9 h-9 flex items-center justify-center shrink-0 transition-colors"
+          [class]="
+            selectedAddress()?._id === address._id
+              ? 'bg-white text-maroon-600'
+              : 'bg-maroon-600 dark:bg-maroon-700 text-white'
+          "
+        >
+          <i class="pi pi-phone text-sm rtl:-scale-x-100"></i>
+        </div>
+
+        <span
+          class="text-[18px] font-medium"
+          [class.text-white]="selectedAddress()?._id === address._id"
+          [class.text-zinc-500]="selectedAddress()?._id !== address._id"
+          [class.dark:text-zinc-400]="selectedAddress()?._id !== address._id"
+        >
+          {{ address.phone }}
+        </span>
+      </div>
+    </div>
+    }
+  </div>
+
+  @if (shippingAddresses().length > 0) {
+  <div class="mb-6 flex gap-2 items-center">
+    <p-divider class="dark:opacity-20"></p-divider>
+    <span
+      class="text-zinc-500 dark:text-zinc-400 font-semibold text-[18px] uppercase"
+      >{{ 'SHIPPING_ADDRESS.OR' | translate }}</span
+    >
+    <p-divider class="dark:opacity-20"></p-divider>
+  </div>
+  }
+
+  <div class="space-y-4">
+    <lib-button
+      [block]="true"
+      [variant]="'secondary'"
+      class="dark:brightness-110"
+      (click)="addAddress()"
+    >
+      {{ 'SHIPPING_ADDRESS.ADD_NEW_ADDRESS' | translate }}
+    </lib-button>
+
+    <div class="flex justify-end rtl:justify-start">
+      <lib-button
+        [block]="true"
+        [iconPos]="'right'"
+        [icon]="nextIcon()"
+        [disabled]="!selectedAddress()"
+        class="next-btn dark:brightness-110"
+        (click)="next()"
+      >
+        {{ 'SHIPPING_ADDRESS.NEXT' | translate }}
+      </lib-button>
+    </div>
+  </div>
+</div>
