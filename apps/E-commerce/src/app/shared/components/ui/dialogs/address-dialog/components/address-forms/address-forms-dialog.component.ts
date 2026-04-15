@@ -8,9 +8,15 @@ import { AuthState } from '@elevate/auth-domain';
 import { ToastrService } from 'ngx-toastr';
 import { AddressFormStepComponent } from './components/address-form-step/address-form-step.component';
 import { AddressMapStepComponent } from './components/address-map-step/address-map-step.component';
+import { StepperComponent } from '../../../../stepper/stepper.component';
 @Component({
   selector: 'app-address-forms-dialog.component',
-  imports: [TranslateModule, AddressFormStepComponent, AddressMapStepComponent],
+  imports: [
+    TranslateModule,
+    AddressFormStepComponent,
+    AddressMapStepComponent,
+    StepperComponent,
+  ],
   templateUrl: './address-forms-dialog.component.html',
 })
 export class AddressFormsDialogComponent implements OnInit {
