@@ -2,7 +2,13 @@
   <h2 class="text-[30px] font-semibold mb-4 text-black dark:text-white">
     {{ 'SHIPPING_ADDRESS.TITLE' | translate }}
   </h2>
-
+  @if (shippingAddresses().length===0) {
+  <div class="flex items-center justify-center p-10">
+    <p class="text-zinc-500 dark:text-zinc-400 font-medium text-[18px]">
+      {{ 'SHIPPING_ADDRESS.NO_ADDRESSES' | translate }}
+    </p>
+  </div>
+  }
   <div class="space-y-3">
     @for (address of shippingAddresses(); track address._id) {
     <div
@@ -64,7 +70,8 @@
     }
   </div>
 
-  <div class="my-6 flex gap-2 items-center">
+  @if (shippingAddresses().length > 0) {
+  <div class="mb-6 flex gap-2 items-center">
     <p-divider class="dark:opacity-20"></p-divider>
     <span
       class="text-zinc-500 dark:text-zinc-400 font-semibold text-[18px] uppercase"
@@ -72,6 +79,7 @@
     >
     <p-divider class="dark:opacity-20"></p-divider>
   </div>
+  }
 
   <div class="space-y-4">
     <lib-button
@@ -88,6 +96,7 @@
         [block]="true"
         [iconPos]="'right'"
         [icon]="nextIcon()"
+        [disabled]="!selectedAddress()"
         class="next-btn dark:brightness-110"
         (click)="next()"
       >

@@ -181,6 +181,38 @@
   gap: 5rem;
 }
 
+.full-width-confirm-dialog .p-dialog-footer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.full-width-confirm-dialog .p-dialog-footer > p-button {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.full-width-confirm-dialog .p-dialog-footer > p-button > button {
+  width: 100%;
+}
+
+.full-width-confirm-dialog .p-dialog-footer > p-button:first-child button {
+  background-color: var(--color-zinc-50) !important;
+  border: var(--color-zinc-400) 1px solid !important;
+  color: var(--color-zinc-800) !important;
+  font-weight: 500;
+}
+
+.full-width-confirm-dialog
+  .p-dialog-footer
+  > p-button:first-child
+  button:hover {
+  background-color: var(--color-zinc-600) !important;
+  border: var(--color-zinc-400) 1px solid !important;
+  color: var(--color-white) !important;
+}
+
 @media (width >= 80rem) {
   .route-page-content {
     max-width: 75rem;
@@ -294,7 +326,7 @@
 }
 #toast-container {
   position: fixed !important;
-  z-index: 9999 !important;
+  z-index: 9999999999 !important;
   pointer-events: none;
 }
 #toast-container > div {
@@ -665,4 +697,7 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 }
 .btn-arrow button {
   @apply w-10 h-10 rounded-full flex items-center justify-center;
+}
+.dark .label-address .input-wrapper .input-label {
+  @apply text-zinc-700;
 }

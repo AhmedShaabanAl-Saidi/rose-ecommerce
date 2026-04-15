@@ -55,9 +55,17 @@ export class ShippingAddressComponent implements OnInit {
     // TODO: navigate to the next step in the checkout process, passing the selected address information
   }
   addAddress() {
-    // TODO: open a modal to add a new address
-    this.dialogUiService.openAddressManager()?.onClose.subscribe(() => {
-      this.getUserAddresses();
-    });
+    const address = this.selectedAddress();
+    if (address != null) {
+      this.dialogUiService
+        .openAddressManager('view', address)
+        ?.onClose.subscribe(() => {
+          this.getUserAddresses();
+        });
+    } else {
+      this.dialogUiService.openAddressManager('view')?.onClose.subscribe(() => {
+        this.getUserAddresses();
+      });
+    }
   }
 }

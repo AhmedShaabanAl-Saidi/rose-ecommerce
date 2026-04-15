@@ -52,6 +52,8 @@ import {
   UserRound,
   ArrowLeft,
   Zap,
+  ArrowRight,
+  AlertTriangle,
 } from 'lucide-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
@@ -136,6 +138,8 @@ export const appConfig: ApplicationConfig = {
         ShoppingBag,
         MoveRight,
         TicketPercent,
+        ArrowRight,
+        AlertTriangle,
       })
     ),
     providePrimeNG({

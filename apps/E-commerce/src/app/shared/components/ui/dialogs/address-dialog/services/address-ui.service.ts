@@ -8,7 +8,7 @@ export class AddressUiService {
   private dialogService = inject(DialogService);
 
   openAddressManager(
-    mode: 'view' | 'add' | 'edit' | 'delete' = 'view',
+    mode: 'view' | 'add' | 'edit' = 'view',
     address?: ShippingAddress
   ) {
     return this.dialogService.open(AddressDialogComponent, {
@@ -19,6 +19,7 @@ export class AddressUiService {
       closable: true,
       appendTo: 'body',
       closeOnEscape: true,
+      dismissableMask: true,
       draggable: false,
       contentStyle: {
         padding: '0',

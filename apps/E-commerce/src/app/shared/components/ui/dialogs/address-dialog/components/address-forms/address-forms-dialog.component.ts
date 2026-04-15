@@ -2,26 +2,15 @@ import { ShippingAddressService } from './../../../../../../../feature/shipping-
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddressStateService } from './../../services/address-state.service';
-import { PhoneInputComponent } from '@elevate/reusable-input';
-import { ButtonComponent } from '@elevate/reusable-ui';
-import { TextInputComponent } from '@elevate/reusable-input';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthState } from '@elevate/auth-domain';
-import { GoogleMapsModule } from '@angular/google-maps';
+import { ToastrService } from 'ngx-toastr';
+import { AddressFormStepComponent } from './components/address-form-step/address-form-step.component';
+import { AddressMapStepComponent } from './components/address-map-step/address-map-step.component';
 @Component({
   selector: 'app-address-forms-dialog.component',
-  imports: [
-    ReactiveFormsModule,
-    PhoneInputComponent,
-    ButtonComponent,
-    TextInputComponent,
-    GoogleMapsModule,
-  ],
+  imports: [TranslateModule, AddressFormStepComponent, AddressMapStepComponent],
   templateUrl: './address-forms-dialog.component.html',
 })
 export class AddressFormsDialogComponent implements OnInit {
@@ -30,7 +19,9 @@ export class AddressFormsDialogComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly addressService = inject(ShippingAddressService);
   private readonly authState = inject(AuthState);
-
+  private readonly translate = inject(TranslateService);
+  private readonly toastr = inject(ToastrService);
+  isRtl = computed(() => this.translate.getCurrentLang() === 'ar');
   isEdit = computed(() => this.addressStateService.address() !== null);
   steps = signal(1);
   addressForm!: FormGroup;
@@ -85,9 +76,17 @@ export class AddressFormsDialogComponent implements OnInit {
   }
   onNext() {
     if (this.addressForm.valid) {
-      console.log(this.addressForm.value);
       this.steps.set(2);
     }
+  }
+
+  private normalizePhone(phoneValue: unknown): string {
+    if (typeof phoneValue === 'string') {
+      return phoneValue;
+    }
+
+    const e164 = (phoneValue as { e164Number?: unknown }).e164Number;
+    return typeof e164 === 'string' ? e164 : '';
   }
 
   onSubmit() {
@@ -96,7 +95,7 @@ export class AddressFormsDialogComponent implements OnInit {
         ...this.addressForm.value,
         lat: this.addressForm.get('lat')?.value.toString(),
         long: this.addressForm.get('long')?.value.toString(),
-        phone: this.addressForm.get('phone')?.value?.e164Number,
+        phone: this.normalizePhone(this.addressForm.get('phone')?.value),
       };
 
       const action =
@@ -105,7 +104,14 @@ export class AddressFormsDialogComponent implements OnInit {
           : this.addressService.addAddress(addressData);
 
       action.subscribe({
-        next: () => this.ref.close(true),
+        next: () => {
+          this.toastr.success(
+            this.isEdit()
+              ? this.translate.instant('ADDRESS_DIALOG.UPDATE_SUCCESS')
+              : this.translate.instant('ADDRESS_DIALOG.ADD_SUCCESS')
+          );
+          this.ref.close(true);
+        },
       });
     }
   }
