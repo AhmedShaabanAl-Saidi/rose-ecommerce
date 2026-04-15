@@ -14,6 +14,4 @@ export interface ShippingAddress {
   username?: string;
 }
 export type AddAddressParams = Omit<ShippingAddress, '_id'>;
-export type UpdateAddressParams = Partial<
-  Omit<ShippingAddress, '_id' | 'username'>
->;
+export type UpdateAddressParams = Partial<AddAddressParams>;

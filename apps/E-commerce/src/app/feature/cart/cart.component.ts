@@ -1,8 +1,8 @@
 import { Component, computed, inject } from '@angular/core';
-import { CartService } from './services/cart.service';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
-import { ProductLikedComponent } from './components/product-liked/product-liked.component';
 import { CopounComponent } from './components/copoun/copoun.component';
+import { ProductLikedComponent } from './components/product-liked/product-liked.component';
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-cart',

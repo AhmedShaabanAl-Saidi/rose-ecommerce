@@ -14,6 +14,7 @@ import { Divider } from 'primeng/divider';
 import { TranslateModule } from '@ngx-translate/core';
 import { languageService } from '../../core/services/language-service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AddressUiService } from '../../shared/components/ui/dialogs/address-dialog/services/address-ui.service';
 
 @Component({
   selector: 'app-shipping-address',
@@ -24,6 +25,7 @@ export class ShippingAddressComponent implements OnInit {
   private readonly shippingAddressService = inject(ShippingAddressService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly languageService = inject(languageService);
+  private readonly dialogUiService = inject(AddressUiService);
   shippingAddresses = signal<ShippingAddress[]>([]);
   selectedAddress = signal<ShippingAddress | null>(null);
   nextIcon = computed(() =>
@@ -54,5 +56,8 @@ export class ShippingAddressComponent implements OnInit {
   }
   addAddress() {
     // TODO: open a modal to add a new address
+    this.dialogUiService.openAddressManager()?.onClose.subscribe(() => {
+      this.getUserAddresses();
+    });
   }
 }

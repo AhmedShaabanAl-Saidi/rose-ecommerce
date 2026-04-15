@@ -1,0 +1,148 @@
+<div class="p-6">
+  <h2 class="text-[30px] font-bold text-zinc-800 mb-6">
+    {{ isEdit() ? 'Update Address Info' : 'Add a New Address' }}
+  </h2>
+
+  <div class="relative flex items-center mb-2 w-full h-10">
+    <div
+      class="absolute top-1/2 left-0 w-full h-1 bg-zinc-200 -translate-y-1/2 rounded-full"
+    ></div>
+
+    <div
+      class="absolute top-1/2 left-0 h-1 bg-maroon-700 -translate-y-1/2 transition-all duration-500 rounded-full"
+      [style.width]="steps() === 1 ? '50%' : '100%'"
+    ></div>
+
+    <div class="relative w-full flex">
+      <div
+        class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-10"
+      >
+        <div
+          class="w-8 h-8 rounded-full transition-all duration-500 flex items-center justify-center font-bold text-base shadow-sm"
+          [class]="
+            steps() >= 1
+              ? 'bg-maroon-700 text-white shadow-maroon-200'
+              : 'bg-zinc-200 text-zinc-500'
+          "
+        >
+          1
+        </div>
+      </div>
+
+      <div class="absolute right-0 top-1/2 -translate-y-1/2 z-10">
+        <div
+          class="w-8 h-8 rounded-full transition-all duration-500 flex items-center justify-center font-bold text-base shadow-sm"
+          [class]="
+            steps() === 2
+              ? 'bg-maroon-700 text-white shadow-maroon-200'
+              : 'bg-zinc-200 text-zinc-500'
+          "
+        >
+          2
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (steps()===1) {
+  <form [formGroup]="addressForm" (ngSubmit)="onNext()" class="space-y-6">
+    <h3
+      class="text-maroon-600 text-[24px] font-medium border-b border-zinc-200 pb-2"
+    >
+      Enter address details
+    </h3>
+
+    <div class="space-y-2">
+      <lib-text-input
+        formControlName="city"
+        label="City"
+        placeholder="Enter city name"
+      ></lib-text-input>
+    </div>
+    <div class="space-y-2">
+      <label for="" class="block text-zinc-700 font-medium">Address</label>
+      <textarea
+        formControlName="street"
+        rows="4"
+        placeholder="Enter your full address"
+        class="w-full p-4 rounded-xl border-2 placeholder:text-zinc-400 bg-white outline-none transition-all resize-none"
+        [class.input-status-normal]="
+          !(
+            addressForm.get('street')?.invalid &&
+            addressForm.get('street')?.touched
+          )
+        "
+        [class.input-status-error]="
+          addressForm.get('street')?.invalid &&
+          addressForm.get('street')?.touched
+        "
+      ></textarea>
+      @if(addressForm.get('street')?.invalid &&
+      addressForm.get('street')?.touched){
+      <i class="pi pi-exclamation-triangle text-red-500"></i>
+      <span class="text-red-400 font-semibold mx-1 text-sm"
+        >Address is required</span
+      >
+      }
+    </div>
+
+    <div class="space-y-2">
+      <lib-phone-input
+        formControlName="phone"
+        label="Phone Number"
+        placeholder="Enter your phone number"
+      ></lib-phone-input>
+    </div>
+    <lib-button type="submit" [block]="true" [disabled]="addressForm.invalid"
+      >Next
+    </lib-button>
+  </form>
+  }@else {
+  <div class="space-y-6 animate-in fade-in slide-in-from-right duration-500">
+    <div class="flex items-center gap-3">
+      <lib-button (click)="steps.set(1)" class="btn-arrow" icon="arrow-left">
+      </lib-button>
+      <h3 class="text-maroon-600 text-[24px] font-medium">
+        Find Your Location
+      </h3>
+    </div>
+
+    <div
+      class="relative w-full h-87.5 rounded-2xl overflow-hidden border-2 border-zinc-100 shadow-sm"
+    >
+      <google-map
+        height="100%"
+        width="100%"
+        [center]="center"
+        [zoom]="zoom"
+        (mapClick)="onMapClick($event)"
+      >
+        <map-marker
+          [position]="markerPosition"
+          [options]="markerOptions"
+        ></map-marker>
+      </google-map>
+      <lib-button
+        type="button"
+        (click)="getCurrentLocation()"
+        class="absolute top-3 right-14 z-20"
+      >
+        <i class="pi pi-compass text-lg"></i>
+        Find My Location
+      </lib-button>
+      <!-- <button
+        type="button"
+        (click)="getCurrentLocation()"
+        class="absolute top-4 right-4 bg-white px-4 py-2 rounded-xl shadow-md flex items-center gap-2 font-bold text-maroon-700 hover:bg-zinc-50 transition-all z-20"
+      >
+        <i class="pi pi-compass text-lg"></i>
+        Find My Location
+      </button> -->
+    </div>
+
+    <lib-button (click)="onSubmit()" [block]="true" class="w-full">
+      {{ isEdit() ? 'Update Address' : 'Add Address' }}
+    </lib-button>
+  </div>
+  }
+</div>

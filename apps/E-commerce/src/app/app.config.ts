@@ -63,6 +63,8 @@ import { provideThemeInitializer } from './core/initializers/theme.initializer';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 import { provideCartInitializer } from './core/initializers/cart.initializer';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ConfirmationService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -145,5 +147,7 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
+    DialogService,
+    ConfirmationService,
   ],
 };

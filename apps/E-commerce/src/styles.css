@@ -663,3 +663,6 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 .next-btn button {
   @apply px-10 mt-5;
 }
+.btn-arrow button {
+  @apply w-10 h-10 rounded-full flex items-center justify-center;
+}

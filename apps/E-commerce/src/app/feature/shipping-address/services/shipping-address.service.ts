@@ -17,7 +17,7 @@ export class ShippingAddressService {
       `${environment.baseUrl}/addresses`
     );
   }
-  addAdress(address: AddAddressParams) {
+  addAddress(address: AddAddressParams) {
     return this.httpClient.patch<ShippingAddressResponse>(
       `${environment.baseUrl}/addresses`,
       address
