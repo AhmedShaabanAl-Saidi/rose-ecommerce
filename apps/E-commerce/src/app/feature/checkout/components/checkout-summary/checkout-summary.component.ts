@@ -26,11 +26,6 @@ export class CheckoutSummaryComponent {
   private readonly _cartService = inject(CartService);
   private readonly _destroyRef = inject(DestroyRef);
 
-  btnLabel = input<string>('Next');
-  isLoading = input<boolean>(false);
-  canProceed = input<boolean>(true);
-
-  btnClick = output<void>();
 
   // Consume centralized signals — single source of truth
   readonly cart = this._cartService.cart;
@@ -77,7 +72,4 @@ export class CheckoutSummaryComponent {
       });
   }
 
-  onBtnClick() {
-    this.btnClick.emit();
-  }
 }

@@ -10,8 +10,15 @@ import {
 import { ShippingAddressService } from './services/shipping-address.service';
 import { ShippingAddress } from './interfaces/shipping-address.interface';
 import { ButtonComponent } from '@elevate/reusable-ui';
-import { LucideAngularModule } from 'lucide-angular';
-import { Divider } from 'primeng/divider';
+import {
+  LucideAngularModule,
+  Phone,
+  PlusCircle,
+  MapPin,
+  Check,
+  MoveLeft,
+  MoveRight,
+} from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { languageService } from '../../core/services/language-service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -19,7 +26,24 @@ import { AddressUiService } from '../../shared/components/ui/dialogs/address-dia
 
 @Component({
   selector: 'app-shipping-address',
-  imports: [ButtonComponent, LucideAngularModule, Divider, TranslateModule],
+  imports: [
+    ButtonComponent,
+    LucideAngularModule,
+    TranslateModule,
+  ],
+  providers: [
+    {
+      provide: LucideAngularModule,
+      useValue: LucideAngularModule.pick({
+        Phone,
+        PlusCircle,
+        MapPin,
+        Check,
+        MoveLeft,
+        MoveRight,
+      }),
+    },
+  ],
   templateUrl: './shipping-address.component.html',
 })
 export class ShippingAddressComponent implements OnInit {

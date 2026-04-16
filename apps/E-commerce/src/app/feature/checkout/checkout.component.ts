@@ -64,18 +64,6 @@ export class CheckoutComponent {
 
   cart = this._cartService.cart;
 
-  btnLabel = computed(() => {
-    return this.currentStep() === 1
-      ? this._translateService.instant('CART.PROCEED_CHECKOUT') || 'Next'
-      : this._translateService.instant('CART.PLACE_ORDER') || 'Place Order';
-  });
-
-  canProceed = computed(() => {
-    if (this.currentStep() === 1) {
-      return !!this.selectedAddress();
-    }
-    return true;
-  });
 
   onAddressSelected(address: ShippingAddress) {
     this.selectedAddress.set(address);
@@ -117,17 +105,32 @@ export class CheckoutComponent {
     const cartId = this.cart()?._id;
     const address = this.selectedAddress();
 
-    if (!cartId || !address) return;
+    console.log('CheckoutComponent.placeOrder:', {
+      cartId,
+      address,
+      method: this.selectedPaymentMethod(),
+    });
+
+    if (!cartId || !address) {
+      console.warn('CheckoutComponent: Missing cartId or address');
+      return;
+    }
 
     const orderData: OrderInput = {
-      shippingAddress: address,
+      shippingAddress: {
+        street: address.street,
+        phone: address.phone,
+        city: address.city,
+        lat: address.lat || '0',
+        long: address.long || '0',
+      },
     };
 
     this.isLoading.set(true);
 
     if (this.selectedPaymentMethod() === 'cash') {
       this._checkoutService
-        .placeCashOrder(cartId, orderData)
+        .placeCashOrder(orderData)
         .pipe(
           takeUntilDestroyed(this._destroyRef),
           finalize(() => this.isLoading.set(false))
@@ -154,7 +157,7 @@ export class CheckoutComponent {
         });
     } else {
       this._checkoutService
-        .placeOnlineOrder(cartId, orderData)
+        .placeOnlineOrder(orderData)
         .pipe(
           takeUntilDestroyed(this._destroyRef),
           finalize(() => this.isLoading.set(false))

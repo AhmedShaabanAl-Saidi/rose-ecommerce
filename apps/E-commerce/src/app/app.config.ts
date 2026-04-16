@@ -54,6 +54,12 @@ import {
   Zap,
   ArrowRight,
   AlertTriangle,
+  Banknote,
+  CreditCard,
+  ChevronLeft,
+  PlusCircle,
+  Phone,
+  Check,
 } from 'lucide-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
@@ -140,6 +146,12 @@ export const appConfig: ApplicationConfig = {
         TicketPercent,
         ArrowRight,
         AlertTriangle,
+        Banknote,
+        CreditCard,
+        ChevronLeft,
+        PlusCircle,
+        Phone,
+        Check,
       })
     ),
     providePrimeNG({

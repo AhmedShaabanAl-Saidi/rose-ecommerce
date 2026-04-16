@@ -7,44 +7,27 @@
     ></lib-stepper>
   </div>
 
-  <!-- Back Button -->
-  <div class="mb-6">
-    <button
-      (click)="onBack()"
-      class="flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-maroon-600 dark:text-zinc-400 dark:hover:text-maroon-400 transition-colors"
-    >
-      <lucide-angular name="arrow-left" [size]="16"></lucide-angular>
-      {{ currentStep() === 1 ? 'Back to Cart' : 'Back to Shipping' }}
-    </button>
-  </div>
-
   <!-- Main Content Grid -->
   <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
     <!-- Left Section: Steps Content (8 Cols) -->
     <div class="lg:col-span-8">
-      <div
-        class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-950 dark:ring-zinc-800 sm:p-8"
-      >
-        @if (currentStep() === 1) {
-        <app-shipping-address
-          (proceedToPayment)="onAddressProceed($event)"
-        ></app-shipping-address>
-        } @else {
-        <app-payment-method-section
-          (methodSelected)="onPaymentMethodSelected($event)"
-        ></app-payment-method-section>
-        }
-      </div>
+      @if (currentStep() === 1) {
+      <app-shipping-address
+        (proceedToPayment)="onAddressProceed($event)"
+      ></app-shipping-address>
+      } @else {
+      <app-payment-method-section
+        [isLoading]="isLoading()"
+        (methodSelected)="onPaymentMethodSelected($event)"
+        (back)="onBack()"
+        (checkout)="onNext()"
+      ></app-payment-method-section>
+      }
     </div>
 
     <!-- Right Section: Order Summary (4 Cols) -->
     <div class="lg:col-span-4">
-      <app-checkout-summary
-        [btnLabel]="btnLabel()"
-        [isLoading]="isLoading()"
-        [canProceed]="canProceed()"
-        (btnClick)="onNext()"
-      ></app-checkout-summary>
+      <app-checkout-summary></app-checkout-summary>
     </div>
   </div>
 

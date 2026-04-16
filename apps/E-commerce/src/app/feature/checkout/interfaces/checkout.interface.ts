@@ -1,7 +1,13 @@
 import { ShippingAddress } from '../../shipping-address/interfaces/shipping-address.interface';
 
 export interface OrderInput {
-  shippingAddress: Omit<ShippingAddress, 'id' | 'userId'>;
+  shippingAddress: {
+    street: string;
+    phone: string;
+    city: string;
+    lat: string;
+    long: string;
+  };
 }
 
 export interface OrderRes {

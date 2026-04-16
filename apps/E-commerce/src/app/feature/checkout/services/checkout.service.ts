@@ -16,15 +16,14 @@ export class CheckoutService {
   private readonly _httpClient = inject(HttpClient);
   private readonly _platformId = inject(PLATFORM_ID);
 
-  placeCashOrder(cartId: string, orderData: OrderInput): Observable<OrderRes> {
+  placeCashOrder(orderData: OrderInput): Observable<OrderRes> {
     return this._httpClient.post<OrderRes>(
-      `${environment.baseUrl}/orders/${cartId}`,
+      `${environment.baseUrl}/orders`,
       orderData
     );
   }
 
   placeOnlineOrder(
-    cartId: string,
     orderData: OrderInput
   ): Observable<CheckoutSessionRes> {
     const origin = isPlatformBrowser(this._platformId)
@@ -32,7 +31,7 @@ export class CheckoutService {
       : environment.baseUrl;
 
     return this._httpClient.post<CheckoutSessionRes>(
-      `${environment.baseUrl}/orders/checkout-session/${cartId}?url=${origin}`,
+      `${environment.baseUrl}/orders/checkout?url=${origin}`,
       orderData
     );
   }
