@@ -1,4 +1,5 @@
-import { Component, DestroyRef, inject, input, output, signal } from '@angular/core';
+import { Component, DestroyRef, inject, input, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -19,6 +20,7 @@ import { LucideAngularModule } from 'lucide-angular';
     TextInputComponent,
     ButtonComponent,
     LucideAngularModule,
+    RouterLink,
   ],
   templateUrl: './checkout-summary.component.html',
 })
@@ -26,6 +28,7 @@ export class CheckoutSummaryComponent {
   private readonly _cartService = inject(CartService);
   private readonly _destroyRef = inject(DestroyRef);
 
+  readonly showCheckoutButton = input<boolean>(false);
 
   // Consume centralized signals — single source of truth
   readonly cart = this._cartService.cart;

@@ -141,11 +141,12 @@ export class CheckoutComponent {
               this._translateService.instant('CHECKOUT.ORDER_SUCCESS') ||
                 'Order placed successfully!'
             );
+            this._cartService.setDefaultCart();
             this._cartService
-              .clearUserCart()
+              .getLoggedUserCart()
               .pipe(takeUntilDestroyed(this._destroyRef))
               .subscribe();
-            this._router.navigate(['/home']);
+            this._router.navigate(['/shopping-cart']);
           },
           error: (err) => {
             this._toastrService.error(

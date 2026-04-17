@@ -77,3 +77,18 @@
     </div>
   </div>
 </section>
+
+@if (showCheckoutButton()) {
+<div class="my-4">
+  <lib-button
+    [block]="true"
+    [disabled]="!hasItems()"
+    [icon]="'move-right'"
+    [iconPos]="'right'"
+    size="lg"
+    routerLink="/checkout"
+  >
+    {{ 'CART.PROCEED_CHECKOUT' | translate }}
+  </lib-button>
+</div>
+}

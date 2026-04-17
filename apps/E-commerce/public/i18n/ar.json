@@ -350,7 +350,8 @@
   "TOTAL_DISCOUNT": "الخصم",
   "ORDER_TOTAL": "الإجمالي",
   "PROCEED_CHECKOUT": "الدفع",
-  "CURRENCY": "جنيه"
+  "CURRENCY": "جنيه",
+  "DISCOUNT": "خصم"
   },
   "WISHLIST": {
     "TITLE": "قائمة أمنياتي",

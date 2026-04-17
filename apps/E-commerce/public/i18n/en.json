@@ -349,7 +349,8 @@
     "SUBTOTAL": "Subtotal",
     "TOTAL_DISCOUNT": "Discount",
     "ORDER_TOTAL": "Total",
-    "PROCEED_CHECKOUT": "Checkout"
+    "PROCEED_CHECKOUT": "Checkout",
+    "DISCOUNT": "Discount"
   },
 
   "WISHLIST": {
