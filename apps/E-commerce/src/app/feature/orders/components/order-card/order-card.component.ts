@@ -15,6 +15,9 @@ import { Order, OrderItem } from '../../interfaces/orders.interface';
   selector: 'app-order-card',
   imports: [CommonModule, TranslateModule, LucideAngularModule],
   templateUrl: './order-card.component.html',
+  host: {
+    class: 'block',
+  },
 })
 export class OrderCardComponent {
   private readonly language = inject(languageService);
@@ -34,6 +37,12 @@ export class OrderCardComponent {
     const items = this.order().orderItems;
     return this.isExpanded() ? items : items.slice(0, this.previewItemsCount);
   });
+  readonly hiddenPreviewItems = computed(() =>
+    this.order().orderItems.slice(
+      this.previewItemsCount,
+      this.previewItemsCount * 2
+    )
+  );
 
   readonly hasHiddenItems = computed(
     () => this.order().orderItems.length > this.previewItemsCount
