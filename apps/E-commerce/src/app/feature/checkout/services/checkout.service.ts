@@ -21,7 +21,7 @@ export class CheckoutService {
       ? window.location.origin
       : new URL(environment.baseUrl).origin;
 
-    return new URL('/allorders', appOrigin).toString();
+    return new URL('/allOrders', appOrigin).toString();
   }
 
   placeCashOrder(orderData: OrderInput): Observable<OrderRes> {

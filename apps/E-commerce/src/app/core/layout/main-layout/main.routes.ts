@@ -49,7 +49,7 @@ export const mainRoutes: Routes = [
           ),
       },
       {
-        path: 'allorders',
+        path: 'allOrders',
         canActivate: [authGuard],
         loadChildren: () =>
           import('../../../feature/orders/orders.routes').then(
