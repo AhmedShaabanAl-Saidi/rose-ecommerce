@@ -146,7 +146,7 @@ export class CheckoutComponent {
               .getLoggedUserCart()
               .pipe(takeUntilDestroyed(this._destroyRef))
               .subscribe();
-            this._router.navigate(['/shopping-cart']);
+            this._router.navigate(['/allorders']);
           },
           error: (err) => {
             this._toastrService.error(
