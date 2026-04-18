@@ -13,12 +13,15 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
     "paths": {
-      "@elevate/auth-data-access": ["libs/auth/data-access/src/index.ts"],
-      "@elevate/auth-domain": ["libs/auth/domain/src/index.ts"],
-      "@elevate/reusable-input": ["libs/shared-ui/reusable-input/src/index.ts"],
-      "@elevate/reusable-ui": ["libs/shared-ui/reusable-ui/src/index.ts"]
+      "apps/*": ["./apps/*"],
+      "libs/*": ["./libs/*"],
+      "@elevate/auth-data-access": ["./libs/auth/data-access/src/index.ts"],
+      "@elevate/auth-domain": ["./libs/auth/domain/src/index.ts"],
+      "@elevate/reusable-input": [
+        "./libs/shared-ui/reusable-input/src/index.ts"
+      ],
+      "@elevate/reusable-ui": ["./libs/shared-ui/reusable-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

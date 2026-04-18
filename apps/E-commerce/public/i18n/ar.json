@@ -83,6 +83,38 @@
     "CART.LOGIN_TO_ACCESS": "يرجى تسجيل الدخول للوصول إلى عربة التسوق",
     "WISHLIST.LOGIN_TO_ACCESS": "يرجى تسجيل الدخول للوصول إلى قائمة الرغبات"
   },
+  "SHIPPING_ADDRESS": {
+    "TITLE": "عنوان الشحن",
+    "ADD_NEW_ADDRESS": "إضافة عنوان جديد",
+    "NEXT": "التالي",
+    "OR": "أو",
+    "NO_ADDRESSES": "لا توجد عناوين شحن محفوظة. يرجى إضافة عنوان جديد للمتابعة."
+  },
+  "ADDRESS_DIALOG": {
+    "LIST_TITLE": "عناويني",
+    "ADD_NEW_ADDRESS": "إضافة عنوان جديد",
+    "EDIT_TITLE": "تحديث معلومات العنوان",
+    "CREATE_TITLE": "إضافة عنوان جديد",
+    "STEP_1_TITLE": "أدخل تفاصيل العنوان",
+    "CITY_LABEL": "المدينة",
+    "CITY_PLACEHOLDER": "أدخل اسم المدينة",
+    "STREET_LABEL": "العنوان",
+    "STREET_PLACEHOLDER": "أدخل عنوانك الكامل",
+    "STREET_REQUIRED": "العنوان مطلوب",
+    "PHONE_LABEL": "رقم الهاتف",
+    "PHONE_PLACEHOLDER": "أدخل رقم هاتفك",
+    "NEXT": "التالي",
+    "STEP_2_TITLE": "ابحث عن موقعك",
+    "FIND_LOCATION": "اعثر على موقعي",
+    "SUBMIT_ADD": "إضافة العنوان",
+    "SUBMIT_UPDATE": "تحديث العنوان",
+    "DELETE_CONFIRM": "هل أنت متأكد أنك تريد حذف هذا العنوان؟",
+    "UPDATE_SUCCESS": "تم تحدسيث العنوان بنجاح",
+    "ADD_SUCCESS": "تم إضافة العنوان بنجاح",
+    "DELETE_SUCCESS": "تم حذف العنوان بنجاح",
+    "CANCEL": "إلغاء",
+    "CONFIRM": "تأكيد"
+  },
   "GALLERY": {
     "GALLERY_LABEL": "المعرض",
     "CHECK_OUT": "اكتشف",

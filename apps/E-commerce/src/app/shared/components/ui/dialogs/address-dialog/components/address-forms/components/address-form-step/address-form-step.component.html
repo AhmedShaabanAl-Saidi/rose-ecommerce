@@ -1,0 +1,58 @@
+<form [formGroup]="form()" (ngSubmit)="onNext()" class="space-y-6 text-start">
+  <h3
+    class="text-maroon-600 text-[24px] font-medium border-b border-zinc-200 dark:border-zinc-700 pb-2"
+  >
+    {{ 'ADDRESS_DIALOG.STEP_1_TITLE' | translate }}
+  </h3>
+
+  <div class="space-y-2">
+    <lib-text-input
+      class="label-address"
+      formControlName="city"
+      [label]="'ADDRESS_DIALOG.CITY_LABEL' | translate"
+      [placeholder]="'ADDRESS_DIALOG.CITY_PLACEHOLDER' | translate"
+    ></lib-text-input>
+  </div>
+
+  <div class="space-y-2">
+    <label for="street" class="block font-medium text-start text-zinc-700">
+      {{ 'ADDRESS_DIALOG.STREET_LABEL' | translate }}
+    </label>
+
+    <textarea
+      id="street"
+      formControlName="street"
+      rows="4"
+      [placeholder]="'ADDRESS_DIALOG.STREET_PLACEHOLDER' | translate"
+      class="w-full p-4 rounded-xl border-2 placeholder:text-zinc-400 dark:text-white dark:bg-zinc-700 outline-none transition-all resize-none"
+      [class.input-status-normal]="
+        !(form().get('street')?.invalid && form().get('street')?.touched)
+      "
+      [class.input-status-error]="
+        form().get('street')?.invalid && form().get('street')?.touched
+      "
+    ></textarea>
+
+    @if(form().get('street')?.invalid && form().get('street')?.touched){
+    <div class="flex items-center gap-1">
+      <i class="pi pi-exclamation-triangle text-red-500"></i>
+      <span class="text-red-400 font-semibold text-sm">
+        {{ 'ADDRESS_DIALOG.STREET_REQUIRED' | translate }}
+      </span>
+    </div>
+    }
+  </div>
+
+  <div class="space-y-2">
+    <lib-phone-input
+      class="label-address"
+      formControlName="phone"
+      [label]="'ADDRESS_DIALOG.PHONE_LABEL' | translate"
+      [placeholder]="'ADDRESS_DIALOG.PHONE_PLACEHOLDER' | translate"
+    ></lib-phone-input>
+  </div>
+
+  <lib-button type="submit" [block]="true" [disabled]="form().invalid">
+    {{ 'ADDRESS_DIALOG.NEXT' | translate }}
+  </lib-button>
+</form>
