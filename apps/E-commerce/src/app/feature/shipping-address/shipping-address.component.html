@@ -69,13 +69,15 @@
     }
   </div>
 
-  <div class="flex items-center gap-4 py-4">
-    <div class="h-px flex-1 bg-zinc-100 dark:bg-zinc-800"></div>
-    <span class="text-xs font-black uppercase tracking-widest text-zinc-400">
-      {{ 'SHIPPING_ADDRESS.OR' | translate }}
-    </span>
-    <div class="h-px flex-1 bg-zinc-100 dark:bg-zinc-800"></div>
-  </div>
+  @if (shippingAddresses().length > 0) {
+    <div class="flex items-center gap-4 py-4">
+      <div class="h-px flex-1 bg-zinc-100 dark:bg-zinc-800"></div>
+      <span class="text-xs font-black uppercase tracking-widest text-zinc-400">
+        {{ 'SHIPPING_ADDRESS.OR' | translate }}
+      </span>
+      <div class="h-px flex-1 bg-zinc-100 dark:bg-zinc-800"></div>
+    </div>
+  }
 
   <div class="space-y-8">
     <div class="flex justify-center">

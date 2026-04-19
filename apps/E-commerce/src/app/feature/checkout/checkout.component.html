@@ -1,10 +1,10 @@
 <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
   <!-- Stepper -->
   <div class="mb-12">
-    <lib-stepper
-      [steps]="checkoutSteps"
+    <app-stepper
+      [totalSteps]="checkoutStepsCount"
       [currentStep]="currentStep()"
-    ></lib-stepper>
+    ></app-stepper>
   </div>
 
   <!-- Main Content Grid -->

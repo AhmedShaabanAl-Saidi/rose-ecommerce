@@ -37,11 +37,7 @@
 
       <!-- Selection Indicator -->
       @if (selectedMethod() === 'cash') {
-        <div class="absolute right-6 top-6">
-          <div class="flex h-8 w-8 items-center justify-center rounded-full bg-maroon-600 shadow-lg">
-            <lucide-angular name="check" [size]="16" class="text-white font-bold"></lucide-angular>
-          </div>
-        </div>
+        <ng-container *ngTemplateOutlet="selectionIndicator"></ng-container>
       }
     </div>
 
@@ -70,11 +66,7 @@
 
       <!-- Selection Indicator -->
       @if (selectedMethod() === 'card') {
-        <div class="absolute right-6 top-6">
-          <div class="flex h-8 w-8 items-center justify-center rounded-full bg-maroon-600 shadow-lg">
-            <lucide-angular name="check" [size]="16" class="text-white font-bold"></lucide-angular>
-          </div>
-        </div>
+        <ng-container *ngTemplateOutlet="selectionIndicator"></ng-container>
       }
     </div>
   </div>
@@ -92,3 +84,11 @@
     </lib-button>
   </div>
 </section>
+
+<ng-template #selectionIndicator>
+  <div class="absolute right-6 top-6">
+    <div class="flex h-8 w-8 items-center justify-center rounded-full bg-maroon-600 shadow-lg">
+      <lucide-angular name="check" [size]="16" class="text-white font-bold"></lucide-angular>
+    </div>
+  </div>
+</ng-template>
