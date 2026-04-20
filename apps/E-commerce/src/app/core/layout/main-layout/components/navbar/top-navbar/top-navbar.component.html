@@ -15,23 +15,17 @@
           alt="logo"
         />
         @if (user()) {
-        <button
-          type="button"
-          class="hidden lg:flex max-w-[240px] shrink-0 flex-col rounded-2xl px-3 py-2 text-start transition-colors hover:bg-maroon-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maroon-200 dark:hover:bg-zinc-800 dark:focus-visible:ring-soft-pink-300"
-          (click)="openAddressManager()"
-          [title]="deliveryAddressText()"
-          [attr.aria-label]="deliveryAddressText()"
-        >
+        <div class="hidden lg:block shrink-0">
           <span class="dark:text-zinc-400 text-xs">
             {{ 'NAVBAR.DELIVERTO' | translate }}
           </span>
-          <span
-            class="text-maroon-700 dark:text-soft-pink-200 flex items-center gap-1 text-sm font-semibold min-w-0"
+          <h2
+            class="text-maroon-700 dark:text-soft-pink-200 flex items-center gap-1 text-sm font-semibold"
           >
-            <lucide-icon name="map-pin-pen" class="w-4 h-4 shrink-0"></lucide-icon>
-            <span class="truncate">{{ deliveryAddressText() }}</span>
-          </span>
-        </button>
+            <lucide-icon name="map-pin" class="w-4 h-4"></lucide-icon>
+            {{ 'NAVBAR.DELIVERY_CITY' | translate }}
+          </h2>
+        </div>
         }
         <div class="flex-1">
           <lib-text-input
