@@ -70,7 +70,7 @@ export class TopNavbarComponent {
           {
             label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ORDERS'),
             icon: 'pi pi-shopping-cart',
-            routerLink: '/shopping-cart',
+            routerLink: '/allorders',
           },
           {
             label: this.translate.instant('NAVBAR.ACCOUNT_MENU.DASHBOARD'),

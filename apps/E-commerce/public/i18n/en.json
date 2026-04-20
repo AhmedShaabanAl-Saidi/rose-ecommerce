@@ -349,7 +349,8 @@
     "SUBTOTAL": "Subtotal",
     "TOTAL_DISCOUNT": "Discount",
     "ORDER_TOTAL": "Total",
-    "PROCEED_CHECKOUT": "Checkout"
+    "PROCEED_CHECKOUT": "Checkout",
+    "DISCOUNT": "Discount"
   },
 
   "WISHLIST": {
@@ -372,6 +373,16 @@
     "DESCRIPTION": "The page you're looking for has moved or no longer exists. Let's get you back to finding the perfect gift.",
     "BACK_TO_HOME": "Back to Home",
     "BROWSE_PRODUCTS": "Browse Products"
+  },
+  "CHECKOUT": {
+    "PAYMENT_METHOD": "Payment Method",
+    "CASH_TITLE": "Cash on Delivery",
+    "CASH_DESC": "You'll pay in cash when your order is delivered.",
+    "CARD_TITLE": "Credit Card",
+    "CARD_DESC": "You'll be securely redirected to Stripe to complete your payment.",
+    "CHECKOUT_BTN": "Checkout",
+    "ORDER_SUCCESS": "Order placed successfully!",
+    "ORDER_FAILED": "Payment failed, please try again or choose another method"
   },
   "ERRORS": {
     "UNEXPECTED": "An unexpected error occurred",

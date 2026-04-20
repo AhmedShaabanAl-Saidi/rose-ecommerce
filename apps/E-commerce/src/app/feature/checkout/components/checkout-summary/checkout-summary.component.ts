@@ -1,31 +1,34 @@
-import { DecimalPipe } from '@angular/common';
-import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, DestroyRef, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateModule } from '@ngx-translate/core';
+import { finalize } from 'rxjs';
+import { CartService } from '../../../cart/services/cart.service';
 import { TextInputComponent } from '@elevate/reusable-input';
 import { ButtonComponent } from '@elevate/reusable-ui';
-import { TranslatePipe } from '@ngx-translate/core';
-import { finalize } from 'rxjs';
-import { CartService } from '../../services/cart.service';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
-  selector: 'app-copoun',
+  selector: 'app-checkout-summary',
+  standalone: true,
   imports: [
-    ButtonComponent,
-    DecimalPipe,
-    TranslatePipe,
+    CommonModule,
     ReactiveFormsModule,
+    TranslateModule,
     TextInputComponent,
+    ButtonComponent,
+    LucideAngularModule,
     RouterLink,
   ],
-  templateUrl: './copoun.component.html',
+  templateUrl: './checkout-summary.component.html',
 })
-export class CopounComponent {
+export class CheckoutSummaryComponent {
   private readonly _cartService = inject(CartService);
   private readonly _destroyRef = inject(DestroyRef);
 
-  readonly isApplyingCoupon = signal(false);
+  readonly showCheckoutButton = input<boolean>(false);
 
   // Consume centralized signals — single source of truth
   readonly cart = this._cartService.cart;
@@ -35,6 +38,8 @@ export class CopounComponent {
   readonly totalDiscountAmount = this._cartService.totalDiscount;
   readonly discountPercent = this._cartService.discountPercent;
   readonly lastAppliedCoupon = this._cartService.lastAppliedCoupon;
+
+  readonly isApplyingCoupon = signal(false);
 
   readonly couponForm = new FormGroup({
     code: new FormControl('', {
@@ -69,4 +74,5 @@ export class CopounComponent {
         },
       });
   }
+
 }
