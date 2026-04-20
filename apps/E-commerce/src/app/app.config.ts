@@ -61,6 +61,7 @@ import {
   PlusCircle,
   Phone,
   Check,
+  Clock3,
 } from 'lucide-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
@@ -154,6 +155,7 @@ export const appConfig: ApplicationConfig = {
         PlusCircle,
         Phone,
         Check,
+        Clock3,
       })
     ),
     providePrimeNG({

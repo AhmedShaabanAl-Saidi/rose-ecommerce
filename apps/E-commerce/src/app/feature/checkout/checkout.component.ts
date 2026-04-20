@@ -1,31 +1,28 @@
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   Component,
-  computed,
   DestroyRef,
   inject,
   PLATFORM_ID,
   signal,
 } from '@angular/core';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
+import { ToastrService } from 'ngx-toastr';
 import { finalize, of, switchMap } from 'rxjs';
 
 import { StepperComponent } from '../../shared/components/ui/stepper/stepper.component';
 
-import { CheckoutService } from './services/checkout.service';
-import { CartService } from '../cart/services/cart.service';
-import {
-  PaymentMethodSectionComponent,
-} from './components/payment-method/payment-method.component';
-import { CheckoutSummaryComponent } from './components/checkout-summary/checkout-summary.component';
 import { ProductLikedComponent } from '../cart/components/product-liked/product-liked.component';
-import { OrderInput, PaymentMethod } from './interfaces/checkout.interface';
-import { ShippingAddressComponent } from '../shipping-address/shipping-address.component';
+import { CartService } from '../cart/services/cart.service';
 import { ShippingAddress } from '../shipping-address/interfaces/shipping-address.interface';
+import { ShippingAddressComponent } from '../shipping-address/shipping-address.component';
+import { CheckoutSummaryComponent } from './components/checkout-summary/checkout-summary.component';
+import { PaymentMethodSectionComponent } from './components/payment-method/payment-method.component';
+import { PaymentMethod } from './interfaces/checkout.interface';
+import { CheckoutService } from './services/checkout.service';
 
 @Component({
   selector: 'app-checkout',
@@ -60,7 +57,6 @@ export class CheckoutComponent {
 
   cart = this._cartService.cart;
 
-
   onAddressSelected(address: ShippingAddress) {
     this.selectedAddress.set(address);
   }
@@ -89,7 +85,6 @@ export class CheckoutComponent {
       this._router.navigate(['/shopping-cart']);
     }
   }
-
 
   placeOrder() {
     const address = this.selectedAddress();
@@ -124,7 +119,7 @@ export class CheckoutComponent {
       .subscribe({
         next: (res) => {
           if (res) {
-            this._router.navigate(['/shopping-cart']);
+            this._router.navigate(['/allOrders']);
           }
         },
         error: (err) => {

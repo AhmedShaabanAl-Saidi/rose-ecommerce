@@ -6,61 +6,62 @@
   "sourceRoot": "apps/E-commerce/src",
   "tags": ["type:app"],
   "targets": {
-   "build": {
-    "executor": "@angular/build:application",
-    "outputs": ["{options.outputPath}"],
-    "options": {
-      "outputPath": "dist/apps/E-commerce",
-      "browser": "apps/E-commerce/src/main.ts",
-      "tsConfig": "apps/E-commerce/tsconfig.app.json",
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/E-commerce",
+        "browser": "apps/E-commerce/src/main.ts",
+        "tsConfig": "apps/E-commerce/tsconfig.app.json",
       "allowedCommonJsDependencies": [
         "google-libphonenumber"
       ],
-      "assets": [
-        {
-          "glob": "**/*",
-          "input": "apps/E-commerce/public"
-        }
-      ],
-      "styles": [
-        "apps/E-commerce/src/styles.css",
-        "node_modules/ngx-toastr/toastr.css",
-        "node_modules/ngx-spinner/animations/triangle-skew-spin.css",
-        "node_modules/intl-tel-input/build/css/intlTelInput.css"
-      ],
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/E-commerce/public"
+          }
+        ],
+        "styles": [
+          "apps/E-commerce/src/styles.css",
+          "node_modules/primeicons/primeicons.css",
+          "node_modules/ngx-toastr/toastr.css",
+          "node_modules/ngx-spinner/animations/triangle-skew-spin.css",
+          "node_modules/intl-tel-input/build/css/intlTelInput.css"
+        ],
       "scripts": [
         "node_modules/intl-tel-input/build/js/utils.js"
       ],
-      "server": "apps/E-commerce/src/main.server.ts",
-      "ssr": {
-        "entry": "apps/E-commerce/src/server.ts"
+        "server": "apps/E-commerce/src/main.server.ts",
+        "ssr": {
+          "entry": "apps/E-commerce/src/server.ts"
+        },
+        "outputMode": "server"
       },
-      "outputMode": "server"
-    },
-    "configurations": {
-      "production": {
-        "budgets": [
-          {
-            "type": "initial",
-            "maximumWarning": "1mb",
-            "maximumError": "2mb"
-          },
-          {
-            "type": "anyComponentStyle",
-            "maximumWarning": "4kb",
-            "maximumError": "10kb"
-          }
-        ],
-        "outputHashing": "all"
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "1mb",
+              "maximumError": "2mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "10kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
       },
-      "development": {
-        "optimization": false,
-        "extractLicenses": false,
-        "sourceMap": true
-      }
+      "defaultConfiguration": "production"
     },
-    "defaultConfiguration": "production"
-  },
     "serve": {
       "continuous": true,
       "executor": "@angular/build:dev-server",
@@ -90,7 +91,10 @@
             "input": "apps/E-commerce/public"
           }
         ],
-        "styles": ["apps/E-commerce/src/styles.css"],
+        "styles": [
+          "apps/E-commerce/src/styles.css",
+          "node_modules/primeicons/primeicons.css"
+        ],
         "scripts": []
       }
     },

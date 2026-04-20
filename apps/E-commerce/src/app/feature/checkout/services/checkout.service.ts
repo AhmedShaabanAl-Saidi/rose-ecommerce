@@ -50,7 +50,9 @@ export class CheckoutService {
     const origin = this._origin || environment.baseUrl;
 
     return this._httpClient.post<CheckoutSessionRes>(
-      `${environment.baseUrl}/orders/checkout?url=${origin}`,
+      `${environment.baseUrl}/orders/checkout?url=${encodeURIComponent(
+        origin
+      )}`,
       orderData
     );
   }
