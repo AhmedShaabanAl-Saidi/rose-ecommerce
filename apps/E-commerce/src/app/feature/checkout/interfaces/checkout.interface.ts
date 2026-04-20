@@ -1,5 +1,7 @@
 import { ShippingAddress } from '../../shipping-address/interfaces/shipping-address.interface';
 
+export type PaymentMethod = 'cash' | 'card';
+
 export interface OrderInput {
   shippingAddress: {
     street: string;

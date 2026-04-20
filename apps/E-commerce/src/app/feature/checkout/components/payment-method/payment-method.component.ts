@@ -9,8 +9,7 @@ import {
 } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent } from '@elevate/reusable-ui';
-
-export type PaymentMethod = 'cash' | 'card';
+import { PaymentMethod } from '../../interfaces/checkout.interface';
 
 @Component({
   selector: 'app-payment-method-section',

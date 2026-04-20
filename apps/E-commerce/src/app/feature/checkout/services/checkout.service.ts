@@ -1,27 +1,42 @@
-import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environments';
 import {
   CheckoutSessionRes,
   OrderInput,
   OrderRes,
+  PaymentMethod,
 } from '../interfaces/checkout.interface';
+import { APP_ORIGIN } from '../../../core/tokens/origin.token';
+import { ShippingAddress } from '../../shipping-address/interfaces/shipping-address.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CheckoutService {
   private readonly _httpClient = inject(HttpClient);
-  private readonly _platformId = inject(PLATFORM_ID);
+  private readonly _origin = inject(APP_ORIGIN);
 
-  private getOrdersReturnUrl(): string {
-    const appOrigin = isPlatformBrowser(this._platformId)
-      ? window.location.origin
-      : new URL(environment.baseUrl).origin;
+  createOrder(
+    address: ShippingAddress,
+    method: PaymentMethod
+  ): Observable<OrderRes | CheckoutSessionRes> {
+    const orderData: OrderInput = {
+      shippingAddress: {
+        street: address.street,
+        phone: address.phone,
+        city: address.city,
+        lat: address.lat || '0',
+        long: address.long || '0',
+      },
+    };
 
-    return new URL('/allOrders', appOrigin).toString();
+    if (method === 'cash') {
+      return this.placeCashOrder(orderData);
+    }
+
+    return this.placeOnlineOrder(orderData);
   }
 
   placeCashOrder(orderData: OrderInput): Observable<OrderRes> {
@@ -32,11 +47,11 @@ export class CheckoutService {
   }
 
   placeOnlineOrder(orderData: OrderInput): Observable<CheckoutSessionRes> {
-    const returnUrl = this.getOrdersReturnUrl();
+    const origin = this._origin || environment.baseUrl;
 
     return this._httpClient.post<CheckoutSessionRes>(
       `${environment.baseUrl}/orders/checkout?url=${encodeURIComponent(
-        returnUrl
+        origin
       )}`,
       orderData
     );
