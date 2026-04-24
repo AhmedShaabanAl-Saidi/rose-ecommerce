@@ -702,19 +702,19 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 }
 
 @utility taxonomy-header {
-  @apply mb-8 flex flex-col gap-2;
+  @apply mb-8;
 }
 
 @utility taxonomy-label {
-  @apply text-sm font-bold uppercase text-soft-pink-500 dark:text-soft-pink-300;
+  @apply text-sm font-semibold uppercase tracking-[0.2em] text-soft-pink-500 dark:text-maroon-400;
 }
 
 @utility taxonomy-title {
-  @apply text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-50;
+  @apply mt-2 text-3xl font-bold text-maroon-700 dark:text-soft-pink-200 sm:text-4xl;
 }
 
 @utility taxonomy-subtitle {
-  @apply max-w-2xl text-sm leading-6 text-zinc-500 dark:text-zinc-400;
+  @apply mt-3 max-w-2xl text-zinc-600 dark:text-zinc-300;
 }
 
 @utility taxonomy-grid {
