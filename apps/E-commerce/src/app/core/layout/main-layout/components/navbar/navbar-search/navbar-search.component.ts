@@ -1,6 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { HttpContext } from '@angular/common/http';
-import { Component, computed, DestroyRef, ElementRef, HostListener, inject, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,12 +8,19 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { catchError, debounceTime, distinctUntilChanged, finalize, map, of, switchMap, take, tap } from 'rxjs';
 import { SKIP_GLOBAL_LOADING } from '../../../../../interceptors/loading-interceptor';
+import { ClickOutsideDirective } from '../../../../../utils/click-outside.directive';
 import { ProductsService } from '../../../../../../../app/feature/products/services/product';
 import { Product } from '../../../../../../shared/components/ui/product-card/interface/product';
 
 @Component({
   selector: 'app-navbar-search',
-  imports: [DecimalPipe, LucideAngularModule, ReactiveFormsModule, TranslatePipe],
+  imports: [
+    ClickOutsideDirective,
+    DecimalPipe,
+    LucideAngularModule,
+    ReactiveFormsModule,
+    TranslatePipe,
+  ],
   templateUrl: './navbar-search.component.html',
   host: {
     class: 'block flex-1 min-w-0',
@@ -22,7 +29,6 @@ import { Product } from '../../../../../../shared/components/ui/product-card/int
 export class NavbarSearchComponent {
   private readonly MIN_SEARCH_LENGTH = 2;
   private readonly destroy = inject(DestroyRef);
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly productsService = inject(ProductsService);
   private readonly router = inject(Router);
 
@@ -98,21 +104,6 @@ export class NavbarSearchComponent {
       .subscribe((products) => {
         this.searchResults.set(products);
       });
-  }
-
-  @HostListener('document:pointerdown', ['$event'])
-  closeSearchPanelOnOutsideClick(event: PointerEvent): void {
-    const target = event.target;
-
-    if (
-      !this.isSearchPanelOpen() ||
-      !(target instanceof Node) ||
-      this.elementRef.nativeElement.contains(target)
-    ) {
-      return;
-    }
-
-    this.closeSearchPanel();
   }
 
   openSearchPanel(): void {
