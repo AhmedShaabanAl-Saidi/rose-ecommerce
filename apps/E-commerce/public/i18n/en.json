@@ -271,6 +271,14 @@
     "EMPTY_SUBTITLE": "Categories will appear here once they are available.",
     "PRODUCTS_COUNT": "{{count}} products"
   },
+  "OCCASIONS_PAGE": {
+    "LABEL": "Occasions",
+    "TITLE": "Shop by Occasion",
+    "SUBTITLE": "Choose an occasion to browse products curated for that moment.",
+    "EMPTY_TITLE": "No occasions available",
+    "EMPTY_SUBTITLE": "Occasions will appear here once they are available.",
+    "PRODUCTS_COUNT": "{{count}} products"
+  },
   "PRODUCT_BADGES": {
     "HOT": "HOT",
     "NEW": "NEW",

@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject, output, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, effect, inject, input, output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Occasion } from '../../../interfaces/product';
 import { ProductsService } from '../../../services/product';
@@ -16,9 +16,16 @@ export class OccasionFilterComponent implements OnInit {
 
   occasions = signal<Occasion[]>([]);
   isLoading = signal(true);
+  initialOccasionIds = input<string[] | undefined>(undefined);
   selectedOccasionIds = signal<Set<string>>(new Set());
 
   occasionChange = output<string[]>();
+
+  constructor() {
+    effect(() => {
+      this.selectedOccasionIds.set(new Set(this.initialOccasionIds() ?? []));
+    });
+  }
 
   ngOnInit(): void {
     this.fetchOccasions();

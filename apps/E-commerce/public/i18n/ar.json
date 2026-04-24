@@ -271,6 +271,14 @@
     "EMPTY_SUBTITLE": "ستظهر التصنيفات هنا عند توفرها.",
     "PRODUCTS_COUNT": "{{count}} منتج"
   },
+  "OCCASIONS_PAGE": {
+    "LABEL": "المناسبات",
+    "TITLE": "تسوق حسب المناسبة",
+    "SUBTITLE": "اختر مناسبة الهدايا المناسبة لعرض المنتجات المرتبطة بها.",
+    "EMPTY_TITLE": "لا توجد مناسبات متاحة",
+    "EMPTY_SUBTITLE": "ستظهر المناسبات هنا عند توفرها.",
+    "PRODUCTS_COUNT": "{{count}} منتج"
+  },
   "PRODUCT_BADGES": {
     "HOT": "الأكثر طلباً",
     "NEW": "جديد",
