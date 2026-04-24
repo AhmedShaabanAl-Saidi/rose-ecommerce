@@ -1,0 +1,27 @@
+<a [routerLink]="['/products']" [queryParams]="queryParams()" class="taxonomy-card">
+  <div class="taxonomy-card-media">
+    @if (imageUrl()) {
+    <img [src]="imageUrl()" [alt]="title()" class="taxonomy-card-image" />
+    } @else {
+    <div class="taxonomy-card-placeholder">
+      <lucide-icon [img]="ImageIcon" class="taxonomy-card-placeholder-icon"></lucide-icon>
+    </div>
+    }
+    <div class="taxonomy-card-overlay">
+    </div>
+  </div>
+
+  <div class="taxonomy-card-body">
+    <div class="taxonomy-card-title-row">
+      <h2 class="taxonomy-card-title">
+        {{ title() }}
+      </h2>
+    </div>
+
+    @if (productsCount() !== undefined) {
+    <span class="taxonomy-card-count">
+      {{ productsCountKey() | translate: { count: productsCount() } }}
+    </span>
+    }
+  </div>
+</a>

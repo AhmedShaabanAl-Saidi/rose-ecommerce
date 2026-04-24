@@ -39,33 +39,9 @@
     } @else {
     <div class="taxonomy-grid">
       @for (category of categories(); track category._id) {
-      <a [routerLink]="['/products']" [queryParams]="{ category: category._id }" class="taxonomy-card">
-        <div class="taxonomy-card-media">
-          @if (category.image) {
-          <img [src]="category.image" [alt]="category.name" class="taxonomy-card-image" />
-          } @else {
-          <div class="taxonomy-card-placeholder">
-            <lucide-icon [img]="ImageIcon" class="taxonomy-card-placeholder-icon"></lucide-icon>
-          </div>
-          }
-          <div class="taxonomy-card-overlay">
-          </div>
-        </div>
-
-        <div class="taxonomy-card-body">
-          <div class="taxonomy-card-title-row">
-            <h2 class="taxonomy-card-title">
-              {{ category.name }}
-            </h2>
-          </div>
-
-          @if (category.productsCount !== undefined) {
-          <span class="taxonomy-card-count">
-            {{ 'CATEGORIES_PAGE.PRODUCTS_COUNT' | translate: { count: category.productsCount } }}
-          </span>
-          }
-        </div>
-      </a>
+      <app-taxonomy-card [title]="category.name" [imageUrl]="category.image" queryParamName="category"
+        [queryParamValue]="category._id" [productsCount]="category.productsCount"
+        productsCountKey="CATEGORIES_PAGE.PRODUCTS_COUNT"></app-taxonomy-card>
       }
     </div>
     }

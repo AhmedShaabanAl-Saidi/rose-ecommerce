@@ -39,33 +39,9 @@
     } @else {
     <div class="taxonomy-grid">
       @for (occasion of occasions(); track occasion._id) {
-      <a [routerLink]="['/products']" [queryParams]="{ occasion: occasion._id }" class="taxonomy-card">
-        <div class="taxonomy-card-media">
-          @if (occasion.image) {
-          <img [src]="occasionImageUrl(occasion.image)" [alt]="occasion.name" class="taxonomy-card-image" />
-          } @else {
-          <div class="taxonomy-card-placeholder">
-            <lucide-icon [img]="ImageIcon" class="taxonomy-card-placeholder-icon"></lucide-icon>
-          </div>
-          }
-          <div class="taxonomy-card-overlay">
-          </div>
-        </div>
-
-        <div class="taxonomy-card-body">
-          <div class="taxonomy-card-title-row">
-            <h2 class="taxonomy-card-title">
-              {{ occasion.name }}
-            </h2>
-          </div>
-
-          @if (occasion.productsCount !== undefined) {
-          <span class="taxonomy-card-count">
-            {{ 'OCCASIONS_PAGE.PRODUCTS_COUNT' | translate: { count: occasion.productsCount } }}
-          </span>
-          }
-        </div>
-      </a>
+      <app-taxonomy-card [title]="occasion.name" [imageUrl]="occasionImageUrl(occasion.image)" queryParamName="occasion"
+        [queryParamValue]="occasion._id" [productsCount]="occasion.productsCount"
+        productsCountKey="OCCASIONS_PAGE.PRODUCTS_COUNT"></app-taxonomy-card>
       }
     </div>
     }
