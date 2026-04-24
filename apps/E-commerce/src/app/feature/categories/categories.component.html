@@ -1,0 +1,75 @@
+<section class="min-h-[60vh] py-8">
+  <div class="mx-auto max-w-7xl">
+    <header class="mb-8 flex flex-col gap-2">
+      <span class="text-sm font-bold uppercase text-soft-pink-500 dark:text-soft-pink-300">
+        {{ 'CATEGORIES_PAGE.LABEL' | translate }}
+      </span>
+      <h1 class="text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-50">
+        {{ 'CATEGORIES_PAGE.TITLE' | translate }}
+      </h1>
+      <p class="max-w-2xl text-sm leading-6 text-zinc-500 dark:text-zinc-400">
+        {{ 'CATEGORIES_PAGE.SUBTITLE' | translate }}
+      </p>
+    </header>
+
+    @if (isLoading()) {
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      @for (card of skeletonCards; track card) {
+      <div
+        class="animate-pulse overflow-hidden rounded-2xl border border-zinc-100 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+        <div class="aspect-4/3 bg-zinc-200 dark:bg-zinc-800"></div>
+        <div class="space-y-3 p-4">
+          <div class="h-5 w-3/4 rounded bg-zinc-200 dark:bg-zinc-800"></div>
+          <div class="h-4 w-1/2 rounded bg-zinc-200 dark:bg-zinc-800"></div>
+        </div>
+      </div>
+      }
+    </div>
+    } @else if (categories().length === 0) {
+    <div
+      class="flex flex-col items-center justify-center rounded-3xl border border-zinc-200 bg-white px-6 py-16 text-center shadow-sm dark:border-zinc-800 dark:bg-zinc-900/60">
+      <div class="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-maroon-50 dark:bg-zinc-800">
+        <lucide-icon [img]="LayoutGridIcon" class="h-12 w-12 text-maroon-400 dark:text-soft-pink-300"></lucide-icon>
+      </div>
+      <h2 class="text-2xl font-bold text-zinc-800 dark:text-zinc-50">
+        {{ 'CATEGORIES_PAGE.EMPTY_TITLE' | translate }}
+      </h2>
+      <p class="mt-3 max-w-lg text-sm leading-6 text-zinc-500 dark:text-zinc-400">
+        {{ 'CATEGORIES_PAGE.EMPTY_SUBTITLE' | translate }}
+      </p>
+    </div>
+    } @else {
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      @for (category of categories(); track category._id) {
+      <a [routerLink]="['/products']" [queryParams]="{ category: category._id }" class="category-card">
+        <div class="relative aspect-4/3 overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+          @if (category.image) {
+          <img [src]="category.image" [alt]="category.name" class="category-card-image h-full w-full object-cover" />
+          } @else {
+          <div class="flex h-full w-full items-center justify-center">
+            <lucide-icon [img]="ImageIcon" class="h-12 w-12 text-zinc-300 dark:text-zinc-600"></lucide-icon>
+          </div>
+          }
+          <div class="category-card-overlay absolute inset-0">
+          </div>
+        </div>
+
+        <div class="flex min-h-24 flex-col gap-3 p-4">
+          <div class="flex items-start justify-between gap-3">
+            <h2 class="line-clamp-2 text-lg font-bold leading-tight text-maroon-700 dark:text-soft-pink-200">
+              {{ category.name }}
+            </h2>
+          </div>
+
+          @if (category.productsCount !== undefined) {
+          <span class="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            {{ 'CATEGORIES_PAGE.PRODUCTS_COUNT' | translate: { count: category.productsCount } }}
+          </span>
+          }
+        </div>
+      </a>
+      }
+    </div>
+    }
+  </div>
+</section>

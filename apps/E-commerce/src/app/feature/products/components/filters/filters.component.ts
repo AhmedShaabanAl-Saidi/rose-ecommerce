@@ -1,5 +1,5 @@
 import { DOCUMENT, NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
-import { Component, DestroyRef, PLATFORM_ID, computed, inject, output, signal, viewChild } from '@angular/core';
+import { Component, DestroyRef, PLATFORM_ID, computed, effect, inject, input, output, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { auditTime, fromEvent, startWith } from 'rxjs';
@@ -22,6 +22,7 @@ type FilterLayoutMode = 'mobile' | 'tablet' | 'desktop';
 export class FiltersComponent {
   readonly ResetAllIcon = RotateCcw;
   readonly FiltersTriggerIcon = SlidersHorizontal;
+  readonly initialCategoryIds = input<string[] | undefined>(undefined);
   readonly filterChange = output<FilterState>();
   readonly viewportMode = signal<FilterLayoutMode>('desktop');
   readonly isTabletPanelExpanded = signal(false);
@@ -55,6 +56,14 @@ export class FiltersComponent {
   );
 
   constructor() {
+    effect(() => {
+      const categoryIds = this.initialCategoryIds();
+      this.currentState.update((current) => ({
+        ...current,
+        categoryIds,
+      }));
+    });
+
     this.bindViewportMode();
   }
 

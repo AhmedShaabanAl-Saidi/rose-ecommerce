@@ -701,3 +701,23 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 .dark .label-address .input-wrapper .input-label {
   @apply text-zinc-700;
 }
+
+@utility category-card {
+  @apply block overflow-hidden rounded-2xl border border-zinc-100 bg-white text-start no-underline shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-maroon-200 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900/70 dark:hover:border-soft-pink-300/50;
+}
+
+@utility category-card-image {
+  @apply transition-transform duration-700;
+}
+
+@utility category-card-overlay {
+  @apply bg-transparent transition-colors duration-300;
+}
+
+.category-card:hover .category-card-image {
+  @apply scale-110;
+}
+
+.category-card:hover .category-card-overlay {
+  @apply bg-maroon-950/15;
+}

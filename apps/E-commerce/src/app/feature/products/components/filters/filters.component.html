@@ -66,7 +66,8 @@
 <ng-template #filtersPanel>
   <section class="flex h-full flex-col gap-6" [class.border-r]="showSidebarBorder()" [class.pr-6]="showSidebarBorder()"
     [class.border-zinc-100]="showSidebarBorder()" [class.dark:border-zinc-800]="showSidebarBorder()">
-    <app-category-filter (categoryChange)="onCategoryChange($event)"></app-category-filter>
+    <app-category-filter [initialCategoryIds]="initialCategoryIds()"
+      (categoryChange)="onCategoryChange($event)"></app-category-filter>
     <app-occasion-filter (occasionChange)="onOccasionChange($event)"></app-occasion-filter>
     <app-rating-filter (ratingChange)="onRatingChange($event)"></app-rating-filter>
     <app-price-filter (priceChange)="onPriceChange($event)"></app-price-filter>
