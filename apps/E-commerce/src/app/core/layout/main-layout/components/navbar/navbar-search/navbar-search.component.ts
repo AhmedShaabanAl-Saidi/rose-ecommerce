@@ -1,4 +1,5 @@
 import { DecimalPipe } from '@angular/common';
+import { HttpContext } from '@angular/common/http';
 import { Component, computed, DestroyRef, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -6,6 +7,7 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { catchError, debounceTime, distinctUntilChanged, finalize, map, of, switchMap, take, tap } from 'rxjs';
+import { SKIP_GLOBAL_LOADING } from '../../../../../interceptors/loading-interceptor';
 import { ProductsService } from '../../../../../../../app/feature/products/services/product';
 import { Product } from '../../../../../../shared/components/ui/product-card/interface/product';
 
@@ -80,11 +82,16 @@ export class NavbarSearchComponent {
 
           this.isSearchLoading.set(true);
 
-          return this.productsService.getProducts({ keyword, limit: 20 }).pipe(
-            map((response) => response.products),
-            catchError(() => of<Product[]>([])),
-            finalize(() => this.isSearchLoading.set(false))
-          );
+          return this.productsService
+            .getProducts(
+              { keyword, limit: 20 },
+              { context: this.createSkipGlobalLoadingContext() }
+            )
+            .pipe(
+              map((response) => response.products),
+              catchError(() => of<Product[]>([])),
+              finalize(() => this.isSearchLoading.set(false))
+            );
         }),
         takeUntilDestroyed(this.destroy)
       )
@@ -170,7 +177,10 @@ export class NavbarSearchComponent {
     this.isSuggestedProductsLoading.set(true);
 
     this.productsService
-      .getProducts({ limit: 20 })
+      .getProducts(
+        { limit: 20 },
+        { context: this.createSkipGlobalLoadingContext() }
+      )
       .pipe(
         take(1),
         map((response) => response.products),
@@ -181,6 +191,10 @@ export class NavbarSearchComponent {
       .subscribe((products) => {
         this.suggestedProducts.set(products);
       });
+  }
+
+  private createSkipGlobalLoadingContext(): HttpContext {
+    return new HttpContext().set(SKIP_GLOBAL_LOADING, true);
   }
 
   private escapeHtml(value: string): string {

@@ -1,8 +1,8 @@
 import { environment } from '../../../../environments/environments';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {ProductQueryParams,ProductsResponse,CategoriesRes,OccasionsRes} from '../interfaces/product';
+import { ProductQueryParams, ProductsResponse, CategoriesRes, OccasionsRes } from '../interfaces/product';
 import { Product } from '../../../shared/components/ui/product-card/interface/product';
 import { ReviewResponse } from '../interfaces/review';
 import { RelatedProductsResponse } from '../interfaces/related';
@@ -14,7 +14,19 @@ export class ProductsService {
   private baseUrl = environment.baseUrl;
   private http = inject(HttpClient);
 
-  getProducts({page = 1,limit = 12,keyword,categoryIds,occasionIds,rating,priceFrom,priceTo}: ProductQueryParams = {}): Observable<ProductsResponse> {
+  getProducts(
+    {
+      page = 1,
+      limit = 12,
+      keyword,
+      categoryIds,
+      occasionIds,
+      rating,
+      priceFrom,
+      priceTo,
+    }: ProductQueryParams = {},
+    options: { context?: HttpContext } = {}
+  ): Observable<ProductsResponse> {
     let params = new HttpParams()
       .set('page', String(page))
       .set('limit', String(limit));
@@ -50,6 +62,7 @@ export class ProductsService {
 
     return this.http.get<ProductsResponse>(`${this.baseUrl}/products`, {
       params,
+      context: options.context,
     });
   }
 
