@@ -1,27 +1,28 @@
-<a [routerLink]="['/products']" [queryParams]="queryParams()" class="taxonomy-card">
-  <div class="taxonomy-card-media">
+<div class="taxonomy-card" role="button" tabindex="0" [attr.aria-label]="title()" (click)="navigateToProducts()"
+  (keydown)="onCardKeydown($event)">
+  <span class="taxonomy-card-media">
     @if (imageUrl()) {
     <img [src]="imageUrl()" [alt]="title()" class="taxonomy-card-image" />
     } @else {
-    <div class="taxonomy-card-placeholder">
+    <span class="taxonomy-card-placeholder">
       <lucide-icon [img]="ImageIcon" class="taxonomy-card-placeholder-icon"></lucide-icon>
-    </div>
+    </span>
     }
-    <div class="taxonomy-card-overlay">
-    </div>
-  </div>
+    <span class="taxonomy-card-overlay">
+    </span>
+  </span>
 
-  <div class="taxonomy-card-body">
-    <div class="taxonomy-card-title-row">
-      <h2 class="taxonomy-card-title">
+  <span class="taxonomy-card-body">
+    <span class="taxonomy-card-title-row">
+      <span class="taxonomy-card-title">
         {{ title() }}
-      </h2>
-    </div>
+      </span>
+    </span>
 
     @if (productsCount() !== undefined) {
     <span class="taxonomy-card-count">
       {{ productsCountKey() | translate: { count: productsCount() } }}
     </span>
     }
-  </div>
-</a>
+  </span>
+</div>
