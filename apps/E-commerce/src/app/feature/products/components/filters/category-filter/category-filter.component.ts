@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject, output, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, effect, inject, input, output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Category } from '../../../interfaces/product';
 import { ProductsService } from '../../../services/product';
@@ -16,10 +16,17 @@ export class CategoryFilterComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   categories = signal<Category[]>([]);
+  initialCategoryIds = input<string[] | undefined>(undefined);
   selectedCategoryIds = signal<Set<string>>(new Set());
   isLoading = signal(true);
 
   categoryChange = output<string[]>();
+
+  constructor() {
+    effect(() => {
+      this.selectedCategoryIds.set(new Set(this.initialCategoryIds() ?? []));
+    });
+  }
 
   ngOnInit(): void {
     this.fetchCategories();

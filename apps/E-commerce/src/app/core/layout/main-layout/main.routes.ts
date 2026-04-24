@@ -33,6 +33,13 @@ export const mainRoutes: Routes = [
         ],
       },
       {
+        path: 'categories',
+        loadComponent: () =>
+          import('../../../feature/categories/categories.component').then(
+            (m) => m.CategoriesComponent
+          ),
+      },
+      {
         path: 'shopping-cart',
         canActivate: [authGuard],
         loadComponent: () =>

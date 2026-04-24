@@ -263,6 +263,14 @@
     "NO_PRODUCTS_FOUND": "لم يتم العثور على منتجات.",
     "LOADING_PRODUCTS": "جاري تحميل المنتجات..."
   },
+  "CATEGORIES_PAGE": {
+    "LABEL": "التصنيفات",
+    "TITLE": "تسوق حسب التصنيف",
+    "SUBTITLE": "اختر تصنيف الهدايا المناسب لعرض المنتجات المرتبطة به.",
+    "EMPTY_TITLE": "لا توجد تصنيفات متاحة",
+    "EMPTY_SUBTITLE": "ستظهر التصنيفات هنا عند توفرها.",
+    "PRODUCTS_COUNT": "{{count}} منتج"
+  },
   "PRODUCT_BADGES": {
     "HOT": "الأكثر طلباً",
     "NEW": "جديد",

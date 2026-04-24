@@ -263,6 +263,14 @@
     "NO_PRODUCTS_FOUND": "No products found.",
     "LOADING_PRODUCTS": "Loading products..."
   },
+  "CATEGORIES_PAGE": {
+    "LABEL": "Categories",
+    "TITLE": "Shop by Category",
+    "SUBTITLE": "Choose a gift category to browse products curated for that style.",
+    "EMPTY_TITLE": "No categories available",
+    "EMPTY_SUBTITLE": "Categories will appear here once they are available.",
+    "PRODUCTS_COUNT": "{{count}} products"
+  },
   "PRODUCT_BADGES": {
     "HOT": "HOT",
     "NEW": "NEW",
