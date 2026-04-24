@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, computed, DestroyRef, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { Component, computed, DestroyRef, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,11 +18,9 @@ import { Product } from '../../../../../../shared/components/ui/product-card/int
   },
 })
 export class NavbarSearchComponent {
-  @ViewChild('searchInput')
-  private searchInput?: ElementRef<HTMLInputElement>;
-
   private readonly MIN_SEARCH_LENGTH = 2;
   private readonly destroy = inject(DestroyRef);
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly productsService = inject(ProductsService);
   private readonly router = inject(Router);
 
@@ -95,6 +93,21 @@ export class NavbarSearchComponent {
       });
   }
 
+  @HostListener('document:pointerdown', ['$event'])
+  closeSearchPanelOnOutsideClick(event: PointerEvent): void {
+    const target = event.target;
+
+    if (
+      !this.isSearchPanelOpen() ||
+      !(target instanceof Node) ||
+      this.elementRef.nativeElement.contains(target)
+    ) {
+      return;
+    }
+
+    this.closeSearchPanel();
+  }
+
   openSearchPanel(): void {
     this.isSearchPanelOpen.set(true);
     this.loadSuggestedProducts();
@@ -147,7 +160,6 @@ export class NavbarSearchComponent {
     this.searchValue.set('');
     this.searchResults.set([]);
     this.isSearchLoading.set(false);
-    setTimeout(() => this.searchInput?.nativeElement.focus());
   }
 
   private loadSuggestedProducts(): void {
