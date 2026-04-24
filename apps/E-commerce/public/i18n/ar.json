@@ -398,6 +398,7 @@
       "EMAIL_PLACEHOLDER": "ادخل عنوان بريدك الإلكتروني",
       "PHONE": "رقم الهاتف",
       "PHONE_PLACEHOLDER": "ادخل رقم هاتفك",
+      "SUBJECT": "الموضوع",
       "SUBJECT_PLACEHOLDER": "سؤال بخصوص توصيل الزهور",
       "MESSAGE": "الرسالة",
       "MESSAGE_PLACEHOLDER": "أرغب في معرفة إذا كنتم توصلون إلى منطقتي. الرمز البريدي 12345.",

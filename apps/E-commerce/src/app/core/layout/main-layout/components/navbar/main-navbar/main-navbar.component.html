@@ -1,42 +1,89 @@
-<nav class="bg-maroon-700 dark:bg-soft-pink-200 fixed w-full mt-30 lg:mt-26 z-50 shadow-sm">
+<nav
+  class="bg-maroon-700 dark:bg-soft-pink-200 fixed w-full mt-30 lg:mt-26 z-50 shadow-sm"
+>
   <div class="max-w-7xl mx-auto px-4">
-    <div class="flex justify-between md:justify-center items-center h-12">
-      <div class="md:hidden flex items-center">
-        <button (click)="toggleMenu()"
-          class="text-white dark:text-zinc-900 hover:dark:text-zinc-950 cursor-pointer hover:text-soft-pink-200 focus:outline-none">
-          <i [class]="isMenuOpen ? 'pi pi-times' : 'pi pi-bars'" class="text-xl"></i>
+    <div class="flex justify-between lg:justify-center items-center h-12">
+      <div class="lg:hidden flex items-center">
+        <button
+          type="button"
+          (click)="toggleMenu()"
+          [attr.aria-label]="isMenuOpen ? 'Close menu' : 'Open menu'"
+          class="inline-flex items-center justify-center text-white dark:text-zinc-900 hover:dark:text-zinc-950 cursor-pointer hover:text-soft-pink-200 focus:outline-none"
+        >
+          @if (isMenuOpen) {
+          <svg
+            class="w-6 h-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M6 6L18 18M18 6L6 18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          } @else {
+          <svg
+            class="w-6 h-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 7H20M4 12H20M4 17H20"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          }
         </button>
       </div>
 
-      <ul class="hidden md:flex items-center h-full m-0 p-0 list-none">
+      <ul class="hidden lg:flex items-center h-full m-0 p-0 list-none">
         @for (item of items; track item.label) {
         <li class="h-full flex items-center">
-          <a [routerLink]="item.routerLink" [routerLinkActive]="navStyles.desktopActive"
-            [routerLinkActiveOptions]="{ exact: item.exact ?? true }" [class]="navStyles.desktopLink">
+          <a
+            [routerLink]="item.routerLink"
+            [routerLinkActive]="navStyles.desktopActive"
+            [routerLinkActiveOptions]="{ exact: item.exact ?? true }"
+            [class]="navStyles.desktopLink"
+          >
             @if (item.icon) { <i [class]="item.icon" class="me-2 text-sm"></i> }
             <span class="text-sm font-medium">{{
               item.label | translate
-              }}</span>
+            }}</span>
           </a>
         </li>
         }
       </ul>
 
-      <div class="md:hidden text-white font-bold dark:text-zinc-900">ROSE</div>
+      <div class="lg:hidden text-white font-bold dark:text-zinc-900">ROSE</div>
     </div>
   </div>
 
-  <div [class.hidden]="!isMenuOpen"
-    class="md:hidden bg-maroon-700 dark:bg-soft-pink-300 border-t border-maroon-800 dark:border-soft-pink-400 absolute w-full z-50 shadow-xl">
+  <div
+    [class.hidden]="!isMenuOpen"
+    class="lg:hidden bg-maroon-700 dark:bg-soft-pink-300 border-t border-maroon-800 dark:border-soft-pink-400 absolute w-full z-50 shadow-xl"
+  >
     <ul class="flex flex-col list-none m-0 p-2">
       @for (item of items; track item.label) {
       <li>
-        <a [routerLink]="item.routerLink" (click)="isMenuOpen = false" [routerLinkActive]="navStyles.mobileActive"
-          [routerLinkActiveOptions]="{ exact: item.exact ?? true }" [class]="navStyles.mobileLink">
+        <a
+          [routerLink]="item.routerLink"
+          (click)="isMenuOpen = false"
+          [routerLinkActive]="navStyles.mobileActive"
+          [routerLinkActiveOptions]="{ exact: item.exact ?? true }"
+          [class]="navStyles.mobileLink"
+        >
           @if (item.icon) { <i [class]="item.icon" class="me-3 text-lg"></i> }
           <span class="text-base font-medium">{{
             item.label | translate
-            }}</span>
+          }}</span>
         </a>
       </li>
       }
