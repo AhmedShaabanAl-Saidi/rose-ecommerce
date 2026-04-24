@@ -79,6 +79,7 @@ export interface ProductsResponse {
 export interface ProductQueryParams {
   page?: number;
   limit?: number;
+  keyword?: string;
   categoryIds?: string[];
   occasionIds?: string[];
   rating?: number;

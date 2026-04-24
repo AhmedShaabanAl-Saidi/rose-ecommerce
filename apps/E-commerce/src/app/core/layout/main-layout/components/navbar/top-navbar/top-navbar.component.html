@@ -1,5 +1,5 @@
 <section
-  class="fixed w-full z-50 px-4 py-3 bg-bg-main dark:text-zinc-50 text-zinc-500 text-sm font-medium"
+  class="fixed w-full z-[60] px-4 py-3 bg-bg-main dark:text-zinc-50 text-zinc-500 text-sm font-medium"
 >
   <div
     class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4"
@@ -34,11 +34,145 @@
         </button>
         }
         <div class="flex-1">
-          <lib-text-input
-            class="w-full"
-            [placeholder]="'NAVBAR.SEARCH' | translate"
-            icon="search"
-          ></lib-text-input>
+          <div class="relative w-full">
+            <lucide-icon
+              name="search"
+              class="pointer-events-none absolute start-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-zinc-400"
+            ></lucide-icon>
+            <input
+              #searchPanelInput
+              type="text"
+              class="input-base input-status-normal pe-11 ps-12!"
+              [formControl]="searchControl"
+              [placeholder]="'NAVBAR.SEARCH' | translate"
+              [attr.aria-label]="
+                'NAVBAR.SEARCH_RESULTS.SEARCH_ARIA' | translate
+              "
+              [attr.aria-expanded]="isSearchPanelOpen()"
+              (focus)="openSearchPanel()"
+              (click)="openSearchPanel()"
+              (keydown.escape)="closeSearchPanel()"
+            />
+
+            @if (isSearchPanelOpen() || searchValue()) {
+            <button
+              type="button"
+              class="absolute end-2 top-1/2 flex h-8 w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-maroon-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maroon-500 dark:hover:bg-zinc-800 dark:hover:text-soft-pink-300 dark:focus-visible:ring-soft-pink-300"
+              [title]="'NAVBAR.SEARCH_RESULTS.CLEAR' | translate"
+              [attr.aria-label]="'NAVBAR.SEARCH_RESULTS.CLEAR' | translate"
+              (click)="clearAndCloseSearch()"
+            >
+              <lucide-icon name="x" class="h-4.5 w-4.5"></lucide-icon>
+            </button>
+            }
+
+            @if (isSearchPanelOpen()) {
+            <div
+              class="absolute inset-x-0 top-[calc(100%+0.5rem)] z-[80] max-h-[min(70vh,34rem)] overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-950"
+              (keydown.escape)="closeSearchPanel()"
+            >
+              <div class="max-h-[min(70vh,34rem)] overflow-y-auto">
+                @if (isPanelLoading()) {
+                <div
+                  class="flex min-h-30 items-center justify-center px-4 py-8 text-sm font-medium text-zinc-500 dark:text-zinc-400"
+                >
+                  {{ 'NAVBAR.SEARCH_RESULTS.LOADING' | translate }}
+                </div>
+                } @else if (showNoSearchResults()) {
+                <div
+                  class="flex min-h-30 flex-col items-center justify-center gap-3 px-4 py-8 text-center text-zinc-500 dark:text-zinc-400"
+                >
+                  <lucide-icon
+                    name="search"
+                    class="h-10 w-10 text-zinc-300 dark:text-zinc-700"
+                  ></lucide-icon>
+                  <p class="text-sm font-medium">
+                    {{ 'NAVBAR.SEARCH_RESULTS.NO_RESULTS' | translate }}
+                  </p>
+                </div>
+                } @else if (showNoSuggestedProducts()) {
+                <div
+                  class="flex min-h-30 flex-col items-center justify-center gap-3 px-4 py-8 text-center text-zinc-500 dark:text-zinc-400"
+                >
+                  <lucide-icon
+                    name="search"
+                    class="h-10 w-10 text-zinc-300 dark:text-zinc-700"
+                  ></lucide-icon>
+                  <p class="text-sm font-medium">
+                    {{
+                      'NAVBAR.SEARCH_RESULTS.NO_RECOMMENDATIONS' | translate
+                    }}
+                  </p>
+                </div>
+                } @else {
+                @if (!hasSearchTerm()) {
+                <h2
+                  class="px-4 py-3 text-sm font-bold text-maroon-700 dark:text-soft-pink-300"
+                >
+                  {{
+                    'NAVBAR.SEARCH_RESULTS.PRODUCTS_YOU_MAY_LIKE' | translate
+                  }}
+                </h2>
+                }
+                <div class="divide-y divide-zinc-100 dark:divide-zinc-800">
+                  @for (product of panelProducts(); track product._id) {
+                  <button
+                    type="button"
+                    class="grid w-full grid-cols-[4.5rem_1fr] gap-3 bg-white px-3 py-3 text-start transition-colors hover:bg-maroon-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-maroon-500 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:focus-visible:ring-soft-pink-300 xl:grid-cols-[5.25rem_1fr_auto] xl:gap-4 xl:px-4"
+                    (click)="selectProduct(product)"
+                  >
+                    <img
+                      [src]="product.imgCover"
+                      [alt]="product.title"
+                      loading="lazy"
+                      class="h-[4.5rem] w-[4.5rem] rounded-lg bg-zinc-100 object-cover dark:bg-zinc-900 xl:h-[5.25rem] xl:w-[5.25rem]"
+                    />
+
+                    <div class="min-w-0 self-center">
+                      <h3
+                        class="line-clamp-2 text-sm font-semibold leading-snug text-zinc-800 dark:text-zinc-100"
+                        [innerHTML]="highlightTitle(product.title)"
+                      ></h3>
+
+                      <p class="mt-2 flex items-baseline gap-1">
+                        <span
+                          class="text-xl font-bold leading-none text-zinc-800 dark:text-zinc-50"
+                        >
+                          {{ getProductPrice(product) | number : '1.0-0' }}
+                        </span>
+                        <span
+                          class="text-xs font-medium text-zinc-700 dark:text-zinc-300"
+                        >
+                          {{ 'CURRENCY' | translate }}
+                        </span>
+                      </p>
+                    </div>
+
+                    <div
+                      class="col-span-2 flex items-center gap-2 self-center text-sm text-zinc-800 dark:text-zinc-100 xl:col-span-1 xl:justify-end"
+                    >
+                      <i class="pi pi-star-fill text-lg text-amber-500"></i>
+                      <span>
+                        {{ 'NAVBAR.SEARCH_RESULTS.RATING' | translate }}:
+                        <strong>{{
+                          product.rateAvg | number : '1.0-1'
+                        }}/5</strong>
+                      </span>
+                      <span class="text-maroon-600 dark:text-soft-pink-300">
+                        {{
+                          'NAVBAR.SEARCH_RESULTS.RATINGS_COUNT'
+                            | translate : { count: product.rateCount }
+                        }}
+                      </span>
+                    </div>
+                  </button>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+            }
+          </div>
         </div>
       </div>
     </div>
@@ -132,4 +266,5 @@
       <app-theme-switcher></app-theme-switcher>
     </div>
   </div>
+
 </section>
