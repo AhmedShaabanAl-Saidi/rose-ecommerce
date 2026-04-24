@@ -694,7 +694,7 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 }
 
 @utility taxonomy-page {
-  @apply min-h-[60vh] py-8;
+  @apply min-h-[60vh] pb-8;
 }
 
 @utility taxonomy-container {
