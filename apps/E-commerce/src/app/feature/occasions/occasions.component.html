@@ -2,13 +2,13 @@
   <div class="taxonomy-container">
     <header class="taxonomy-header">
       <span class="taxonomy-label">
-        {{ 'CATEGORIES_PAGE.LABEL' | translate }}
+        {{ 'OCCASIONS_PAGE.LABEL' | translate }}
       </span>
       <h1 class="taxonomy-title">
-        {{ 'CATEGORIES_PAGE.TITLE' | translate }}
+        {{ 'OCCASIONS_PAGE.TITLE' | translate }}
       </h1>
       <p class="taxonomy-subtitle">
-        {{ 'CATEGORIES_PAGE.SUBTITLE' | translate }}
+        {{ 'OCCASIONS_PAGE.SUBTITLE' | translate }}
       </p>
     </header>
 
@@ -24,24 +24,24 @@
       </div>
       }
     </div>
-    } @else if (categories().length === 0) {
+    } @else if (occasions().length === 0) {
     <div class="taxonomy-empty-state">
       <div class="taxonomy-empty-icon-box">
         <lucide-icon [img]="LayoutGridIcon" class="taxonomy-empty-icon"></lucide-icon>
       </div>
       <h2 class="taxonomy-empty-title">
-        {{ 'CATEGORIES_PAGE.EMPTY_TITLE' | translate }}
+        {{ 'OCCASIONS_PAGE.EMPTY_TITLE' | translate }}
       </h2>
       <p class="taxonomy-empty-subtitle">
-        {{ 'CATEGORIES_PAGE.EMPTY_SUBTITLE' | translate }}
+        {{ 'OCCASIONS_PAGE.EMPTY_SUBTITLE' | translate }}
       </p>
     </div>
     } @else {
     <div class="taxonomy-grid">
-      @for (category of categories(); track category._id) {
-      <app-taxonomy-card [title]="category.name" [imageUrl]="category.image" queryParamName="category"
-        [queryParamValue]="category._id" [productsCount]="category.productsCount"
-        productsCountKey="CATEGORIES_PAGE.PRODUCTS_COUNT"></app-taxonomy-card>
+      @for (occasion of occasions(); track occasion._id) {
+      <app-taxonomy-card [title]="occasion.name" [imageUrl]="occasionImageUrl(occasion.image)" queryParamName="occasion"
+        [queryParamValue]="occasion._id" [productsCount]="occasion.productsCount"
+        productsCountKey="OCCASIONS_PAGE.PRODUCTS_COUNT"></app-taxonomy-card>
       }
     </div>
     }

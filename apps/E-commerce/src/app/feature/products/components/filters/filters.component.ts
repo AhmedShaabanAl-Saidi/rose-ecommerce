@@ -23,6 +23,7 @@ export class FiltersComponent {
   readonly ResetAllIcon = RotateCcw;
   readonly FiltersTriggerIcon = SlidersHorizontal;
   readonly initialCategoryIds = input<string[] | undefined>(undefined);
+  readonly initialOccasionIds = input<string[] | undefined>(undefined);
   readonly filterChange = output<FilterState>();
   readonly viewportMode = signal<FilterLayoutMode>('desktop');
   readonly isTabletPanelExpanded = signal(false);
@@ -58,9 +59,11 @@ export class FiltersComponent {
   constructor() {
     effect(() => {
       const categoryIds = this.initialCategoryIds();
+      const occasionIds = this.initialOccasionIds();
       this.currentState.update((current) => ({
         ...current,
         categoryIds,
+        occasionIds,
       }));
     });
 

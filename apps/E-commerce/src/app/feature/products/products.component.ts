@@ -17,6 +17,7 @@ export class ProductsComponent {
 
   readonly appliedFilters = signal<FilterState>({});
   readonly initialCategoryIds = signal<string[] | undefined>(undefined);
+  readonly initialOccasionIds = signal<string[] | undefined>(undefined);
 
   constructor() {
     this.route.queryParamMap
@@ -26,21 +27,31 @@ export class ProductsComponent {
         const categoryIds = categoryParamIds.length
           ? categoryParamIds
           : undefined;
+        const occasionParamIds = params.getAll('occasion');
+        const occasionIds = occasionParamIds.length
+          ? occasionParamIds
+          : undefined;
 
         this.initialCategoryIds.set(categoryIds);
+        this.initialOccasionIds.set(occasionIds);
         this.appliedFilters.update((current) => ({
           ...current,
           categoryIds,
+          occasionIds,
         }));
       });
   }
 
   onFilterChange(filter: FilterState): void {
     this.initialCategoryIds.set(filter.categoryIds);
+    this.initialOccasionIds.set(filter.occasionIds);
     this.appliedFilters.set(filter);
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { category: filter.categoryIds ?? null },
+      queryParams: {
+        category: filter.categoryIds ?? null,
+        occasion: filter.occasionIds ?? null,
+      },
       queryParamsHandling: 'merge',
       replaceUrl: true,
     });

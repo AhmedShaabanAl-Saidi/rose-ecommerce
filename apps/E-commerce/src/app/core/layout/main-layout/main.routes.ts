@@ -40,6 +40,13 @@ export const mainRoutes: Routes = [
           ),
       },
       {
+        path: 'occasions',
+        loadComponent: () =>
+          import('../../../feature/occasions/occasions.component').then(
+            (m) => m.OccasionsComponent
+          ),
+      },
+      {
         path: 'shopping-cart',
         canActivate: [authGuard],
         loadComponent: () =>

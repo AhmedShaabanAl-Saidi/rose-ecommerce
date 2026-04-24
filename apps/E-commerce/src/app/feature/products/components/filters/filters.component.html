@@ -68,7 +68,8 @@
     [class.border-zinc-100]="showSidebarBorder()" [class.dark:border-zinc-800]="showSidebarBorder()">
     <app-category-filter [initialCategoryIds]="initialCategoryIds()"
       (categoryChange)="onCategoryChange($event)"></app-category-filter>
-    <app-occasion-filter (occasionChange)="onOccasionChange($event)"></app-occasion-filter>
+    <app-occasion-filter [initialOccasionIds]="initialOccasionIds()"
+      (occasionChange)="onOccasionChange($event)"></app-occasion-filter>
     <app-rating-filter (ratingChange)="onRatingChange($event)"></app-rating-filter>
     <app-price-filter (priceChange)="onPriceChange($event)"></app-price-filter>
 

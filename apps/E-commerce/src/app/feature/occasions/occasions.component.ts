@@ -4,42 +4,48 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LayoutGrid, LucideAngularModule } from 'lucide-angular';
 import { finalize } from 'rxjs';
 import { TaxonomyCardComponent } from '../../shared/components/ui/taxonomy-card/taxonomy-card.component';
-import { Category } from '../products/interfaces/product';
+import { Occasion } from '../products/interfaces/product';
 import { ProductsService } from '../products/services/product';
 
 @Component({
-  selector: 'app-categories',
+  selector: 'app-occasions',
   imports: [TranslateModule, LucideAngularModule, TaxonomyCardComponent],
-  templateUrl: './categories.component.html',
+  templateUrl: './occasions.component.html',
 })
-export class CategoriesComponent {
+export class OccasionsComponent {
   private readonly productsService = inject(ProductsService);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly categories = signal<Category[]>([]);
+  readonly occasions = signal<Occasion[]>([]);
   readonly isLoading = signal(true);
   readonly skeletonCards = [1, 2, 3, 4, 5, 6, 7, 8];
   readonly LayoutGridIcon = LayoutGrid;
 
   constructor() {
-    this.loadCategories();
+    this.loadOccasions();
   }
 
-  private loadCategories(): void {
+  occasionImageUrl(image: string): string {
+    return image.startsWith('http')
+      ? image
+      : `https://flower.elevateegy.com/uploads/${image}`;
+  }
+
+  private loadOccasions(): void {
     this.isLoading.set(true);
 
     this.productsService
-      .getCategories()
+      .getOccasions()
       .pipe(
         finalize(() => this.isLoading.set(false)),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe({
         next: (res) => {
-          const sortedCategories = [...res.categories].sort((a, b) =>
+          const sortedOccasions = [...res.occasions].sort((a, b) =>
             a.name.localeCompare(b.name)
           );
-          this.categories.set(sortedCategories);
+          this.occasions.set(sortedOccasions);
         },
       });
   }

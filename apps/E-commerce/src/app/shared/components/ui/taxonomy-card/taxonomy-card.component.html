@@ -1,0 +1,28 @@
+<div class="taxonomy-card" role="button" tabindex="0" [attr.aria-label]="title()" (click)="navigateToProducts()"
+  (keydown)="onCardKeydown($event)">
+  <span class="taxonomy-card-media">
+    @if (imageUrl()) {
+    <img [src]="imageUrl()" [alt]="title()" class="taxonomy-card-image" />
+    } @else {
+    <span class="taxonomy-card-placeholder">
+      <lucide-icon [img]="ImageIcon" class="taxonomy-card-placeholder-icon"></lucide-icon>
+    </span>
+    }
+    <span class="taxonomy-card-overlay">
+    </span>
+  </span>
+
+  <span class="taxonomy-card-body">
+    <span class="taxonomy-card-title-row">
+      <span class="taxonomy-card-title">
+        {{ title() }}
+      </span>
+    </span>
+
+    @if (productsCount() !== undefined) {
+    <span class="taxonomy-card-count">
+      {{ productsCountKey() | translate: { count: productsCount() } }}
+    </span>
+    }
+  </span>
+</div>
