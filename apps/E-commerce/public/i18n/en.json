@@ -81,6 +81,7 @@
     "OCCASIONS": "Occasions",
     "CONTACT": "Contact",
     "ABOUT": "About",
+    "ABOUT_US": "About Us",
     "CART.LOGIN_TO_ACCESS": "Please login to access your cart",
     "WISHLIST.LOGIN_TO_ACCESS": "Please login to access your wishlist"
   },
@@ -415,6 +416,33 @@
       "HOURS": {
         "TITLE": "Working Hours",
         "VALUE": "Daily from 9:00 AM to 10:00 PM"
+      }
+    }
+  },
+  "ABOUT_PAGE": {
+    "BADGE": "About us",
+    "TITLE": "Crafting Meaningful Gift Moments",
+    "SUBTITLE": "We blend thoughtful curation, elegant presentation, and reliable delivery so every gift feels special from first look to final delivery.",
+    "IMAGES": {
+      "ALT_2": "Premium gift packaging",
+      "ALT_3": "Celebration gift with flowers"
+    },
+    "CARDS": {
+      "QUALITY": {
+        "TITLE": "Premium Selection",
+        "DESCRIPTION": "Every product is selected to meet high quality standards and memorable presentation."
+      },
+      "PACKAGING": {
+        "TITLE": "Elegant Packaging",
+        "DESCRIPTION": "Our packaging is designed to create a luxurious unboxing moment for every recipient."
+      },
+      "DELIVERY": {
+        "TITLE": "Reliable Delivery",
+        "DESCRIPTION": "Fast and dependable shipping that keeps your important occasions on schedule."
+      },
+      "SUPPORT": {
+        "TITLE": "Always Here to Help",
+        "DESCRIPTION": "Our support team is available to guide you from product selection to final checkout."
       }
     }
   },

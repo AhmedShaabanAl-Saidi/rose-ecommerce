@@ -71,6 +71,13 @@ export const mainRoutes: Routes = [
             (m) => m.ContactComponent
           ),
       },
+      {
+        path: 'about-us',
+        loadComponent: () =>
+          import('../../../feature/about-us/about-us.component').then(
+            (m) => m.AboutUsComponent
+          ),
+      },
     ],
   },
 ];

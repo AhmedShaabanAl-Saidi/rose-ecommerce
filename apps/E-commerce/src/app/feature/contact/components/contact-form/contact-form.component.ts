@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
@@ -18,7 +18,6 @@ import { ButtonComponent } from '@elevate/reusable-ui';
 import { ContactRequest } from '../../interfaces/contact.interface';
 import { ContactService } from '../../services/contact.service';
 import { PhoneValue } from '../../../auth/pages/register/interface/PhoneValue.interface';
-import { map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-contact-form',
