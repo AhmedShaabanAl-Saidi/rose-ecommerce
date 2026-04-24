@@ -21,7 +21,7 @@
       [value]="value || ''"
       [disabled]="isDisabled"
       (blur)="onTouched()"
-      (input)="onChange($any($event.target).value)"
+      (input)="value = $any($event.target).value; onChange(value)"
       class="input-base"
       [class.input-status-normal]="!Invalid"
       [class.input-status-error]="Invalid"

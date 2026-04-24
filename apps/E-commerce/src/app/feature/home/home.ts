@@ -1,5 +1,4 @@
 import { MostPopular } from './components/most-popular/most-popular';
-import { AboutUs } from './components/about-us/about-us';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
 import { BestSellerComponent } from './components/best-seller/best-seller.component';
@@ -10,6 +9,7 @@ import { Product } from '../../shared/components/ui/product-card/interface/produ
 import { FeaturesBarComponent } from './components/features-bar/features-bar.component';
 import { HomeService } from './services/home';
 import { mapToProductCard } from './home.mapper';
+import { AboutUsComponent } from '../about-us/about-us.component';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,7 @@ import { mapToProductCard } from './home.mapper';
     TestimonialComponent,
     FeaturesBarComponent,
     GallerySectionComponent,
-    AboutUs,
+    AboutUsComponent,
     MostPopular,
   ],
   templateUrl: './home.html',

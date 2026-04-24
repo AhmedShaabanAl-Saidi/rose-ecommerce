@@ -42,6 +42,10 @@ export class MainNavbarComponent {
       routerLink: '/occasions',
     },
     { label: 'NAVBAR.CONTACT', icon: 'pi pi-envelope', routerLink: '/contact' },
-    { label: 'NAVBAR.ABOUT', icon: 'pi pi-info-circle', routerLink: '/about' },
+    {
+      label: 'NAVBAR.ABOUT_US',
+      icon: 'pi pi-info-circle',
+      routerLink: '/about-us',
+    },
   ];
 }

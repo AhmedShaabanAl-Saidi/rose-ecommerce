@@ -81,6 +81,7 @@
     "OCCASIONS": "Occasions",
     "CONTACT": "Contact",
     "ABOUT": "About",
+    "ABOUT_US": "About Us",
     "CART.LOGIN_TO_ACCESS": "Please login to access your cart",
     "WISHLIST.LOGIN_TO_ACCESS": "Please login to access your wishlist"
   },
@@ -384,6 +385,66 @@
     "CHECKOUT_BTN": "Checkout",
     "ORDER_SUCCESS": "Order placed successfully!",
     "ORDER_FAILED": "Payment failed, please try again or choose another method"
+  },
+  "CONTACT_PAGE": {
+    "BADGE": "Get in touch",
+    "TITLE": "We'd Love to Hear from You",
+    "SUBTITLE": "Have a question about an order, a gift recommendation, or delivery details? Send us a message and our team will reply as soon as possible.",
+    "SUCCESS_MESSAGE": "Your message has been sent successfully.",
+    "FORM": {
+      "NAME": "Name",
+      "NAME_PLACEHOLDER": "Enter your full name",
+      "EMAIL": "Email",
+      "EMAIL_PLACEHOLDER": "Enter your email address",
+      "PHONE": "Phone",
+      "PHONE_PLACEHOLDER": "Enter your phone number",
+      "SUBJECT": "Subject",
+      "SUBJECT_PLACEHOLDER": "Question about flower delivery",
+      "MESSAGE": "Message",
+      "MESSAGE_PLACEHOLDER": "I would like to know if you deliver to my area. My zip code is 12345.",
+      "SUBMIT": "Send Message"
+    },
+    "CARDS": {
+      "EMAIL": {
+        "TITLE": "Email Support",
+        "VALUE": "support@rose-store.com"
+      },
+      "PHONE": {
+        "TITLE": "Phone",
+        "VALUE": "+20 100 000 0000"
+      },
+      "HOURS": {
+        "TITLE": "Working Hours",
+        "VALUE": "Daily from 9:00 AM to 10:00 PM"
+      }
+    }
+  },
+  "ABOUT_PAGE": {
+    "BADGE": "About us",
+    "TITLE": "Crafting Meaningful Gift Moments",
+    "SUBTITLE": "We blend thoughtful curation, elegant presentation, and reliable delivery so every gift feels special from first look to final delivery.",
+    "IMAGES": {
+      "ALT_2": "Premium gift packaging",
+      "ALT_3": "Celebration gift with flowers"
+    },
+    "CARDS": {
+      "QUALITY": {
+        "TITLE": "Premium Selection",
+        "DESCRIPTION": "Every product is selected to meet high quality standards and memorable presentation."
+      },
+      "PACKAGING": {
+        "TITLE": "Elegant Packaging",
+        "DESCRIPTION": "Our packaging is designed to create a luxurious unboxing moment for every recipient."
+      },
+      "DELIVERY": {
+        "TITLE": "Reliable Delivery",
+        "DESCRIPTION": "Fast and dependable shipping that keeps your important occasions on schedule."
+      },
+      "SUPPORT": {
+        "TITLE": "Always Here to Help",
+        "DESCRIPTION": "Our support team is available to guide you from product selection to final checkout."
+      }
+    }
   },
   "ORDERS": {
     "TITLE": "Orders",
