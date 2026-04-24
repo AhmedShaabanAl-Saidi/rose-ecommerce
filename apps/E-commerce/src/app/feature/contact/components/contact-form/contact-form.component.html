@@ -1,0 +1,93 @@
+<div
+  class="rounded-2xl border border-zinc-100 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/60 sm:p-6 lg:p-8"
+>
+  <form
+    [formGroup]="contactForm"
+    (ngSubmit)="submitContactForm()"
+    class="space-y-4"
+  >
+    <div class="grid gap-4 sm:grid-cols-2">
+      <lib-text-input
+        formControlName="name"
+        [label]="'CONTACT_PAGE.FORM.NAME' | translate"
+        [placeholder]="'CONTACT_PAGE.FORM.NAME_PLACEHOLDER' | translate"
+        type="text"
+      />
+
+      <lib-text-input
+        formControlName="email"
+        [label]="'CONTACT_PAGE.FORM.EMAIL' | translate"
+        [placeholder]="'CONTACT_PAGE.FORM.EMAIL_PLACEHOLDER' | translate"
+        type="email"
+      />
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      <lib-phone-input
+        formControlName="phone"
+        [label]="'CONTACT_PAGE.FORM.PHONE' | translate"
+        [placeholder]="'CONTACT_PAGE.FORM.PHONE_PLACEHOLDER' | translate"
+      />
+      <lib-text-input
+        formControlName="subject"
+        [label]="'CONTACT_PAGE.FORM.SUBJECT' | translate"
+        [placeholder]="'CONTACT_PAGE.FORM.SUBJECT_PLACEHOLDER' | translate"
+        type="text"
+      />
+    </div>
+    <div class="grid gap-4">
+      <label
+        for="message"
+        class="block font-medium text-start dark:text-white text-zinc-700"
+      >
+        {{ 'CONTACT_PAGE.FORM.MESSAGE' | translate }}
+      </label>
+
+      <textarea
+        id="message"
+        formControlName="message"
+        rows="4"
+        [placeholder]="'CONTACT_PAGE.FORM.MESSAGE_PLACEHOLDER' | translate"
+        class="w-full p-4 rounded-xl border placeholder:text-zinc-400 dark:text-white dark:bg-zinc-700 outline-none transition-all resize-none"
+        [class.input-status-normal]="
+          !(
+            contactForm.get('message')?.invalid &&
+            contactForm.get('message')?.touched
+          )
+        "
+        [class.input-status-error]="
+          contactForm.get('message')?.invalid &&
+          contactForm.get('message')?.touched
+        "
+      ></textarea>
+      @if (contactForm.controls.message.touched &&
+      contactForm.controls.message.invalid) {
+      <p class="mt-2 text-xs text-red-600 dark:text-red-400">
+        @if (contactForm.controls.message.errors?.['required']) {
+        {{ 'VALIDATION.REQUIRED' | translate }}
+        } @else if (contactForm.controls.message.errors?.['minlength']) {
+        {{ 'VALIDATION.MIN_LENGTH' | translate:{ length: contactForm.controls.message.errors?.['minlength']?.requiredLength } }}
+        } @else if (contactForm.controls.message.errors?.['maxlength']) {
+        {{ 'VALIDATION.MAX_LENGTH' | translate:{ length: contactForm.controls.message.errors?.['maxlength']?.requiredLength } }}
+        } @else {
+        {{ 'VALIDATION.INVALID' | translate }}
+        }
+      </p>
+      }
+    </div>
+
+    <div class="pt-2">
+      <lib-button
+        type="submit"
+        [loading]="isSubmitting()"
+        [disabled]="isSubmitting()"
+        [block]="true"
+        [icon]="isRtl() ? 'arrow-left' : 'arrow-right'"
+        [iconPos]="'right'"
+        size="lg"
+      >
+        {{ 'CONTACT_PAGE.FORM.SUBMIT' | translate }}
+      </lib-button>
+    </div>
+  </form>
+</div>

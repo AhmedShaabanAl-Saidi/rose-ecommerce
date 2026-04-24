@@ -64,6 +64,13 @@ export const mainRoutes: Routes = [
             (m) => m.checkoutRoutes
           ),
       },
+      {
+        path: 'contact',
+        loadComponent: () =>
+          import('../../../feature/contact/contact.component').then(
+            (m) => m.ContactComponent
+          ),
+      },
     ],
   },
 ];
