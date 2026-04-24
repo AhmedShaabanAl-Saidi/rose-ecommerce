@@ -64,6 +64,16 @@
   "NAVBAR": {
     "LOGIN": "تسجيل الدخول",
     "SEARCH": "ما هي الهدايا الرائعة التي تبحث عنها؟",
+    "SEARCH_RESULTS": {
+      "LOADING": "جاري البحث عن المنتجات...",
+      "NO_RESULTS": "لم يتم العثور على منتجات.",
+      "NO_RECOMMENDATIONS": "لا توجد منتجات متاحة في الوقت الحالي.",
+      "PRODUCTS_YOU_MAY_LIKE": "منتجات قد تعجبك:",
+      "CLEAR": "مسح البحث",
+      "SEARCH_ARIA": "البحث عن المنتجات",
+      "RATING": "التقييم",
+      "RATINGS_COUNT": "({{count}} تقييمات)"
+    },
     "DELIVERTO": "توصيل إلى:",
     "DELIVERY_CITY": "القاهرة",
     "ADD_ADDRESS": "إضافة عنوان",

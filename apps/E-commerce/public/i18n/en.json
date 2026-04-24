@@ -64,6 +64,16 @@
   "NAVBAR": {
     "LOGIN": "Login",
     "SEARCH": "What awesome gift are you looking for?",
+    "SEARCH_RESULTS": {
+      "LOADING": "Searching products...",
+      "NO_RESULTS": "No products found.",
+      "NO_RECOMMENDATIONS": "No products available at the moment.",
+      "PRODUCTS_YOU_MAY_LIKE": "Products you may like:",
+      "CLEAR": "Clear search",
+      "SEARCH_ARIA": "Search products",
+      "RATING": "Rating",
+      "RATINGS_COUNT": "({{count}} ratings)"
+    },
     "DELIVERTO": "Deliver to:",
     "DELIVERY_CITY": "Cairo",
     "ADD_ADDRESS": "Add Address",

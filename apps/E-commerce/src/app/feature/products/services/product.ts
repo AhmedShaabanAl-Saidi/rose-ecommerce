@@ -1,5 +1,5 @@
 import { environment } from '../../../../environments/environments';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductQueryParams, ProductsResponse, CategoriesRes, OccasionsRes } from '../interfaces/product';
@@ -14,26 +14,56 @@ export class ProductsService {
   private baseUrl = environment.baseUrl;
   private http = inject(HttpClient);
 
-  getProducts({ page = 1, limit = 12, categoryIds, occasionIds, rating, priceFrom, priceTo }: ProductQueryParams = {}): Observable<ProductsResponse> {
-    let params = `?page=${page}&limit=${limit}`;
+  getProducts(
+    {
+      page = 1,
+      limit = 12,
+      keyword,
+      categoryIds,
+      occasionIds,
+      rating,
+      priceFrom,
+      priceTo,
+    }: ProductQueryParams = {},
+    options: { context?: HttpContext } = {}
+  ): Observable<ProductsResponse> {
+    let params = new HttpParams()
+      .set('page', String(page))
+      .set('limit', String(limit));
+
+    const normalizedKeyword = keyword?.trim();
+    if (normalizedKeyword) {
+      params = params.set('keyword', normalizedKeyword);
+    }
+
     if (categoryIds?.length) {
-      categoryIds.forEach(id => { params += `&category=${id}`; });
+      categoryIds.forEach((id) => {
+        params = params.append('category', id);
+      });
     }
+
     if (occasionIds?.length) {
-      occasionIds.forEach(id => { params += `&occasion=${id}`; });
+      occasionIds.forEach((id) => {
+        params = params.append('occasion', id);
+      });
     }
+
     if (rating) {
-      params += `&rateAvg=${rating}`;
+      params = params.set('rateAvg', String(rating));
     }
+
     if (priceFrom !== undefined) {
-      params += `&price[gte]=${priceFrom}`;
+      params = params.set('price[gte]', String(priceFrom));
     }
+
     if (priceTo !== undefined) {
-      params += `&price[lte]=${priceTo}`;
+      params = params.set('price[lte]', String(priceTo));
     }
-    return this.http.get<ProductsResponse>(
-      `${this.baseUrl}/products${params}`
-    );
+
+    return this.http.get<ProductsResponse>(`${this.baseUrl}/products`, {
+      params,
+      context: options.context,
+    });
   }
 
   getOccasions(page = 1, limit = 100): Observable<OccasionsRes> {
@@ -59,7 +89,7 @@ export class ProductsService {
       `${this.baseUrl}/products/${productId}/reviews`
     );
   }
-  
+
   getRelatedProductByID(product_id: string) {
     return this.http.get<RelatedProductsResponse>(
       `${this.baseUrl}/related/category/${product_id}`

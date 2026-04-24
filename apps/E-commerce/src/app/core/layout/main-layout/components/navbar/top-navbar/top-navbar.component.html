@@ -1,57 +1,31 @@
-<section
-  class="fixed w-full z-50 px-4 py-3 bg-bg-main dark:text-zinc-50 text-zinc-500 text-sm font-medium"
->
-  <div
-    class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4"
-  >
-    <div
-      class="flex flex-col lg:flex-row lg:items-center gap-3 w-full lg:flex-1"
-    >
+<section class="fixed w-full z-[60] px-4 py-3 bg-bg-main dark:text-zinc-50 text-zinc-500 text-sm font-medium">
+  <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+    <div class="flex flex-col lg:flex-row lg:items-center gap-3 w-full lg:flex-1">
       <div class="flex items-center gap-3 w-full">
-        <img
-          src="images/navbar/logo.png"
-          class="w-12 h-12 lg:w-20 lg:h-20 shrink-0 cursor-pointer"
-          routerLink="/"
-          alt="logo"
-        />
+        <img src="images/navbar/logo.png" class="w-12 h-12 lg:w-20 lg:h-20 shrink-0 cursor-pointer" routerLink="/"
+          alt="logo" />
         @if (user()) {
-        <button
-          type="button"
+        <button type="button"
           class="hidden lg:flex max-w-[240px] shrink-0 flex-col rounded-2xl px-3 py-2 text-start transition-colors hover:bg-maroon-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maroon-200 dark:hover:bg-zinc-800 dark:focus-visible:ring-soft-pink-300"
-          (click)="openAddressManager()"
-          [title]="deliveryAddressText()"
-          [attr.aria-label]="deliveryAddressText()"
-        >
+          (click)="openAddressManager()" [title]="deliveryAddressText()" [attr.aria-label]="deliveryAddressText()">
           <span class="dark:text-zinc-400 text-xs">
             {{ 'NAVBAR.DELIVERTO' | translate }}
           </span>
-          <span
-            class="text-maroon-700 dark:text-soft-pink-200 flex items-center gap-1 text-sm font-semibold min-w-0"
-          >
+          <span class="text-maroon-700 dark:text-soft-pink-200 flex items-center gap-1 text-sm font-semibold min-w-0">
             <lucide-icon name="map-pin-pen" class="w-4 h-4 shrink-0"></lucide-icon>
             <span class="truncate">{{ deliveryAddressText() }}</span>
           </span>
         </button>
         }
-        <div class="flex-1">
-          <lib-text-input
-            class="w-full"
-            [placeholder]="'NAVBAR.SEARCH' | translate"
-            icon="search"
-          ></lib-text-input>
-        </div>
+        <app-navbar-search></app-navbar-search>
       </div>
     </div>
 
-    <div
-      class="flex items-center justify-between lg:justify-end gap-4 w-full lg:w-auto"
-    >
+    <div class="flex items-center justify-between lg:justify-end gap-4 w-full lg:w-auto">
       @if (user()) {
-      <button
-        type="button"
+      <button type="button"
         class="flex relative items-start flex-1 flex-col justify-start rounded-full cursor-pointer transition"
-        (click)="menu.toggle($event)"
-      >
+        (click)="menu.toggle($event)">
         <span>{{ 'NAVBAR.HELLO' | translate }}</span>
         <div class="flex text-maroon-500 dark:text-soft-pink-200 ms-2">
           <span> {{ user()?.firstName }} </span>
@@ -60,15 +34,9 @@
       </button>
 
       } @else {
-      <a
-        routerLink="/auth/login"
-        class="flex items-start flex-1 gap-1 hover:text-maroon-400 hover:dark:text-soft-pink-400"
-      >
-        <lucide-icon
-          strokeWidth="2"
-          class="w-5 h-5"
-          name="user-round"
-        ></lucide-icon>
+      <a routerLink="/auth/login"
+        class="flex items-start flex-1 gap-1 hover:text-maroon-400 hover:dark:text-soft-pink-400">
+        <lucide-icon strokeWidth="2" class="w-5 h-5" name="user-round"></lucide-icon>
         <span>
           {{ 'NAVBAR.LOGIN' | translate }}
         </span>
@@ -79,45 +47,26 @@
       <p-divider [layout]="'vertical'" class="m-0!"></p-divider>
 
       <ul class="flex gap-4 items-center">
-        <li
-          role="button"
-          tabindex="0"
-          (keydown.enter)="navigateToWishlist($event)"
+        <li role="button" tabindex="0" (keydown.enter)="navigateToWishlist($event)"
           (keydown.space)="$event.preventDefault(); navigateToWishlist($event)"
-          class="hover:text-maroon-400 cursor-pointer relative"
-          (click)="navigateToWishlist($event)"
-          routerLinkActive="text-maroon-400"
-          routerLink="/wishlist"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
+          class="hover:text-maroon-400 cursor-pointer relative" (click)="navigateToWishlist($event)"
+          routerLinkActive="text-maroon-400" routerLink="/wishlist" [routerLinkActiveOptions]="{ exact: true }">
           <lucide-icon class="w-5 h-5 lg:w-6 lg:h-6" name="heart"></lucide-icon>
           @if (wishlistService.wishlistCount() > 0) {
           <span
-            class="absolute -top-2 -right-2 bg-red-500 min-w-5 h-5 flex items-center justify-center rounded-full text-white text-[10px] px-1 font-bold border-2 border-bg-main"
-          >
+            class="absolute -top-2 -right-2 bg-red-500 min-w-5 h-5 flex items-center justify-center rounded-full text-white text-[10px] px-1 font-bold border-2 border-bg-main">
             {{ wishlistService.wishlistCount() }}
           </span>
           }
         </li>
-        <li
-          role="button"
-          tabindex="0"
-          (keydown.enter)="navigateToCart($event)"
+        <li role="button" tabindex="0" (keydown.enter)="navigateToCart($event)"
           (keydown.space)="$event.preventDefault(); navigateToCart($event)"
-          class="hover:text-maroon-400 cursor-pointer relative"
-          (click)="navigateToCart($event)"
-          routerLinkActive="text-maroon-400"
-          routerLink="/shopping-cart"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <lucide-icon
-            class="w-5 h-5 lg:w-6 lg:h-6"
-            name="shopping-cart"
-          ></lucide-icon>
+          class="hover:text-maroon-400 cursor-pointer relative" (click)="navigateToCart($event)"
+          routerLinkActive="text-maroon-400" routerLink="/shopping-cart" [routerLinkActiveOptions]="{ exact: true }">
+          <lucide-icon class="w-5 h-5 lg:w-6 lg:h-6" name="shopping-cart"></lucide-icon>
           @if (cartCount() > 0) {
           <span
-            class="absolute -top-2 -right-2 bg-red-500 min-w-5 h-5 flex items-center justify-center rounded-full text-white text-[10px] px-1 font-bold border-2 border-bg-main"
-          >
+            class="absolute -top-2 -right-2 bg-red-500 min-w-5 h-5 flex items-center justify-center rounded-full text-white text-[10px] px-1 font-bold border-2 border-bg-main">
             {{ cartCount() > 99 ? '99+' : cartCount() }}
           </span>
           }

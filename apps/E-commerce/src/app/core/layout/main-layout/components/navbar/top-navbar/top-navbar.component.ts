@@ -1,27 +1,26 @@
-import { ToastrService } from 'ngx-toastr';
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthRepo, AuthState } from '@elevate/auth-domain';
-import { TextInputComponent } from '@elevate/reusable-input';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
+import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
 import { DividerModule } from 'primeng/divider';
 import { MenuModule } from 'primeng/menu';
+import { take, tap } from 'rxjs';
 import { languageService } from '../../../../../services/language-service';
 import { LanguageSwitcherComponent } from '../../../../auth-layout/components/language-switcher/language-switcher.component';
 import { ThemeSwitcherComponent } from '../../../../auth-layout/components/theme-switcher/theme-switcher.component';
 import { CartService } from '../../../../../../../app/feature/cart/services/cart.service';
-import { take, tap } from 'rxjs';
-import { WishlistService } from '../../../../../../shared/services/wishlist.service';
 import { ShippingAddress } from '../../../../../../../app/feature/shipping-address/interfaces/shipping-address.interface';
 import { ShippingAddressService } from '../../../../../../../app/feature/shipping-address/services/shipping-address.service';
 import { AddressUiService } from '../../../../../../shared/components/ui/dialogs/address-dialog/services/address-ui.service';
+import { WishlistService } from '../../../../../../shared/services/wishlist.service';
+import { NavbarSearchComponent } from '../navbar-search/navbar-search.component';
 
 @Component({
   selector: 'app-top-navbar',
   imports: [
-    TextInputComponent,
     LucideAngularModule,
     RouterLink,
     RouterLinkActive,
@@ -30,6 +29,7 @@ import { AddressUiService } from '../../../../../../shared/components/ui/dialogs
     TranslatePipe,
     MenuModule,
     ThemeSwitcherComponent,
+    NavbarSearchComponent,
   ],
   templateUrl: './top-navbar.component.html',
 })
@@ -41,6 +41,8 @@ export class TopNavbarComponent {
   private readonly cartService = inject(CartService);
   private readonly shippingAddressService = inject(ShippingAddressService);
   private readonly addressUiService = inject(AddressUiService);
+  private readonly toastrService = inject(ToastrService);
+
   readonly cartCount = computed(() => this.cartService.cartCount());
   readonly wishlistService = inject(WishlistService);
   readonly user = this.authState.currentUser;
@@ -122,7 +124,6 @@ export class TopNavbarComponent {
       },
     ];
   });
-  private readonly toastrService = inject(ToastrService);
 
   private loadPrimaryAddress() {
     this.shippingAddressService
