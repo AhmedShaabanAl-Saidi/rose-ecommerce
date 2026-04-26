@@ -2,9 +2,12 @@
   <label class="checkbox-container group">
     <div class="relative flex items-center justify-center">
       <input
+        [id]="inputId()"
         type="checkbox"
         [checked]="value"
         [disabled]="isDisabled"
+        [attr.aria-describedby]="describedBy"
+        [attr.aria-invalid]="Invalid"
         (change)="toggle()"
         class="peer sr-only"
       />
@@ -32,5 +35,8 @@
     </span>
     }
   </label>
-  <lib-input-error [control]="control"></lib-input-error>
+  <lib-input-error
+    [control]="control"
+    [errorId]="errorId()"
+  ></lib-input-error>
 </div>

@@ -3,6 +3,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   PhoneInputComponent,
+  TextareaInputComponent,
   TextInputComponent,
 } from '@elevate/reusable-input';
 import { ButtonComponent } from '@elevate/reusable-ui';
@@ -13,6 +14,7 @@ import { ButtonComponent } from '@elevate/reusable-ui';
     ReactiveFormsModule,
     TranslateModule,
     PhoneInputComponent,
+    TextareaInputComponent,
     TextInputComponent,
     ButtonComponent,
   ],

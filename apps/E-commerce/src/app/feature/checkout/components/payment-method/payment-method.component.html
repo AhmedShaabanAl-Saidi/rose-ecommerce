@@ -36,7 +36,7 @@
       (click)="selectMethod('cash')"
       (keydown.enter)="selectMethod('cash')"
       (keydown.space)="$event.preventDefault(); selectMethod('cash')"
-      class="group relative cursor-pointer overflow-hidden rounded-[32px] sm:rounded-[40px] border-2 p-6 sm:p-10 transition-all duration-500 focus-visible:ring-4 focus-visible:ring-maroon-600/20 focus-visible:outline-none"
+      class="group relative cursor-pointer overflow-hidden rounded-4xl sm:rounded-[40px] border-2 p-6 sm:p-10 transition-all duration-500 focus-visible:ring-4 focus-visible:ring-maroon-600/20 focus-visible:outline-none"
       [ngClass]="{
         'border-maroon-600 bg-maroon-50/10 shadow-xl shadow-maroon-600/10':
           selectedMethod() === 'cash',
@@ -101,7 +101,7 @@
       (click)="selectMethod('card')"
       (keydown.enter)="selectMethod('card')"
       (keydown.space)="$event.preventDefault(); selectMethod('card')"
-      class="group relative cursor-pointer overflow-hidden rounded-[32px] sm:rounded-[40px] border-2 p-6 sm:p-10 transition-all duration-500 focus-visible:ring-4 focus-visible:ring-maroon-600/20 focus-visible:outline-none"
+      class="group relative cursor-pointer overflow-hidden rounded-4xl sm:rounded-[40px] border-2 p-6 sm:p-10 transition-all duration-500 focus-visible:ring-4 focus-visible:ring-maroon-600/20 focus-visible:outline-none"
       [ngClass]="{
         'border-maroon-600 bg-maroon-50/10 shadow-xl shadow-maroon-600/10':
           selectedMethod() === 'card',
@@ -164,10 +164,10 @@
       [disabled]="isLoading() || !selectedMethod()"
       [icon]="isRtl() ? 'arrow-left' : 'arrow-right'"
       [iconPos]="'right'"
-      [attr.aria-label]="
+      [ariaLabel]="
         ('CHECKOUT.CHECKOUT_BTN' | translate) || 'Proceed to checkout'
       "
-      class="sm:min-w-[160px] sm:w-auto"
+      class="sm:min-w-40 sm:w-auto"
       (buttonClick)="onCheckout()"
     >
       {{ ('CHECKOUT.CHECKOUT_BTN' | translate) || 'Checkout' }}

@@ -1,7 +1,7 @@
 <div class="space-y-6">
-  <h2 class="text-4xl font-black text-zinc-900 dark:text-white">
+  <h1 class="text-4xl font-black text-zinc-900 dark:text-white">
     {{ 'SHIPPING_ADDRESS.TITLE' | translate }}
-  </h2>
+  </h1>
 
   @if (shippingAddresses().length === 0) {
   <div
@@ -20,10 +20,11 @@
 
   <div class="space-y-4">
     @for (address of shippingAddresses(); track address._id) {
-    <div
-      role="button"
-      tabindex="0"
+    <button
+      type="button"
       (click)="selectAddress(address)"
+      [attr.aria-pressed]="selectedAddress()?._id === address._id"
+      [attr.aria-label]="'Select shipping address in ' + address.city"
       class="group relative flex justify-between items-center border-2 p-6 rounded-3xl cursor-pointer transition-all duration-300"
       [class]="
         selectedAddress()?._id === address._id
@@ -32,7 +33,7 @@
       "
     >
       <div class="space-y-1">
-        <h4
+        <h2
           class="font-black text-2xl"
           [class]="
             selectedAddress()?._id === address._id
@@ -41,7 +42,7 @@
           "
         >
           {{ address.city }}
-        </h4>
+        </h2>
         <p
           class="text-sm font-medium"
           [class]="
@@ -85,7 +86,7 @@
         <div class="h-1.5 w-1.5 rounded-full bg-white"></div>
       </div>
       }
-    </div>
+    </button>
     }
   </div>
 
@@ -102,8 +103,10 @@
   <div class="space-y-8">
     <div class="flex justify-center">
       <button
+        type="button"
         (click)="addAddress()"
-        class="text-maroon-600 hover:text-maroon-700 font-bold text-sm transition-colors flex items-center gap-2"
+        aria-label="Add a new shipping address"
+        class="text-maroon-600 hover:text-maroon-700 font-bold text-sm transition-colors flex min-h-11 items-center gap-2 px-3"
       >
         <lucide-angular name="plus-circle" [size]="18"></lucide-angular>
         {{ 'SHIPPING_ADDRESS.ADD_NEW_ADDRESS' | translate }}

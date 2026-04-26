@@ -14,12 +14,16 @@ export class AddressUiService {
     return this.dialogService.open(AddressDialogComponent, {
       data: { mode, address },
       header: '',
+      ariaLabelledBy: 'address-dialog-title',
       width: 'min(90vw, 850px)',
       showHeader: false,
       closable: true,
+      closeAriaLabel: 'Close address manager dialog',
       appendTo: 'body',
       closeOnEscape: true,
       dismissableMask: true,
+      focusOnShow: true,
+      focusTrap: true,
       draggable: false,
       contentStyle: {
         padding: '0',

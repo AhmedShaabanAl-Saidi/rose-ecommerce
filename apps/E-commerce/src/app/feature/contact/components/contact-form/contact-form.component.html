@@ -36,44 +36,12 @@
       />
     </div>
     <div class="grid gap-4">
-      <label
-        for="message"
-        class="block font-medium text-start dark:text-white text-zinc-700"
-      >
-        {{ 'CONTACT_PAGE.FORM.MESSAGE' | translate }}
-      </label>
-
-      <textarea
-        id="message"
+      <lib-textarea-input
         formControlName="message"
-        rows="4"
+        [label]="'CONTACT_PAGE.FORM.MESSAGE' | translate"
         [placeholder]="'CONTACT_PAGE.FORM.MESSAGE_PLACEHOLDER' | translate"
-        class="w-full p-4 rounded-xl border placeholder:text-zinc-400 dark:text-white dark:bg-zinc-700 outline-none transition-all resize-none"
-        [class.input-status-normal]="
-          !(
-            contactForm.get('message')?.invalid &&
-            contactForm.get('message')?.touched
-          )
-        "
-        [class.input-status-error]="
-          contactForm.get('message')?.invalid &&
-          contactForm.get('message')?.touched
-        "
-      ></textarea>
-      @if (contactForm.controls.message.touched &&
-      contactForm.controls.message.invalid) {
-      <p class="mt-2 text-xs text-red-600 dark:text-red-400">
-        @if (contactForm.controls.message.errors?.['required']) {
-        {{ 'VALIDATION.REQUIRED' | translate }}
-        } @else if (contactForm.controls.message.errors?.['minlength']) {
-        {{ 'VALIDATION.MIN_LENGTH' | translate:{ length: contactForm.controls.message.errors?.['minlength']?.requiredLength } }}
-        } @else if (contactForm.controls.message.errors?.['maxlength']) {
-        {{ 'VALIDATION.MAX_LENGTH' | translate:{ length: contactForm.controls.message.errors?.['maxlength']?.requiredLength } }}
-        } @else {
-        {{ 'VALIDATION.INVALID' | translate }}
-        }
-      </p>
-      }
+        [rows]="4"
+      ></lib-textarea-input>
     </div>
 
     <div class="pt-2">

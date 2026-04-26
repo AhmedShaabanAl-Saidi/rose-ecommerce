@@ -44,15 +44,29 @@
 .hero-indicator {
   border: 0;
   padding: 0;
+  position: relative;
+  min-width: 44px;
+  min-height: 44px;
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero-indicator-active {
+.hero-indicator::after {
+  content: "";
+  position: absolute;
+  border-radius: 9999px;
+  transition: all 0.3s ease-out;
+}
+
+.hero-indicator-active::after {
   width: 1.5rem;
   height: 0.625rem;
   background-color: var(--color-maroon-600);
 }
 
-.hero-indicator-inactive {
+.hero-indicator-inactive::after {
   width: 0.5rem;
   height: 0.5rem;
   background-color: rgb(255 255 255 / 0.78);

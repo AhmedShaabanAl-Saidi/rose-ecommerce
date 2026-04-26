@@ -3,14 +3,24 @@ import { HttpContext } from '@angular/common/http';
 import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { catchError, debounceTime, distinctUntilChanged, finalize, map, of, switchMap, take, tap } from 'rxjs';
-import { SKIP_GLOBAL_LOADING } from '../../../../../interceptors/loading-interceptor';
-import { ClickOutsideDirective } from '../../../../../utils/click-outside.directive';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  finalize,
+  map,
+  of,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 import { ProductsService } from '../../../../../../../app/feature/products/services/product';
 import { Product } from '../../../../../../shared/components/ui/product-card/interface/product';
+import { SKIP_GLOBAL_LOADING } from '../../../../../interceptors/loading-interceptor';
+import { ClickOutsideDirective } from '../../../../../utils/click-outside.directive';
 
 @Component({
   selector: 'app-navbar-search',
@@ -31,6 +41,9 @@ export class NavbarSearchComponent {
   private readonly destroy = inject(DestroyRef);
   private readonly productsService = inject(ProductsService);
   private readonly router = inject(Router);
+  readonly searchInputId = 'navbar-search-input';
+  readonly searchPanelId = 'navbar-search-panel';
+  readonly searchResultsId = 'navbar-search-results';
 
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly searchValue = signal('');
@@ -65,6 +78,7 @@ export class NavbarSearchComponent {
 
   constructor() {
     this.listenToSearchControlChanges();
+    this.listenToRouteChanges();
   }
 
   private listenToSearchControlChanges(): void {
@@ -103,6 +117,16 @@ export class NavbarSearchComponent {
       )
       .subscribe((products) => {
         this.searchResults.set(products);
+      });
+  }
+
+  private listenToRouteChanges(): void {
+    this.router.events
+      .pipe(takeUntilDestroyed(this.destroy))
+      .subscribe((event) => {
+        if (event instanceof NavigationStart) {
+          this.closeSearchPanel();
+        }
       });
   }
 

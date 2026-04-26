@@ -6,6 +6,12 @@
   >
     <div class="relative min-w-10 h-10">
       <button
+        type="button"
+        [attr.aria-label]="
+          isInWishlist()
+            ? 'Remove from wishlist: ' + product().title
+            : 'Add to wishlist: ' + product().title
+        "
         [class.text-maroon-500]="!isInWishlist()"
         [class.bg-white]="!isInWishlist()"
         [class.text-white]="isInWishlist()"
@@ -62,6 +68,8 @@
       class="absolute inset-0 bg-[#E65073]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center"
     >
       <button
+        type="button"
+        [attr.aria-label]="'View product details for ' + product().title"
         (click)="showProductDetails(); $event.stopPropagation()"
         class="bg-white cursor-pointer text-maroon-600 p-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-maroon-50"
       >
@@ -105,7 +113,7 @@
 
           @if (discountPrice !== null && discountPrice < originalPrice) {
           <span
-            class="text-zinc-400 dark:text-zinc-500 inline-block ms-1 line-through font-medium text-sm whitespace-nowrap"
+            class="text-zinc-600 dark:text-zinc-300 inline-block ms-1 line-through font-medium text-sm whitespace-nowrap"
           >
             {{ originalPrice | number : '1.2-2' }} {{ 'CURRENCY' | translate }}
           </span>
@@ -116,6 +124,7 @@
       <lib-button
         (buttonClick)="addToCart()"
         [disabled]="product().quantity === 0"
+        [ariaLabel]="'Add ' + product().title + ' to cart'"
         class="shrink-0"
       >
         <lucide-icon

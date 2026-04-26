@@ -1,9 +1,14 @@
 <p-confirmdialog
   styleClass="full-width-confirm-dialog"
+  header="Confirmation"
   [style]="{ width: 'min(80vw, 450px)' }"
   [closable]="true"
   [closeOnEscape]="true"
   [dismissableMask]="true"
+  [focusTrap]="true"
+  closeAriaLabel="Close confirmation dialog"
+  acceptAriaLabel="Confirm action"
+  rejectAriaLabel="Cancel action"
 >
   <ng-template #message let-message>
     @if (message) {

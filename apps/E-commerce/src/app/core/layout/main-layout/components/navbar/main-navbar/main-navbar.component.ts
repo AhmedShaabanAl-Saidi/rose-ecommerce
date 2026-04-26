@@ -9,6 +9,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class MainNavbarComponent {
   isMenuOpen = false;
+  readonly mobileMenuId = 'primary-mobile-menu';
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

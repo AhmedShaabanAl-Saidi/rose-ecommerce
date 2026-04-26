@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import {
   PhoneInputComponent,
+  TextareaInputComponent,
   TextInputComponent,
 } from '@elevate/reusable-input';
 import { ButtonComponent } from '@elevate/reusable-ui';
@@ -29,6 +30,7 @@ import { PhoneValue } from '../../../auth/pages/register/interface/PhoneValue.in
     ReactiveFormsModule,
     TranslatePipe,
     TextInputComponent,
+    TextareaInputComponent,
     ButtonComponent,
     PhoneInputComponent,
   ],

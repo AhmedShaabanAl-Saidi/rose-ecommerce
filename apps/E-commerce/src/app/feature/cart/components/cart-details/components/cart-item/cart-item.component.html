@@ -75,6 +75,7 @@
     >
       <lib-button
         [disabled]="cartItem().quantity <= 1"
+        [ariaLabel]="'Decrease quantity for ' + cartItem().product.title"
         (buttonClick)="
           updateProductQuantity(cartItem().product._id, cartItem().quantity - 1)
         "
@@ -83,6 +84,7 @@
       ></lib-button>
 
       <h5
+        aria-live="polite"
         class="w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-center text-zinc-800 transition-all dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 lg:w-32"
       >
         {{ cartItem().quantity }}
@@ -90,6 +92,7 @@
 
       <lib-button
         [disabled]="cartItem().quantity === cartItem().product.quantity"
+        [ariaLabel]="'Increase quantity for ' + cartItem().product.title"
         (buttonClick)="
           updateProductQuantity(cartItem().product._id, cartItem().quantity + 1)
         "

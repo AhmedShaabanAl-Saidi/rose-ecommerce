@@ -9,17 +9,15 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ButtonComponent } from '@elevate/reusable-ui';
 import { CarouselModule } from 'primeng/carousel';
 import { TranslateModule } from '@ngx-translate/core';
-import { ArrowLeft, ArrowRight } from 'lucide-angular';
 import { languageService } from '../../../../core/services/language-service';
 import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.component';
 import { heroBannerConfig } from '../../interfaces/home';
 
 @Component({
   selector: 'app-hero-section',
-  imports: [CommonModule, RouterLink, ButtonComponent, CarouselModule, BottomBannerComponent, TranslateModule],
+  imports: [CommonModule, RouterLink, CarouselModule, BottomBannerComponent, TranslateModule],
   templateUrl: './hero-section.component.html',
   styleUrl: './hero-section.component.css'
 })
@@ -30,9 +28,6 @@ export class HeroSectionComponent {
   readonly activeMainBanner = signal(0);
   readonly isHeroCarouselReady = signal(false);
   readonly isRTL = this.langService.isRTL;
-  readonly ctaArrowIcon = computed(() =>
-    this.langService.isRTL() ? ArrowLeft : ArrowRight
-  );
   readonly currentMainBanner = computed(
     () => this.mainBanners[this.activeMainBanner()] ?? this.mainBanners[0]
   );

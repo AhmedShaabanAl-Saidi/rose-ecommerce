@@ -11,7 +11,11 @@
       class="flex gap-2"
     >
       <div class="flex-1">
+        <label for="checkout-coupon-code" class="sr-only">
+          {{ 'CART.COUPON_PLACEHOLDER' | translate }}
+        </label>
         <lib-text-input
+          id="checkout-coupon-code"
           formControlName="code"
           class="w-full"
           placeholder="{{ 'CART.COUPON_PLACEHOLDER' | translate }}"
@@ -34,7 +38,7 @@
       class="rounded-xl border-2 border-dashed border-zinc-200 bg-zinc-50/50 p-8 dark:border-zinc-800 dark:bg-zinc-900/30"
     >
       @if (lastAppliedCoupon()) {
-      <div class="flex flex-col items-center justify-center text-center">
+      <div class="flex flex-col items-center justify-center text-center" aria-live="polite">
         <p class="text-sm font-bold text-maroon-600 uppercase tracking-wide">
           {{ ('CART.COUPON_APPLIED' | translate) || 'Coupon Applied!' }}
         </p>
@@ -44,7 +48,7 @@
         </p>
       </div>
       } @else {
-      <div class="flex items-center justify-center text-center">
+      <div class="flex items-center justify-center text-center" aria-live="polite">
         <p class="text-zinc-400 dark:text-zinc-500 italic">
           {{ 'CART.NO_COUPON' | translate }}
         </p>

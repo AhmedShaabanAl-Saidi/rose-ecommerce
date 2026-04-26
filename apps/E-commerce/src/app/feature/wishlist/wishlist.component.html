@@ -18,6 +18,9 @@
     @if (wishlistService.isLoading()) {
     <!-- Loading State -->
     <div
+      role="status"
+      aria-live="polite"
+      aria-label="Loading wishlist items"
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
     >
       @for (i of [1,2,3,4]; track i) {
@@ -85,6 +88,7 @@
     >
       <div class="mb-12">
         <button
+          type="button"
           (click)="browseProducts()"
           class="flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-maroon-700 hover:bg-maroon-800 text-white text-sm font-medium transition-colors cursor-pointer w-auto max-w-xs shadow-sm hover:shadow-md"
         >

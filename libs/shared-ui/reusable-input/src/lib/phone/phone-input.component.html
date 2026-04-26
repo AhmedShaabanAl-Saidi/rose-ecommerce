@@ -1,6 +1,6 @@
 <div class="input-wrapper">
   @if (label()) {
-  <label [for]="label()" class="input-label">
+  <label [for]="inputId()" class="input-label">
     {{ label() }}
   </label>
   }
@@ -16,8 +16,12 @@
     autofocus="false"
     [maxLength]="15"
     name="phone"
+    [inputId]="inputId()"
     [formControl]="formField"
   ></ngx-intl-tel-input>
 
-  <lib-input-error [control]="control"></lib-input-error>
+  <lib-input-error
+    [control]="control"
+    [errorId]="errorId()"
+  ></lib-input-error>
 </div>

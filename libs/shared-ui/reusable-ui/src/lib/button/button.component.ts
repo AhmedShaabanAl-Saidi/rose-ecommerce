@@ -18,6 +18,7 @@ type ButtonSize = 'sm' | 'md' | 'lg';
 export class ButtonComponent {
   readonly Loader2 = Loader2;
   readonly type = input<'button' | 'submit' | 'reset'>('button');
+  readonly ariaLabel = input<string>('');
   readonly variant = input<ButtonVariant>('primary');
   readonly size = input<ButtonSize>('md');
   readonly disabled = input(false);

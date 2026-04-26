@@ -1,7 +1,13 @@
-<section class="flex flex-col gap-4 pb-6 border-b border-zinc-100 dark:border-zinc-700">
+<section
+  class="flex flex-col gap-4 pb-6 border-b border-zinc-100 dark:border-zinc-700"
+  aria-labelledby="category-filter-heading"
+>
   <div class="flex items-center justify-between mb-1">
     <div class="flex items-center gap-2">
-      <h3 class="m-0 text-[20px] font-semibold text-zinc-800 dark:text-soft-pink-200">{{ 'Category' | translate }}</h3>
+      <h3
+        id="category-filter-heading"
+        class="m-0 text-[20px] font-semibold text-zinc-800 dark:text-soft-pink-200"
+      >{{ 'Category' | translate }}</h3>
       @if (selectedCategoryIds().size > 0) {
       <span
         class="flex h-5 min-w-5 items-center justify-center rounded-full bg-maroon-600 px-1.5 text-[11px] font-bold text-white dark:bg-soft-pink-400 dark:text-zinc-900">
@@ -23,6 +29,11 @@
     } @else {
     @for (category of categories(); track category._id) {
     <button
+      [attr.aria-pressed]="selectedCategoryIds().has(category._id)"
+      [attr.aria-label]="
+        (selectedCategoryIds().has(category._id) ? 'Deselect ' : 'Select ') +
+        category.name
+      "
       [class]="selectedCategoryIds().has(category._id)
         ? 'flex h-10 min-h-10 w-full shrink-0 items-center gap-3 overflow-hidden rounded-md border border-maroon-100 bg-[#fdf2f4] pr-3 text-left transition-colors duration-150 dark:border-soft-pink-300/20 dark:bg-zinc-800 dark:ring-1 dark:ring-soft-pink-300/20'
         : 'flex h-10 min-h-10 w-full shrink-0 items-center gap-3 overflow-hidden rounded-md border border-transparent bg-zinc-200 pr-3 text-left transition-colors duration-150 hover:bg-zinc-300 dark:bg-zinc-900 dark:hover:bg-zinc-800'"
@@ -30,7 +41,7 @@
       <div
         class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded bg-zinc-500 dark:bg-zinc-700">
         @if (category.image) {
-        <img [src]="category.image" [alt]="category.name" class="w-full h-full object-cover block" />
+        <img [src]="category.image" alt="" class="w-full h-full object-cover block" />
         } @else {
         <lucide-icon name="image" class="w-5 h-5 stroke-white"></lucide-icon>
         }

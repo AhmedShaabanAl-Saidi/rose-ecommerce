@@ -181,6 +181,46 @@
   gap: 5rem;
 }
 
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  transform: translateY(-200%);
+  border-radius: 9999px;
+  background: var(--color-maroon-700);
+  color: var(--color-white);
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role='button']:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-maroon-500);
+  outline-offset: 2px;
+}
+
+.dark a:focus-visible,
+.dark button:focus-visible,
+.dark input:focus-visible,
+.dark select:focus-visible,
+.dark textarea:focus-visible,
+.dark [role='button']:focus-visible,
+.dark [tabindex]:focus-visible {
+  outline-color: var(--color-soft-pink-300);
+}
+
 .full-width-confirm-dialog .p-dialog-footer {
   display: flex;
   flex-direction: row;

@@ -27,12 +27,4 @@ export class TaxonomyCardComponent {
     });
   }
 
-  onCardKeydown(event: KeyboardEvent): void {
-    if (event.key !== 'Enter' && event.key !== ' ') {
-      return;
-    }
-
-    event.preventDefault();
-    this.navigateToProducts();
-  }
 }

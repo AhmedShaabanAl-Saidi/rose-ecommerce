@@ -1,11 +1,15 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject, input, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeadingTitleComponent } from '../../../../shared/components/ui/heading/heading-title.component';
 import { Review } from '../../../products/interfaces/review';
-import { TextInputComponent } from '@elevate/reusable-input';
+import {
+  TextareaInputComponent,
+  TextInputComponent,
+} from '@elevate/reusable-input';
 import { ButtonComponent } from '@elevate/reusable-ui';
-import { AuthRepo, AuthState } from '@elevate/auth-domain';
+import { AuthState } from '@elevate/auth-domain';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -14,9 +18,11 @@ import { RouterLink } from '@angular/router';
     DatePipe,
     HeadingTitleComponent,
     TextInputComponent,
+    TextareaInputComponent,
     ButtonComponent,
     TranslateModule,
     RouterLink,
+    ReactiveFormsModule,
   ],
   templateUrl: './product-reviews.component.html',
 })
@@ -26,6 +32,7 @@ export class ProductReviewsComponent {
   reviews = input.required<Review[]>();
   selectedRating = signal(0);
   hoveredRating = signal(0);
+  readonly reviewMessage = new FormControl('', { nonNullable: true });
 
   setRating(rating: number) {
     this.selectedRating.set(rating);

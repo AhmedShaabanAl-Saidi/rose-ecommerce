@@ -15,32 +15,12 @@
   </div>
 
   <div class="space-y-2">
-    <label for="street" class="block font-medium text-start text-zinc-700">
-      {{ 'ADDRESS_DIALOG.STREET_LABEL' | translate }}
-    </label>
-
-    <textarea
-      id="street"
+    <lib-textarea-input
       formControlName="street"
-      rows="4"
+      [label]="'ADDRESS_DIALOG.STREET_LABEL' | translate"
       [placeholder]="'ADDRESS_DIALOG.STREET_PLACEHOLDER' | translate"
-      class="w-full p-4 rounded-xl border-2 placeholder:text-zinc-400 dark:text-white dark:bg-zinc-700 outline-none transition-all resize-none"
-      [class.input-status-normal]="
-        !(form().get('street')?.invalid && form().get('street')?.touched)
-      "
-      [class.input-status-error]="
-        form().get('street')?.invalid && form().get('street')?.touched
-      "
-    ></textarea>
-
-    @if(form().get('street')?.invalid && form().get('street')?.touched){
-    <div class="flex items-center gap-1">
-      <i class="pi pi-exclamation-triangle text-red-500"></i>
-      <span class="text-red-400 font-semibold text-sm">
-        {{ 'ADDRESS_DIALOG.STREET_REQUIRED' | translate }}
-      </span>
-    </div>
-    }
+      [rows]="4"
+    ></lib-textarea-input>
   </div>
 
   <div class="space-y-2">
