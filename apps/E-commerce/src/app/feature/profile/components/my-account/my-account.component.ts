@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthRepo, AuthState } from '@elevate/auth-domain';
 import { ToastrService } from 'ngx-toastr';
@@ -6,10 +6,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-my-account',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule, TranslateModule, ConfirmDialogModule],
   providers: [ConfirmationService],
   templateUrl: './my-account.component.html',
@@ -25,8 +27,8 @@ export class MyAccountComponent implements OnInit {
 
   profileForm!: FormGroup;
   selectedFile: File | null = null;
-  previewUrl: string | ArrayBuffer | null = null;
-  isLoading = false;
+  previewUrl = signal<string | ArrayBuffer | null>(null);
+  isLoading = signal(false);
 
   get user() {
     return this.authState.currentUser();
@@ -38,7 +40,7 @@ export class MyAccountComponent implements OnInit {
 
   private initForm(): void {
     const user = this.user;
-    this.previewUrl = user?.photo || null;
+    this.previewUrl.set(user?.photo || null);
 
     this.profileForm = this.fb.group({
       firstName: [user?.firstName || '', [Validators.required, Validators.minLength(2)]],
@@ -59,7 +61,7 @@ export class MyAccountComponent implements OnInit {
       this.selectedFile = file;
       const reader = new FileReader();
       reader.onload = () => {
-        this.previewUrl = reader.result;
+        this.previewUrl.set(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -71,7 +73,7 @@ export class MyAccountComponent implements OnInit {
       return;
     }
 
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     if (this.selectedFile) {
       const formData = new FormData();
@@ -81,16 +83,18 @@ export class MyAccountComponent implements OnInit {
       formData.append('phone', this.profileForm.value.phone);
       formData.append('photo', this.selectedFile);
 
-      this.authRepo.editProfile(formData).subscribe({
-        next: () => {
-          this.isLoading = false;
-          this.toastr.success(this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') || 'Profile updated successfully');
-          this.selectedFile = null;
-        },
-        error: () => {
-          this.isLoading = false;
-        },
-      });
+      this.authRepo.editProfile(formData)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.isLoading.set(false);
+            this.toastr.success(this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') || 'Profile updated successfully');
+            this.selectedFile = null;
+          },
+          error: () => {
+            this.isLoading.set(false);
+          },
+        });
     } else {
       const payload = {
         firstName: this.profileForm.value.firstName,
@@ -99,15 +103,17 @@ export class MyAccountComponent implements OnInit {
         phone: this.profileForm.value.phone,
       };
 
-      this.authRepo.editProfile(payload).subscribe({
-        next: () => {
-          this.isLoading = false;
-          this.toastr.success(this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') || 'Profile updated successfully');
-        },
-        error: () => {
-          this.isLoading = false;
-        },
-      });
+      this.authRepo.editProfile(payload)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.isLoading.set(false);
+            this.toastr.success(this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') || 'Profile updated successfully');
+          },
+          error: () => {
+            this.isLoading.set(false);
+          },
+        });
     }
   }
 
@@ -121,13 +127,15 @@ export class MyAccountComponent implements OnInit {
       acceptButtonStyleClass: 'p-button-danger',
       rejectButtonStyleClass: 'p-button-text',
       accept: () => {
-        this.authRepo.deleteMe().subscribe({
-          next: () => {
-            this.toastr.success('Account deleted successfully');
-            this.authRepo.cleanData();
-            this.router.navigate(['/auth/login']);
-          }
-        });
+        this.authRepo.deleteMe()
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.toastr.success('Account deleted successfully');
+              this.authRepo.cleanData();
+              this.router.navigate(['/auth/login']);
+            }
+          });
       }
     });
   }
