@@ -698,11 +698,11 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 }
 
 @utility taxonomy-page {
-  @apply min-h-[60vh] pb-8;
+  @apply min-h-[60vh];
 }
 
 @utility taxonomy-container {
-  @apply mx-auto max-w-7xl;
+  @apply w-full;
 }
 
 @utility taxonomy-header {
@@ -722,7 +722,7 @@ html[dir='rtl'] .iti .iti__dropdown-content {
 }
 
 @utility taxonomy-grid {
-  @apply grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4;
+  @apply grid grid-cols-2 gap-5 lg:grid-cols-4;
 }
 
 @utility taxonomy-skeleton-card {

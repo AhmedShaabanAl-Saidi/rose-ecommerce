@@ -23,11 +23,20 @@
   overflow: hidden !important;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  :host ::ng-deep .hero-main-carousel,
+  :host ::ng-deep .hero-main-carousel .p-carousel-content,
+  :host ::ng-deep .hero-main-carousel .p-carousel-viewport,
+  :host ::ng-deep .hero-main-carousel .p-carousel-item-list {
+    touch-action: pan-y pinch-zoom !important;
+  }
+}
+
 :host ::ng-deep .hero-main-carousel .p-carousel-item {
   display: flex;
 }
 
-:host ::ng-deep .hero-main-carousel .p-carousel-item>* {
+:host ::ng-deep .hero-main-carousel .p-carousel-item > * {
   flex: 1 1 auto;
   min-height: 100%;
 }

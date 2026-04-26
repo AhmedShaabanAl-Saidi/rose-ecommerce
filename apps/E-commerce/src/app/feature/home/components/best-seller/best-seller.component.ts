@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslateModule } from '@ngx-translate/core';
@@ -38,7 +44,7 @@ export class BestSellerComponent {
     },
     {
       breakpoint: '768px',
-      numVisible: 1,
+      numVisible: 2,
       numScroll: 1,
     },
   ];

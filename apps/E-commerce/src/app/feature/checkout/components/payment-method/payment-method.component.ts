@@ -1,4 +1,12 @@
-import { Component, input, output, signal } from '@angular/core';
+import { languageService } from './../../../../core/services/language-service';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   LucideAngularModule,
@@ -35,7 +43,8 @@ import { PaymentMethod } from '../../interfaces/checkout.interface';
 })
 export class PaymentMethodSectionComponent {
   isLoading = input<boolean>(false);
-  
+  private readonly LanguageService = inject(languageService);
+  readonly isRtl = computed(() => this.LanguageService.isRTL());
   methodSelected = output<PaymentMethod>();
   back = output<void>();
   checkout = output<void>();

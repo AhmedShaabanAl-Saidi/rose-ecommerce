@@ -13,7 +13,14 @@ import { Product } from '../../shared/components/ui/product-card/interface/produ
 
 @Component({
   selector: 'app-wishlist',
-  imports: [TranslateModule, LucideAngularModule, ButtonComponent, ProductCardComponent, HeadingTitleComponent, ProdcutCarousalComponent],
+  imports: [
+    TranslateModule,
+    LucideAngularModule,
+    ButtonComponent,
+    ProductCardComponent,
+    HeadingTitleComponent,
+    ProdcutCarousalComponent,
+  ],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css',
 })
@@ -24,21 +31,29 @@ export class WishlistComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   recommendedProducts = signal<Product[]>([]);
+  readonly recommendedProductsCarouselOptions: any[] = [
+    { breakpoint: '1400px', numVisible: 4, numScroll: 1 },
+    { breakpoint: '1199px', numVisible: 3, numScroll: 1 },
+    { breakpoint: '991px', numVisible: 2, numScroll: 1 },
+    { breakpoint: '767px', numVisible: 2, numScroll: 1 },
+  ];
 
   ngOnInit(): void {
-    this.wishlistService.loadWishlist()
+    this.wishlistService
+      .loadWishlist()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
     this.loadRecommendedProducts();
   }
 
   loadRecommendedProducts(): void {
-    this.productsService.getProducts()
+    this.productsService
+      .getProducts()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (res) => {
           this.recommendedProducts.set(res.products);
-        }
+        },
       });
   }
 
