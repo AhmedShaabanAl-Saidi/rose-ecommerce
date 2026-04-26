@@ -63,6 +63,14 @@ export const mainRoutes: Routes = [
           ),
       },
       {
+        path: 'profile',
+        canActivate: [authGuard],
+        loadChildren: () =>
+          import('../../../feature/profile/profile.routes').then(
+            (m) => m.profileRoutes
+          ),
+      },
+      {
         path: 'allOrders',
         canActivate: [authGuard],
         loadChildren: () =>

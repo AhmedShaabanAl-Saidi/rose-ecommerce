@@ -87,12 +87,14 @@ export class TopNavbarComponent {
           {
             label: this.translate.instant('NAVBAR.ACCOUNT_MENU.PROFILE'),
             icon: 'pi pi-user',
-            routerLink: '/',
+            routerLink: '/profile',
           },
           {
             label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ADDRESSES'),
             icon: 'pi pi-map-marker',
-            routerLink: '/',
+            command: () => {
+              this.openAddressManager();
+            },
           },
           {
             label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ORDERS'),

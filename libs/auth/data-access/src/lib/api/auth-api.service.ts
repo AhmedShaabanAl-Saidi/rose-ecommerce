@@ -63,7 +63,7 @@ export class AuthApiService {
       this._config.baseUrl + AuthApiEndpoints.profileData
     );
   }
-  editProfile(data: EditProfileParams): Observable<EditProfileRes> {
+  editProfile(data: EditProfileParams | FormData): Observable<EditProfileRes> {
     return this._httpClient.put<EditProfileRes>(
       this._config.baseUrl + AuthApiEndpoints.editProfile,
       data

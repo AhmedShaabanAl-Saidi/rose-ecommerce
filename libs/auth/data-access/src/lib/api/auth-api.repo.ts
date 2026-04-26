@@ -76,7 +76,7 @@ export class AuthApiRepo extends AuthRepo {
   deleteMe(): Observable<MessageModel> {
     return this._authService.deleteMe();
   }
-  editProfile(data: EditProfileParams): Observable<ProfileModel> {
+  editProfile(data: EditProfileParams | FormData): Observable<ProfileModel> {
     return this._authService.editProfile(data).pipe(
       map((res) => AuthMapper.toProfileModel(res)),
       tap((data) => this._state.setUser(data.user))

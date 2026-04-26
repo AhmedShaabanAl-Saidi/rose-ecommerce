@@ -1,0 +1,65 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8 text-primary">{{ 'NAVBAR.ACCOUNT_MENU.PROFILE' | translate }}</h1>
+
+  <div class="flex flex-col md:flex-row gap-8">
+    <!-- Sidebar -->
+    <div class="w-full md:w-1/4">
+      <ul class="flex flex-col gap-2">
+        <li>
+          <a
+            routerLink="/profile"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="bg-black text-white"
+            class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-100 transition-colors text-gray-700 font-medium cursor-pointer"
+          >
+            <i class="pi pi-user text-lg"></i>
+            {{ 'NAVBAR.ACCOUNT_MENU.PROFILE' | translate }}
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/profile/change-password"
+            routerLinkActive="bg-black text-white"
+            class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-100 transition-colors text-gray-700 font-medium cursor-pointer"
+          >
+            <i class="pi pi-lock text-lg"></i>
+            {{ 'Change Password' | translate }}
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/allOrders"
+            class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-100 transition-colors text-gray-700 font-medium cursor-pointer"
+          >
+            <i class="pi pi-shopping-cart text-lg"></i>
+            {{ 'NAVBAR.ACCOUNT_MENU.ORDERS' | translate }}
+          </a>
+        </li>
+        <li>
+          <a
+            (click)="openAddressManager()"
+            class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-100 transition-colors text-gray-700 font-medium cursor-pointer"
+          >
+            <i class="pi pi-map-marker text-lg"></i>
+            {{ 'NAVBAR.ACCOUNT_MENU.ADDRESSES' | translate }}
+          </a>
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-8">
+        <a
+          (click)="logout()"
+          class="flex items-center gap-3 px-4 py-3 text-primary-500 hover:text-primary-600 transition-colors font-medium cursor-pointer"
+        >
+          <i class="pi pi-sign-out text-lg"></i>
+          {{ 'NAVBAR.ACCOUNT_MENU.LOGOUT' | translate }}
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="w-full md:w-3/4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

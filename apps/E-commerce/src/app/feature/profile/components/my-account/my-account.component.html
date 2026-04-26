@@ -1,0 +1,120 @@
+<div class="bg-white p-6 rounded-lg">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <!-- Photo Upload -->
+    <div class="flex items-center gap-6 mb-8">
+      <div class="relative w-24 h-24 rounded-full overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-200">
+        @if (previewUrl) {
+          <img [src]="previewUrl" alt="Profile Photo" class="w-full h-full object-cover" />
+        } @else {
+          <div class="w-full h-full flex items-center justify-center text-gray-400">
+            <i class="pi pi-user text-4xl"></i>
+          </div>
+        }
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg text-gray-800">Upload Photo</h3>
+        <p class="text-sm text-gray-500 mb-3">You can upload a .jpg, .png, or .gif photo with max size of 5MB.</p>
+        <button
+          type="button"
+          class="text-sm border border-gray-300 rounded-md px-4 py-2 hover:bg-gray-50 transition-colors"
+          (click)="fileInput.click()"
+        >
+          Choose File
+        </button>
+        <input #fileInput type="file" accept=".jpg,.png,.gif" class="hidden" (change)="onFileSelected($event)" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="flex flex-col gap-2">
+        <label for="firstName" class="text-sm font-medium text-gray-700">First name</label>
+        <input
+          id="firstName"
+          type="text"
+          formControlName="firstName"
+          class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+        />
+        @if (profileForm.get('firstName')?.touched && profileForm.get('firstName')?.invalid) {
+          <small class="text-red-500">First name is required</small>
+        }
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="lastName" class="text-sm font-medium text-gray-700">Last name</label>
+        <input
+          id="lastName"
+          type="text"
+          formControlName="lastName"
+          class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+        />
+        @if (profileForm.get('lastName')?.touched && profileForm.get('lastName')?.invalid) {
+          <small class="text-red-500">Last name is required</small>
+        }
+      </div>
+
+      <div class="flex flex-col gap-2 md:col-span-2">
+        <label for="email" class="text-sm font-medium text-gray-700">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+        />
+        @if (profileForm.get('email')?.touched && profileForm.get('email')?.invalid) {
+          <small class="text-red-500">Valid email is required</small>
+        }
+      </div>
+
+      <div class="flex flex-col gap-2 md:col-span-2">
+        <label for="phone" class="text-sm font-medium text-gray-700">Phone</label>
+        <div class="flex">
+          <span class="inline-flex items-center px-3 border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm rounded-l-md">
+            🇪🇬 +20
+          </span>
+          <input
+            id="phone"
+            type="tel"
+            formControlName="phone"
+            class="flex-1 block w-full min-w-0 rounded-none rounded-r-md border border-gray-300 px-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+          />
+        </div>
+        @if (profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid) {
+          <small class="text-red-500">Valid Egyptian phone number is required (e.g. 01012345678)</small>
+        }
+      </div>
+
+      <div class="flex flex-col gap-2 md:col-span-2">
+        <label for="gender" class="text-sm font-medium text-gray-700">Gender</label>
+        <input
+          id="gender"
+          type="text"
+          formControlName="gender"
+          class="border border-gray-300 rounded-md px-4 py-2 bg-gray-50 text-gray-500 cursor-not-allowed"
+        />
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+      <button
+        type="button"
+        (click)="deleteAccount()"
+        class="text-primary hover:text-red-700 font-medium transition-colors"
+      >
+        Delete My Account
+      </button>
+
+      <button
+        type="submit"
+        [disabled]="profileForm.invalid || isLoading"
+        class="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+      >
+        @if (isLoading) {
+          <i class="pi pi-spin pi-spinner"></i>
+        }
+        Save Changes
+      </button>
+    </div>
+  </form>
+
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+</div>
