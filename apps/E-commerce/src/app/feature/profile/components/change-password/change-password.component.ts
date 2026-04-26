@@ -4,13 +4,14 @@ import { AuthRepo } from '@elevate/auth-domain';
 import { take } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { PasswordModule } from 'primeng/password';
+import { TextInputComponent } from '@elevate/reusable-input';
+import { ButtonComponent } from '@elevate/reusable-ui';
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, TranslateModule, PasswordModule],
+  imports: [ReactiveFormsModule, TranslateModule, TextInputComponent, ButtonComponent],
   templateUrl: './change-password.component.html',
 })
 export class ChangePasswordComponent {

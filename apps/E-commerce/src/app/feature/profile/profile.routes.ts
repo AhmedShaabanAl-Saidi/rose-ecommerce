@@ -20,6 +20,20 @@ export const profileRoutes: Routes = [
             './components/change-password/change-password.component'
           ).then((m) => m.ChangePasswordComponent),
       },
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./components/profile-orders/profile-orders.component').then(
+            (m) => m.ProfileOrdersComponent
+          ),
+      },
+      {
+        path: 'addresses',
+        loadComponent: () =>
+          import(
+            './components/profile-addresses/profile-addresses.component'
+          ).then((m) => m.ProfileAddressesComponent),
+      },
     ],
   },
 ];

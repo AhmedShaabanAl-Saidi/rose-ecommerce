@@ -76,10 +76,15 @@ export class AuthApiRepo extends AuthRepo {
   deleteMe(): Observable<MessageModel> {
     return this._authService.deleteMe();
   }
-  editProfile(data: EditProfileParams | FormData): Observable<ProfileModel> {
+  editProfile(data: EditProfileParams): Observable<ProfileModel> {
     return this._authService.editProfile(data).pipe(
       map((res) => AuthMapper.toProfileModel(res)),
       tap((data) => this._state.setUser(data.user))
+    );
+  }
+  uploadPhoto(data: FormData): Observable<MessageModel> {
+    return this._authService.uploadPhoto(data).pipe(
+      map(() => ({ message: 'success' })) // Map to MessageModel manually since API might return varying format
     );
   }
   verifyResetCode(data: VerifyResetCodeParams): Observable<StatusModel> {

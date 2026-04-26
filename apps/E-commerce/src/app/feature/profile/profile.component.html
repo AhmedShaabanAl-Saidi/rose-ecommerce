@@ -28,7 +28,8 @@
         </li>
         <li>
           <a
-            routerLink="/allOrders"
+            routerLink="/profile/orders"
+            routerLinkActive="bg-black dark:bg-zinc-800 text-white"
             class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors text-gray-700 dark:text-gray-300 font-medium cursor-pointer"
           >
             <i class="pi pi-shopping-cart text-lg"></i>
@@ -37,7 +38,8 @@
         </li>
         <li>
           <a
-            (click)="openAddressManager()"
+            routerLink="/profile/addresses"
+            routerLinkActive="bg-black dark:bg-zinc-800 text-white"
             class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors text-gray-700 dark:text-gray-300 font-medium cursor-pointer"
           >
             <i class="pi pi-map-marker text-lg"></i>

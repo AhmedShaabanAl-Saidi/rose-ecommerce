@@ -63,9 +63,15 @@ export class AuthApiService {
       this._config.baseUrl + AuthApiEndpoints.profileData
     );
   }
-  editProfile(data: EditProfileParams | FormData): Observable<EditProfileRes> {
+  editProfile(data: EditProfileParams): Observable<EditProfileRes> {
     return this._httpClient.put<EditProfileRes>(
       this._config.baseUrl + AuthApiEndpoints.editProfile,
+      data
+    );
+  }
+  uploadPhoto(data: FormData): Observable<any> {
+    return this._httpClient.put<any>(
+      this._config.baseUrl + AuthApiEndpoints.uploadPhoto,
       data
     );
   }

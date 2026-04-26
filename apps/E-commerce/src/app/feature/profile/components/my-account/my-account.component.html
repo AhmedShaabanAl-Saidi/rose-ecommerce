@@ -14,105 +14,77 @@
       <div>
         <h3 class="font-semibold text-lg text-gray-800 dark:text-white">{{ 'PROFILE_PAGE.UPLOAD_PHOTO' | translate }}</h3>
         <p class="text-sm text-gray-500 dark:text-zinc-400 mb-3">{{ 'PROFILE_PAGE.UPLOAD_HINT' | translate }}</p>
-        <button
+        <lib-button
           type="button"
-          class="text-sm border border-gray-300 dark:border-zinc-700 dark:text-zinc-300 rounded-md px-4 py-2 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors"
-          (click)="fileInput.click()"
+          variant="outline"
+          (buttonClick)="fileInput.click()"
         >
           {{ 'PROFILE_PAGE.CHOOSE_FILE' | translate }}
-        </button>
+        </lib-button>
         <input #fileInput type="file" accept=".jpg,.png,.gif" class="hidden" (change)="onFileSelected($event)" />
       </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div class="flex flex-col gap-2">
-        <label for="firstName" class="text-sm font-medium text-gray-700 dark:text-zinc-300">{{ 'PROFILE_PAGE.FIRST_NAME' | translate }}</label>
-        <input
+        <lib-text-input
           id="firstName"
-          type="text"
           formControlName="firstName"
-          class="border border-gray-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white rounded-md px-4 py-2 focus:outline-none focus:border-maroon-600 focus:ring-1 focus:ring-maroon-600"
-        />
-        @if (profileForm.get('firstName')?.touched && profileForm.get('firstName')?.invalid) {
-          <small class="text-red-500">First name is required</small>
-        }
+          [label]="'PROFILE_PAGE.FIRST_NAME' | translate"
+        ></lib-text-input>
       </div>
 
       <div class="flex flex-col gap-2">
-        <label for="lastName" class="text-sm font-medium text-gray-700 dark:text-zinc-300">{{ 'PROFILE_PAGE.LAST_NAME' | translate }}</label>
-        <input
+        <lib-text-input
           id="lastName"
-          type="text"
           formControlName="lastName"
-          class="border border-gray-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white rounded-md px-4 py-2 focus:outline-none focus:border-maroon-600 focus:ring-1 focus:ring-maroon-600"
-        />
-        @if (profileForm.get('lastName')?.touched && profileForm.get('lastName')?.invalid) {
-          <small class="text-red-500">Last name is required</small>
-        }
+          [label]="'PROFILE_PAGE.LAST_NAME' | translate"
+        ></lib-text-input>
       </div>
 
       <div class="flex flex-col gap-2 md:col-span-2">
-        <label for="email" class="text-sm font-medium text-gray-700 dark:text-zinc-300">{{ 'PROFILE_PAGE.EMAIL' | translate }}</label>
-        <input
+        <lib-text-input
           id="email"
           type="email"
           formControlName="email"
-          class="border border-gray-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white rounded-md px-4 py-2 focus:outline-none focus:border-maroon-600 focus:ring-1 focus:ring-maroon-600"
-        />
-        @if (profileForm.get('email')?.touched && profileForm.get('email')?.invalid) {
-          <small class="text-red-500">Valid email is required</small>
-        }
+          [label]="'PROFILE_PAGE.EMAIL' | translate"
+        ></lib-text-input>
       </div>
 
       <div class="flex flex-col gap-2 md:col-span-2">
-        <label for="phone" class="text-sm font-medium text-gray-700 dark:text-zinc-300">{{ 'PROFILE_PAGE.PHONE' | translate }}</label>
-        <div class="flex">
-          <span class="inline-flex items-center px-3 border border-r-0 border-gray-300 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800 text-gray-500 dark:text-zinc-400 sm:text-sm rounded-l-md">
-            🇪🇬 +20
-          </span>
-          <input
-            id="phone"
-            type="tel"
-            formControlName="phone"
-            class="flex-1 block w-full min-w-0 rounded-none rounded-r-md border border-gray-300 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white px-4 py-2 focus:outline-none focus:border-maroon-600 focus:ring-1 focus:ring-maroon-600"
-          />
-        </div>
-        @if (profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid) {
-          <small class="text-red-500">Valid Egyptian phone number is required (e.g. 01012345678)</small>
-        }
+        <lib-phone-input
+          id="phone"
+          formControlName="phone"
+          [label]="'PROFILE_PAGE.PHONE' | translate"
+        ></lib-phone-input>
       </div>
 
       <div class="flex flex-col gap-2 md:col-span-2">
-        <label for="gender" class="text-sm font-medium text-gray-700 dark:text-zinc-300">{{ 'PROFILE_PAGE.GENDER' | translate }}</label>
-        <input
+        <lib-text-input
           id="gender"
-          type="text"
           formControlName="gender"
-          class="border border-gray-300 dark:border-zinc-700 rounded-md px-4 py-2 bg-gray-50 dark:bg-zinc-800/50 text-gray-500 dark:text-zinc-400 cursor-not-allowed"
-        />
+          [label]="'PROFILE_PAGE.GENDER' | translate"
+        ></lib-text-input>
       </div>
     </div>
 
     <div class="flex items-center justify-between pt-6 border-t border-gray-100 dark:border-zinc-800">
-      <button
+      <lib-button
         type="button"
+        variant="destructive"
         (click)="deleteAccount()"
-        class="text-maroon-600 hover:text-red-700 font-medium transition-colors"
       >
         {{ 'PROFILE_PAGE.DELETE_ACCOUNT' | translate }}
-      </button>
+      </lib-button>
 
-      <button
+      <lib-button
         type="submit"
+        variant="primary"
         [disabled]="profileForm.invalid || isLoading()"
-        class="bg-maroon-600 text-white px-6 py-2 rounded-md hover:bg-maroon-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+        [loading]="isLoading()"
       >
-        @if (isLoading()) {
-          <i class="pi pi-spin pi-spinner"></i>
-        }
         {{ 'PROFILE_PAGE.SAVE_CHANGES' | translate }}
-      </button>
+      </lib-button>
     </div>
   </form>
 

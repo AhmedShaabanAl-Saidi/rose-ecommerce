@@ -6,13 +6,16 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
+import { forkJoin, Observable, take } from 'rxjs';
+import { TextInputComponent, PhoneInputComponent } from '@elevate/reusable-input';
+import { ButtonComponent } from '@elevate/reusable-ui';
+import { PhoneValue } from '../../../auth/pages/register/interface/PhoneValue.interface';
 
 @Component({
   selector: 'app-my-account',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, TranslateModule, ConfirmDialogModule],
+  imports: [ReactiveFormsModule, TranslateModule, ConfirmDialogModule, TextInputComponent, PhoneInputComponent, ButtonComponent],
   providers: [ConfirmationService],
   templateUrl: './my-account.component.html',
 })
@@ -46,7 +49,7 @@ export class MyAccountComponent implements OnInit {
       firstName: [user?.firstName || '', [Validators.required, Validators.minLength(2)]],
       lastName: [user?.lastName || '', [Validators.required, Validators.minLength(2)]],
       email: [user?.email || '', [Validators.required, Validators.email]],
-      phone: [user?.phone || '', [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]],
+      phone: [user?.phone || '', [Validators.required]],
       gender: [{ value: user?.gender || '', disabled: true }],
     });
   }
@@ -75,46 +78,41 @@ export class MyAccountComponent implements OnInit {
 
     this.isLoading.set(true);
 
+    const phoneRaw = this.profileForm.value.phone;
+    const phone = typeof phoneRaw === 'string'
+      ? phoneRaw
+      : (phoneRaw as PhoneValue).e164Number;
+
+    const payload = {
+      firstName: this.profileForm.value.firstName,
+      lastName: this.profileForm.value.lastName,
+      email: this.profileForm.value.email,
+      phone,
+    };
+
+    let requests$: Observable<any> = this.authRepo.editProfile(payload);
+
     if (this.selectedFile) {
       const formData = new FormData();
-      formData.append('firstName', this.profileForm.value.firstName);
-      formData.append('lastName', this.profileForm.value.lastName);
-      formData.append('email', this.profileForm.value.email);
-      formData.append('phone', this.profileForm.value.phone);
       formData.append('photo', this.selectedFile);
-
-      this.authRepo.editProfile(formData)
-        .pipe(take(1))
-        .subscribe({
-          next: () => {
-            this.isLoading.set(false);
-            this.toastr.success(this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') || 'Profile updated successfully');
-            this.selectedFile = null;
-          },
-          error: () => {
-            this.isLoading.set(false);
-          },
-        });
-    } else {
-      const payload = {
-        firstName: this.profileForm.value.firstName,
-        lastName: this.profileForm.value.lastName,
-        email: this.profileForm.value.email,
-        phone: this.profileForm.value.phone,
-      };
-
-      this.authRepo.editProfile(payload)
-        .pipe(take(1))
-        .subscribe({
-          next: () => {
-            this.isLoading.set(false);
-            this.toastr.success(this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') || 'Profile updated successfully');
-          },
-          error: () => {
-            this.isLoading.set(false);
-          },
-        });
+      requests$ = forkJoin([
+        this.authRepo.uploadPhoto(formData),
+        this.authRepo.editProfile(payload)
+      ]);
     }
+
+    requests$
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading.set(false);
+          this.toastr.success(this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') || 'Profile updated successfully');
+          this.selectedFile = null;
+        },
+        error: () => {
+          this.isLoading.set(false);
+        },
+      });
   }
 
   deleteAccount(): void {
