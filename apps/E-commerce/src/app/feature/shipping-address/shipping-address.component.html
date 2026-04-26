@@ -25,7 +25,7 @@
       (click)="selectAddress(address)"
       [attr.aria-pressed]="selectedAddress()?._id === address._id"
       [attr.aria-label]="'Select shipping address in ' + address.city"
-      class="group relative flex justify-between items-center border-2 p-6 rounded-3xl cursor-pointer transition-all duration-300"
+      class="group relative w-full flex justify-between items-center border-2 p-6 rounded-3xl cursor-pointer transition-all duration-300"
       [class]="
         selectedAddress()?._id === address._id
           ? 'bg-maroon-600 border-maroon-600 shadow-xl shadow-maroon-600/20'
