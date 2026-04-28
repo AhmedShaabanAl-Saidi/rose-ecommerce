@@ -70,6 +70,7 @@ export class MyAccountComponent implements OnInit {
       reader.readAsDataURL(file);
 
       // Upload photo immediately
+      const oldPhoto = this.previewUrl();
       this.isUploadingPhoto.set(true);
       const formData = new FormData();
       formData.append('photo', file);
@@ -87,10 +88,7 @@ export class MyAccountComponent implements OnInit {
           },
           error: () => {
             this.isUploadingPhoto.set(false);
-            this.toastr.error(
-              this.translate.instant('PROFILE_PAGE.PHOTO_UPDATE_FAILED') ||
-                'Failed to update photo'
-            );
+            this.previewUrl.set(oldPhoto);
           },
         });
     }
