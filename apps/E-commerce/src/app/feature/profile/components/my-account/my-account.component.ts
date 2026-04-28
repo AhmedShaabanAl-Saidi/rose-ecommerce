@@ -53,7 +53,11 @@ export class MyAccountComponent implements OnInit {
       phone: [user?.phone || '', [Validators.required]],
       gender: [{ value: user?.gender || '', disabled: true }],
     });
-    this.profileForm.markAsPristine();
+    
+    // Use setTimeout to ensure the form is marked as pristine after child components initialize
+    setTimeout(() => {
+      this.profileForm.markAsPristine();
+    });
   }
 
   onFileSelected(event: Event): void {

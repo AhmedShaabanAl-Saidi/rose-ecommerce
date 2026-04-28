@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthRepo } from '@elevate/auth-domain';
 import { take } from 'rxjs';
@@ -15,7 +15,7 @@ import { ValidationsUtils } from '../../../../shared/utils/validators/validators
   imports: [ReactiveFormsModule, TranslateModule, TextInputComponent, ButtonComponent],
   templateUrl: './change-password.component.html',
 })
-export class ChangePasswordComponent {
+export class ChangePasswordComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly authRepo = inject(AuthRepo);
   private readonly toastr = inject(ToastrService);
@@ -36,6 +36,12 @@ export class ChangePasswordComponent {
       ),
     }
   );
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.passwordForm.markAsPristine();
+    });
+  }
 
 
   onSubmit(formDirective: FormGroupDirective): void {
