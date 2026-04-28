@@ -521,6 +521,8 @@
     "ENTER_NEW_PASSWORD": "Enter a new password",
     "ENTER_CONFIRM_PASSWORD": "Re-enter your new password",
     "PHOTO_UPDATED": "Photo updated successfully",
-    "PHOTO_UPDATE_FAILED": "Failed to update photo"
+    "PHOTO_UPDATE_FAILED": "Failed to update photo",
+    "UPDATE_SUCCESS": "Profile updated successfully",
+    "PASSWORD_UPDATE_SUCCESS": "Password changed successfully"
   }
 }

@@ -56,8 +56,7 @@ export class ChangePasswordComponent {
         next: () => {
           this.isLoading.set(false);
           this.toastr.success(
-            this.translate.instant('PASSWORD_CHANGED_SUCCESSFULLY') ||
-              'Password changed successfully'
+            this.translate.instant('PROFILE_PAGE.PASSWORD_UPDATE_SUCCESS')
           );
           // FormGroupDirective reset is handled via the reference in html if needed, or just reset form
           formDirective.resetForm();

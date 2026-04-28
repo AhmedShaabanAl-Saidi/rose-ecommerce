@@ -53,6 +53,7 @@ export class MyAccountComponent implements OnInit {
       phone: [user?.phone || '', [Validators.required]],
       gender: [{ value: user?.gender || '', disabled: true }],
     });
+    this.profileForm.markAsPristine();
   }
 
   onFileSelected(event: Event): void {
@@ -126,8 +127,7 @@ export class MyAccountComponent implements OnInit {
         next: () => {
           this.isLoading.set(false);
           this.toastr.success(
-            this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') ||
-              'Profile updated successfully'
+            this.translate.instant('PROFILE_PAGE.UPDATE_SUCCESS')
           );
           this.profileForm.markAsPristine();
         },

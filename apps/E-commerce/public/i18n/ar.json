@@ -522,6 +522,8 @@
     "ENTER_NEW_PASSWORD": "أدخل كلمة المرور الجديدة",
     "ENTER_CONFIRM_PASSWORD": "أعد إدخال كلمة المرور الجديدة",
     "PHOTO_UPDATED": "تم تحديث الصورة بنجاح",
-    "PHOTO_UPDATE_FAILED": "فشل في تحديث الصورة"
+    "PHOTO_UPDATE_FAILED": "فشل في تحديث الصورة",
+    "UPDATE_SUCCESS": "تم تحديث الملف الشخصي بنجاح",
+    "PASSWORD_UPDATE_SUCCESS": "تم تغيير كلمة المرور بنجاح"
   }
 }
