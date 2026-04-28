@@ -85,7 +85,7 @@
       <lib-button
         type="submit"
         variant="primary"
-        [disabled]="profileForm.invalid || isLoading()"
+        [disabled]="profileForm.invalid || profileForm.pristine || isLoading()"
         [loading]="isLoading()"
       >
         {{ 'PROFILE_PAGE.SAVE_CHANGES' | translate }}

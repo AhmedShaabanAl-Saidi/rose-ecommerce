@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthRepo } from '@elevate/auth-domain';
 import { CartService } from '../cart/services/cart.service';
@@ -22,6 +22,7 @@ export class ProfileComponent {
   private readonly authRepo = inject(AuthRepo);
   private readonly cartService = inject(CartService);
   private readonly wishlistService = inject(WishlistService);
+  private readonly router = inject(Router);
 
   logout(): void {
     this.authRepo
@@ -30,6 +31,7 @@ export class ProfileComponent {
         tap(() => {
           this.cartService.setDefaultCart();
           this.wishlistService.clearWishlist();
+          this.router.navigate(['/']);
         }),
         take(1)
       )
