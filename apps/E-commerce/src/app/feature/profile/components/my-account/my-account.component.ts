@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthRepo, AuthState, MessageModel, ProfileModel } from '@elevate/auth-domain';
+import { AuthRepo, AuthState } from '@elevate/auth-domain';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { Router } from '@angular/router';
-import { forkJoin, Observable, take } from 'rxjs';
+import { take } from 'rxjs';
 import { TextInputComponent, PhoneInputComponent } from '@elevate/reusable-input';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { PhoneValue } from '../../../auth/pages/register/interface/PhoneValue.interface';
@@ -32,6 +32,7 @@ export class MyAccountComponent implements OnInit {
   selectedFile: File | null = null;
   previewUrl = signal<string | ArrayBuffer | null>(null);
   isLoading = signal(false);
+  isUploadingPhoto = signal(false);
 
   get user() {
     return this.authState.currentUser();
@@ -67,6 +68,31 @@ export class MyAccountComponent implements OnInit {
         this.previewUrl.set(reader.result);
       };
       reader.readAsDataURL(file);
+
+      // Upload photo immediately
+      this.isUploadingPhoto.set(true);
+      const formData = new FormData();
+      formData.append('photo', file);
+      this.authRepo
+        .uploadPhoto(formData)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.isUploadingPhoto.set(false);
+            this.toastr.success(
+              this.translate.instant('PROFILE_PAGE.PHOTO_UPDATED') ||
+                'Photo updated successfully'
+            );
+            this.selectedFile = null;
+          },
+          error: () => {
+            this.isUploadingPhoto.set(false);
+            this.toastr.error(
+              this.translate.instant('PROFILE_PAGE.PHOTO_UPDATE_FAILED') ||
+                'Failed to update photo'
+            );
+          },
+        });
     }
   }
 
@@ -76,7 +102,7 @@ export class MyAccountComponent implements OnInit {
       return;
     }
 
-    if (this.profileForm.pristine && !this.selectedFile) {
+    if (this.profileForm.pristine) {
       return;
     }
 
@@ -95,37 +121,22 @@ export class MyAccountComponent implements OnInit {
       phone,
     };
 
-    let requests$: Observable<MessageModel | ProfileModel | [MessageModel, ProfileModel]>;
-
-    if (this.profileForm.dirty && this.selectedFile) {
-      const formData = new FormData();
-      formData.append('photo', this.selectedFile);
-      requests$ = forkJoin([
-        this.authRepo.uploadPhoto(formData),
-        this.authRepo.editProfile(payload),
-      ]);
-    } else if (this.selectedFile) {
-      const formData = new FormData();
-      formData.append('photo', this.selectedFile);
-      requests$ = this.authRepo.uploadPhoto(formData);
-    } else {
-      requests$ = this.authRepo.editProfile(payload);
-    }
-
-    requests$.pipe(take(1)).subscribe({
-      next: () => {
-        this.isLoading.set(false);
-        this.toastr.success(
-          this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') ||
-            'Profile updated successfully'
-        );
-        this.selectedFile = null;
-        this.profileForm.markAsPristine();
-      },
-      error: () => {
-        this.isLoading.set(false);
-      },
-    });
+    this.authRepo
+      .editProfile(payload)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading.set(false);
+          this.toastr.success(
+            this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') ||
+              'Profile updated successfully'
+          );
+          this.profileForm.markAsPristine();
+        },
+        error: () => {
+          this.isLoading.set(false);
+        },
+      });
   }
 
   deleteAccount(): void {

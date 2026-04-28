@@ -10,6 +10,11 @@
             <i class="pi pi-user text-4xl"></i>
           </div>
         }
+        @if (isUploadingPhoto()) {
+          <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
+            <i class="pi pi-spin pi-spinner text-white text-2xl"></i>
+          </div>
+        }
       </div>
       <div>
         <h3 class="font-semibold text-lg text-gray-800 dark:text-white">{{ 'PROFILE_PAGE.UPLOAD_PHOTO' | translate }}</h3>

@@ -517,6 +517,11 @@
     "OLD_PASSWORD": "كلمة المرور القديمة",
     "NEW_PASSWORD": "كلمة المرور الجديدة",
     "CONFIRM_PASSWORD": "تأكيد كلمة المرور الجديدة",
-    "CHANGE_PASSWORD": "تغيير كلمة المرور"
+    "CHANGE_PASSWORD": "تغيير كلمة المرور",
+    "ENTER_OLD_PASSWORD": "أدخل كلمة المرور الحالية",
+    "ENTER_NEW_PASSWORD": "أدخل كلمة المرور الجديدة",
+    "ENTER_CONFIRM_PASSWORD": "أعد إدخال كلمة المرور الجديدة",
+    "PHOTO_UPDATED": "تم تحديث الصورة بنجاح",
+    "PHOTO_UPDATE_FAILED": "فشل في تحديث الصورة"
   }
 }
