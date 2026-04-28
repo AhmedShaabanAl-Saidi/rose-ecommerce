@@ -76,12 +76,17 @@ export class MyAccountComponent implements OnInit {
       return;
     }
 
+    if (this.profileForm.pristine && !this.selectedFile) {
+      return;
+    }
+
     this.isLoading.set(true);
 
     const phoneRaw = this.profileForm.value.phone;
-    const phone = typeof phoneRaw === 'string'
-      ? phoneRaw
-      : (phoneRaw as PhoneValue).e164Number;
+    const phone =
+      typeof phoneRaw === 'string'
+        ? phoneRaw
+        : (phoneRaw as PhoneValue).e164Number;
 
     const payload = {
       firstName: this.profileForm.value.firstName,
@@ -90,29 +95,37 @@ export class MyAccountComponent implements OnInit {
       phone,
     };
 
-    let requests$: Observable<any> = this.authRepo.editProfile(payload);
+    let requests$: Observable<any>;
 
-    if (this.selectedFile) {
+    if (this.profileForm.dirty && this.selectedFile) {
       const formData = new FormData();
       formData.append('photo', this.selectedFile);
       requests$ = forkJoin([
         this.authRepo.uploadPhoto(formData),
-        this.authRepo.editProfile(payload)
+        this.authRepo.editProfile(payload),
       ]);
+    } else if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('photo', this.selectedFile);
+      requests$ = this.authRepo.uploadPhoto(formData);
+    } else {
+      requests$ = this.authRepo.editProfile(payload);
     }
 
-    requests$
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.isLoading.set(false);
-          this.toastr.success(this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') || 'Profile updated successfully');
-          this.selectedFile = null;
-        },
-        error: () => {
-          this.isLoading.set(false);
-        },
-      });
+    requests$.pipe(take(1)).subscribe({
+      next: () => {
+        this.isLoading.set(false);
+        this.toastr.success(
+          this.translate.instant('PROFILE_UPDATED_SUCCESSFULLY') ||
+            'Profile updated successfully'
+        );
+        this.selectedFile = null;
+        this.profileForm.markAsPristine();
+      },
+      error: () => {
+        this.isLoading.set(false);
+      },
+    });
   }
 
   deleteAccount(): void {

@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TextInputComponent } from '@elevate/reusable-input';
 import { ButtonComponent } from '@elevate/reusable-ui';
+import { ValidationsUtils } from '../../../../shared/utils/validators/validators-utils';
 
 @Component({
   selector: 'app-change-password',
@@ -28,14 +29,14 @@ export class ChangePasswordComponent {
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       rePassword: ['', [Validators.required]],
     },
-    { validators: this.passwordMatchValidator }
+    {
+      validators: ValidationsUtils.matchFieldsValidator(
+        'newPassword',
+        'rePassword'
+      ),
+    }
   );
 
-  passwordMatchValidator(g: FormGroup) {
-    return g.get('newPassword')?.value === g.get('rePassword')?.value
-      ? null
-      : { mismatch: true };
-  }
 
   onSubmit(formDirective: FormGroupDirective): void {
     if (this.passwordForm.invalid) {
