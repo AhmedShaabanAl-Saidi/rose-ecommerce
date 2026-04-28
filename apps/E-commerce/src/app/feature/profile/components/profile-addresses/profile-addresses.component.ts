@@ -15,7 +15,7 @@ class InlineDialogRef extends DynamicDialogRef {
   constructor(private readonly addressState: AddressStateService) {
     super();
   }
-  override close(result?: any): void {
+  override close(result?: unknown): void {
     // Instead of closing a dialog, go back to the address list view
     this.addressState.mode.set('view');
     this.addressState.address.set(null);

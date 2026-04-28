@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthRepo, AuthState } from '@elevate/auth-domain';
+import { AuthRepo, AuthState, MessageModel, ProfileModel } from '@elevate/auth-domain';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
@@ -95,7 +95,7 @@ export class MyAccountComponent implements OnInit {
       phone,
     };
 
-    let requests$: Observable<any>;
+    let requests$: Observable<MessageModel | ProfileModel | [MessageModel, ProfileModel]>;
 
     if (this.profileForm.dirty && this.selectedFile) {
       const formData = new FormData();
