@@ -11,7 +11,11 @@
       (ngSubmit)="applyCoupon()"
       class="flex flex-col sm:flex-row gap-3"
     >
+      <label for="cart-coupon-code" class="sr-only">
+        {{ 'CART.COUPON_PLACEHOLDER' | translate }}
+      </label>
       <lib-text-input
+        id="cart-coupon-code"
         formControlName="code"
         class="block w-full"
         placeholder="{{ 'CART.COUPON_PLACEHOLDER' | translate }}"
@@ -33,7 +37,7 @@
       class="mt-4 rounded-xl border border-zinc-300 min-h-45 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-950/40"
     >
       @if (lastAppliedCoupon()) {
-      <div class="min-h-45 flex items-center justify-center text-center">
+      <div class="min-h-45 flex items-center justify-center text-center" aria-live="polite">
         <div class="w-full max-w-xs rounded-xl p-5">
           <p
             class="text-xs uppercase tracking-[0.15em] text-maroon-700 dark:text-soft-pink-400"
@@ -49,7 +53,7 @@
         </div>
       </div>
       } @else {
-      <div class="min-h-45 flex items-center justify-center text-center">
+      <div class="min-h-45 flex items-center justify-center text-center" aria-live="polite">
         <div class="w-full max-w-xs rounded-xl p-5">
           <p class="text-zinc-400 dark:text-zinc-500 italic text-[16px]">
             {{ 'CART.NO_COUPON' | translate }}

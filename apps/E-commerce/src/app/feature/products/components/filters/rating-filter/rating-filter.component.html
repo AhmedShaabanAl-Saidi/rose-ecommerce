@@ -10,6 +10,7 @@
     (mouseleave)="onStarMouseleave()">
     @for (star of stars; track star) {
     <button type="button"
+      [attr.aria-label]="'Filter by ' + star + ' stars'"
       class="relative flex h-7 w-7 cursor-pointer items-center justify-center border-none bg-transparent p-0 text-amber-500 transition-transform duration-100 ease-in-out hover:scale-110 dark:text-amber-400"
       (mousemove)="onStarMousemove($event, star)" (click)="onStarClick($event, star)">
       <lucide-icon [img]="StarIcon" [size]="28" [strokeWidth]="1.5"

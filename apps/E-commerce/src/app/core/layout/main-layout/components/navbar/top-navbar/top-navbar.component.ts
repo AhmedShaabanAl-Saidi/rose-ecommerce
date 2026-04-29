@@ -83,7 +83,9 @@ export class TopNavbarComponent {
 
     return [
       {
-        label: user.firstName,
+        label: `<span class="truncate block max-w-[200px]" title="${user.firstName}">${user.firstName}</span>`,
+        escape: false,
+        styleClass: 'max-w-[220px]',
         items: [
           {
             label: this.translate.instant('NAVBAR.ACCOUNT_MENU.PROFILE'),

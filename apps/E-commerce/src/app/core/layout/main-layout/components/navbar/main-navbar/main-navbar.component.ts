@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ClickOutsideDirective } from '../../../../../utils/click-outside.directive';
 
 @Component({
   selector: 'app-main-navbar',
-  imports: [RouterModule, TranslatePipe],
+  imports: [RouterModule, TranslatePipe, ClickOutsideDirective],
   templateUrl: './main-navbar.component.html',
 })
 export class MainNavbarComponent {
-  isMenuOpen = false;
+  isMenuOpen = signal(false);
+  readonly mobileMenuId = 'primary-mobile-menu';
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen.set(!this.isMenuOpen());
   }
   readonly navStyles = {
     desktopLink:

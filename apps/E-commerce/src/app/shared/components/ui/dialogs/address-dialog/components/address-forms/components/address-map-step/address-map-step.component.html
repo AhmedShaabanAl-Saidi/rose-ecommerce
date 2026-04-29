@@ -2,6 +2,7 @@
   <div class="flex items-center gap-3">
     <lib-button
       (buttonClick)="onBack()"
+      [ariaLabel]="'Go back to previous step'"
       class="btn-arrow"
       [icon]="isRtl() ? 'arrow-right' : 'arrow-left'"
     >

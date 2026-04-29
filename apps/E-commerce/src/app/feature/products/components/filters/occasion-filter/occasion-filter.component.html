@@ -1,7 +1,13 @@
-<section class="flex flex-col gap-4 pb-6 border-b border-zinc-100 dark:border-zinc-700">
+<section
+  class="flex flex-col gap-4 pb-6 border-b border-zinc-100 dark:border-zinc-700"
+  aria-labelledby="occasion-filter-heading"
+>
   <div class="flex items-center justify-between mb-1">
     <div class="flex items-center gap-2">
-      <h3 class="m-0 text-[20px] font-semibold text-zinc-800 dark:text-soft-pink-200">{{ 'Occasion' | translate }}</h3>
+      <h3
+        id="occasion-filter-heading"
+        class="m-0 text-[20px] font-semibold text-zinc-800 dark:text-soft-pink-200"
+      >{{ 'Occasion' | translate }}</h3>
       @if (selectedOccasionIds().size > 0) {
       <span
         class="flex h-5 min-w-5 items-center justify-center rounded-full bg-maroon-600 px-1.5 text-[11px] font-bold text-white dark:bg-soft-pink-400 dark:text-zinc-900">
@@ -23,12 +29,17 @@
     } @else {
     @for (occasion of occasions(); track occasion._id) {
     <button type="button" (click)="onSelectOccasion(occasion._id)"
+      [attr.aria-pressed]="selectedOccasionIds().has(occasion._id)"
+      [attr.aria-label]="
+        (selectedOccasionIds().has(occasion._id) ? 'Deselect ' : 'Select ') +
+        occasion.name
+      "
       class="relative h-16.25 w-full overflow-hidden rounded-lg border-2 transition-transform duration-200 hover:scale-[1.02]"
       [class.border-transparent]="!selectedOccasionIds().has(occasion._id)"
       [class.dark:border-zinc-800]="!selectedOccasionIds().has(occasion._id)"
       [class.border-maroon-600]="selectedOccasionIds().has(occasion._id)"
       [class.dark:border-soft-pink-300]="selectedOccasionIds().has(occasion._id)">
-      <img [src]="occasionImageUrl(occasion.image)" [alt]="occasion.name"
+      <img [src]="occasionImageUrl(occasion.image)" alt=""
         class="absolute inset-0 w-full h-full object-cover z-0" crossorigin="anonymous" />
       <div class="absolute inset-0 z-10 bg-black/45 transition-colors duration-200 dark:bg-zinc-950/60"
         [class.bg-maroon-900/40]="selectedOccasionIds().has(occasion._id)"></div>

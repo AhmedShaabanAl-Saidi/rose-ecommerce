@@ -20,6 +20,8 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 })
 export class ProdcutCarousalComponent {
   private readonly platformId = inject(PLATFORM_ID);
+  readonly prevButtonProps = { ariaLabel: 'Previous products' };
+  readonly nextButtonProps = { ariaLabel: 'Next products' };
 
   products = input.required<Product[]>();
   numVisible = input<number>(4);

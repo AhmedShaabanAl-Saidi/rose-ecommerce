@@ -43,6 +43,7 @@ export class AddressListDialogComponent implements OnInit {
     event.stopPropagation();
     this.state.address.set(address);
     this.confirmationService.confirm({
+      header: this.translate.instant('ADDRESS_DIALOG.CONFIRM'),
       message: this.translate.instant('ADDRESS_DIALOG.DELETE_CONFIRM'),
       icon: 'Trash2',
       rejectLabel: this.translate.instant('ADDRESS_DIALOG.CANCEL'),

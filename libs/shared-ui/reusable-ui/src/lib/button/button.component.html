@@ -1,5 +1,6 @@
 <button
   [type]="type()"
+  [attr.aria-label]="ariaLabel() || null"
   [disabled]="disabled() || loading()"
   [class]="classes()"
   (click)="onClick($event)"

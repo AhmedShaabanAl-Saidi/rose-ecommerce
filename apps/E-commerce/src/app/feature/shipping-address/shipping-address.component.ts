@@ -44,6 +44,9 @@ import { AddressUiService } from '../../shared/components/ui/dialogs/address-dia
       }),
     },
   ],
+  host: {
+    class: 'block w-full',
+  },
   templateUrl: './shipping-address.component.html',
 })
 export class ShippingAddressComponent implements OnInit {

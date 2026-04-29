@@ -94,29 +94,34 @@
       <div [class.pointer-events-none]="!user()" class="space-y-5">
         <div>
           <label
-            for
+            for="product-review-rating"
             class="block text-sm font-medium text-zinc-700 mb-2 dark:text-white"
           >
             {{ 'PRODUCT_REVIEWS.YOUR_RATING' | translate }}
           </label>
 
           <div
+            id="product-review-rating"
+            role="radiogroup"
+            [attr.aria-label]="'PRODUCT_REVIEWS.YOUR_RATING' | translate"
             class="flex gap-1 text-amber-400"
             (mouseleave)="clearHoveredRating()"
           >
             @for (star of [1,2,3,4,5]; track star) {
-            <i
+            <button
+              type="button"
+              role="radio"
+              [attr.aria-checked]="selectedRating() === star"
+              [attr.aria-label]="star + ' out of 5'"
               (click)="setRating(star)"
               (mouseenter)="setHoveredRating(star)"
-              (keydown.enter)="setRating(star)"
-              tabindex="0"
               class="pi text-xl cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400 rounded-sm"
               [class.text-amber-400]="hoveredRating() >= star"
               [class.pi-star-fill]="
                 (hoveredRating() || selectedRating()) >= star
               "
               [class.pi-star]="(hoveredRating() || selectedRating()) < star"
-            ></i>
+            ></button>
             }
           </div>
         </div>
@@ -127,19 +132,13 @@
         ></lib-text-input>
 
         <div>
-          <label
-            for="kk"
-            class="block text-sm font-medium text-zinc-700 mb-1 dark:text-white"
-          >
-            {{ 'PRODUCT_REVIEWS.REVIEW' | translate }}
-          </label>
-          <textarea
-            id="kk"
-            rows="4"
+          <lib-textarea-input
+            [formControl]="reviewMessage"
+            [label]="'PRODUCT_REVIEWS.REVIEW' | translate"
+            [rows]="4"
             [disabled]="!user()"
             [placeholder]="'PRODUCT_REVIEWS.REVIEW_PLACEHOLDER' | translate"
-            class="w-full resize-none rounded-lg border border-zinc-400 px-4 py-2.5 text-sm placeholder:text-zinc-500 outline-none focus:border-2 focus:border-maroon-500 dark:bg-zinc-600 dark:placeholder:text-zinc-400 dark:focus:border-soft-pink-300 disabled:opacity-50"
-          ></textarea>
+          ></lib-textarea-input>
         </div>
 
         <lib-button [block]="true" [disabled]="!user()">

@@ -27,7 +27,10 @@
     } @else if (categories().length === 0) {
     <div class="taxonomy-empty-state">
       <div class="taxonomy-empty-icon-box">
-        <lucide-icon [img]="LayoutGridIcon" class="taxonomy-empty-icon"></lucide-icon>
+        <lucide-icon
+          [img]="LayoutGridIcon"
+          class="taxonomy-empty-icon"
+        ></lucide-icon>
       </div>
       <h2 class="taxonomy-empty-title">
         {{ 'CATEGORIES_PAGE.EMPTY_TITLE' | translate }}
@@ -39,9 +42,14 @@
     } @else {
     <div class="taxonomy-grid">
       @for (category of categories(); track category._id) {
-      <app-taxonomy-card [title]="category.name" [imageUrl]="category.image" queryParamName="category"
-        [queryParamValue]="category._id" [productsCount]="category.productsCount"
-        productsCountKey="CATEGORIES_PAGE.PRODUCTS_COUNT"></app-taxonomy-card>
+      <app-taxonomy-card
+        [title]="category.name"
+        [imageUrl]="category.image"
+        queryParamName="category"
+        [queryParamValue]="category._id"
+        [productsCount]="category.productsCount"
+        productsCountKey="CATEGORIES_PAGE.PRODUCTS_COUNT"
+      ></app-taxonomy-card>
       }
     </div>
     }

@@ -1,4 +1,11 @@
-import { Component, DestroyRef, inject, input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -9,6 +16,7 @@ import { CartService } from '../../../cart/services/cart.service';
 import { TextInputComponent } from '@elevate/reusable-input';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { LucideAngularModule } from 'lucide-angular';
+import { languageService } from '../../../../core/services/language-service';
 
 @Component({
   selector: 'app-checkout-summary',
@@ -27,7 +35,8 @@ import { LucideAngularModule } from 'lucide-angular';
 export class CheckoutSummaryComponent {
   private readonly _cartService = inject(CartService);
   private readonly _destroyRef = inject(DestroyRef);
-
+  private readonly LanguageService = inject(languageService);
+  readonly isRtl = computed(() => this.LanguageService.isRTL());
   readonly showCheckoutButton = input<boolean>(false);
 
   // Consume centralized signals — single source of truth
@@ -74,5 +83,4 @@ export class CheckoutSummaryComponent {
         },
       });
   }
-
 }

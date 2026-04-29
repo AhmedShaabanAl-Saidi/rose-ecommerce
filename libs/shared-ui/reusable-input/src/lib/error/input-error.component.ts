@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class InputErrorComponent {
   control = input.required<AbstractControl | null | undefined>();
   customType = input<string>('');
+  errorId = input<string>('');
 
   get haveError(): boolean {
     const ctrl = this.control();

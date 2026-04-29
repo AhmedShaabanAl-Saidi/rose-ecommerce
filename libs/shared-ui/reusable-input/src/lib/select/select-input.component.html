@@ -1,18 +1,19 @@
 <div class="input-wrapper">
   @if (label()) {
-  <label [for]="label()" class="input-label">
+  <label [for]="inputId()" class="input-label">
     {{ label() }}
   </label>
   }
 
   <div class="relative w-full">
     <p-select
-      [id]="label()"
+      [inputId]="inputId()"
       [options]="options()"
       [(ngModel)]="value"
       optionLabel="label"
       autofocus="false"
       optionValue="value"
+      [ariaLabel]="label() || placeholder()"
       [placeholder]="placeholder() || ('SHARED.SELECT_OPTION' | translate)"
       [disabled]="isDisabled"
       (onBlur)="onTouched()"
@@ -38,5 +39,8 @@
     </p-select>
   </div>
 
-  <lib-input-error [control]="control"></lib-input-error>
+  <lib-input-error
+    [control]="control"
+    [errorId]="errorId()"
+  ></lib-input-error>
 </div>
