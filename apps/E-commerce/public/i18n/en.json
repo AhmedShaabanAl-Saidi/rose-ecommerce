@@ -380,7 +380,6 @@
     "PROCEED_CHECKOUT": "Checkout",
     "DISCOUNT": "Discount"
   },
-
   "WISHLIST": {
     "TITLE": "My Wishlist",
     "ITEMS_COUNT": "items",
@@ -502,5 +501,28 @@
     "SERVER": "Server error: Please try again later",
     "UNAUTHORIZED": "Please login first",
     "FORBIDDEN": "You don't have permission to access this page"
+  },
+  "PROFILE_PAGE": {
+    "UPLOAD_PHOTO": "Upload Photo",
+    "UPLOAD_HINT": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+    "CHOOSE_FILE": "Choose File",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "GENDER": "Gender",
+    "DELETE_ACCOUNT": "Delete My Account",
+    "SAVE_CHANGES": "Save Changes",
+    "OLD_PASSWORD": "Old Password",
+    "NEW_PASSWORD": "New Password",
+    "CONFIRM_PASSWORD": "Confirm New Password",
+    "CHANGE_PASSWORD": "Change Password",
+    "ENTER_OLD_PASSWORD": "Enter your current password",
+    "ENTER_NEW_PASSWORD": "Enter a new password",
+    "ENTER_CONFIRM_PASSWORD": "Re-enter your new password",
+    "PHOTO_UPDATED": "Photo updated successfully",
+    "PHOTO_UPDATE_FAILED": "Failed to update photo",
+    "UPDATE_SUCCESS": "Profile updated successfully",
+    "PASSWORD_UPDATE_SUCCESS": "Password changed successfully"
   }
 }
