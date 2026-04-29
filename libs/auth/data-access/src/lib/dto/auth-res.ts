@@ -43,3 +43,5 @@ export interface RestPasswordRes {
   message: string;
   token: string;
 }
+
+export type UploadPhotoRes = DeleteMeRes;

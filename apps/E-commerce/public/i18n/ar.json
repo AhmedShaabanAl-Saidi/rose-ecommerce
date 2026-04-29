@@ -502,5 +502,28 @@
     "SERVER": "خطأ في الخادم: يرجى المحاولة مرة أخرى لاحقاً",
     "UNAUTHORIZED": "يرجى تسجيل الدخول أولاً",
     "FORBIDDEN": "ليس لديك صلاحية الوصول إلى هذه الصفحة"
+  },
+  "PROFILE_PAGE": {
+    "UPLOAD_PHOTO": "رفع صورة",
+    "UPLOAD_HINT": "يمكنك رفع صورة بصيغة .jpg، .png، أو .gif بحجم أقصى 5 ميجابايت.",
+    "CHOOSE_FILE": "اختر ملف",
+    "FIRST_NAME": "الاسم الأول",
+    "LAST_NAME": "الاسم الأخير",
+    "EMAIL": "البريد الإلكتروني",
+    "PHONE": "رقم الهاتف",
+    "GENDER": "النوع",
+    "DELETE_ACCOUNT": "حذف حسابي",
+    "SAVE_CHANGES": "حفظ التغييرات",
+    "OLD_PASSWORD": "كلمة المرور القديمة",
+    "NEW_PASSWORD": "كلمة المرور الجديدة",
+    "CONFIRM_PASSWORD": "تأكيد كلمة المرور الجديدة",
+    "CHANGE_PASSWORD": "تغيير كلمة المرور",
+    "ENTER_OLD_PASSWORD": "أدخل كلمة المرور الحالية",
+    "ENTER_NEW_PASSWORD": "أدخل كلمة المرور الجديدة",
+    "ENTER_CONFIRM_PASSWORD": "أعد إدخال كلمة المرور الجديدة",
+    "PHOTO_UPDATED": "تم تحديث الصورة بنجاح",
+    "PHOTO_UPDATE_FAILED": "فشل في تحديث الصورة",
+    "UPDATE_SUCCESS": "تم تحديث الملف الشخصي بنجاح",
+    "PASSWORD_UPDATE_SUCCESS": "تم تغيير كلمة المرور بنجاح"
   }
 }

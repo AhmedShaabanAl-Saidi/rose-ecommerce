@@ -82,6 +82,11 @@ export class AuthApiRepo extends AuthRepo {
       tap((data) => this._state.setUser(data.user))
     );
   }
+  uploadPhoto(data: FormData): Observable<MessageModel> {
+    return this._authService.uploadPhoto(data).pipe(
+      map(() => ({ message: 'success' })) // Map to MessageModel manually since API might return varying format
+    );
+  }
   verifyResetCode(data: VerifyResetCodeParams): Observable<StatusModel> {
     return this._authService.verifyResetCode(data);
   }

@@ -20,6 +20,7 @@ import {
   ProfileDataRes,
   RestPasswordRes,
   VerifyResetCodeRes,
+  UploadPhotoRes,
 } from '../dto/auth-res';
 import { API_CONFIG } from './api-config.token';
 import { AuthApiEndpoints } from './auth-api-end-point';
@@ -66,6 +67,12 @@ export class AuthApiService {
   editProfile(data: EditProfileParams): Observable<EditProfileRes> {
     return this._httpClient.put<EditProfileRes>(
       this._config.baseUrl + AuthApiEndpoints.editProfile,
+      data
+    );
+  }
+  uploadPhoto(data: FormData): Observable<UploadPhotoRes> {
+    return this._httpClient.put<UploadPhotoRes>(
+      this._config.baseUrl + AuthApiEndpoints.uploadPhoto,
       data
     );
   }
