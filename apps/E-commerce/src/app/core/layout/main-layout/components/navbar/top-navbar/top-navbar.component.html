@@ -60,9 +60,10 @@
         <div
           class="ms-2 flex min-w-0 items-center gap-1 text-maroon-500 dark:text-soft-pink-200"
         >
-          <span class="truncate whitespace-nowrap">{{
-            user()?.firstName
-          }}</span>
+          <span
+            class="truncate whitespace-nowrap block max-w-[80px] sm:max-w-[120px]"
+            >{{ user()?.firstName }}</span
+          >
           <lucide-icon
             aria-hidden="true"
             class="h-5 w-5 shrink-0"
