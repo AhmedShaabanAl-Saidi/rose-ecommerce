@@ -1,5 +1,5 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthRepo, AuthState } from '@elevate/auth-domain';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
@@ -47,6 +47,7 @@ export class TopNavbarComponent {
   readonly wishlistService = inject(WishlistService);
   readonly user = this.authState.currentUser;
   readonly primaryAddress = signal<ShippingAddress | null>(null);
+  readonly router = inject(Router);
   readonly deliveryAddressText = computed(() => {
     this.language.currentLang();
 
@@ -116,6 +117,7 @@ export class TopNavbarComponent {
                   tap(() => {
                     this.cartService.setDefaultCart();
                     this.wishlistService.clearWishlist();
+                    this.router.navigate(['/']);
                   }),
                   take(1)
                 )
