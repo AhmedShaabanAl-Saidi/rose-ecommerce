@@ -22,6 +22,7 @@ import { ProductInfoComponent } from './components/product-info/product-info.com
 import { ProductReviewsComponent } from './components/product-reviews/product-reviews.component';
 import { RelatedProductComponent } from './components/related-product/related-product.component';
 import { CartService } from '../cart/services/cart.service';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-product-details',
@@ -41,6 +42,7 @@ export class ProductDetailsComponent implements OnInit {
   private readonly wishlistService = inject(WishlistService);
   private readonly cartService = inject(CartService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly seoService = inject(SeoService);
 
   product = signal<Product | null>(null);
   reviews = signal<Review[]>([]);
@@ -82,9 +84,16 @@ export class ProductDetailsComponent implements OnInit {
         )
       )
       .subscribe((data) => {
-        this.product.set(data.product.product);
+        const product = data.product.product;
+
+        this.product.set(product);
         this.reviews.set(data.reviews.reviews || []);
         this.relatedProducts.set(data.related.relatedProducts || []);
+        this.seoService.update({
+          title: `${product.title} | Elevate Gifts`,
+          description:
+            product.description || `Shop ${product.title} from Elevate Gifts.`,
+        });
       });
   }
 
