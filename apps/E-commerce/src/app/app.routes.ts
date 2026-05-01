@@ -1,5 +1,13 @@
 import { Route } from '@angular/router';
 import { guestGuard } from '@elevate/auth-data-access';
+import type { SeoMeta } from './core/interfaces/seo-meta.interface';
+
+const notFoundSeo: SeoMeta = {
+  title: 'Page Not Found | Elevate Gifts',
+  description:
+    'The page you are looking for could not be found. Return to Elevate Gifts to keep shopping flowers, gifts, and curated occasion collections.',
+  robots: 'noindex, nofollow',
+};
 
 export const appRoutes: Route[] = [
   {
@@ -10,6 +18,9 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'not-found',
+    data: {
+      seo: notFoundSeo,
+    },
     loadComponent: () =>
       import('./feature/not-found/not-found.component').then(
         (m) => m.NotFoundComponent
