@@ -11,6 +11,7 @@ export class AuthStorageService {
       expires: rememberMe ? 30 : undefined,
       path: '/',
       sameSite: 'Lax',
+      secure: true,
     });
   }
 
