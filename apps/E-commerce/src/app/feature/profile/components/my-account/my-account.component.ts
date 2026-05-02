@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthRepo, AuthState } from '@elevate/auth-domain';
 import { ToastrService } from 'ngx-toastr';
@@ -27,6 +27,7 @@ export class MyAccountComponent implements OnInit {
   private readonly translate = inject(TranslateService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly router = inject(Router);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   profileForm!: FormGroup;
   selectedFile: File | null = null;
@@ -57,6 +58,7 @@ export class MyAccountComponent implements OnInit {
     // Use setTimeout to ensure the form is marked as pristine after child components initialize
     setTimeout(() => {
       this.profileForm.markAsPristine();
+      this.cdr.markForCheck();
     });
   }
 
