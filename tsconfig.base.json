@@ -21,6 +21,9 @@
       ],
       "@elevate/reusable-ui": ["./libs/shared-ui/reusable-ui/src/index.ts"],
       "apps/*": ["./apps/*"],
+      "dashboard/Routes": [
+        "apps/dashboard/src/app/remote-entry/entry.routes.ts"
+      ],
       "libs/*": ["./libs/*"]
     }
   },
