@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-dashboard-entry',
   template: `
     <div
-      class="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 font-sans"
+      class="min-h-screen bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 font-sans"
     >
       <header
         class="bg-black/20 text-white p-8 text-center border-b border-white/10"
@@ -17,11 +17,6 @@ import { CommonModule } from '@angular/common';
       </header>
 
       <nav class="flex gap-0 bg-black/10 px-8 border-b-2 border-white/10">
-        <a
-          routerLink=""
-          class="text-white px-6 py-4 no-underline border-b-4 border-transparent transition-all cursor-pointer font-medium hover:border-yellow-400 hover:bg-white/10 active:border-yellow-400 active:bg-white/10"
-          >Home</a
-        >
         <a
           routerLink="test-1"
           class="text-white px-6 py-4 no-underline border-b-4 border-transparent transition-all cursor-pointer font-medium hover:border-yellow-400 hover:bg-white/10"
@@ -44,7 +39,7 @@ import { CommonModule } from '@angular/common';
           <h2 class="text-4xl m-0 mb-8 text-center">Quick Overview</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div
-              class="bg-white p-8 rounded-xl shadow-lg transition-all hover:translate-y-[-5px] hover:shadow-2xl text-gray-800"
+              class="bg-white p-8 rounded-xl shadow-lg transition-all hover:-translate-y-1.25 hover:shadow-2xl text-gray-800"
             >
               <h3 class="text-2xl mb-4 m-0 text-indigo-600">📊 Analytics</h3>
               <p class="m-0 mb-6 text-gray-600 leading-relaxed">
@@ -52,12 +47,12 @@ import { CommonModule } from '@angular/common';
               </p>
               <a
                 routerLink="test-2"
-                class="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-lg no-underline font-semibold transition-all hover:scale-105 hover:shadow-lg"
+                class="inline-block bg-linear-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-lg no-underline font-semibold transition-all hover:scale-105 hover:shadow-lg"
                 >View Analytics</a
               >
             </div>
             <div
-              class="bg-white p-8 rounded-xl shadow-lg transition-all hover:translate-y-[-5px] hover:shadow-2xl text-gray-800"
+              class="bg-white p-8 rounded-xl shadow-lg transition-all hover:-translate-y-1.25 hover:shadow-2xl text-gray-800"
             >
               <h3 class="text-2xl mb-4 m-0 text-indigo-600">📝 Reports</h3>
               <p class="m-0 mb-6 text-gray-600 leading-relaxed">
@@ -65,12 +60,12 @@ import { CommonModule } from '@angular/common';
               </p>
               <a
                 routerLink="test-1"
-                class="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-lg no-underline font-semibold transition-all hover:scale-105 hover:shadow-lg"
+                class="inline-block bg-linear-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-lg no-underline font-semibold transition-all hover:scale-105 hover:shadow-lg"
                 >View Reports</a
               >
             </div>
             <div
-              class="bg-white p-8 rounded-xl shadow-lg transition-all hover:translate-y-[-5px] hover:shadow-2xl text-gray-800"
+              class="bg-white p-8 rounded-xl shadow-lg transition-all hover:-translate-y-1.25 hover:shadow-2xl text-gray-800"
             >
               <h3 class="text-2xl mb-4 m-0 text-indigo-600">✨ Features</h3>
               <p class="m-0 mb-6 text-gray-600 leading-relaxed">
@@ -78,7 +73,7 @@ import { CommonModule } from '@angular/common';
               </p>
               <a
                 routerLink="test-3"
-                class="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-lg no-underline font-semibold transition-all hover:scale-105 hover:shadow-lg"
+                class="inline-block bg-linear-to-r from-indigo-500 to-purple-600 text-white px-6 py-3 rounded-lg no-underline font-semibold transition-all hover:scale-105 hover:shadow-lg"
                 >Explore Features</a
               >
             </div>

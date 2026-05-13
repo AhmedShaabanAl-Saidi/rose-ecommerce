@@ -5,8 +5,27 @@ import { TestPage2Component } from '../pages/test-page-2/test-page-2.component';
 import { TestPage3Component } from '../pages/test-page-3/test-page-3.component';
 
 export const remoteRoutes: Route[] = [
-  { path: '', component: RemoteEntry },
-  { path: 'test-1', component: TestPage1Component },
-  { path: 'test-2', component: TestPage2Component },
-  { path: 'test-3', component: TestPage3Component },
+  {
+    path: '',
+    component: RemoteEntry,
+    children: [
+      {
+        path: '',
+        redirectTo: 'test-1',
+        pathMatch: 'full',
+      },
+      {
+        path: 'test-1',
+        component: TestPage1Component,
+      },
+      {
+        path: 'test-2',
+        component: TestPage2Component,
+      },
+      {
+        path: 'test-3',
+        component: TestPage3Component,
+      },
+    ],
+  },
 ];
