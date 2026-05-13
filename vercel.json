@@ -1,8 +1,4 @@
 {
-  "version": 2,
-  "buildCommand": "npx ng build E-commerce",
-  "installCommand": "npm install --legacy-peer-deps",
-  "outputDirectory": "dist/apps/E-commerce/browser",
   "rewrites": [
     {
       "source": "/(.*)",

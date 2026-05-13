@@ -7,15 +7,14 @@
   "tags": ["type:app"],
   "targets": {
     "build": {
-      "executor": "@angular/build:application",
+      "executor": "@nx/angular:webpack-browser",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "index": "apps/E-commerce/src/index.html",
         "outputPath": "dist/apps/E-commerce",
-        "browser": "apps/E-commerce/src/main.ts",
+        "main": "apps/E-commerce/src/main.ts",
         "tsConfig": "apps/E-commerce/tsconfig.app.json",
-      "allowedCommonJsDependencies": [
-        "google-libphonenumber"
-      ],
+        "allowedCommonJsDependencies": ["google-libphonenumber"],
         "assets": [
           {
             "glob": "**/*",
@@ -29,14 +28,10 @@
           "node_modules/ngx-spinner/animations/triangle-skew-spin.css",
           "node_modules/intl-tel-input/build/css/intlTelInput.css"
         ],
-      "scripts": [
-        "node_modules/intl-tel-input/build/js/utils.js"
-      ],
-        "server": "apps/E-commerce/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/E-commerce/src/server.ts"
-        },
-        "outputMode": "server"
+        "scripts": ["node_modules/intl-tel-input/build/js/utils.js"],
+        "customWebpackConfig": {
+          "path": "apps/E-commerce/webpack.config.ts"
+        }
       },
       "configurations": {
         "production": {
@@ -64,7 +59,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@angular/build:dev-server",
+      "executor": "@nx/angular:module-federation-dev-server",
       "configurations": {
         "production": {
           "buildTarget": "E-commerce:build:production"
@@ -73,7 +68,10 @@
           "buildTarget": "E-commerce:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "publicHost": "http://localhost:4200"
+      }
     },
     "lint": {
       "executor": "@nx/eslint:lint"

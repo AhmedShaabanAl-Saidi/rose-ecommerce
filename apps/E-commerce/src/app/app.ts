@@ -1,21 +1,21 @@
-import { Component, OnInit, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgxSpinnerComponent } from 'ngx-spinner';
-import { PaginatorModule } from 'primeng/paginator';
-import { ButtonModule } from 'primeng/button';
 import { LucideAngularModule } from 'lucide-angular';
-import { ConfirmDialogComponent } from './shared/components/ui/dialogs/confirm-dialog/confirm-dialog.component';
-import { SeoService } from './core/services/seo.service';
+import { ButtonModule } from 'primeng/button';
+import { PaginatorModule } from 'primeng/paginator';
 import { environment } from '../environments/environments';
+import { SeoService } from './core/services/seo.service';
+import { NgxSpinnerComponent } from 'ngx-spinner';
+import { ConfirmDialogComponent } from './shared/components/ui/dialogs/confirm-dialog/confirm-dialog.component';
 
 @Component({
   imports: [
     RouterModule,
-    NgxSpinnerComponent,
     PaginatorModule,
     ButtonModule,
     LucideAngularModule,
+    NgxSpinnerComponent,
     ConfirmDialogComponent,
   ],
   selector: 'app-root',

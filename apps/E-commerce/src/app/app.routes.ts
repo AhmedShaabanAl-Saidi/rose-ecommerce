@@ -36,6 +36,4 @@ export const appRoutes: Route[] = [
     redirectTo: 'not-found',
     pathMatch: 'full',
   },
-
-
 ];
