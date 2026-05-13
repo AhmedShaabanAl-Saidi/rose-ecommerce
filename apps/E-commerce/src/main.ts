@@ -1,5 +1,9 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { App } from './app/app';
+import { registerRemotes } from '@module-federation/enhanced/runtime';
 
-bootstrapApplication(App, appConfig).catch((err) => console.error(err));
+fetch('/module-federation.manifest.json')
+  .then((res) => res.json())
+  .then((remotes: Record<string, string>) =>
+    Object.entries(remotes).map(([name, entry]) => ({ name, entry }))
+  )
+  .then((remotes) => registerRemotes(remotes))
+  .then(() => import('./bootstrap').catch((err) => console.error(err)));

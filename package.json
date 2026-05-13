@@ -43,7 +43,8 @@
     "rxjs": "~7.8.0",
     "tailwindcss": "^4.0.0",
     "tslib": "^2.6.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "~0.15.0",
+    "@nx/angular": "21.6.1"
   },
   "devDependencies": {
     "@analogjs/vite-plugin-angular": "~1.19.1",
@@ -55,12 +56,14 @@
     "@angular/cli": "20.3.1",
     "@angular/compiler-cli": "20.3.1",
     "@angular/language-service": "20.3.1",
-    "@nx/angular": "21.6.1",
+    "@module-federation/enhanced": "^0.18.0",
     "@nx/eslint": "21.6.1",
     "@nx/eslint-plugin": "21.6.1",
     "@nx/js": "21.6.1",
+    "@nx/module-federation": "21.6.1",
     "@nx/vite": "21.6.1",
     "@nx/web": "21.6.1",
+    "@nx/webpack": "21.6.1",
     "@nx/workspace": "21.6.1",
     "@schematics/angular": "20.3.1",
     "@swc-node/register": "~1.9.1",

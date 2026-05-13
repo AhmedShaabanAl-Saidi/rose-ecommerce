@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { guestGuard } from '@elevate/auth-data-access';
 import type { SeoMeta } from './core/interfaces/seo-meta.interface';
+import { loadRemote } from '@module-federation/enhanced/runtime';
 
 const notFoundSeo: SeoMeta = {
   title: 'Page Not Found | Elevate Gifts',
@@ -10,6 +11,13 @@ const notFoundSeo: SeoMeta = {
 };
 
 export const appRoutes: Route[] = [
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      loadRemote<typeof import('dashboard/Routes')>('dashboard/Routes').then(
+        (m) => m!.remoteRoutes
+      ),
+  },
   {
     path: 'auth',
     canActivate: [guestGuard],
@@ -36,6 +44,4 @@ export const appRoutes: Route[] = [
     redirectTo: 'not-found',
     pathMatch: 'full',
   },
-
-
 ];
