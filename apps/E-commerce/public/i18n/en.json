@@ -399,7 +399,14 @@
     "TITLE": "Lost in the Gift Shop?",
     "DESCRIPTION": "The page you're looking for has moved or no longer exists. Let's get you back to finding the perfect gift.",
     "BACK_TO_HOME": "Back to Home",
-    "BROWSE_PRODUCTS": "Browse Products"
+    "BROWSE_PRODUCTS": "Browse Products",
+    "BACK_TO_DASHBOARD": "Back to Dashboard"
+  },
+  "UNAUTHORIZED": {
+    "TITLE": "Access Denied",
+    "DESCRIPTION": "You do not have permission to view this page. This area is restricted to authorized users only.",
+    "BACK_TO_HOME": "Back to Home",
+    "BACK_TO_DASHBOARD": "Back to Dashboard"
   },
   "CHECKOUT": {
     "PAYMENT_METHOD": "Payment Method",

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { guestGuard } from '@elevate/auth-data-access';
+import { guestGuard, adminGuard, userGuard } from '@elevate/auth-data-access';
 import type { SeoMeta } from './core/interfaces/seo-meta.interface';
 import { loadRemote } from '@module-federation/enhanced/runtime';
 
@@ -10,9 +10,22 @@ const notFoundSeo: SeoMeta = {
   robots: 'noindex, nofollow',
 };
 
+const unauthorizedSeo: SeoMeta = {
+  title: 'Access Denied | Elevate Gifts',
+  description: 'You do not have permission to access this page.',
+  robots: 'noindex, nofollow',
+};
+
 export const appRoutes: Route[] = [
   {
+    path: '',
+    canActivate: [userGuard],
+    loadChildren: () =>
+      import('./core/layout/main-layout/main.routes').then((m) => m.mainRoutes),
+  },
+  {
     path: 'dashboard',
+    canActivate: [adminGuard],
     loadChildren: () =>
       loadRemote<typeof import('dashboard/Routes')>('dashboard/Routes').then(
         (m) => m!.remoteRoutes
@@ -25,6 +38,16 @@ export const appRoutes: Route[] = [
       import('./feature/auth/auth.routes').then((m) => m.authRoutes),
   },
   {
+    path: 'unauthorized',
+    data: {
+      seo: unauthorizedSeo,
+    },
+    loadComponent: () =>
+      import('./feature/unauthorized/unauthorized.component').then(
+        (m) => m.UnauthorizedComponent
+      ),
+  },
+  {
     path: 'not-found',
     data: {
       seo: notFoundSeo,
@@ -34,11 +57,7 @@ export const appRoutes: Route[] = [
         (m) => m.NotFoundComponent
       ),
   },
-  {
-    path: '',
-    loadChildren: () =>
-      import('./core/layout/main-layout/main.routes').then((m) => m.mainRoutes),
-  },
+
   {
     path: '**',
     redirectTo: 'not-found',

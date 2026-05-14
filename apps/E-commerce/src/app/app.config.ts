@@ -24,10 +24,18 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   AlertCircle,
+  AlertTriangle,
+  ArrowLeft,
+  ArrowRight,
+  Banknote,
   Bell,
   BrushCleaning,
+  Check,
   ChevronDown,
+  ChevronLeft,
+  Clock3,
   Compass,
+  CreditCard,
   Eye,
   EyeOff,
   Heart,
@@ -36,53 +44,41 @@ import {
   House,
   Lock,
   LucideAngularModule,
+  Mail,
   MapPin,
   MapPinPen,
   Minus,
   MoveLeft,
   MoveRight,
   Package,
+  Phone,
   Plus,
+  PlusCircle,
   Search,
   ShoppingBag,
   ShoppingCart,
   Star,
   TicketPercent,
-  Trash,
   Trash2,
   UserRound,
   X,
-  ArrowLeft,
   Zap,
-  ArrowRight,
-  AlertTriangle,
-  Banknote,
-  CreditCard,
-  ChevronLeft,
-  PlusCircle,
-  Phone,
-  Check,
-  Clock3,
-  Mail,
 } from 'lucide-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
+import { ConfirmationService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
+import { DialogService } from 'primeng/dynamicdialog';
 import MyPreset from '../mypreset';
 import { appRoutes } from './app.routes';
 import { provideLanguageInitializer } from './core/initializers/language.initializer';
 import { provideThemeInitializer } from './core/initializers/theme.initializer';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
-import { provideCartInitializer } from './core/initializers/cart.initializer';
-import { DialogService } from 'primeng/dynamicdialog';
-import { ConfirmationService } from 'primeng/api';
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideThemeInitializer(),
     provideLanguageInitializer(),
-    provideCartInitializer(),
     provideAnimationsAsync(),
     provideClientHydration(withEventReplay()),
     provideBrowserGlobalErrorListeners(),

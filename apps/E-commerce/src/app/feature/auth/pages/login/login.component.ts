@@ -16,7 +16,7 @@ import {
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { finalize, switchMap } from 'rxjs';
+import { finalize, switchMap, map, of } from 'rxjs';
 import {
   AuthPage,
   AuthPageData,
@@ -73,14 +73,24 @@ export class LoginComponent implements AuthPage {
           this.toastr.success(res.message);
           this.loginForm.reset();
 
-          return this.cartService.getLoggedUserCart();
+          if (res.user.role === 'admin') {
+            return of('admin');
+          }
+
+          return this.cartService.getLoggedUserCart().pipe(
+            map(() => res.user.role)
+          );
         }),
         takeUntilDestroyed(this.destroyRef),
         finalize(() => this.isLoading.set(false))
       )
       .subscribe({
-        next: () => {
-          this.router.navigate(['/home']);
+        next: (role) => {
+          if (role === 'admin') {
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.router.navigate(['/home']);
+          }
         },
       });
   }
