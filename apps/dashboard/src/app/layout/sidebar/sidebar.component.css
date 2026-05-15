@@ -1,0 +1,17 @@
+.active-nav-item {
+  background-color: var(--color-maroon-50) !important;
+  color: var(--color-maroon-600) !important;
+}
+
+.active-nav-item .sidebar-icon {
+  color: var(--color-maroon-600) !important;
+}
+
+.active-nav-item:hover {
+  background-color: var(--color-maroon-100) !important;
+}
+::ng-deep .profile-menu-custom {
+  bottom: 20px !important;
+  left: 20px !important;
+  top: auto !important;
+}
