@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -13,7 +14,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
       }
     `,
   ],
-  imports: [RouterOutlet, SidebarComponent],
+  imports: [RouterOutlet, SidebarComponent, BreadcrumbComponent],
   templateUrl: './dashboard-layout.component.html',
 })
 export class DashboardLayoutComponent {}

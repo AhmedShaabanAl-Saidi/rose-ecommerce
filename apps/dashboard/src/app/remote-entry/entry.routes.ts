@@ -4,6 +4,8 @@ import { OverviewComponent } from '../pages/overview/overview.component';
 import { CategoriesComponent } from '../pages/categories/categories.component';
 import { OccasionsComponent } from '../pages/occasions/occasions.component';
 import { ProductsComponent } from '../pages/products/products.component';
+import { ProductAddComponent } from '../pages/products/product-add/product-add.component';
+import { ProductEditComponent } from '../pages/products/product-edit/product-edit.component';
 
 export const remoteRoutes: Route[] = [
   {
@@ -34,6 +36,18 @@ export const remoteRoutes: Route[] = [
         path: 'products',
         component: ProductsComponent,
         title: 'Dashboard – Products',
+        children: [
+          {
+            path: 'add',
+            component: ProductAddComponent,
+            title: 'Dashboard – Add Product',
+          },
+          {
+            path: 'edit',
+            component: ProductEditComponent,
+            title: 'Dashboard – Edit Product',
+          },
+        ],
       },
     ],
   },
