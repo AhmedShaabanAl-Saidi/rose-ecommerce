@@ -5,6 +5,8 @@ import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
+import { Flower, LucideAngularModule } from 'lucide-angular';
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import {
   AuthRepo,
   eAuthStateService as AuthStateService,
@@ -27,6 +29,8 @@ interface NavItem {
     ButtonModule,
     AvatarModule,
     MenuModule,
+    LucideAngularModule,
+    BreadcrumbComponent,
   ],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
@@ -36,11 +40,12 @@ export class SidebarComponent {
   private readonly authState = inject(AuthStateService);
   private readonly authRepo = inject(AuthRepo);
   user = this.authState.currentUser;
+  readonly WebsiteIcon = Flower;
 
   navItems: NavItem[] = [
     { label: 'Overview', icon: 'pi pi-th-large', route: 'overview' },
-    { label: 'Categories', icon: 'pi pi-tag', route: 'categories' },
-    { label: 'Occasions', icon: 'pi pi-calendar', route: 'occasions' },
+    { label: 'Categories', icon: 'pi pi-clipboard', route: 'categories' },
+    { label: 'Occasions', icon: 'pi pi-calendar-plus', route: 'occasions' },
     { label: 'Products', icon: 'pi pi-box', route: 'products' },
   ];
 

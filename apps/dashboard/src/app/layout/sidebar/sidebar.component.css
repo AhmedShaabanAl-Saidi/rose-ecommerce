@@ -1,3 +1,7 @@
+:host {
+  display: contents;
+}
+
 .active-nav-item {
   background-color: var(--color-maroon-50) !important;
   color: var(--color-maroon-600) !important;
@@ -10,8 +14,175 @@
 .active-nav-item:hover {
   background-color: var(--color-maroon-100) !important;
 }
-::ng-deep .profile-menu-custom {
-  bottom: 20px !important;
-  left: 20px !important;
-  top: auto !important;
+
+.mobile-bottom-nav {
+  box-shadow: 0 -10px 24px rgba(24, 24, 27, 0.08);
+  overflow: visible;
+}
+
+.mobile-nav-list {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: end;
+  column-gap: 0;
+}
+
+.mobile-nav-slot {
+  min-width: 0;
+  padding-inline: 0.25rem;
+}
+
+.mobile-nav-item {
+  --mobile-nav-icon-scale: 1;
+  --mobile-nav-icon-y: 0;
+  --mobile-nav-notch-offset-x: 0.25rem;
+  --mobile-nav-notch-offset-y: -1rem;
+  --mobile-nav-notch-radius: 2.15rem;
+  isolation: isolate;
+}
+
+.mobile-nav-icon {
+  height: 1.75rem;
+  width: 1.75rem;
+  color: var(--color-zinc-700);
+  flex-shrink: 0;
+  transform: translateY(var(--mobile-nav-icon-y)) scale(var(--mobile-nav-icon-scale));
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-nav-icon i {
+  display: block;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.mobile-nav-label {
+  display: block;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item:focus-visible {
+  --mobile-nav-icon-scale: 1.08;
+  --mobile-nav-icon-y: -0.125rem;
+  background-color: transparent !important;
+  color: var(--color-maroon-600) !important;
+  outline: none;
+}
+
+.mobile-nav-item:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-maroon-600) 28%, transparent);
+}
+
+.mobile-nav-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 0.5rem;
+  background-color: var(--color-soft-pink-50);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.active-mobile-nav-item {
+  background-color: transparent !important;
+  color: var(--color-maroon-600) !important;
+}
+
+.active-mobile-nav-item::before {
+  opacity: 1;
+}
+
+.mobile-nav-item:hover::before,
+.mobile-nav-item:focus-visible::before {
+  opacity: 1;
+}
+
+.mobile-nav-item--before-center.active-mobile-nav-item::before,
+.mobile-nav-item--before-center:hover::before,
+.mobile-nav-item--before-center:focus-visible::before {
+  -webkit-mask-image: radial-gradient(
+    circle var(--mobile-nav-notch-radius) at calc(100% + var(--mobile-nav-notch-offset-x)) var(--mobile-nav-notch-offset-y),
+    transparent 98%,
+    #000 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--mobile-nav-notch-radius) at calc(100% + var(--mobile-nav-notch-offset-x)) var(--mobile-nav-notch-offset-y),
+    transparent 98%,
+    #000 100%
+  );
+}
+
+.mobile-nav-item--after-center.active-mobile-nav-item::before,
+.mobile-nav-item--after-center:hover::before,
+.mobile-nav-item--after-center:focus-visible::before {
+  -webkit-mask-image: radial-gradient(
+    circle var(--mobile-nav-notch-radius) at calc(0% - var(--mobile-nav-notch-offset-x)) var(--mobile-nav-notch-offset-y),
+    transparent 98%,
+    #000 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--mobile-nav-notch-radius) at calc(0% - var(--mobile-nav-notch-offset-x)) var(--mobile-nav-notch-offset-y),
+    transparent 98%,
+    #000 100%
+  );
+}
+
+.active-mobile-nav-item .mobile-nav-icon,
+.mobile-nav-item:hover .mobile-nav-icon,
+.mobile-nav-item:focus-visible .mobile-nav-icon {
+  color: var(--color-maroon-600);
+}
+
+.active-mobile-nav-item .mobile-nav-label,
+.mobile-nav-item:hover .mobile-nav-label,
+.mobile-nav-item:focus-visible .mobile-nav-label {
+  color: var(--color-maroon-600);
+}
+
+.mobile-website-link {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.75rem;
+  width: 3.75rem;
+  border: 0.25rem solid white;
+  border-radius: 9999px;
+  background-color: var(--color-maroon-600);
+  color: white;
+  box-shadow: 0 0.75rem 1.5rem color-mix(in srgb, var(--color-maroon-700) 24%, transparent);
+  transform: translate(-50%, -50%);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-website-icon {
+  display: block;
+  height: 2.25rem;
+  width: 2.25rem;
+  transition: transform 0.2s ease;
+}
+
+.mobile-website-link:hover,
+.mobile-website-link:focus-visible {
+  background-color: var(--color-maroon-700);
+  box-shadow: 0 1rem 1.75rem color-mix(in srgb, var(--color-maroon-700) 28%, transparent);
+  outline: none;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.mobile-website-link:hover .mobile-website-icon,
+.mobile-website-link:focus-visible .mobile-website-icon {
+  transform: rotate(8deg) scale(1.04);
+}
+
+@media (min-width: 1024px) {
+  ::ng-deep .profile-menu-custom {
+    bottom: 20px !important;
+    left: 20px !important;
+    top: auto !important;
+  }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import {Component,OnDestroy,OnInit,inject,input,signal} from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -7,7 +7,6 @@ import { Subscription, filter } from 'rxjs';
 
 @Component({
   selector: 'app-breadcrumb',
-  standalone: true,
   imports: [CommonModule, BreadcrumbModule, RouterLink],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.css',
@@ -16,6 +15,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private sub!: Subscription;
 
+  variant = input<'desktop' | 'mobile'>('desktop');
   breadcrumbs = signal<MenuItem[]>([]);
 
   homeItem: MenuItem = {
