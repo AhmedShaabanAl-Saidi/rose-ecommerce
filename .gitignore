@@ -58,3 +58,4 @@ opencode.json
 .nx/polygraph
 .claude/worktrees
 .claude/settings.local.json
+.claude/settings.json
