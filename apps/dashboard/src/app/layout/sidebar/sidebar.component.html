@@ -51,6 +51,14 @@
     <img src="images/navbar/logo.png" alt="Elevate Logo" class="w-20 h-20 object-contain" />
   </div>
 
+  <a routerLink="/home"
+    class="mx-3 mb-3 flex items-center gap-3 rounded-lg bg-maroon-600 px-3 py-2.5 text-sm font-bold leading-5 text-white no-underline transition-colors hover:bg-maroon-700 hover:text-white focus-visible:bg-maroon-700 focus-visible:text-white focus-visible:outline-none"
+    aria-label="Preview website">
+    <lucide-icon [img]="WebsiteIcon" [size]="16" [strokeWidth]="2.4" class="block h-4 w-4 shrink-0"
+      aria-hidden="true"></lucide-icon>
+    <span>Preview Website</span>
+  </a>
+
   <nav class="flex flex-col gap-1 px-3 flex-1">
     @for (item of navItems; track item.route) {
     <a [routerLink]="item.route" routerLinkActive="active-nav-item"
