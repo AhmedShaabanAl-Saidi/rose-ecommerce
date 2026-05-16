@@ -1,18 +1,27 @@
-<nav
-  class="hidden lg:flex items-center gap-1 py-3 px-6 bg-white border-b border-zinc-100"
-  aria-label="Breadcrumb"
->
-  <p-breadcrumb
-    [model]="breadcrumbs()"
-    [home]="homeItem"
-    styleClass="!bg-transparent !border-0 !p-0"
-  >
+@if (variant() === 'mobile') {
+<nav class="flex min-w-0 items-center gap-1 text-[10px] font-medium leading-4 text-zinc-500" aria-label="Breadcrumb">
+  @for (item of breadcrumbs(); track $index; let isLast = $last) {
+  @if (item.routerLink && !isLast) {
+  <a [routerLink]="item.routerLink"
+    class="min-w-0 max-w-20 truncate text-zinc-500 no-underline transition-colors hover:text-maroon-700 sm:max-w-28">
+    {{ item.label }}
+  </a>
+  } @else {
+  <span class="min-w-0 max-w-24 truncate font-semibold text-maroon-700 sm:max-w-32">
+    {{ item.label }}
+  </span>
+  } @if (!isLast) {
+  <i class="pi pi-chevron-right shrink-0 text-[8px] text-zinc-300"></i>
+  }
+  }
+</nav>
+} @else {
+<nav class="hidden lg:flex items-center gap-1 py-3 px-6 bg-white border-b border-zinc-100" aria-label="Breadcrumb">
+  <p-breadcrumb [model]="breadcrumbs()" [home]="homeItem" styleClass="!bg-transparent !border-0 !p-0">
     <ng-template #item let-item>
       @if (item.routerLink) {
-      <a
-        [routerLink]="item.routerLink"
-        class="text-sm font-medium text-zinc-500 hover:text-maroon-700 transition-colors no-underline"
-      >
+      <a [routerLink]="item.routerLink"
+        class="text-sm font-medium text-zinc-500 hover:text-maroon-700 transition-colors no-underline">
         {{ item.label }}
       </a>
       } @else {
@@ -26,3 +35,4 @@
     </ng-template>
   </p-breadcrumb>
 </nav>
+}
