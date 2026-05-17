@@ -1,7 +1,6 @@
 <div class="rounded-2xl border border-zinc-200/80 bg-white p-6 shadow-sm flex flex-col h-full">
-  <div class="mb-5 border-b border-zinc-100 pb-3">
+  <div class="mb-5">
     <h3 class="text-lg font-bold text-zinc-800">Top Selling Products</h3>
-    <p class="text-xs text-zinc-400">By sales volume performance</p>
   </div>
 
   <div class="flex-1 space-y-5">
@@ -11,37 +10,22 @@
         <span class="text-xs">No sales data available</span>
       </div>
     } @else {
-      @for (prod of productsList(); track prod._id) {
-        <div class="group flex flex-col gap-2">
-          <div class="flex items-center justify-between gap-3">
-            <div class="flex items-center gap-3 min-w-0">
-              <!-- Product Image -->
-              <div class="h-10 w-10 shrink-0 overflow-hidden rounded-lg border border-zinc-100 bg-zinc-50">
-                <img
-                  [src]="prod.image"
-                  [alt]="prod.nameWithPrice"
-                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  (error)="fallbackImage($event)"
-                />
-              </div>
-              <!-- Product Title + Unit Price in parentheses -->
-              <span class="text-xs sm:text-sm font-bold text-zinc-700 truncate max-w-[200px] sm:max-w-[280px]">
-                {{ prod.nameWithPrice }}
-              </span>
-            </div>
-
-            <!-- Sales Count Badge -->
-            <span class="shrink-0 rounded-lg bg-maroon-50 px-2.5 py-1 text-xs font-extrabold text-maroon-700">
-              {{ prod.salesFormatted }} Sales
-            </span>
+      @for (prod of productsList(); track prod._id; let i = $index) {
+        <div class="relative h-8 flex items-center justify-between px-3 text-xs sm:text-sm">
+          <!-- Progress Bar Background -->
+          <div 
+            class="absolute left-0 top-0 h-full rounded-md"
+            [style.width]="prod.percentageWidth + '%'"
+            [ngClass]="i === 0 ? 'bg-amber-100' : (i === 1 ? 'bg-zinc-200' : (i === 2 ? 'bg-orange-100/50' : 'bg-zinc-100'))"
+          ></div>
+          
+          <!-- Text Content -->
+          <div class="font-bold text-zinc-800 truncate relative z-10">
+            {{ prod.name }} <span class="text-zinc-500 font-medium text-[11px]">({{ prod.price | currency:'EGP':'symbol':'1.0-0' }})</span>
           </div>
-
-          <!-- Horizontal Progress Representation -->
-          <div class="relative h-2 w-full rounded-full bg-zinc-100 overflow-hidden">
-            <div
-              [style.width.%]="prod.percentageWidth"
-              class="absolute left-0 top-0 bottom-0 rounded-full bg-gradient-to-r from-maroon-500 to-rose-500 transition-all duration-1000 ease-out"
-            ></div>
+          
+          <div class="font-bold text-zinc-800 relative z-10 shrink-0 ml-2 text-xs">
+            {{ prod.sales | number }} Sales
           </div>
         </div>
       }

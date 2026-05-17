@@ -1,31 +1,20 @@
 <div
   [ngClass]="getCardClasses()"
-  class="relative overflow-hidden rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+  class="relative overflow-hidden rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col items-start justify-between min-h-[140px]"
 >
-  <!-- Accent Top/Side Border -->
-  <div [ngClass]="getAccentBarClasses()" class="absolute left-0 top-0 bottom-0 w-1.5"></div>
-
-  <div class="flex items-center justify-between">
-    <div class="space-y-2">
-      <p class="text-xs font-semibold uppercase tracking-wider text-zinc-400">
-        {{ label() }}
-      </p>
-      <h3 class="text-2xl font-bold text-zinc-800 lg:text-3xl">
-        {{ formatValue(value()) }}
-      </h3>
-    </div>
-
-    <div
-      [ngClass]="getIconContainerClasses()"
-      class="flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
-    >
-      <i [class]="icon() + ' text-xl'"></i>
-    </div>
-  </div>
-  
-  <!-- Subtle Background Glow -->
   <div
-    [ngClass]="getGlowClasses()"
-    class="absolute -right-6 -bottom-6 h-24 w-24 rounded-full opacity-10 blur-xl pointer-events-none"
-  ></div>
+    [ngClass]="getIconContainerClasses()"
+    class="flex h-10 w-10 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
+  >
+    <i [class]="icon() + ' text-xl'"></i>
+  </div>
+
+  <div class="space-y-1 mt-4">
+    <h3 [ngClass]="getTextClasses()" class="text-2xl font-bold lg:text-3xl">
+      {{ formatValue(value()) }}
+    </h3>
+    <p class="text-sm font-medium text-zinc-600">
+      {{ label() }}
+    </p>
+  </div>
 </div>
