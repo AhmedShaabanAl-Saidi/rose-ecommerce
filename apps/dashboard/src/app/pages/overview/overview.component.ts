@@ -1,15 +1,57 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Title, Meta } from '@angular/platform-browser';
+import { DashboardService } from '../../core/services/dashboard.service';
+import { StatCardComponent } from './components/stat-card/stat-card.component';
+import { CategoryWidgetComponent } from './components/category-widget/category-widget.component';
+import { OrderStatusChartComponent } from './components/order-status-chart/order-status-chart.component';
+import { RevenueChartComponent } from './components/revenue-chart/revenue-chart.component';
+import { TopSellingProductsComponent } from './components/top-selling-products/top-selling-products.component';
+import { LowStockProductsComponent } from './components/low-stock-products/low-stock-products.component';
 
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [CommonModule],
-  template: `
-    <div class="p-8 max-w-4xl mx-auto">
-      <h1 class="text-3xl font-semibold mb-4">Overview</h1>
-      <p class="text-gray-600">Welcome to the dashboard overview.</p>
-    </div>
-  `,
+  imports: [
+    CommonModule,
+    StatCardComponent,
+    CategoryWidgetComponent,
+    OrderStatusChartComponent,
+    RevenueChartComponent,
+    TopSellingProductsComponent,
+    LowStockProductsComponent,
+  ],
+  templateUrl: './overview.component.html',
+  styleUrl: './overview.component.css',
 })
-export class OverviewComponent {}
+export class OverviewComponent implements OnInit {
+  private readonly dashboardService = inject(DashboardService);
+  private readonly titleService = inject(Title);
+  private readonly metaService = inject(Meta);
+
+  // Expose signals to the view
+  readonly statistics = this.dashboardService.statistics;
+  readonly loading = this.dashboardService.loading;
+  readonly error = this.dashboardService.error;
+
+  ngOnInit() {
+    this.setSEO();
+    this.loadData();
+  }
+
+  loadData() {
+    this.dashboardService.loadAllStatistics().subscribe();
+  }
+
+  refreshData() {
+    this.loadData();
+  }
+
+  private setSEO() {
+    this.titleService.setTitle('Admin Dashboard Overview | Elevate Flower');
+    this.metaService.updateTag({
+      name: 'description',
+      content: 'Analyze store statistics, order status percentages, sales revenue area trends, top sold items, and low stock inventory alerts in real-time.',
+    });
+  }
+}

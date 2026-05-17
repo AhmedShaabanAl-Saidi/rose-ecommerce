@@ -1,0 +1,60 @@
+<div class="rounded-2xl border border-zinc-200/80 bg-white p-6 shadow-sm flex flex-col h-full">
+  <div class="mb-5 border-b border-zinc-100 pb-3">
+    <h3 class="text-lg font-bold text-zinc-800">Orders Status</h3>
+    <p class="text-xs text-zinc-400">Total volume distribution</p>
+  </div>
+
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-8 flex-1">
+    <!-- SVG Donut Chart -->
+    <div class="relative w-36 h-36 flex-shrink-0">
+      <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
+        <!-- Background Circle -->
+        <circle
+          cx="18"
+          cy="18"
+          r="15.91549430918954"
+          fill="transparent"
+          stroke="#f4f4f5"
+          stroke-width="3.5"
+        ></circle>
+
+        <!-- Segments -->
+        @for (slice of slices(); track slice.status) {
+          <circle
+            cx="18"
+            cy="18"
+            r="15.91549430918954"
+            fill="transparent"
+            [attr.stroke]="slice.color"
+            stroke-width="4.2"
+            [attr.stroke-dasharray]="slice.strokeDashArray"
+            [attr.stroke-dashoffset]="slice.strokeDashOffset"
+            class="transition-all duration-500 ease-out hover:stroke-[5.2] cursor-pointer"
+          ></circle>
+        }
+      </svg>
+
+      <!-- Inside Total Text -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+        <span class="text-xl font-extrabold text-zinc-800">{{ totalOrders() }}</span>
+        <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Orders</span>
+      </div>
+    </div>
+
+    <!-- Legend displaying both absolute numbers and percentages -->
+    <div class="flex-1 w-full space-y-3">
+      @for (slice of slices(); track slice.status) {
+        <div class="flex items-center justify-between p-2 rounded-xl hover:bg-zinc-50 transition-colors">
+          <div class="flex items-center gap-2.5">
+            <span class="h-3 w-3 rounded-full" [style.background-color]="slice.color"></span>
+            <span class="text-xs font-bold text-zinc-600">{{ slice.status }}</span>
+          </div>
+          <div class="text-right">
+            <span class="text-xs font-extrabold text-zinc-800">{{ slice.count }}</span>
+            <span class="ml-1.5 text-[10px] font-bold text-zinc-400">({{ slice.percentage }}%)</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
