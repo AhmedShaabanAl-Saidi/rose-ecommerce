@@ -1,5 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
 import { ProductStat } from '../../../../core/interfaces/dashboard.interface';
 
 interface DisplayLowStockProduct {
@@ -12,7 +14,7 @@ interface DisplayLowStockProduct {
 @Component({
   selector: 'app-low-stock-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TableModule, TagModule],
   templateUrl: './low-stock-products.component.html',
   styleUrl: './low-stock-products.component.css',
 })
@@ -34,6 +36,18 @@ export class LowStockProductsComponent {
 
   isCritical(stock: number): boolean {
     return stock < this.threshold;
+  }
+
+  getSeverity(stock: number): 'success' | 'warn' | 'danger' | 'info' | 'secondary' | 'contrast' {
+    if (stock === 0) return 'danger';
+    if (stock < this.threshold) return 'warn';
+    return 'success';
+  }
+
+  getStatusText(stock: number): string {
+    if (stock === 0) return 'Out of Stock';
+    if (stock < this.threshold) return 'Low Stock';
+    return 'Optimal';
   }
 
   fallbackImage(event: Event) {

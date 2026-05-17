@@ -1,24 +1,9 @@
 <div id="admin-dashboard-container" class="space-y-6 pb-12">
   <!-- Welcome Header -->
-  <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-    <div>
-      <h1 id="dashboard-main-heading" class="text-3xl font-extrabold tracking-tight text-zinc-800">
-        Dashboard
-      </h1>
-      <p class="text-xs sm:text-sm font-medium text-zinc-400">
-        Monitor shop statistics, order distribution, and stock performance at a glance.
-      </p>
-    </div>
-
-    <button
-      type="button"
-      (click)="refreshData()"
-      [disabled]="loading()"
-      class="inline-flex items-center gap-2 self-start rounded-xl bg-white border border-zinc-200 px-4 py-2 text-xs font-bold text-zinc-700 shadow-sm transition-all hover:bg-zinc-50 hover:text-zinc-900 disabled:opacity-50 disabled:cursor-not-allowed md:self-auto"
-    >
-      <i [class]="loading() ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'" class="text-xs"></i>
-      <span>Refresh Data</span>
-    </button>
+  <div class="mb-6">
+    <h1 id="dashboard-main-heading" class="text-sm font-medium text-zinc-500">
+      Dashboard
+    </h1>
   </div>
 
   <!-- Loading Skeleton Loader -->

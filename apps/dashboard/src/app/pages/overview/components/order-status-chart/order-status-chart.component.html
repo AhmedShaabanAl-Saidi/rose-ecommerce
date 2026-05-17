@@ -1,60 +1,33 @@
 <div class="rounded-2xl border border-zinc-200/80 bg-white p-6 shadow-sm flex flex-col h-full">
-  <div class="mb-5 border-b border-zinc-100 pb-3">
+  <div class="mb-6">
     <h3 class="text-lg font-bold text-zinc-800">Orders Status</h3>
-    <p class="text-xs text-zinc-400">Total volume distribution</p>
   </div>
 
-  <div class="flex flex-col sm:flex-row items-center justify-center gap-8 flex-1">
-    <!-- SVG Donut Chart -->
-    <div class="relative w-36 h-36 flex-shrink-0">
-      <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
-        <!-- Background Circle -->
-        <circle
-          cx="18"
-          cy="18"
-          r="15.91549430918954"
-          fill="transparent"
-          stroke="#f4f4f5"
-          stroke-width="3.5"
-        ></circle>
-
-        <!-- Segments -->
-        @for (slice of slices(); track slice.status) {
-          <circle
-            cx="18"
-            cy="18"
-            r="15.91549430918954"
-            fill="transparent"
-            [attr.stroke]="slice.color"
-            stroke-width="4.2"
-            [attr.stroke-dasharray]="slice.strokeDashArray"
-            [attr.stroke-dashoffset]="slice.strokeDashOffset"
-            class="transition-all duration-500 ease-out hover:stroke-[5.2] cursor-pointer"
-          ></circle>
-        }
-      </svg>
-
-      <!-- Inside Total Text -->
-      <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-        <span class="text-xl font-extrabold text-zinc-800">{{ totalOrders() }}</span>
-        <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Orders</span>
+  <div class="flex-1 flex flex-col relative h-[300px]">
+    @if (items().length === 0) {
+      <div class="flex h-full flex-col items-center justify-center text-zinc-400">
+        <i class="pi pi-chart-pie text-3xl mb-2"></i>
+        <span class="text-xs">No orders data</span>
       </div>
-    </div>
-
-    <!-- Legend displaying both absolute numbers and percentages -->
-    <div class="flex-1 w-full space-y-3">
-      @for (slice of slices(); track slice.status) {
-        <div class="flex items-center justify-between p-2 rounded-xl hover:bg-zinc-50 transition-colors">
-          <div class="flex items-center gap-2.5">
-            <span class="h-3 w-3 rounded-full" [style.background-color]="slice.color"></span>
-            <span class="text-xs font-bold text-zinc-600">{{ slice.status }}</span>
+    } @else {
+      <div class="relative h-[200px] w-full flex items-center justify-center mb-6">
+        <p-chart type="doughnut" [data]="chartData()" [options]="chartOptions" class="h-full w-full flex justify-center"></p-chart>
+      </div>
+      
+      <!-- Custom Legend -->
+      <div class="mt-auto space-y-3">
+        @for (item of legendItems(); track item.label) {
+          <div class="flex items-center justify-between text-sm">
+            <div class="flex items-center gap-2">
+              <span class="h-2 w-2 rounded-full" [style.background-color]="item.color"></span>
+              <span class="font-medium text-zinc-600">{{ item.label }}</span>
+            </div>
+            <div class="font-bold text-zinc-800 text-xs">
+              {{ item.count }} ({{ item.percentage }}%)
+            </div>
           </div>
-          <div class="text-right">
-            <span class="text-xs font-extrabold text-zinc-800">{{ slice.count }}</span>
-            <span class="ml-1.5 text-[10px] font-bold text-zinc-400">({{ slice.percentage }}%)</span>
-          </div>
-        </div>
-      }
-    </div>
+        }
+      </div>
+    }
   </div>
 </div>

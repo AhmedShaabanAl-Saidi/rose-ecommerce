@@ -1,140 +1,36 @@
 <div class="rounded-2xl border border-zinc-200/80 bg-white p-6 shadow-sm flex flex-col h-full">
-  <div class="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-zinc-100 pb-3">
+  <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
     <div>
-      <h3 class="text-lg font-bold text-zinc-800">Revenue Trends</h3>
-      <p class="text-xs text-zinc-400">Track and monitor sales performance</p>
+      <h3 class="text-lg font-bold text-zinc-800">Revenue</h3>
     </div>
 
-    <!-- Filter Toggle (Monthly / Last Week) -->
-    <div class="inline-flex rounded-lg bg-zinc-100 p-0.5 self-start sm:self-auto">
-      <button
-        type="button"
-        (click)="setFilter('weekly')"
-        [ngClass]="activeFilter() === 'weekly' ? 'bg-white text-zinc-800 shadow-sm' : 'text-zinc-500 hover:text-zinc-800'"
-        class="rounded-md px-3.5 py-1.5 text-xs font-bold transition-all"
-      >
-        Last Week
-      </button>
+    <!-- Filters -->
+    <div class="flex items-center gap-4 self-start sm:self-auto text-xs">
       <button
         type="button"
         (click)="setFilter('monthly')"
-        [ngClass]="activeFilter() === 'monthly' ? 'bg-white text-zinc-800 shadow-sm' : 'text-zinc-500 hover:text-zinc-800'"
-        class="rounded-md px-3.5 py-1.5 text-xs font-bold transition-all"
+        [class]="activeFilter() === 'monthly' ? 'font-bold text-rose-600' : 'text-zinc-400 font-medium'"
       >
         Monthly
+      </button>
+      <button
+        type="button"
+        (click)="setFilter('weekly')"
+        [class]="activeFilter() === 'weekly' ? 'font-bold text-rose-600' : 'text-zinc-400 font-medium'"
+      >
+        Last Week
       </button>
     </div>
   </div>
 
-  <!-- Area/Line Chart -->
-  <div class="relative flex-1 min-h-[220px] w-full flex items-center justify-center">
-    @if (points().length === 0) {
-      <div class="text-zinc-400 text-xs">No trend data available</div>
+  <div class="flex-1 w-full h-[250px]">
+    @if (activeData().length === 0) {
+      <div class="flex h-full flex-col items-center justify-center text-zinc-400">
+        <i class="pi pi-chart-line text-3xl mb-2"></i>
+        <span class="text-xs">No revenue data</span>
+      </div>
     } @else {
-      <svg viewBox="0 0 500 220" class="w-full h-full overflow-visible">
-        <defs>
-          <!-- Area Red Gradient Fill -->
-          <linearGradient id="revenue-area-gradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#E11D48" stop-opacity="0.32" />
-            <stop offset="100%" stop-color="#E11D48" stop-opacity="0.0" />
-          </linearGradient>
-        </defs>
-
-        <!-- Horizontal Gridlines -->
-        @for (line of gridLines(); track line) {
-          <line
-            x1="45"
-            [attr.y1]="line"
-            x2="490"
-            [attr.y2]="line"
-            stroke="#f4f4f5"
-            stroke-width="1.2"
-            stroke-dasharray="3 3"
-          ></line>
-        }
-
-        <!-- Y-Axis Labels -->
-        @for (label of yAxisLabels(); track label.y) {
-          <text
-            x="38"
-            [attr.y]="label.y + 4"
-            text-anchor="end"
-            class="text-[9px] font-bold fill-zinc-400 font-sans"
-          >
-            {{ formatCurrencyShort(label.value) }}
-          </text>
-        }
-
-        <!-- Area Path Under the Line -->
-        <path
-          [attr.d]="areaPath()"
-          fill="url(#revenue-area-gradient)"
-          class="transition-all duration-500 ease-out"
-        ></path>
-
-        <!-- Main Red Line -->
-        <path
-          [attr.d]="linePath()"
-          fill="none"
-          stroke="#E11D48"
-          stroke-width="2.8"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="transition-all duration-500 ease-out"
-        ></path>
-
-        <!-- Interactive Highlight Vertex Points -->
-        @for (point of points(); track point.label; let i = $index) {
-          <g class="group/point">
-            <!-- Outer Hover Pulse -->
-            <circle
-              [attr.cx]="point.x"
-              [attr.cy]="point.y"
-              r="7"
-              fill="#E11D48"
-              class="opacity-0 group-hover/point:opacity-20 transition-opacity cursor-pointer"
-            ></circle>
-            <!-- Inner Solid Point -->
-            <circle
-              [attr.cx]="point.x"
-              [attr.cy]="point.y"
-              r="3.5"
-              fill="#ffffff"
-              stroke="#E11D48"
-              stroke-width="2"
-              class="cursor-pointer"
-              (mouseenter)="hoverPoint.set(point)"
-              (mouseleave)="hoverPoint.set(null)"
-            ></circle>
-          </g>
-        }
-
-        <!-- X-Axis Labels -->
-        @for (point of points(); track point.label) {
-          <text
-            [attr.x]="point.x"
-            y="206"
-            text-anchor="middle"
-            class="text-[10px] font-bold fill-zinc-400 font-sans"
-          >
-            {{ point.label }}
-          </text>
-        }
-      </svg>
-
-      <!-- Interactive Tooltip Overlay -->
-      @if (hoverPoint(); as active) {
-        <div
-          [style.left.px]="getTooltipLeft(active.x)"
-          [style.top.px]="active.y - 45"
-          class="absolute z-10 -translate-x-1/2 rounded-lg bg-zinc-900 px-2.5 py-1.5 shadow-xl text-center pointer-events-none transition-all duration-200 border border-zinc-800"
-        >
-          <p class="text-[9px] font-bold text-zinc-400 uppercase tracking-wider">{{ active.label }}</p>
-          <p class="text-xs font-black text-white mt-0.5">
-            {{ formatCurrencyFull(active.value) }}
-          </p>
-        </div>
-      }
-    @}
+      <p-chart type="line" [data]="chartData()" [options]="chartOptions" class="w-full h-full block" [style]="{'height': '250px'}"></p-chart>
+    }
   </div>
 </div>

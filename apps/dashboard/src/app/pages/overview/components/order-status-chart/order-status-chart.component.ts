@@ -1,71 +1,70 @@
 import { Component, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChartModule } from 'primeng/chart';
 import { OrderStatusStat } from '../../../../core/interfaces/dashboard.interface';
-
-interface DonutSlice {
-  status: string;
-  count: number;
-  percentage: number;
-  strokeDashArray: string;
-  strokeDashOffset: number;
-  color: string;
-  badgeClass: string;
-  textClass: string;
-}
 
 @Component({
   selector: 'app-order-status-chart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ChartModule],
   templateUrl: './order-status-chart.component.html',
   styleUrl: './order-status-chart.component.css',
 })
 export class OrderStatusChartComponent {
   items = input.required<OrderStatusStat[]>();
 
-  totalOrders = computed(() => {
-    return this.items().reduce((sum, item) => sum + item.count, 0);
-  });
+  totalCount = computed(() => this.items().reduce((acc, curr) => acc + curr.count, 0));
 
-  slices = computed<DonutSlice[]>(() => {
-    let currentOffset = 0;
+  legendItems = computed(() => {
+    const data = this.items();
+    const total = this.totalCount();
     const colorsMap: Record<string, string> = {
-      Completed: '#10b981', // Green
-      'In progress': '#3b82f6', // Blue
-      Pending: '#f59e0b', // Amber
-      Canceled: '#ef4444', // Red
+      Completed: '#10b981',
+      'In progress': '#3b82f6',
+      Pending: '#f59e0b',
+      Canceled: '#ef4444',
     };
 
-    return this.items().map((item) => {
-      const percentage = this.totalOrders() > 0 ? Math.round((item.count / this.totalOrders()) * 100) : 0;
-      const strokeDashArray = `${percentage} ${100 - percentage}`;
-      const strokeDashOffset = currentOffset;
-      currentOffset -= percentage;
-
-      const rawStatus = item.status || item._id || 'unknown';
-      let statusName = rawStatus;
-      if (rawStatus === 'inProgress' || rawStatus === 'in progress') {
-        statusName = 'In progress';
-      } else if (rawStatus === 'completed') {
-        statusName = 'Completed';
-      } else if (rawStatus === 'pending') {
-        statusName = 'Pending';
-      } else if (rawStatus === 'canceled') {
-        statusName = 'Canceled';
-      }
-
-      const color = colorsMap[statusName] || '#a1a1aa';
-
+    return data.map(item => {
+      let rawStatus = item.status || item._id || 'unknown';
+      if (rawStatus === 'inProgress' || rawStatus === 'in progress') rawStatus = 'In progress';
+      if (rawStatus === 'completed') rawStatus = 'Completed';
+      if (rawStatus === 'pending') rawStatus = 'Pending';
+      if (rawStatus === 'canceled') rawStatus = 'Canceled';
+      
+      const percentage = total === 0 ? 0 : Math.round((item.count / total) * 100);
+      
       return {
-        status: statusName,
+        label: rawStatus,
         count: item.count,
         percentage,
-        strokeDashArray,
-        strokeDashOffset,
-        color,
-        badgeClass: statusName === 'Completed' ? 'bg-emerald-50 text-emerald-600' : statusName === 'In progress' ? 'bg-blue-50 text-blue-600' : statusName === 'Pending' ? 'bg-amber-50 text-amber-600' : 'bg-red-50 text-red-600',
-        textClass: statusName === 'Completed' ? 'text-emerald-500' : statusName === 'In progress' ? 'text-blue-500' : statusName === 'Pending' ? 'text-amber-500' : 'text-red-500',
+        color: colorsMap[rawStatus as string] || '#a1a1aa'
       };
     });
   });
+
+  chartData = computed(() => {
+    const items = this.legendItems();
+    return {
+      labels: items.map(item => item.label),
+      datasets: [
+        {
+          data: items.map(item => item.count),
+          backgroundColor: items.map(item => item.color),
+          hoverBackgroundColor: items.map(item => item.color),
+          borderWidth: 0,
+        },
+      ],
+    };
+  });
+
+  chartOptions = {
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
+    cutout: '70%',
+    maintainAspectRatio: false
+  };
 }

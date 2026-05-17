@@ -1,10 +1,11 @@
-import { Component, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, input, inject } from '@angular/core';
+import { CommonModule, CurrencyPipe, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-stat-card',
   standalone: true,
   imports: [CommonModule],
+  providers: [CurrencyPipe, DecimalPipe],
   templateUrl: './stat-card.component.html',
   styleUrl: './stat-card.component.css',
 })
@@ -14,12 +15,15 @@ export class StatCardComponent {
   icon = input.required<string>();
   colorType = input<'rose' | 'blue' | 'purple' | 'green'>('rose');
 
+  private currencyPipe = inject(CurrencyPipe);
+  private decimalPipe = inject(DecimalPipe);
+
   formatValue(val: string | number): string {
     if (typeof val === 'number') {
       if (this.colorType() === 'green') {
-        return new Intl.NumberFormat('en-EG', { style: 'currency', currency: 'EGP', maximumFractionDigits: 0 }).format(val);
+        return this.currencyPipe.transform(val, 'EGP', 'symbol', '1.0-0') || '';
       }
-      return new Intl.NumberFormat('en-US').format(val);
+      return this.decimalPipe.transform(val, '1.0-0') || '';
     }
     return val;
   }
@@ -27,60 +31,45 @@ export class StatCardComponent {
   getCardClasses(): string {
     switch (this.colorType()) {
       case 'rose':
-        return 'border-rose-100/80 hover:border-rose-200';
+        return 'bg-rose-50';
       case 'blue':
-        return 'border-blue-100/80 hover:border-blue-200';
+        return 'bg-blue-50';
       case 'purple':
-        return 'border-purple-100/80 hover:border-purple-200';
+        return 'bg-purple-50';
       case 'green':
-        return 'border-emerald-100/80 hover:border-emerald-200';
+        return 'bg-emerald-50';
       default:
-        return 'border-zinc-100 hover:border-zinc-200';
-    }
-  }
-
-  getAccentBarClasses(): string {
-    switch (this.colorType()) {
-      case 'rose':
-        return 'bg-rose-500';
-      case 'blue':
-        return 'bg-blue-500';
-      case 'purple':
-        return 'bg-purple-500';
-      case 'green':
-        return 'bg-emerald-500';
-      default:
-        return 'bg-zinc-500';
+        return 'bg-zinc-50';
     }
   }
 
   getIconContainerClasses(): string {
     switch (this.colorType()) {
       case 'rose':
-        return 'bg-rose-50 text-rose-500';
+        return 'text-rose-500';
       case 'blue':
-        return 'bg-blue-50 text-blue-500';
+        return 'text-blue-500';
       case 'purple':
-        return 'bg-purple-50 text-purple-500';
+        return 'text-purple-500';
       case 'green':
-        return 'bg-emerald-50 text-emerald-500';
+        return 'text-emerald-500';
       default:
-        return 'bg-zinc-50 text-zinc-500';
+        return 'text-zinc-500';
     }
   }
 
-  getGlowClasses(): string {
+  getTextClasses(): string {
     switch (this.colorType()) {
       case 'rose':
-        return 'bg-rose-400';
+        return 'text-rose-500';
       case 'blue':
-        return 'bg-blue-400';
+        return 'text-blue-500';
       case 'purple':
-        return 'bg-purple-400';
+        return 'text-purple-500';
       case 'green':
-        return 'bg-emerald-400';
+        return 'text-emerald-500';
       default:
-        return 'bg-zinc-400';
+        return 'text-zinc-800';
     }
   }
 }
