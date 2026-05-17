@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthRepo } from '@elevate/auth-domain';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, throwError } from 'rxjs';
+import { catchError, retry, throwError, timer } from 'rxjs';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const toast = inject(ToastrService);
@@ -14,6 +14,16 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const injector = inject(Injector);
   const platFormId = inject(PLATFORM_ID);
   return next(req).pipe(
+    retry({
+      count: 2,
+      delay: (error: HttpErrorResponse, retryCount: number) => {
+        const isIdempotent = ['GET', 'PUT', 'DELETE', 'HEAD', 'OPTIONS'].includes(req.method);
+        if (isIdempotent && (error.status === 0 || error.status >= 500)) {
+          return timer(1000 * retryCount);
+        }
+        return throwError(() => error);
+      },
+    }),
     catchError((err: HttpErrorResponse) => {
       const translate = injector.get(TranslateService);
 
