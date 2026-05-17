@@ -1,0 +1,57 @@
+<section
+  class="relative min-h-[80vh] flex flex-col items-center justify-center px-6 py-24 bg-white"
+  aria-labelledby="not-found-heading"
+>
+  <div class="relative z-10 flex flex-col items-center text-center max-w-lg w-full">
+    
+    <!-- 404 Graphic -->
+    <div class="relative max-w-md w-full mb-8 select-none" aria-hidden="true">
+      <svg viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto drop-shadow-sm">
+        <!-- Background shadow ellipses -->
+        <ellipse cx="140" cy="180" rx="30" ry="6" fill="#e4e4e7" />
+        <ellipse cx="200" cy="185" rx="35" ry="7" fill="#e4e4e7" />
+        <ellipse cx="270" cy="180" rx="25" ry="5" fill="#e4e4e7" />
+
+        <!-- Left pink leaves -->
+        <path d="M70 140 C50 140, 40 100, 70 80 C80 90, 85 110, 100 115 C100 130, 80 140, 70 140Z" fill="#ec4899" />
+        <path d="M60 160 C40 160, 30 130, 50 110 C60 120, 75 140, 85 140 C85 150, 70 160, 60 160Z" fill="#db2777" />
+        <!-- Left small leaf -->
+        <path d="M100 165 C90 165, 85 155, 95 150 C100 155, 105 160, 100 165Z" fill="#db2777" />
+
+        <!-- 404 Numbers (Dark Gray #27272a) -->
+        <path d="M150 160H110V140L140 60H160V140H170V160H160V170H140V160ZM140 140V90L120 140H140Z" fill="#27272a"/>
+        <path d="M225 160C205 160 190 140 190 115C190 90 205 70 225 70C245 70 260 90 260 115C260 140 245 160 225 160ZM225 90C215 90 210 100 210 115C210 130 215 140 225 140C235 140 240 130 240 115C240 100 235 90 225 90Z" fill="#27272a"/>
+        <path d="M310 160H270V140L300 60H320V140H330V160H320V170H300V160ZM300 140V90L280 140H300Z" fill="#27272a"/>
+
+        <!-- Right purple/yellow leaves -->
+        <path d="M330 130 C310 130, 310 90, 330 70 C350 70, 360 100, 340 110 C350 120, 340 130, 330 130Z" fill="#a855f7" />
+        <path d="M310 170 C290 170, 280 140, 300 120 C310 130, 320 150, 330 150 C330 160, 320 170, 310 170Z" fill="#eab308" />
+        <path d="M350 160 C340 160, 335 150, 345 140 C350 145, 355 155, 350 160Z" fill="#ef4444" />
+        
+        <!-- Center small dots/leaves -->
+        <path d="M180 110 C175 110, 175 105, 180 105 C185 105, 185 110, 180 110Z" fill="#eab308" />
+        <path d="M265 140 C260 140, 260 135, 265 135 C270 135, 270 140, 265 140Z" fill="#ec4899" />
+      </svg>
+    </div>
+
+    <!-- Heading -->
+    <h1
+      id="not-found-heading"
+      class="text-2xl sm:text-[28px] font-bold text-black mb-3"
+    >
+      {{ title }}
+    </h1>
+
+    <!-- Description -->
+    <p
+      class="text-[15px] text-zinc-400 mb-8 max-w-sm mx-auto leading-relaxed"
+    >
+      {{ description }}
+    </p>
+
+    <!-- Content projection for buttons -->
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</section>

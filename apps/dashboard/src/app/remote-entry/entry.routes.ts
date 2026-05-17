@@ -49,6 +49,11 @@ export const remoteRoutes: Route[] = [
           },
         ],
       },
+      {
+        path: '**',
+        loadComponent: () => import('@elevate/reusable-ui').then(m => m.NotFoundComponent),
+        title: 'Dashboard – Page Not Found',
+      },
     ],
   },
 ];
