@@ -1,0 +1,146 @@
+<div id="admin-dashboard-container" class="space-y-6 pb-12">
+  <!-- Welcome Header -->
+  <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h1 id="dashboard-main-heading" class="text-3xl font-extrabold tracking-tight text-zinc-800">
+        Dashboard
+      </h1>
+      <p class="text-xs sm:text-sm font-medium text-zinc-400">
+        Monitor shop statistics, order distribution, and stock performance at a glance.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      (click)="refreshData()"
+      [disabled]="loading()"
+      class="inline-flex items-center gap-2 self-start rounded-xl bg-white border border-zinc-200 px-4 py-2 text-xs font-bold text-zinc-700 shadow-sm transition-all hover:bg-zinc-50 hover:text-zinc-900 disabled:opacity-50 disabled:cursor-not-allowed md:self-auto"
+    >
+      <i [class]="loading() ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'" class="text-xs"></i>
+      <span>Refresh Data</span>
+    </button>
+  </div>
+
+  <!-- Loading Skeleton Loader -->
+  @if (loading() && !statistics()) {
+    <div class="space-y-6">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        @for (i of [1, 2, 3, 4]; track i) {
+          <div class="h-32 animate-pulse rounded-2xl border border-zinc-100 bg-white p-6 shadow-sm"></div>
+        }
+      </div>
+      <div class="grid gap-6 lg:grid-cols-3">
+        <div class="h-80 lg:col-span-2 animate-pulse rounded-2xl border border-zinc-100 bg-white p-6 shadow-sm"></div>
+        <div class="h-80 animate-pulse rounded-2xl border border-zinc-100 bg-white p-6 shadow-sm"></div>
+      </div>
+    </div>
+  }
+
+  <!-- Main Statistics Grid -->
+  @if (statistics(); as data) {
+    <div class="space-y-6">
+      <!-- Row 1: Stats Cards Grid + Category Widget -->
+      <div class="grid gap-6 lg:grid-cols-3">
+        <!-- Left Side: 2x2 Metric Cards Grid -->
+        <div class="lg:col-span-2 grid gap-4 sm:grid-cols-2">
+          <app-stat-card
+            label="Total Products"
+            [value]="data.overall.totalProducts"
+            icon="pi pi-box"
+            colorType="rose"
+            id="stat-total-products"
+          ></app-stat-card>
+
+          <app-stat-card
+            label="Total Orders"
+            [value]="data.overall.totalOrders"
+            icon="pi pi-shopping-bag"
+            colorType="blue"
+            id="stat-total-orders"
+          ></app-stat-card>
+
+          <app-stat-card
+            label="Total Categories"
+            [value]="data.overall.totalCategories"
+            icon="pi pi-clipboard"
+            colorType="purple"
+            id="stat-total-categories"
+          ></app-stat-card>
+
+          <app-stat-card
+            label="Total Revenue"
+            [value]="data.overall.totalRevenue"
+            icon="pi pi-dollar"
+            colorType="green"
+            id="stat-total-revenue"
+          ></app-stat-card>
+        </div>
+
+        <!-- Right Side: Scrollable Categories Widget -->
+        <div class="h-full">
+          <app-category-widget
+            [items]="data.products.productsByCategory"
+            id="widget-all-categories"
+          ></app-category-widget>
+        </div>
+      </div>
+
+      <!-- Row 2: Donut Order Status + Line Revenue Chart -->
+      <div class="grid gap-6 lg:grid-cols-3">
+        <!-- Left: Order Status SVG Donut -->
+        <div>
+          <app-order-status-chart
+            [items]="data.orders.ordersByStatus"
+            id="widget-order-status"
+          ></app-order-status-chart>
+        </div>
+
+        <!-- Right: Interactive SVG Area Line Chart -->
+        <div class="lg:col-span-2">
+          <app-revenue-chart
+            [dailyRevenue]="data.orders.dailyRevenue"
+            [monthlyRevenue]="data.orders.monthlyRevenue"
+            id="widget-revenue-trends"
+          ></app-revenue-chart>
+        </div>
+      </div>
+
+      <!-- Row 3: Top Selling List + Low Stock Alert Table -->
+      <div class="grid gap-6 lg:grid-cols-2">
+        <!-- Left: Top Selling Products progress bar list -->
+        <div>
+          <app-top-selling-products
+            [items]="data.products.topSellingProducts"
+            id="widget-top-selling"
+          ></app-top-selling-products>
+        </div>
+
+        <!-- Right: Low Stock Alert warehouse status -->
+        <div>
+          <app-low-stock-products
+            [items]="data.products.lowStockProducts"
+            id="widget-low-stock"
+          ></app-low-stock-products>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Error Fallback Message -->
+  @if (error() && !statistics()) {
+    <div class="flex flex-col items-center justify-center p-12 rounded-2xl border border-red-100 bg-red-50/50 shadow-sm text-center">
+      <div class="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600 mb-4">
+        <i class="pi pi-exclamation-triangle text-xl"></i>
+      </div>
+      <h4 class="text-sm font-bold text-red-800">Failed to load statistics</h4>
+      <p class="text-xs text-red-600 mt-1 max-w-md">{{ error() }}</p>
+      <button
+        type="button"
+        (click)="refreshData()"
+        class="mt-4 rounded-lg bg-red-600 px-4 py-2 text-xs font-bold text-white hover:bg-red-700 transition-colors shadow-sm"
+      >
+        Try Again
+      </button>
+    </div>
+  }
+</div>
