@@ -1,3 +1,6 @@
+import { ProductStat } from './product.interface';
+export type { ProductStat };
+
 export interface OverallStats {
   totalProducts: number;
   totalOrders: number;
@@ -9,20 +12,6 @@ export interface CategoryStat {
   categoryName: string;
   productCount: number;
   revenue: number;
-}
-
-export interface ProductStat {
-  _id: string;
-  name?: string;
-  title?: string;
-  sales?: number;
-  sold?: number;
-  revenue?: number;
-  price: number;
-  stock?: number;
-  quantity?: number;
-  image?: string;
-  imgCover?: string;
 }
 
 export interface OrderStatusStat {

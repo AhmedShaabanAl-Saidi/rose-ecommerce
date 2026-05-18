@@ -1,14 +1,15 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, Observable, throwError, tap, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { catchError, map, Observable, throwError, tap } from 'rxjs';
 import { AllStatsResponse, StatisticsApiResponse } from '../interfaces/dashboard.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DashboardService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'https://flower.elevateegy.com/api/v1';
+  private readonly baseUrl = environment.baseUrl;
 
   // State management using Signals
   readonly statistics = signal<AllStatsResponse | null>(null);
@@ -19,12 +20,7 @@ export class DashboardService {
     this.loading.set(true);
     this.error.set(null);
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjlkZWFjOGU2YmJhZjE1ODhiYmMxOTg0Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzkwMTgwMzZ9.ljOzZkaTNSzUKV7b7WYYcLuaH4_5H1ogoTZZhOxkxjg';
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    return this.http.get<StatisticsApiResponse>(`${this.baseUrl}/statistics`, { headers }).pipe(
+    return this.http.get<StatisticsApiResponse>(`${this.baseUrl}/statistics`).pipe(
       map(response => {
         const stats = response.statistics || response.data;
         if (!stats) {

@@ -63,10 +63,13 @@
 
         <!-- Right Side: Scrollable Categories Widget -->
         <div class="h-full">
-          <app-category-widget
-            [items]="data.products.productsByCategory"
+          <app-list-widget
+            title="All Categories"
+            [items]="categoryWidgetItems()"
+            emptyMessage="No category data"
+            emptyIcon="pi pi-inbox"
             id="widget-all-categories"
-          ></app-category-widget>
+          ></app-list-widget>
         </div>
       </div>
 

@@ -1,9 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
 import { DashboardService } from '../../core/services/dashboard.service';
 import { StatCardComponent } from './components/stat-card/stat-card.component';
-import { CategoryWidgetComponent } from './components/category-widget/category-widget.component';
+import { ListWidgetComponent, ListItem } from './components/list-widget/list-widget.component';
 import { OrderStatusChartComponent } from './components/order-status-chart/order-status-chart.component';
 import { RevenueChartComponent } from './components/revenue-chart/revenue-chart.component';
 import { TopSellingProductsComponent } from './components/top-selling-products/top-selling-products.component';
@@ -15,7 +15,7 @@ import { LowStockProductsComponent } from './components/low-stock-products/low-s
   imports: [
     CommonModule,
     StatCardComponent,
-    CategoryWidgetComponent,
+    ListWidgetComponent,
     OrderStatusChartComponent,
     RevenueChartComponent,
     TopSellingProductsComponent,
@@ -33,6 +33,15 @@ export class OverviewComponent implements OnInit {
   readonly statistics = this.dashboardService.statistics;
   readonly loading = this.dashboardService.loading;
   readonly error = this.dashboardService.error;
+
+  readonly categoryWidgetItems = computed<ListItem[]>(() => {
+    const stats = this.statistics();
+    if (!stats) return [];
+    return stats.products.productsByCategory.map((c) => ({
+      label: c.category,
+      value: c.count
+    }));
+  });
 
   ngOnInit() {
     this.setSEO();
