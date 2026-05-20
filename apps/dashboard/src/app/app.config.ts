@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
@@ -14,6 +15,8 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
+import { provideToastr } from 'ngx-toastr';
+import { errorInterceptor } from './core/interceptors/error-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,8 +24,17 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimationsAsync(),
     provideRouter(appRoutes, withComponentInputBinding()),
-    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([authInterceptor, errorInterceptor])
+    ),
     provideAuth({ baseUrl: 'https://flower.elevateegy.com/' }),
+    provideToastr({
+      closeButton: true,
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     providePrimeNG({
       ripple: true,
       theme: {
