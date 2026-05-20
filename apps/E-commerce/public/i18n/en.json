@@ -396,8 +396,8 @@
     "NO_RECOMMENDATIONS": "No products available at the moment."
   },
   "NOT_FOUND": {
-    "TITLE": "Lost in the Gift Shop?",
-    "DESCRIPTION": "The page you're looking for has moved or no longer exists. Let's get you back to finding the perfect gift.",
+    "TITLE": "This page does not exist.",
+    "DESCRIPTION": "We couldn't find the page your are looking for, please make sure you are in the right path.",
     "BACK_TO_HOME": "Back to Home",
     "BROWSE_PRODUCTS": "Browse Products",
     "BACK_TO_DASHBOARD": "Back to Dashboard"
