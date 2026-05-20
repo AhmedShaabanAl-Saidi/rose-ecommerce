@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, throwError, tap } from 'rxjs';
 import { AllStatsResponse, StatisticsApiResponse } from '../interfaces/dashboard.interface';
+import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -9,6 +10,7 @@ import { environment } from '../../../environments/environment';
 })
 export class DashboardService {
   private readonly http = inject(HttpClient);
+  private readonly router = inject(Router);
   private readonly baseUrl = environment.baseUrl;
 
   // State management using Signals
@@ -32,7 +34,10 @@ export class DashboardService {
         this.statistics.set(data);
         this.loading.set(false);
       }),
-      catchError((err) => {
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401 || err.status === 403) {
+          this.router.navigate(['/unauthorized']);
+        }
         this.error.set(err.message || 'Failed to load statistics');
         this.loading.set(false);
         return throwError(() => err);

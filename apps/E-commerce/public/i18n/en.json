@@ -403,10 +403,10 @@
     "BACK_TO_DASHBOARD": "Back to Dashboard"
   },
   "UNAUTHORIZED": {
-    "TITLE": "Access Denied",
-    "DESCRIPTION": "You do not have permission to view this page. This area is restricted to authorized users only.",
-    "BACK_TO_HOME": "Back to Home",
-    "BACK_TO_DASHBOARD": "Back to Dashboard"
+    "TITLE": "You are not authorized to access this page.",
+    "DESCRIPTION": "If you think this is wrong, please contact the support.",
+    "BACK_TO_HOME": "Go to Homepage",
+    "BACK_TO_DASHBOARD": "Go to Dashboard"
   },
   "CHECKOUT": {
     "PAYMENT_METHOD": "Payment Method",
