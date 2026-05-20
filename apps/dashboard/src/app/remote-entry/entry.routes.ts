@@ -1,30 +1,53 @@
 import { Route } from '@angular/router';
-import { RemoteEntry } from './entry';
-import { TestPage1Component } from '../pages/test-page-1/test-page-1.component';
-import { TestPage2Component } from '../pages/test-page-2/test-page-2.component';
-import { TestPage3Component } from '../pages/test-page-3/test-page-3.component';
+import { DashboardLayoutComponent } from '../layout/dashboard-layout/dashboard-layout.component';
+import { OverviewComponent } from '../pages/overview/overview.component';
+import { CategoriesComponent } from '../pages/categories/categories.component';
+import { OccasionsComponent } from '../pages/occasions/occasions.component';
+import { ProductsComponent } from '../pages/products/products.component';
+import { ProductAddComponent } from '../pages/products/product-add/product-add.component';
+import { ProductEditComponent } from '../pages/products/product-edit/product-edit.component';
 
 export const remoteRoutes: Route[] = [
   {
     path: '',
-    component: RemoteEntry,
+    component: DashboardLayoutComponent,
     children: [
       {
         path: '',
-        redirectTo: 'test-1',
+        redirectTo: 'overview',
         pathMatch: 'full',
       },
       {
-        path: 'test-1',
-        component: TestPage1Component,
+        path: 'overview',
+        component: OverviewComponent,
+        title: 'Dashboard – Overview',
       },
       {
-        path: 'test-2',
-        component: TestPage2Component,
+        path: 'categories',
+        component: CategoriesComponent,
+        title: 'Dashboard – Categories',
       },
       {
-        path: 'test-3',
-        component: TestPage3Component,
+        path: 'occasions',
+        component: OccasionsComponent,
+        title: 'Dashboard – Occasions',
+      },
+      {
+        path: 'products',
+        component: ProductsComponent,
+        title: 'Dashboard – Products',
+        children: [
+          {
+            path: 'add',
+            component: ProductAddComponent,
+            title: 'Dashboard – Add Product',
+          },
+          {
+            path: 'edit',
+            component: ProductEditComponent,
+            title: 'Dashboard – Edit Product',
+          },
+        ],
       },
     ],
   },

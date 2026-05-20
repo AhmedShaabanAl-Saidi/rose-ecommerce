@@ -1,0 +1,72 @@
+<aside
+  class="hidden lg:flex flex-col w-[303px] min-w-[190px] bg-white border-r border-zinc-100 h-screen sticky top-0 overflow-y-auto overflow-x-hidden shadow-sm z-30"
+  role="navigation"
+  aria-label="Main navigation"
+>
+  <div class="flex items-center justify-center pt-7 pb-5 px-4">
+    <img
+      src="images/navbar/logo.png"
+      alt="Elevate Logo"
+      class="w-20 h-20 object-contain"
+    />
+  </div>
+
+  <nav class="flex flex-col gap-1 px-3 flex-1">
+    @for (item of navItems; track item.route) {
+    <a
+      [routerLink]="item.route"
+      routerLinkActive="active-nav-item"
+      [routerLinkActiveOptions]="{ exact: item.route === 'overview' }"
+      class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-zinc-600 hover:bg-maroon-50 hover:text-maroon-700 group cursor-pointer no-underline"
+      [attr.aria-label]="item.label + ' page'"
+    >
+      <i
+        [class]="
+          item.icon +
+          ' text-base sidebar-icon text-zinc-400 group-hover:text-maroon-600 transition-colors'
+        "
+      ></i>
+      <span>{{ item.label }}</span>
+    </a>
+    }
+  </nav>
+
+  <div class="mt-auto border-t border-zinc-100 px-3 py-4">
+    <div class="flex items-center gap-2.5 px-1">
+      <p-avatar
+        [image]="user()?.photo || 'https://www.gravatar.com/avatar/?d=mp&f=y'"
+        shape="circle"
+        size="normal"
+        class="flex-shrink-0"
+        styleClass="w-9 h-9 text-sm font-semibold !bg-maroon-600 !text-white"
+      >
+      </p-avatar>
+      <div class="flex flex-col min-w-0 flex-1">
+        <span class="text-xs font-semibold text-zinc-800 truncate">{{
+          (user()?.firstName || '') +
+            (user()?.lastName ? ' ' + user()?.lastName : '') || 'Guest'
+        }}</span>
+        <span class="text-[10px] text-zinc-400 truncate">{{
+          user()?.email || '—'
+        }}</span>
+      </div>
+      <button
+        #profileBtn
+        type="button"
+        (click)="$event.stopPropagation(); profileMenu.toggle($event)"
+        class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors"
+        aria-label="Profile menu"
+      >
+        <i class="pi pi-ellipsis-v text-xs"></i>
+      </button>
+    </div>
+  </div>
+
+  <p-menu
+    #profileMenu
+    [model]="profileMenuItems"
+    [popup]="true"
+    appendTo="body"
+    styleClass="profile-menu-custom"
+  ></p-menu>
+</aside>

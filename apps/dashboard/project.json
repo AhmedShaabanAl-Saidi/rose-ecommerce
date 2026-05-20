@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/dashboard/src",
-  "tags": [],
+  "tags": ["type:app", "scope:shared"],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
@@ -21,7 +21,10 @@
             "input": "apps/dashboard/public"
           }
         ],
-        "styles": ["apps/dashboard/src/styles.css"],
+        "styles": [
+          "node_modules/primeicons/primeicons.css",
+          "apps/dashboard/src/styles.css"
+        ],
         "customWebpackConfig": {
           "path": "apps/dashboard/webpack.config.ts"
         }

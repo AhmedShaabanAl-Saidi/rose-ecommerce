@@ -71,6 +71,7 @@ export class TopNavbarComponent {
       }
 
       this.loadPrimaryAddress();
+      this.cartService.getLoggedUserCart().pipe(take(1)).subscribe();
       this.wishlistService.loadWishlist().pipe(take(1)).subscribe();
     });
   }
@@ -80,53 +81,55 @@ export class TopNavbarComponent {
 
     const user = this.user();
     if (!user) return [];
-
+    const baseItems = [
+      {
+        label: this.translate.instant('NAVBAR.ACCOUNT_MENU.PROFILE'),
+        icon: 'pi pi-user',
+        routerLink: '/profile',
+      },
+      {
+        label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ADDRESSES'),
+        icon: 'pi pi-map-marker',
+        command: () => {
+          this.openAddressManager();
+        },
+      },
+      {
+        label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ORDERS'),
+        icon: 'pi pi-shopping-cart',
+        routerLink: '/allOrders',
+      },
+    ];
+    if (user.role === 'admin') {
+      baseItems.push({
+        label: this.translate.instant('NAVBAR.ACCOUNT_MENU.DASHBOARD'),
+        icon: 'pi pi-chart-bar',
+        routerLink: '/',
+      });
+    }
+    baseItems.push({
+      label: this.translate.instant('NAVBAR.ACCOUNT_MENU.LOGOUT'),
+      icon: 'pi pi-sign-out',
+      command: () => {
+        this.authRepo
+          .logout()
+          .pipe(
+            tap(() => {
+              this.cartService.setDefaultCart();
+              this.wishlistService.clearWishlist();
+              this.router.navigate(['/']);
+            }),
+            take(1)
+          )
+          .subscribe();
+      },
+    });
     return [
       {
         label: `<span class="truncate block max-w-[200px]" title="${user.firstName}">${user.firstName}</span>`,
         escape: false,
         styleClass: 'max-w-[220px]',
-        items: [
-          {
-            label: this.translate.instant('NAVBAR.ACCOUNT_MENU.PROFILE'),
-            icon: 'pi pi-user',
-            routerLink: '/profile',
-          },
-          {
-            label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ADDRESSES'),
-            icon: 'pi pi-map-marker',
-            command: () => {
-              this.openAddressManager();
-            },
-          },
-          {
-            label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ORDERS'),
-            icon: 'pi pi-shopping-cart',
-            routerLink: '/allOrders',
-          },
-          {
-            label: this.translate.instant('NAVBAR.ACCOUNT_MENU.DASHBOARD'),
-            icon: 'pi pi-chart-bar',
-            routerLink: '/',
-          },
-          {
-            label: this.translate.instant('NAVBAR.ACCOUNT_MENU.LOGOUT'),
-            icon: 'pi pi-sign-out',
-            command: () => {
-              this.authRepo
-                .logout()
-                .pipe(
-                  tap(() => {
-                    this.cartService.setDefaultCart();
-                    this.wishlistService.clearWishlist();
-                    this.router.navigate(['/']);
-                  }),
-                  take(1)
-                )
-                .subscribe();
-            },
-          },
-        ],
+        items: baseItems,
       },
     ];
   });

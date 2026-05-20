@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthState } from '@elevate/auth-domain';
 import { ButtonComponent } from '@elevate/reusable-ui';
+import { AuthState } from '@elevate/auth-domain';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
-  selector: 'app-not-found',
+  selector: 'app-unauthorized',
   imports: [RouterLink, ButtonComponent, TranslateModule, LucideAngularModule],
-  templateUrl: './not-found.component.html',
+  templateUrl: './unauthorized.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotFoundComponent {
+export class UnauthorizedComponent {
   private readonly authState = inject(AuthState);
   readonly user = this.authState.currentUser;
 }
