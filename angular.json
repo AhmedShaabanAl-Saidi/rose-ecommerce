@@ -11,10 +11,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@nx/angular:webpack-browser",
           "options": {
+            "index": "apps/E-commerce/src/index.html",
             "outputPath": "dist/apps/E-commerce",
-            "browser": "apps/E-commerce/src/main.ts",
+            "main": "apps/E-commerce/src/main.ts",
             "tsConfig": "apps/E-commerce/tsconfig.app.json",
             "allowedCommonJsDependencies": [
               "google-libphonenumber"
@@ -34,11 +35,9 @@
             "scripts": [
               "node_modules/intl-tel-input/build/js/utils.js"
             ],
-            "server": "apps/E-commerce/src/main.server.ts",
-            "ssr": {
-              "entry": "apps/E-commerce/src/server.ts"
-            },
-            "outputMode": "server"
+            "customWebpackConfig": {
+              "path": "apps/E-commerce/webpack.config.ts"
+            }
           },
           "configurations": {
             "production": {
