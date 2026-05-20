@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, throwError, tap } from 'rxjs';
 import { AllStatsResponse, StatisticsApiResponse } from '../interfaces/dashboard.interface';
 import { Router } from '@angular/router';
@@ -22,7 +22,12 @@ export class DashboardService {
     this.loading.set(true);
     this.error.set(null);
 
-    return this.http.get<StatisticsApiResponse>(`${this.baseUrl}/statistics`).pipe(
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjlkZWFjOGU2YmJhZjE1ODhiYmMxOTg0Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NzkwMTgwMzZ9.ljOzZkaTNSzUKV7b7WYYcLuaH4_5H1ogoTZZhOxkxjg';
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.get<StatisticsApiResponse>(`${this.baseUrl}/statistics`, { headers }).pipe(
       map(response => {
         const stats = response.statistics || response.data;
         if (!stats) {
