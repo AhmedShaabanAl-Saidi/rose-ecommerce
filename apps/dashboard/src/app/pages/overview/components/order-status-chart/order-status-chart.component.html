@@ -1,0 +1,33 @@
+<div class="rounded-2xl border border-zinc-200/80 bg-white p-6 shadow-sm flex flex-col h-full">
+  <div class="mb-6">
+    <h3 class="text-lg font-bold text-zinc-800">Orders Status</h3>
+  </div>
+
+  <div class="flex-1 flex flex-col relative h-[300px]">
+    @if (items().length === 0) {
+      <div class="flex h-full flex-col items-center justify-center text-zinc-400">
+        <i class="pi pi-chart-pie text-3xl mb-2"></i>
+        <span class="text-xs">No orders data</span>
+      </div>
+    } @else {
+      <div class="relative h-[200px] w-full flex items-center justify-center mb-6">
+        <p-chart type="doughnut" [data]="chartData()" [options]="chartOptions" class="h-full w-full flex justify-center"></p-chart>
+      </div>
+      
+      <!-- Custom Legend -->
+      <div class="mt-auto space-y-3">
+        @for (item of legendItems(); track item.label) {
+          <div class="flex items-center justify-between text-sm">
+            <div class="flex items-center gap-2">
+              <span class="h-2 w-2 rounded-full" [style.background-color]="item.color"></span>
+              <span class="font-medium text-zinc-600">{{ item.label }}</span>
+            </div>
+            <div class="font-bold text-zinc-800 text-xs">
+              {{ item.count }} ({{ item.percentage }}%)
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
