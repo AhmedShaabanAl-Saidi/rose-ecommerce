@@ -72,15 +72,17 @@
       type="button"
       (click)="toggleWishlist.emit(product()?._id!)"
       [attr.aria-label]="
-        product()?.isInWishlist
+        isInWishlist()
           ? 'Remove from wishlist: ' + product()?.title
           : 'Add to wishlist: ' + product()?.title
       "
       class="cursor-pointer rounded-xl bg-zinc-100 p-2.5 transition-colors hover:bg-zinc-200 dark:border dark:border-zinc-500 dark:bg-transparent dark:hover:bg-zinc-700 sm:p-2"
-      [title]="'PRODUCT_DETAILS.ADD_TO_WISHLIST' | translate"
+      [title]="
+        isInWishlist() ? 'Remove from wishlist' : 'Add to wishlist'
+      "
     >
       <lucide-icon
-        [name]="product()?.isInWishlist ? 'heart-minus' : 'heart-plus'"
+        [name]="isInWishlist() ? 'heart-minus' : 'heart-plus'"
         class="text-zinc-600 dark:text-white"
       ></lucide-icon>
     </button>

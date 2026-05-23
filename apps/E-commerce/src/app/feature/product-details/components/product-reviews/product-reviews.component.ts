@@ -29,6 +29,7 @@ import { RouterLink } from '@angular/router';
 export class ProductReviewsComponent {
   private readonly authState = inject(AuthState);
   readonly user = this.authState.isAuthenticated;
+  userAuth = this.authState.currentUser;
   reviews = input.required<Review[]>();
   selectedRating = signal(0);
   hoveredRating = signal(0);
