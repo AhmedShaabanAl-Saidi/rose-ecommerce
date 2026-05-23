@@ -1,3 +1,4 @@
+import { AuthState } from '@elevate/auth-domain';
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, DestroyRef, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,6 +20,8 @@ export class ProductCardComponent {
   product = input.required<Product>();
   private readonly _cartService = inject(CartService);
   private readonly _destroyRef = inject(DestroyRef);
+  private readonly authState = inject(AuthState);
+  user = this.authState.currentUser;
   readonly ICON_SIZE = 18;
   readonly ICON_STROKE = 2;
   readonly EYE_ICON_SIZE = 22;
@@ -68,7 +71,8 @@ export class ProductCardComponent {
   }
 
   addToWishList(): void {
-    this.wishlistService.toggleWishlist(this.product()._id)
+    this.wishlistService
+      .toggleWishlist(this.product()._id)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe();
   }
