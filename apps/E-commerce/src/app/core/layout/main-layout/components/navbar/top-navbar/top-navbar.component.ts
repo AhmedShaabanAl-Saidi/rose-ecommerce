@@ -69,10 +69,10 @@ export class TopNavbarComponent {
         this.primaryAddress.set(null);
         return;
       }
+      this.wishlistService.loadWishlist().pipe(take(1)).subscribe();
       if (user?.role !== 'admin') {
         this.loadPrimaryAddress();
         this.cartService.getLoggedUserCart().pipe(take(1)).subscribe();
-        this.wishlistService.loadWishlist().pipe(take(1)).subscribe();
       }
     });
   }

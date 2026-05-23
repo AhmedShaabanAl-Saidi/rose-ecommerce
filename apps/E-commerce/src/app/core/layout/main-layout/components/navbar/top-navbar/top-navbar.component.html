@@ -120,7 +120,7 @@
             }
           </a>
         </li>
-
+        @if(!user() || (user() && user()?.role !== 'admin')){
         <li>
           <a
             aria-label="Shopping cart"
@@ -143,6 +143,8 @@
             }
           </a>
         </li>
+        }
+
         <li class="hover:text-maroon-400 cursor-pointer">
           <lucide-icon
             aria-hidden="true"
