@@ -69,10 +69,11 @@ export class TopNavbarComponent {
         this.primaryAddress.set(null);
         return;
       }
-
-      this.loadPrimaryAddress();
-      this.cartService.getLoggedUserCart().pipe(take(1)).subscribe();
-      this.wishlistService.loadWishlist().pipe(take(1)).subscribe();
+      if (user?.role !== 'admin') {
+        this.loadPrimaryAddress();
+        this.cartService.getLoggedUserCart().pipe(take(1)).subscribe();
+        this.wishlistService.loadWishlist().pipe(take(1)).subscribe();
+      }
     });
   }
 
@@ -81,30 +82,34 @@ export class TopNavbarComponent {
 
     const user = this.user();
     if (!user) return [];
-    const baseItems = [
-      {
-        label: this.translate.instant('NAVBAR.ACCOUNT_MENU.PROFILE'),
-        icon: 'pi pi-user',
-        routerLink: '/profile',
-      },
-      {
-        label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ADDRESSES'),
-        icon: 'pi pi-map-marker',
-        command: () => {
-          this.openAddressManager();
+    const baseItems = [];
+    if (user && user.role !== 'admin') {
+      baseItems.push(
+        {
+          label: this.translate.instant('NAVBAR.ACCOUNT_MENU.PROFILE'),
+          icon: 'pi pi-user',
+          routerLink: '/profile',
         },
-      },
-      {
-        label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ORDERS'),
-        icon: 'pi pi-shopping-cart',
-        routerLink: '/allOrders',
-      },
-    ];
+        {
+          label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ADDRESSES'),
+          icon: 'pi pi-map-marker',
+          command: () => {
+            this.openAddressManager();
+          },
+        },
+        {
+          label: this.translate.instant('NAVBAR.ACCOUNT_MENU.ORDERS'),
+          icon: 'pi pi-shopping-cart',
+          routerLink: '/allOrders',
+        }
+      );
+    }
+
     if (user.role === 'admin') {
       baseItems.push({
         label: this.translate.instant('NAVBAR.ACCOUNT_MENU.DASHBOARD'),
         icon: 'pi pi-chart-bar',
-        routerLink: '/',
+        routerLink: '/dashboard',
       });
     }
     baseItems.push({

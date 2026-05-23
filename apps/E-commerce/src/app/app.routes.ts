@@ -19,7 +19,6 @@ const unauthorizedSeo: SeoMeta = {
 export const appRoutes: Route[] = [
   {
     path: '',
-    canActivate: [userGuard],
     loadChildren: () =>
       import('./core/layout/main-layout/main.routes').then((m) => m.mainRoutes),
   },
