@@ -1,4 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
@@ -6,8 +5,6 @@ import {
 } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { providePrimeNG } from 'primeng/config';
-import MyPreset from '../mypreset';
 import { appRoutes } from './app.routes';
 import {
   provideHttpClient,
@@ -15,6 +12,7 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
+import { provideElevatePrimeNG } from '@elevate/theme';
 import { provideToastr } from 'ngx-toastr';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 
@@ -35,14 +33,6 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
-    providePrimeNG({
-      ripple: true,
-      theme: {
-        preset: MyPreset,
-        options: {
-          darkModeSelector: '.dark',
-        },
-      },
-    }),
+    provideElevatePrimeNG(),
   ],
 };

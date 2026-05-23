@@ -20,6 +20,7 @@ import {
   withInMemoryScrolling,
 } from '@angular/router';
 import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
+import { provideElevatePrimeNG } from '@elevate/theme';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
@@ -67,9 +68,7 @@ import {
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
 import { ConfirmationService } from 'primeng/api';
-import { providePrimeNG } from 'primeng/config';
 import { DialogService } from 'primeng/dynamicdialog';
-import MyPreset from '../mypreset';
 import { appRoutes } from './app.routes';
 import { provideLanguageInitializer } from './core/initializers/language.initializer';
 import { provideThemeInitializer } from './core/initializers/theme.initializer';
@@ -158,15 +157,7 @@ export const appConfig: ApplicationConfig = {
         Mail,
       })
     ),
-    providePrimeNG({
-      ripple: true,
-      theme: {
-        preset: MyPreset,
-        options: {
-          darkModeSelector: '.dark',
-        },
-      },
-    }),
+    provideElevatePrimeNG(),
     DialogService,
     ConfirmationService,
   ],

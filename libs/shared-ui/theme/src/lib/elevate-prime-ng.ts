@@ -1,7 +1,8 @@
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
+import { providePrimeNG } from 'primeng/config';
 
-const MyPreset = definePreset(Aura, {
+export const elevatePrimePreset = definePreset(Aura, {
   semantic: {
     colorScheme: {
       light: {
@@ -66,4 +67,14 @@ const MyPreset = definePreset(Aura, {
   },
 });
 
-export default MyPreset;
+export function provideElevatePrimeNG() {
+  return providePrimeNG({
+    ripple: true,
+    theme: {
+      preset: elevatePrimePreset,
+      options: {
+        darkModeSelector: '.dark',
+      },
+    },
+  });
+}
