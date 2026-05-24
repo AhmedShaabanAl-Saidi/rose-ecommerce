@@ -15,7 +15,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { AuthRepo } from '@elevate/auth-domain';
+import { AuthRepo, AuthState } from '@elevate/auth-domain';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
@@ -71,7 +71,8 @@ export class ChangePasswordComponent implements OnInit {
   private readonly authRepo = inject(AuthRepo);
   private readonly toastr = inject(ToastrService);
   private readonly translate = inject(TranslateService);
-
+  private readonly authState = inject(AuthState);
+  user = this.authState.currentUser;
   isLoading = signal(false);
 
   passwordForm: FormGroup = this.fb.group(

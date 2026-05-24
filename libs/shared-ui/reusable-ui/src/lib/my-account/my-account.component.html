@@ -1,4 +1,7 @@
-<div class="bg-white dark:bg-zinc-900 p-6 rounded-lg">
+@if(user() && user()?.role === 'admin') {
+<p class="text-2xl text-semibold text-zinc-800 mb-6">Account Settings</p>
+}
+<div class="bg-white dark:bg-zinc-900 p-6 rounded-lg mb-5">
   <form
     [formGroup]="profileForm"
     (ngSubmit)="onSubmit()"
@@ -111,20 +114,44 @@
     </div>
 
     <div
-      class="flex items-center justify-between pt-6 border-t border-gray-100 dark:border-zinc-800"
+      class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between pt-6 border-t border-gray-100 dark:border-zinc-800"
     >
-      <lib-button type="button" variant="destructive" (click)="deleteAccount()">
-        {{ 'PROFILE_PAGE.DELETE_ACCOUNT' | translate }}
-      </lib-button>
-
-      <lib-button
-        type="submit"
-        variant="primary"
-        [disabled]="profileForm.invalid || profileForm.pristine || isLoading()"
-        [loading]="isLoading()"
+      <div
+        class="flex flex-row justify-between w-full md:w-auto md:justify-start md:items-center md:gap-6"
       >
-        {{ 'PROFILE_PAGE.SAVE_CHANGES' | translate }}
-      </lib-button>
+        <button
+          type="button"
+          class="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 cursor-pointer text-left"
+          (click)="deleteAccount()"
+        >
+          {{ 'PROFILE_PAGE.DELETE_ACCOUNT' | translate }}
+        </button>
+
+        @if (user() && user()?.role === 'admin') {
+        <button
+          type="button"
+          class="text-zinc-900 font-medium dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 cursor-pointer text-right md:text-left"
+          routerLink="change-password"
+        >
+          {{ 'PROFILE_PAGE.CHANGE_PASSWORD' | translate }}
+        </button>
+        }
+      </div>
+
+      <div class="w-full md:w-auto">
+        <lib-button
+          type="submit"
+          variant="primary"
+          class="w-full block md:inline-block"
+          [block]="true"
+          [disabled]="
+            profileForm.invalid || profileForm.pristine || isLoading()
+          "
+          [loading]="isLoading()"
+        >
+          {{ 'PROFILE_PAGE.SAVE_CHANGES' | translate }}
+        </lib-button>
+      </div>
     </div>
   </form>
 

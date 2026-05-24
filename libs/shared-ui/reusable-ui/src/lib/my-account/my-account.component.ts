@@ -12,7 +12,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -42,6 +42,7 @@ interface PhoneValue {
     ConfirmDialogModule,
     TextInputComponent,
     PhoneInputComponent,
+    RouterLink,
     ButtonComponent,
   ],
   providers: [ConfirmationService],
@@ -56,23 +57,19 @@ export class MyAccountComponent implements OnInit {
   private readonly confirmationService = inject(ConfirmationService);
   private readonly router = inject(Router);
   private readonly cdr = inject(ChangeDetectorRef);
-
+  user = this.authState.currentUser;
   profileForm!: FormGroup;
   selectedFile: File | null = null;
   previewUrl = signal<string | ArrayBuffer | null>(null);
   isLoading = signal(false);
   isUploadingPhoto = signal(false);
 
-  get user() {
-    return this.authState.currentUser();
-  }
-
   ngOnInit(): void {
     this.initForm();
   }
 
   private initForm(): void {
-    const user = this.user;
+    const user = this.user();
     this.previewUrl.set(user?.photo || null);
 
     this.profileForm = this.fb.group({
