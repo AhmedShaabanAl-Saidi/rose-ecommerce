@@ -53,7 +53,7 @@ export class SidebarComponent {
     {
       label: 'Account',
       icon: 'pi pi-user',
-      command: () => this.router.navigate(['/account']),
+      command: () => this.router.navigate(['dashboard', 'account']),
     },
     {
       separator: true,

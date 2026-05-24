@@ -1,18 +1,69 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  FormGroupDirective,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { AuthRepo } from '@elevate/auth-domain';
-import { take } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs';
 import { TextInputComponent } from '@elevate/reusable-input';
-import { ButtonComponent } from '@elevate/reusable-ui';
-import { ValidationsUtils } from '../../../../shared/utils/validators/validators-utils';
+import { ButtonComponent } from '../button/button.component';
+
+const matchFieldsValidator = (
+  field: string,
+  confirmField: string
+): ValidatorFn => {
+  return (group: AbstractControl): ValidationErrors | null => {
+    const control = group.get(field);
+    const confirmControl = group.get(confirmField);
+
+    if (!control || !confirmControl) return null;
+
+    if (confirmControl.errors && !confirmControl.errors['mismatch']) {
+      return null;
+    }
+
+    if (control.value !== confirmControl.value) {
+      confirmControl.setErrors({
+        ...confirmControl.errors,
+        mismatch: true,
+      });
+      return { mismatch: true };
+    }
+
+    const errors = confirmControl.errors;
+    if (errors) {
+      delete errors['mismatch'];
+      confirmControl.setErrors(Object.keys(errors).length ? errors : null);
+    }
+
+    return null;
+  };
+};
 
 @Component({
-  selector: 'app-change-password',
+  selector: 'lib-change-password',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, TranslateModule, TextInputComponent, ButtonComponent],
+  imports: [
+    ReactiveFormsModule,
+    TranslateModule,
+    TextInputComponent,
+    ButtonComponent,
+  ],
   templateUrl: './change-password.component.html',
 })
 export class ChangePasswordComponent implements OnInit {
@@ -30,10 +81,7 @@ export class ChangePasswordComponent implements OnInit {
       rePassword: ['', [Validators.required]],
     },
     {
-      validators: ValidationsUtils.matchFieldsValidator(
-        'newPassword',
-        'rePassword'
-      ),
+      validators: matchFieldsValidator('newPassword', 'rePassword'),
     }
   );
 
@@ -42,7 +90,6 @@ export class ChangePasswordComponent implements OnInit {
       this.passwordForm.markAsPristine();
     });
   }
-
 
   onSubmit(formDirective: FormGroupDirective): void {
     if (this.passwordForm.invalid) {
@@ -56,7 +103,8 @@ export class ChangePasswordComponent implements OnInit {
       newPassword: this.passwordForm.value.newPassword,
     };
 
-    this.authRepo.changePassword(payload)
+    this.authRepo
+      .changePassword(payload)
       .pipe(take(1))
       .subscribe({
         next: () => {
@@ -64,7 +112,6 @@ export class ChangePasswordComponent implements OnInit {
           this.toastr.success(
             this.translate.instant('PROFILE_PAGE.PASSWORD_UPDATE_SUCCESS')
           );
-          // FormGroupDirective reset is handled via the reference in html if needed, or just reset form
           formDirective.resetForm();
           this.passwordForm.reset();
         },

@@ -9,16 +9,12 @@ export const profileRoutes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./components/my-account/my-account.component').then(
-            (m) => m.MyAccountComponent
-          ),
+          import('@elevate/reusable-ui').then((m) => m.MyAccountComponent),
       },
       {
         path: 'change-password',
         loadComponent: () =>
-          import(
-            './components/change-password/change-password.component'
-          ).then((m) => m.ChangePasswordComponent),
+          import('@elevate/reusable-ui').then((m) => m.ChangePasswordComponent),
       },
       {
         path: 'orders',
