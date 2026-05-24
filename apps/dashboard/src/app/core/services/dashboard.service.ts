@@ -1,5 +1,10 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpBackend,
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { catchError, map, Observable, throwError, tap } from 'rxjs';
 import { AllStatsResponse, StatisticsApiResponse } from '../interfaces/dashboard.interface';
 import { Router } from '@angular/router';
@@ -9,7 +14,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class DashboardService {
-  private readonly http = inject(HttpClient);
+  private readonly http = new HttpClient(inject(HttpBackend));
   private readonly router = inject(Router);
   private readonly baseUrl = environment.baseUrl;
 
