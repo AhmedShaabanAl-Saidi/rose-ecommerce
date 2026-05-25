@@ -86,11 +86,12 @@ export class MyAccountComponent implements OnInit {
       gender: [{ value: user?.gender || '', disabled: true }],
     });
 
-    // Ensure pristine state after child components initialize
+    // Mark as pristine after form is fully initialized
     setTimeout(() => {
       this.profileForm.markAsPristine();
+      this.profileForm.markAsUntouched();
       this.cdr.markForCheck();
-    });
+    }, 100);
   }
 
   onFileSelected(event: Event): void {

@@ -17,7 +17,13 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     retry({
       count: 2,
       delay: (error: HttpErrorResponse, retryCount: number) => {
-        const isIdempotent = ['GET', 'PUT', 'DELETE', 'HEAD', 'OPTIONS'].includes(req.method);
+        const isIdempotent = [
+          'GET',
+          'PUT',
+          'DELETE',
+          'HEAD',
+          'OPTIONS',
+        ].includes(req.method);
         if (isIdempotent && (error.status === 0 || error.status >= 500)) {
           return timer(1000 * retryCount);
         }
@@ -29,6 +35,8 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
       const hasAuthHeader = req.headers.has('Authorization');
       const isSignInRequest = req.url.includes('/auth/');
+      const isChangePasswordRequest = req.url.includes('/change-password');
+      const isEditProfileRequest = req.url.includes('/editProfile');
 
       let serverError =
         typeof err.error === 'string'
@@ -39,7 +47,12 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           serverError = translate.instant('ERRORS.NETWORK');
           break;
         case 401:
-          if (hasAuthHeader || !isSignInRequest) {
+          if (
+            (hasAuthHeader &&
+              !isChangePasswordRequest &&
+              !isEditProfileRequest) ||
+            !isSignInRequest
+          ) {
             serverError = translate.instant('ERRORS.UNAUTHORIZED');
             auth.cleanData();
             if (isPlatformBrowser(platFormId)) router.navigate(['/auth/login']);

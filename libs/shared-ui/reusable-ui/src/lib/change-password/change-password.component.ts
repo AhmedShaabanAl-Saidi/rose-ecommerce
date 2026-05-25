@@ -78,7 +78,16 @@ export class ChangePasswordComponent implements OnInit {
   passwordForm: FormGroup = this.fb.group(
     {
       password: ['', [Validators.required]],
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      newPassword: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/
+          ),
+        ],
+      ],
       rePassword: ['', [Validators.required]],
     },
     {
