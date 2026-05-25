@@ -8,7 +8,7 @@ export const userGuard: CanActivateFn = () => {
 
   const user = authState.currentUser();
   if (user?.role === 'admin') {
-    router.navigate(['/dashboard'], { replaceUrl: true });
+    router.navigate(['/unauthorized'], { replaceUrl: true });
     return false;
   }
 

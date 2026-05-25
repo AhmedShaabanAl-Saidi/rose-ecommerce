@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from '@elevate/auth-data-access';
+import { authGuard, userGuard } from '@elevate/auth-data-access';
 import { MainLayoutComponent } from './main-layout.component';
 import type { SeoMeta } from '../../interfaces/seo-meta.interface';
 
@@ -102,7 +102,7 @@ export const mainRoutes: Routes = [
       },
       {
         path: 'shopping-cart',
-        canActivate: [authGuard],
+        canActivate: [authGuard, userGuard],
         loadComponent: () =>
           import('../../../feature/cart/cart.component').then(
             (m) => m.CartComponent
@@ -118,7 +118,7 @@ export const mainRoutes: Routes = [
       },
       {
         path: 'profile',
-        canActivate: [authGuard],
+        canActivate: [authGuard, userGuard],
         loadChildren: () =>
           import('../../../feature/profile/profile.routes').then(
             (m) => m.profileRoutes
@@ -126,7 +126,7 @@ export const mainRoutes: Routes = [
       },
       {
         path: 'allOrders',
-        canActivate: [authGuard],
+        canActivate: [authGuard, userGuard],
         loadChildren: () =>
           import('../../../feature/orders/orders.routes').then(
             (m) => m.ordersRoutes
@@ -134,7 +134,7 @@ export const mainRoutes: Routes = [
       },
       {
         path: 'checkout',
-        canActivate: [authGuard],
+        canActivate: [authGuard, userGuard],
         loadChildren: () =>
           import('../../../feature/checkout/checkout.routes').then(
             (m) => m.checkoutRoutes

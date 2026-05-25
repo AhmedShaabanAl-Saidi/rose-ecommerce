@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
-import { guestGuard, adminGuard, userGuard } from '@elevate/auth-data-access';
-import type { SeoMeta } from './core/interfaces/seo-meta.interface';
+import { adminGuard, guestGuard } from '@elevate/auth-data-access';
 import { loadRemote } from '@module-federation/enhanced/runtime';
+import type { SeoMeta } from './core/interfaces/seo-meta.interface';
 
 const notFoundSeo: SeoMeta = {
   title: 'Page Not Found | Elevate Gifts',
@@ -19,7 +19,6 @@ const unauthorizedSeo: SeoMeta = {
 export const appRoutes: Route[] = [
   {
     path: '',
-    canActivate: [userGuard],
     loadChildren: () =>
       import('./core/layout/main-layout/main.routes').then((m) => m.mainRoutes),
   },

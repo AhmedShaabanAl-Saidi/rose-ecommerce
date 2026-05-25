@@ -17,7 +17,7 @@
             alt="Rose"
           />
         </a>
-        @if (user()) {
+        @if (user() && user()?.role !== 'admin') {
         <button
           type="button"
           class="flex max-w-42.5 shrink-0 flex-col rounded-2xl px-2 py-1.5 text-start transition-colors hover:bg-maroon-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maroon-200 dark:hover:bg-zinc-800 dark:focus-visible:ring-soft-pink-300 sm:max-w-55 sm:px-3 sm:py-2 lg:max-w-60"
@@ -120,6 +120,7 @@
             }
           </a>
         </li>
+        @if(!user() || (user() && user()?.role !== 'admin')){
         <li>
           <a
             aria-label="Shopping cart"
@@ -142,6 +143,8 @@
             }
           </a>
         </li>
+        }
+
         <li class="hover:text-maroon-400 cursor-pointer">
           <lucide-icon
             aria-hidden="true"
