@@ -1,21 +1,50 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthRepo, AuthState } from '@elevate/auth-domain';
-import { ToastrService } from 'ngx-toastr';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
-import { TextInputComponent, PhoneInputComponent } from '@elevate/reusable-input';
-import { ButtonComponent } from '@elevate/reusable-ui';
-import { PhoneValue } from '../../../auth/pages/register/interface/PhoneValue.interface';
+import { AuthRepo, AuthState } from '@elevate/auth-domain';
+import {
+  TextInputComponent,
+  PhoneInputComponent,
+} from '@elevate/reusable-input';
+import { ButtonComponent } from '../button/button.component';
+
+interface PhoneValue {
+  e164Number: string;
+  internationalNumber?: string;
+  nationalNumber?: string;
+  countryCode?: string;
+}
 
 @Component({
-  selector: 'app-my-account',
+  selector: 'lib-my-account',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, TranslateModule, ConfirmDialogModule, TextInputComponent, PhoneInputComponent, ButtonComponent],
+  imports: [
+    ReactiveFormsModule,
+    TranslateModule,
+    ConfirmDialogModule,
+    TextInputComponent,
+    PhoneInputComponent,
+    RouterLink,
+    ButtonComponent,
+  ],
   providers: [ConfirmationService],
   templateUrl: './my-account.component.html',
 })
@@ -28,38 +57,41 @@ export class MyAccountComponent implements OnInit {
   private readonly confirmationService = inject(ConfirmationService);
   private readonly router = inject(Router);
   private readonly cdr = inject(ChangeDetectorRef);
-
+  user = this.authState.currentUser;
   profileForm!: FormGroup;
   selectedFile: File | null = null;
   previewUrl = signal<string | ArrayBuffer | null>(null);
   isLoading = signal(false);
   isUploadingPhoto = signal(false);
 
-  get user() {
-    return this.authState.currentUser();
-  }
-
   ngOnInit(): void {
     this.initForm();
   }
 
   private initForm(): void {
-    const user = this.user;
+    const user = this.user();
     this.previewUrl.set(user?.photo || null);
 
     this.profileForm = this.fb.group({
-      firstName: [user?.firstName || '', [Validators.required, Validators.minLength(2)]],
-      lastName: [user?.lastName || '', [Validators.required, Validators.minLength(2)]],
+      firstName: [
+        user?.firstName || '',
+        [Validators.required, Validators.minLength(2)],
+      ],
+      lastName: [
+        user?.lastName || '',
+        [Validators.required, Validators.minLength(2)],
+      ],
       email: [user?.email || '', [Validators.required, Validators.email]],
       phone: [user?.phone || '', [Validators.required]],
       gender: [{ value: user?.gender || '', disabled: true }],
     });
-    
-    // Use setTimeout to ensure the form is marked as pristine after child components initialize
+
+    // Mark as pristine after form is fully initialized
     setTimeout(() => {
       this.profileForm.markAsPristine();
+      this.profileForm.markAsUntouched();
       this.cdr.markForCheck();
-    });
+    }, 100);
   }
 
   onFileSelected(event: Event): void {
@@ -76,7 +108,6 @@ export class MyAccountComponent implements OnInit {
       };
       reader.readAsDataURL(file);
 
-      // Upload photo immediately
       const oldPhoto = this.previewUrl();
       this.isUploadingPhoto.set(true);
       const formData = new FormData();
@@ -145,7 +176,8 @@ export class MyAccountComponent implements OnInit {
 
   deleteAccount(): void {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete your account? This action is permanent and cannot be undone.',
+      message:
+        'Are you sure you want to delete your account? This action is permanent and cannot be undone.',
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
       acceptLabel: 'Yes, delete',
@@ -153,16 +185,17 @@ export class MyAccountComponent implements OnInit {
       acceptButtonStyleClass: 'p-button-danger',
       rejectButtonStyleClass: 'p-button-text',
       accept: () => {
-        this.authRepo.deleteMe()
+        this.authRepo
+          .deleteMe()
           .pipe(take(1))
           .subscribe({
             next: () => {
               this.toastr.success('Account deleted successfully');
               this.authRepo.cleanData();
               this.router.navigate(['/auth/login']);
-            }
+            },
           });
-      }
+      },
     });
   }
 }

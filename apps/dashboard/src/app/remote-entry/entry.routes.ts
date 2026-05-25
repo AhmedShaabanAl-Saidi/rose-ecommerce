@@ -50,8 +50,28 @@ export const remoteRoutes: Route[] = [
         ],
       },
       {
+        path: 'account',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('@elevate/reusable-ui').then((m) => m.MyAccountComponent),
+            title: 'Dashboard – My Account',
+          },
+          {
+            path: 'change-password',
+            loadComponent: () =>
+              import('@elevate/reusable-ui').then(
+                (m) => m.ChangePasswordComponent
+              ),
+            title: 'Dashboard – Change Password',
+          },
+        ],
+      },
+      {
         path: '**',
-        loadComponent: () => import('@elevate/reusable-ui').then(m => m.NotFoundComponent),
+        loadComponent: () =>
+          import('@elevate/reusable-ui').then((m) => m.NotFoundComponent),
         title: 'Dashboard – Page Not Found',
       },
     ],
