@@ -1,19 +1,22 @@
 <div
   [ngClass]="getCardClasses()"
-  class="relative overflow-hidden rounded-2xl p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col items-start justify-between min-h-[140px]"
+  class="group relative flex min-h-[120px] min-w-0 flex-col items-start justify-between overflow-hidden rounded-xl p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:min-h-[140px] sm:rounded-2xl sm:p-6"
 >
   <div
     [ngClass]="getIconContainerClasses()"
-    class="flex h-10 w-10 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
+    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
   >
     <i [class]="icon() + ' text-xl'"></i>
   </div>
 
-  <div class="space-y-1 mt-4">
-    <h3 [ngClass]="getTextClasses()" class="text-2xl font-bold lg:text-3xl">
+  <div class="mt-4 min-w-0 max-w-full space-y-1">
+    <h3
+      [ngClass]="getTextClasses()"
+      class="max-w-full text-xl font-bold leading-tight break-words [overflow-wrap:anywhere] sm:text-2xl lg:text-3xl"
+    >
       {{ formatValue(value()) }}
     </h3>
-    <p class="text-sm font-medium text-zinc-600">
+    <p class="max-w-full break-words text-sm font-medium leading-5 text-zinc-600">
       {{ label() }}
     </p>
   </div>

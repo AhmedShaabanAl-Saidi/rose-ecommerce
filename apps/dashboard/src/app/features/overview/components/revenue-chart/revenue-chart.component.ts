@@ -63,6 +63,10 @@ export class RevenueChartComponent {
           display: false
         },
         ticks: {
+          autoSkip: true,
+          maxRotation: 0,
+          minRotation: 0,
+          maxTicksLimit: 6,
           color: '#a1a1aa'
         }
       },
@@ -74,6 +78,7 @@ export class RevenueChartComponent {
           color: '#f4f4f5'
         },
         ticks: {
+          maxTicksLimit: 5,
           color: '#a1a1aa',
           callback: function(value: any) {
             if (value >= 1000000) return (value / 1000000).toFixed(1) + 'M';
@@ -84,6 +89,7 @@ export class RevenueChartComponent {
       }
     },
     maintainAspectRatio: false,
-    responsive: true
+    responsive: true,
+    resizeDelay: 100
   };
 }

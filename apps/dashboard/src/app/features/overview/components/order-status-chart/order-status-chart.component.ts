@@ -65,6 +65,8 @@ export class OrderStatusChartComponent {
       }
     },
     cutout: '70%',
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    responsive: true,
+    resizeDelay: 100
   };
 }
