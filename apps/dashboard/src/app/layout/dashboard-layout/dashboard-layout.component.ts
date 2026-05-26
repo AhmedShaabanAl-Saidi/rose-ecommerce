@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import {
+  LanguageService,
+  ThemeService,
+} from '@elevate/theme';
 
 @Component({
   selector: 'app-dashboard-layout',
-  standalone: true,
   styles: [
     `
       :host {
@@ -17,4 +20,9 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
   imports: [RouterOutlet, SidebarComponent, BreadcrumbComponent],
   templateUrl: './dashboard-layout.component.html',
 })
-export class DashboardLayoutComponent {}
+export class DashboardLayoutComponent {
+  constructor() {
+    inject(LanguageService);
+    inject(ThemeService);
+  }
+}

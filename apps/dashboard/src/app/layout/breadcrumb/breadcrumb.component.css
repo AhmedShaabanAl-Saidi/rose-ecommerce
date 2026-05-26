@@ -9,3 +9,22 @@
 :host ::ng-deep .p-breadcrumb-list>li:first-child+li.p-breadcrumb-separator {
   display: none !important;
 }
+
+:host ::ng-deep .p-breadcrumb {
+  background: transparent !important;
+}
+
+:host ::ng-deep .p-breadcrumb-list {
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+
+:host ::ng-deep .p-breadcrumb-item {
+  min-width: 0;
+}
+
+@media (max-width: 480px) {
+  :host(.mobile-breadcrumb) ::ng-deep .p-breadcrumb-list > li:not(:last-child) {
+    display: none !important;
+  }
+}

@@ -8,6 +8,7 @@
     "noFallthroughCasesInSwitch": true,
     "target": "es2022",
     "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "emitDecoratorMetadata": false,
     "module": "preserve"

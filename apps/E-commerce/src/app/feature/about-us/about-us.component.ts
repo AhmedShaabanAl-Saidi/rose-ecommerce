@@ -2,14 +2,13 @@ import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent } from '@elevate/reusable-ui';
-import { languageService } from '../../core/services/language-service';
+import { languageService } from '@elevate/theme';
 import { ArrowLeft, ArrowRight, LucideAngularModule } from 'lucide-angular';
 import { AboutValueCardItem } from './interfaces/about.interface';
 import { AboutValueCardComponent } from './components/about-value-card/about-value-card.component';
 
 @Component({
   selector: 'app-about-us',
-  standalone: true,
   imports: [
     TranslateModule,
     RouterLink,

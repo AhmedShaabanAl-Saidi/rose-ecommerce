@@ -1,5 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { CommonModule, I18nPluralPipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface ListItem {
   label: string;
@@ -8,19 +9,22 @@ export interface ListItem {
 
 @Component({
   selector: 'app-list-widget',
-  standalone: true,
-  imports: [CommonModule, I18nPluralPipe],
+  imports: [CommonModule, I18nPluralPipe, TranslatePipe],
   templateUrl: './list-widget.component.html',
   styleUrl: './list-widget.component.css',
 })
 export class ListWidgetComponent {
   title = input.required<string>();
   items = input.required<ListItem[]>();
-  emptyMessage = input<string>('No data');
+  emptyMessage = input<string>('DASHBOARD.OVERVIEW.WIDGETS.NO_DATA');
   emptyIcon = input<string>('pi pi-inbox');
   pluralMap = input<Record<string, string>>({
     '=0': '0',
     '=1': '1',
     'other': '#'
   });
+
+  totalValue = computed(() =>
+    this.items().reduce((total, item) => total + item.value, 0)
+  );
 }

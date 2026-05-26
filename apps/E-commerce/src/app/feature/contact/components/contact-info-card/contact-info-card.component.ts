@@ -4,7 +4,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact-info-card',
-  standalone: true,
+
   host: {
     class: 'block w-full',
   },

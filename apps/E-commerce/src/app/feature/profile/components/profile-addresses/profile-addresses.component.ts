@@ -24,7 +24,7 @@ class InlineDialogRef extends DynamicDialogRef {
 
 @Component({
   selector: 'app-profile-addresses',
-  standalone: true,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [NgComponentOutlet, ConfirmDialogModule],
   providers: [

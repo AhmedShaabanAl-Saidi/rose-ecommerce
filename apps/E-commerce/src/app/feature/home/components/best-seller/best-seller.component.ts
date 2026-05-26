@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { ArrowLeft, ArrowRight } from 'lucide-angular';
-import { languageService } from '../../../../core/services/language-service';
+import { languageService } from '@elevate/theme';
 import { Product } from '../../../../shared/components/ui/product-card/interface/product';
 import { ProdcutCarousalComponent } from '../../../../shared/components/ui/product-carousal/prodcut-carousal.component';
 

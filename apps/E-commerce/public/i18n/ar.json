@@ -525,12 +525,25 @@
     "NEW_PASSWORD": "كلمة المرور الجديدة",
     "CONFIRM_PASSWORD": "تأكيد كلمة المرور الجديدة",
     "CHANGE_PASSWORD": "تغيير كلمة المرور",
+    "ACCOUNT_SETTINGS": "إعدادات الحساب",
+    "CHANGE_PASSWORD_FORM": "نموذج تغيير كلمة المرور",
     "ENTER_OLD_PASSWORD": "أدخل كلمة المرور الحالية",
     "ENTER_NEW_PASSWORD": "أدخل كلمة المرور الجديدة",
     "ENTER_CONFIRM_PASSWORD": "أعد إدخال كلمة المرور الجديدة",
+    "PASSWORDS_MISMATCH": "كلمتا المرور غير متطابقتين",
+    "PROFILE_PHOTO": "صورة الملف الشخصي",
+    "PROFILE_DETAILS_FORM": "نموذج بيانات الملف الشخصي",
+    "USER_PROFILE_PICTURE": "صورة المستخدم الشخصية",
+    "UPLOADING_PHOTO": "جاري رفع الصورة",
+    "FILE_SIZE_LIMIT": "حجم الملف يتجاوز حد 5 ميجابايت",
+    "DELETE_CONFIRMATION": "تأكيد الحذف",
+    "DELETE_CONFIRM_MESSAGE": "هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+    "YES_DELETE": "نعم، احذف",
+    "NO_KEEP": "لا، احتفظ به",
     "PHOTO_UPDATED": "تم تحديث الصورة بنجاح",
     "PHOTO_UPDATE_FAILED": "فشل في تحديث الصورة",
     "UPDATE_SUCCESS": "تم تحديث الملف الشخصي بنجاح",
-    "PASSWORD_UPDATE_SUCCESS": "تم تغيير كلمة المرور بنجاح"
+    "PASSWORD_UPDATE_SUCCESS": "تم تغيير كلمة المرور بنجاح",
+    "ACCOUNT_DELETED": "تم حذف الحساب بنجاح"
   }
 }

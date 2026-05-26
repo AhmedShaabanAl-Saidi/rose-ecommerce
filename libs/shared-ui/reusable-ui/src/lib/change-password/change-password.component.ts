@@ -56,7 +56,7 @@ const matchFieldsValidator = (
 
 @Component({
   selector: 'lib-change-password',
-  standalone: true,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     ReactiveFormsModule,

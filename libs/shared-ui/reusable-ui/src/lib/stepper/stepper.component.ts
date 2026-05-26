@@ -9,7 +9,7 @@ export interface StepperStep {
 
 @Component({
   selector: 'lib-stepper',
-  standalone: true,
+
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './stepper.component.html',
 })

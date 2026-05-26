@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 import { TranslateModule } from '@ngx-translate/core';
-import { languageService } from '../../../../core/services/language-service';
+import { languageService } from '@elevate/theme';
 import { BottomBannerComponent } from './components/bottom-banner/bottom-banner.component';
 import { heroBannerConfig } from '../../interfaces/home';
 

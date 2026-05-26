@@ -524,12 +524,25 @@
     "NEW_PASSWORD": "New Password",
     "CONFIRM_PASSWORD": "Confirm New Password",
     "CHANGE_PASSWORD": "Change Password",
+    "ACCOUNT_SETTINGS": "Account Settings",
+    "CHANGE_PASSWORD_FORM": "Change Password Form",
     "ENTER_OLD_PASSWORD": "Enter your current password",
     "ENTER_NEW_PASSWORD": "Enter a new password",
     "ENTER_CONFIRM_PASSWORD": "Re-enter your new password",
+    "PASSWORDS_MISMATCH": "Passwords do not match",
+    "PROFILE_PHOTO": "Profile Photo",
+    "PROFILE_DETAILS_FORM": "Profile Details Form",
+    "USER_PROFILE_PICTURE": "User Profile Picture",
+    "UPLOADING_PHOTO": "Uploading Photo",
+    "FILE_SIZE_LIMIT": "File size exceeds 5MB limit",
+    "DELETE_CONFIRMATION": "Delete Confirmation",
+    "DELETE_CONFIRM_MESSAGE": "Are you sure you want to delete your account? This action is permanent and cannot be undone.",
+    "YES_DELETE": "Yes, delete",
+    "NO_KEEP": "No, keep it",
     "PHOTO_UPDATED": "Photo updated successfully",
     "PHOTO_UPDATE_FAILED": "Failed to update photo",
     "UPDATE_SUCCESS": "Profile updated successfully",
-    "PASSWORD_UPDATE_SUCCESS": "Password changed successfully"
+    "PASSWORD_UPDATE_SUCCESS": "Password changed successfully",
+    "ACCOUNT_DELETED": "Account deleted successfully"
   }
 }

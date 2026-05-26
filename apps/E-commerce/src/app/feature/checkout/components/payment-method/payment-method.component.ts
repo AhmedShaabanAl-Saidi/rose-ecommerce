@@ -1,4 +1,4 @@
-import { languageService } from './../../../../core/services/language-service';
+import { languageService } from '@elevate/theme';
 import {
   Component,
   computed,
@@ -21,7 +21,6 @@ import { PaymentMethod } from '../../interfaces/checkout.interface';
 
 @Component({
   selector: 'app-payment-method-section',
-  standalone: true,
   imports: [
     CommonModule,
     LucideAngularModule,

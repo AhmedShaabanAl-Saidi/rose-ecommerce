@@ -1,25 +1,28 @@
-<header class="flex items-center justify-between gap-3 border-b border-zinc-100 bg-white px-4 py-2 shadow-sm lg:hidden">
+<header
+  class="flex items-center justify-between gap-2 border-b border-zinc-100 bg-white px-4 py-2 shadow-sm transition-colors dark:border-zinc-800 dark:bg-zinc-950 lg:hidden"
+>
   <div class="flex min-w-0 flex-1 items-center gap-3">
     <img src="images/navbar/logo.png" alt="Elevate Logo" class="h-12 w-12 shrink-0 object-contain sm:h-14 sm:w-14" />
     <app-breadcrumb class="min-w-0 flex-1" variant="mobile" />
   </div>
 
-  <div class="flex shrink-0 items-center gap-3">
+  <div class="flex shrink-0 items-center gap-2">
+    <app-appearance-controls [compact]="true" />
     <p-avatar [image]="user()?.photo || 'https://www.gravatar.com/avatar/?d=mp&f=y'" shape="circle" size="normal"
-      class="flex-shrink-0" class="w-10 h-10 text-sm font-semibold !bg-maroon-600 !text-white">
+      class="flex-shrink-0 w-10 h-10 text-sm font-semibold !bg-maroon-600 !text-white">
     </p-avatar>
     <button type="button" (click)="$event.stopPropagation(); profileMenu.toggle($event)"
-      class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-maroon-700"
-      aria-label="Profile menu" aria-haspopup="menu">
+      class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-maroon-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maroon-500 dark:text-zinc-100 dark:hover:bg-zinc-800 dark:hover:text-soft-pink-200 dark:focus-visible:ring-soft-pink-300"
+      [attr.aria-label]="'DASHBOARD.NAVIGATION.PROFILE_MENU' | translate" aria-haspopup="menu">
       <i class="pi pi-bars text-xl"></i>
     </button>
   </div>
 </header>
 
 <nav
-  class="mobile-bottom-nav fixed inset-x-0 bottom-0 z-40 bg-white px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-4 lg:hidden"
-  role="navigation" aria-label="Dashboard navigation">
-  <a routerLink="/home" class="mobile-website-link" aria-label="Back to website">
+  class="mobile-bottom-nav fixed inset-x-0 bottom-0 z-40 bg-white px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-4 transition-colors dark:bg-zinc-950 lg:hidden"
+  role="navigation" [attr.aria-label]="'DASHBOARD.NAVIGATION.MOBILE_LABEL' | translate">
+  <a routerLink="/home" class="mobile-website-link" [attr.aria-label]="'DASHBOARD.NAVIGATION.BACK_TO_WEBSITE' | translate">
     <lucide-icon [img]="WebsiteIcon" [size]="36" [strokeWidth]="2.35" class="mobile-website-icon"
       aria-hidden="true"></lucide-icon>
   </a>
@@ -29,14 +32,14 @@
     <li class="mobile-nav-slot min-w-0">
       <a [routerLink]="item.route" routerLinkActive="active-mobile-nav-item"
         [routerLinkActiveOptions]="{ exact: item.route === 'overview' }" ariaCurrentWhenActive="page"
-        class="mobile-nav-item relative flex min-h-[4.5rem] min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-1 py-2 text-center text-[11px] font-bold leading-4 text-zinc-800 no-underline transition-colors"
+        class="mobile-nav-item relative flex min-h-[4.5rem] min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-1 py-2 text-center text-[11px] font-bold leading-4 text-zinc-800 no-underline transition-colors dark:text-zinc-200"
         [class.mobile-nav-item--before-center]="item.route === 'categories'"
-        [class.mobile-nav-item--after-center]="item.route === 'occasions'" [attr.aria-label]="item.label + ' page'">
+        [class.mobile-nav-item--after-center]="item.route === 'occasions'" [attr.aria-label]="item.labelKey | translate">
         <span class="mobile-nav-icon flex items-center justify-center rounded-full text-zinc-700">
           <i [class]="item.icon"></i>
         </span>
         <span class="mobile-nav-label max-w-full truncate">{{
-          item.label
+          item.labelKey | translate
           }}</span>
       </a>
     </li>
@@ -45,52 +48,52 @@
 </nav>
 
 <aside
-  class="hidden lg:flex flex-col w-[303px] min-w-[190px] bg-white border-r border-zinc-100 h-screen sticky top-0 overflow-y-auto overflow-x-hidden shadow-sm z-30"
-  role="navigation" aria-label="Main navigation">
+  class="hidden lg:flex flex-col w-[303px] min-w-[190px] bg-white border-e border-zinc-100 h-screen sticky top-0 overflow-y-auto overflow-x-hidden shadow-sm z-30 transition-colors dark:bg-zinc-950 dark:border-zinc-800"
+  role="navigation" [attr.aria-label]="'DASHBOARD.NAVIGATION.LABEL' | translate">
   <div class="flex items-center justify-center pt-7 pb-5 px-4">
     <img src="images/navbar/logo.png" alt="Elevate Logo" class="w-20 h-20 object-contain" />
   </div>
 
   <a routerLink="/home"
-    class="mx-3 mb-3 flex items-center gap-3 rounded-lg bg-maroon-600 px-3 py-2.5 text-sm font-bold leading-5 text-white no-underline transition-colors hover:bg-maroon-700 hover:text-white focus-visible:bg-maroon-700 focus-visible:text-white focus-visible:outline-none"
-    aria-label="Preview website">
+    class="mx-3 mb-3 flex items-center gap-3 rounded-lg bg-maroon-600 px-3 py-2.5 text-sm font-bold leading-5 text-white no-underline transition-colors hover:bg-maroon-700 hover:text-white focus-visible:bg-maroon-700 focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maroon-500 dark:bg-soft-pink-200 dark:text-zinc-950 dark:hover:bg-soft-pink-300 dark:focus-visible:bg-soft-pink-300 dark:focus-visible:text-zinc-950 dark:focus-visible:ring-soft-pink-300"
+    [attr.aria-label]="'DASHBOARD.NAVIGATION.PREVIEW_WEBSITE' | translate">
     <lucide-icon [img]="WebsiteIcon" [size]="16" [strokeWidth]="2.4" class="block h-4 w-4 shrink-0"
       aria-hidden="true"></lucide-icon>
-    <span>Preview Website</span>
+    <span>{{ 'DASHBOARD.NAVIGATION.PREVIEW_WEBSITE' | translate }}</span>
   </a>
 
   <nav class="flex flex-col gap-1 px-3 flex-1">
     @for (item of navItems; track item.route) {
     <a [routerLink]="item.route" routerLinkActive="active-nav-item"
       [routerLinkActiveOptions]="{ exact: item.route === 'overview' }" ariaCurrentWhenActive="page"
-      class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-zinc-600 hover:bg-maroon-50 hover:text-maroon-700 group cursor-pointer no-underline"
-      [attr.aria-label]="item.label + ' page'">
+      class="sidebar-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-bold text-zinc-600 hover:bg-maroon-50 hover:text-maroon-700 group cursor-pointer no-underline transition-colors dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-soft-pink-200"
+      [attr.aria-label]="item.labelKey | translate">
       <i [class]="
           item.icon +
-          ' text-base sidebar-icon text-zinc-400 group-hover:text-maroon-600 transition-colors'
+          ' text-base sidebar-icon text-zinc-400 group-hover:text-maroon-600 transition-colors dark:text-zinc-500 dark:group-hover:text-soft-pink-200'
         "></i>
-      <span>{{ item.label }}</span>
+      <span>{{ item.labelKey | translate }}</span>
     </a>
     }
   </nav>
 
-  <div class="mt-auto border-t border-zinc-100 px-3 py-4">
+  <div class="mt-auto border-t border-zinc-100 px-3 py-4 transition-colors dark:border-zinc-800">
     <div class="flex items-center gap-2.5 px-1">
       <p-avatar [image]="user()?.photo || 'https://www.gravatar.com/avatar/?d=mp&f=y'" shape="circle" size="normal"
-        class="flex-shrink-0" class="w-9 h-9 text-sm font-semibold !bg-maroon-600 !text-white">
+        class="flex-shrink-0 w-9 h-9 text-sm font-semibold !bg-maroon-600 !text-white">
       </p-avatar>
       <div class="flex flex-col min-w-0 flex-1">
-        <span class="text-xs font-semibold text-zinc-800 truncate">{{
+        <span class="text-xs font-semibold text-zinc-800 truncate dark:text-zinc-100">{{
           (user()?.firstName || '') +
-          (user()?.lastName ? ' ' + user()?.lastName : '') || 'Guest'
+          (user()?.lastName ? ' ' + user()?.lastName : '') || ('DASHBOARD.NAVIGATION.GUEST' | translate)
           }}</span>
-        <span class="text-[10px] text-zinc-400 truncate">{{
+        <span class="text-[10px] text-zinc-400 truncate dark:text-zinc-500">{{
           user()?.email || '-'
           }}</span>
       </div>
       <button #profileBtn type="button" (click)="$event.stopPropagation(); profileMenu.toggle($event)"
-        class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors"
-        aria-label="Profile menu" aria-haspopup="menu">
+        class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-maroon-500 dark:text-zinc-500 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 dark:focus-visible:ring-soft-pink-300"
+        [attr.aria-label]="'DASHBOARD.NAVIGATION.PROFILE_MENU' | translate" aria-haspopup="menu">
         <i class="pi pi-ellipsis-v text-xs"></i>
       </button>
     </div>

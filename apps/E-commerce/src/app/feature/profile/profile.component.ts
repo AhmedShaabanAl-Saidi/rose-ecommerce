@@ -8,7 +8,7 @@ import { take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-profile-layout',
-  standalone: true,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterOutlet,

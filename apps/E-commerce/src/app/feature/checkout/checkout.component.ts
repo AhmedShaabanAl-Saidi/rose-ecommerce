@@ -26,7 +26,7 @@ import { CheckoutService } from './services/checkout.service';
 
 @Component({
   selector: 'app-checkout',
-  standalone: true,
+
   imports: [
     CommonModule,
     TranslateModule,

@@ -1,6 +1,8 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Title, Meta } from '@angular/platform-browser';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { DashboardService } from '../../core/services/dashboard.service';
 import { StatCardComponent } from './components/stat-card/stat-card.component';
 import { ListWidgetComponent, ListItem } from './components/list-widget/list-widget.component';
@@ -11,7 +13,6 @@ import { LowStockProductsComponent } from './components/low-stock-products/low-s
 
 @Component({
   selector: 'app-overview',
-  standalone: true,
   imports: [
     CommonModule,
     StatCardComponent,
@@ -20,6 +21,7 @@ import { LowStockProductsComponent } from './components/low-stock-products/low-s
     RevenueChartComponent,
     TopSellingProductsComponent,
     LowStockProductsComponent,
+    TranslatePipe,
   ],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css',
@@ -28,6 +30,8 @@ export class OverviewComponent implements OnInit {
   private readonly dashboardService = inject(DashboardService);
   private readonly titleService = inject(Title);
   private readonly metaService = inject(Meta);
+  private readonly translate = inject(TranslateService);
+  private readonly destroyRef = inject(DestroyRef);
 
   // Expose signals to the view
   readonly statistics = this.dashboardService.statistics;
@@ -45,6 +49,9 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit() {
     this.setSEO();
+    this.translate.onLangChange
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.setSEO());
     this.loadData();
   }
 
@@ -57,10 +64,12 @@ export class OverviewComponent implements OnInit {
   }
 
   private setSEO() {
-    this.titleService.setTitle('Admin Dashboard Overview | Elevate Flower');
+    this.titleService.setTitle(
+      this.translate.instant('DASHBOARD.OVERVIEW.SEO_TITLE')
+    );
     this.metaService.updateTag({
       name: 'description',
-      content: 'Analyze store statistics, order status percentages, sales revenue area trends, top sold items, and low stock inventory alerts in real-time.',
+      content: this.translate.instant('DASHBOARD.OVERVIEW.SEO_DESCRIPTION'),
     });
   }
 }

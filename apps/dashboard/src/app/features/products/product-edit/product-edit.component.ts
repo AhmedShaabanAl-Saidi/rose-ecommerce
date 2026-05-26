@@ -1,26 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-edit',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslatePipe],
   template: `
-    <section class="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-      <p class="text-sm font-medium uppercase tracking-wide text-maroon-700">
-        Product
+    <section class="rounded-2xl border border-zinc-200 bg-white p-6 text-start shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
+      <p class="text-sm font-medium uppercase tracking-wide text-maroon-700 dark:text-soft-pink-200">
+        {{ 'DASHBOARD.PAGES.PRODUCTS.SECTION' | translate }}
       </p>
-      <h2 class="mt-2 text-2xl font-semibold text-zinc-900">Edit Product</h2>
-      <p class="mt-2 text-sm text-zinc-600">
-        This is the edit-product child route.
+      <h2 class="mt-2 text-2xl font-semibold text-zinc-900 dark:text-zinc-50">
+        {{ 'DASHBOARD.PAGES.PRODUCTS.EDIT_TITLE' | translate }}
+      </h2>
+      <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        {{ 'DASHBOARD.PAGES.PRODUCTS.EDIT_DESCRIPTION' | translate }}
       </p>
 
       <a
         routerLink="../"
-        class="mt-4 inline-flex rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 no-underline hover:bg-zinc-50 transition-colors"
+        class="mt-4 inline-flex rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 no-underline transition-colors hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-800"
       >
-        Back to products
+        {{ 'DASHBOARD.PAGES.PRODUCTS.BACK_TO_PRODUCTS' | translate }}
       </a>
     </section>
   `,

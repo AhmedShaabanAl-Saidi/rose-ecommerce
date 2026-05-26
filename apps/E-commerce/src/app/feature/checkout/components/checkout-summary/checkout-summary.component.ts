@@ -16,11 +16,10 @@ import { CartService } from '../../../cart/services/cart.service';
 import { TextInputComponent } from '@elevate/reusable-input';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { LucideAngularModule } from 'lucide-angular';
-import { languageService } from '../../../../core/services/language-service';
+import { languageService } from '@elevate/theme';
 
 @Component({
   selector: 'app-checkout-summary',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
