@@ -18,6 +18,9 @@ import { AppearanceControlsComponent } from '../appearance-controls/appearance-c
   ],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.css',
+  host: {
+    '[class.mobile-breadcrumb]': "variant() === 'mobile'",
+  },
 })
 export class BreadcrumbComponent implements OnInit, OnDestroy {
   private router = inject(Router);

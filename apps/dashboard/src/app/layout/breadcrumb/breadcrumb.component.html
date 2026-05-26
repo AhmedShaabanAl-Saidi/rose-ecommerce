@@ -17,7 +17,7 @@
           [routerLink]="item.routerLink"
           [ngClass]="
             variant() === 'mobile'
-              ? 'min-w-0 max-w-20 truncate text-zinc-500 no-underline transition-colors hover:text-maroon-700 dark:text-zinc-400 dark:hover:text-soft-pink-200 sm:max-w-28'
+              ? 'inline-block min-w-0 max-w-[4.5rem] truncate align-middle text-zinc-500 no-underline transition-colors hover:text-maroon-700 dark:text-zinc-400 dark:hover:text-soft-pink-200 sm:max-w-28'
               : 'text-sm font-medium text-zinc-500 hover:text-maroon-700 transition-colors no-underline dark:text-zinc-400 dark:hover:text-soft-pink-200'
           "
         >
@@ -27,7 +27,7 @@
         <span
           [ngClass]="
             variant() === 'mobile'
-              ? 'min-w-0 max-w-24 truncate font-semibold text-maroon-700 dark:text-soft-pink-200 sm:max-w-32'
+              ? 'inline-block min-w-0 max-w-[5.5rem] truncate align-middle font-semibold text-maroon-700 dark:text-soft-pink-200 sm:max-w-32'
               : 'text-sm font-semibold text-maroon-700 dark:text-soft-pink-200'
           "
         >
