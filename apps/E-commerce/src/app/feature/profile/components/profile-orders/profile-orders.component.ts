@@ -3,7 +3,7 @@ import { OrdersComponent } from '../../../orders/orders.component';
 
 @Component({
   selector: 'app-profile-orders',
-  standalone: true,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [OrdersComponent],
   template: `<app-orders></app-orders>`,

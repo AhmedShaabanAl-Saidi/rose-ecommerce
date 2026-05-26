@@ -2,37 +2,41 @@
   id="admin-dashboard-container"
   class="min-w-0 space-y-4 pb-24 sm:space-y-5 sm:pb-28 lg:space-y-6 lg:pb-12"
 >
-  <!-- Welcome Header -->
   <div class="mb-4 sm:mb-6">
-    <h1 id="dashboard-main-heading" class="text-sm font-medium text-zinc-500">
-      Dashboard
+    <h1
+      id="dashboard-main-heading"
+      class="text-sm font-medium text-zinc-500 dark:text-zinc-400"
+    >
+      {{ 'DASHBOARD.OVERVIEW.TITLE' | translate }}
     </h1>
   </div>
 
-  <!-- Loading Skeleton Loader -->
   @if (loading() && !statistics()) {
     <div class="space-y-4 sm:space-y-5 xl:space-y-6">
       <div class="grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
         @for (i of [1, 2, 3, 4]; track i) {
-          <div class="h-28 animate-pulse rounded-xl border border-zinc-100 bg-white p-4 shadow-sm sm:h-32 sm:rounded-2xl sm:p-6"></div>
+          <div
+            class="h-28 animate-pulse rounded-xl border border-zinc-100 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 sm:h-32 sm:rounded-2xl sm:p-6"
+          ></div>
         }
       </div>
       <div class="grid min-w-0 gap-4 sm:gap-5 xl:grid-cols-3 xl:gap-6">
-        <div class="h-64 animate-pulse rounded-xl border border-zinc-100 bg-white p-4 shadow-sm sm:h-80 sm:rounded-2xl sm:p-6 xl:col-span-2"></div>
-        <div class="h-64 animate-pulse rounded-xl border border-zinc-100 bg-white p-4 shadow-sm sm:h-80 sm:rounded-2xl sm:p-6"></div>
+        <div
+          class="h-64 animate-pulse rounded-xl border border-zinc-100 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 sm:h-80 sm:rounded-2xl sm:p-6 xl:col-span-2"
+        ></div>
+        <div
+          class="h-64 animate-pulse rounded-xl border border-zinc-100 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 sm:h-80 sm:rounded-2xl sm:p-6"
+        ></div>
       </div>
     </div>
   }
 
-  <!-- Main Statistics Grid -->
   @if (statistics(); as data) {
     <div class="min-w-0 space-y-4 sm:space-y-5 xl:space-y-6">
-      <!-- Row 1: Stats Cards Grid + Category Widget -->
       <div class="grid min-w-0 gap-4 sm:gap-5 xl:grid-cols-3 xl:gap-6">
-        <!-- Left Side: 2x2 Metric Cards Grid -->
         <div class="grid min-w-0 gap-4 sm:grid-cols-2 xl:col-span-2">
           <app-stat-card
-            label="Total Products"
+            [label]="'DASHBOARD.OVERVIEW.STATS.TOTAL_PRODUCTS' | translate"
             [value]="data.overall.totalProducts"
             icon="pi pi-box"
             colorType="rose"
@@ -40,7 +44,7 @@
           ></app-stat-card>
 
           <app-stat-card
-            label="Total Orders"
+            [label]="'DASHBOARD.OVERVIEW.STATS.TOTAL_ORDERS' | translate"
             [value]="data.overall.totalOrders"
             icon="pi pi-shopping-bag"
             colorType="blue"
@@ -48,7 +52,7 @@
           ></app-stat-card>
 
           <app-stat-card
-            label="Total Categories"
+            [label]="'DASHBOARD.OVERVIEW.STATS.TOTAL_CATEGORIES' | translate"
             [value]="data.overall.totalCategories"
             icon="pi pi-clipboard"
             colorType="purple"
@@ -56,7 +60,7 @@
           ></app-stat-card>
 
           <app-stat-card
-            label="Total Revenue"
+            [label]="'DASHBOARD.OVERVIEW.STATS.TOTAL_REVENUE' | translate"
             [value]="data.overall.totalRevenue"
             icon="pi pi-dollar"
             colorType="green"
@@ -64,21 +68,20 @@
           ></app-stat-card>
         </div>
 
-        <!-- Right Side: Scrollable Categories Widget -->
         <div class="h-full min-w-0">
           <app-list-widget
-            title="All Categories"
+            [title]="'DASHBOARD.OVERVIEW.WIDGETS.ALL_CATEGORIES' | translate"
             [items]="categoryWidgetItems()"
-            emptyMessage="No category data"
+            [emptyMessage]="
+              'DASHBOARD.OVERVIEW.WIDGETS.NO_CATEGORY_DATA' | translate
+            "
             emptyIcon="pi pi-inbox"
             id="widget-all-categories"
           ></app-list-widget>
         </div>
       </div>
 
-      <!-- Row 2: Donut Order Status + Line Revenue Chart -->
       <div class="grid min-w-0 gap-4 sm:gap-5 xl:grid-cols-3 xl:gap-6">
-        <!-- Left: Order Status SVG Donut -->
         <div class="min-w-0">
           <app-order-status-chart
             [items]="data.orders.ordersByStatus"
@@ -86,7 +89,6 @@
           ></app-order-status-chart>
         </div>
 
-        <!-- Right: Interactive SVG Area Line Chart -->
         <div class="min-w-0 xl:col-span-2">
           <app-revenue-chart
             [dailyRevenue]="data.orders.dailyRevenue"
@@ -96,9 +98,7 @@
         </div>
       </div>
 
-      <!-- Row 3: Top Selling List + Low Stock Alert Table -->
       <div class="grid min-w-0 gap-4 sm:gap-5 xl:grid-cols-2 xl:gap-6">
-        <!-- Left: Top Selling Products progress bar list -->
         <div class="min-w-0">
           <app-top-selling-products
             [items]="data.products.topSellingProducts"
@@ -106,7 +106,6 @@
           ></app-top-selling-products>
         </div>
 
-        <!-- Right: Low Stock Alert warehouse status -->
         <div class="min-w-0">
           <app-low-stock-products
             [items]="data.products.lowStockProducts"
@@ -117,20 +116,29 @@
     </div>
   }
 
-  <!-- Error Fallback Message -->
   @if (error() && !statistics()) {
-    <div class="flex flex-col items-center justify-center rounded-xl border border-red-100 bg-red-50/50 p-6 text-center shadow-sm sm:rounded-2xl sm:p-8 lg:p-12">
-      <div class="flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600 mb-4">
+    <div
+      class="flex flex-col items-center justify-center rounded-xl border border-red-100 bg-red-50/50 p-6 text-center shadow-sm dark:border-red-500/20 dark:bg-red-950/20 sm:rounded-2xl sm:p-8 lg:p-12"
+    >
+      <div
+        class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600 dark:bg-red-500/15 dark:text-red-300"
+      >
         <i class="pi pi-exclamation-triangle text-xl"></i>
       </div>
-      <h4 class="text-sm font-bold text-red-800">Failed to load statistics</h4>
-      <p class="mt-1 max-w-full break-words text-xs text-red-600 sm:max-w-md">{{ error() }}</p>
+      <h4 class="text-sm font-bold text-red-800 dark:text-red-200">
+        {{ 'DASHBOARD.OVERVIEW.ERRORS.FAILED_LOAD_STATISTICS' | translate }}
+      </h4>
+      <p
+        class="mt-1 max-w-full break-words text-xs text-red-600 dark:text-red-300 sm:max-w-md"
+      >
+        {{ error() | translate }}
+      </p>
       <button
         type="button"
         (click)="refreshData()"
-        class="mt-4 rounded-lg bg-red-600 px-4 py-2 text-xs font-bold text-white hover:bg-red-700 transition-colors shadow-sm"
+        class="mt-4 rounded-lg bg-red-600 px-4 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:bg-red-500 dark:hover:bg-red-400"
       >
-        Try Again
+        {{ 'DASHBOARD.OVERVIEW.ERRORS.TRY_AGAIN' | translate }}
       </button>
     </div>
   }

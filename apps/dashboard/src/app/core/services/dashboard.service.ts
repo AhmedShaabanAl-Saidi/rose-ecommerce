@@ -36,7 +36,7 @@ export class DashboardService {
       map(response => {
         const stats = response.statistics || response.data;
         if (!stats) {
-          throw new Error('No statistics data found in response');
+          throw new Error('DASHBOARD.OVERVIEW.ERRORS.NO_STATISTICS_DATA');
         }
         return stats as AllStatsResponse;
       }),
@@ -48,7 +48,9 @@ export class DashboardService {
         if (err.status === 401 || err.status === 403) {
           this.router.navigate(['/unauthorized']);
         }
-        this.error.set(err.message || 'Failed to load statistics');
+        this.error.set(
+          err.message || 'DASHBOARD.OVERVIEW.ERRORS.FAILED_LOAD_STATISTICS'
+        );
         this.loading.set(false);
         return throwError(() => err);
       })

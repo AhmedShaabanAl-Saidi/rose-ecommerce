@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { languageService } from '../../../../core/services/language-service';
+import { languageService } from '@elevate/theme';
 import {
   formatLocalizedDate,
   formatLocalizedTime,

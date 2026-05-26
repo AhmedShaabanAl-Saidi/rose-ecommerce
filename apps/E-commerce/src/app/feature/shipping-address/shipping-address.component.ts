@@ -20,7 +20,7 @@ import {
   MoveRight,
 } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { languageService } from '../../core/services/language-service';
+import { languageService } from '@elevate/theme';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AddressUiService } from '../../shared/components/ui/dialogs/address-dialog/services/address-ui.service';
 

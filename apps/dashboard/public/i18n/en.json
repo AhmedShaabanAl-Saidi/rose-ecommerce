@@ -1,0 +1,148 @@
+{
+  "DASHBOARD": {
+    "NAVIGATION": {
+      "LABEL": "Main navigation",
+      "MOBILE_LABEL": "Dashboard navigation",
+      "BACK_TO_WEBSITE": "Back to website",
+      "PREVIEW_WEBSITE": "Preview Website",
+      "PROFILE_MENU": "Profile menu",
+      "ACCOUNT": "Account",
+      "LOG_OUT": "Log out",
+      "GUEST": "Guest"
+    },
+    "BREADCRUMB": {
+      "LABEL": "Breadcrumb",
+      "DASHBOARD": "Dashboard",
+      "OVERVIEW": "Overview",
+      "CATEGORIES": "Categories",
+      "OCCASIONS": "Occasions",
+      "PRODUCTS": "Products",
+      "ADD_NEW": "Add New",
+      "EDIT": "Edit",
+      "ACCOUNT": "Account",
+      "CHANGE_PASSWORD": "Change Password",
+      "PAGE_NOT_FOUND": "Page Not Found"
+    },
+    "ROUTES": {
+      "OVERVIEW_TITLE": "Dashboard - Overview",
+      "CATEGORIES_TITLE": "Dashboard - Categories",
+      "OCCASIONS_TITLE": "Dashboard - Occasions",
+      "PRODUCTS_TITLE": "Dashboard - Products",
+      "ADD_PRODUCT_TITLE": "Dashboard - Add Product",
+      "EDIT_PRODUCT_TITLE": "Dashboard - Edit Product",
+      "ACCOUNT_TITLE": "Dashboard - My Account",
+      "CHANGE_PASSWORD_TITLE": "Dashboard - Change Password",
+      "NOT_FOUND_TITLE": "Dashboard - Page Not Found"
+    },
+    "PAGES": {
+      "CATEGORIES": {
+        "TITLE": "Categories",
+        "DESCRIPTION": "Manage your categories here."
+      },
+      "OCCASIONS": {
+        "TITLE": "Occasions",
+        "DESCRIPTION": "List and manage occasions."
+      },
+      "PRODUCTS": {
+        "TITLE": "Products",
+        "DESCRIPTION": "Products list and management.",
+        "ADD_PRODUCT": "Add Product",
+        "EDIT_PRODUCT": "Edit Product",
+        "LIST_AREA": "Product list area",
+        "SECTION": "Product",
+        "ADD_TITLE": "Add Product",
+        "ADD_DESCRIPTION": "This is the add-product child route.",
+        "EDIT_TITLE": "Edit Product",
+        "EDIT_DESCRIPTION": "This is the edit-product child route.",
+        "BACK_TO_PRODUCTS": "Back to products"
+      }
+    },
+    "OVERVIEW": {
+      "TITLE": "Dashboard",
+      "SEO_TITLE": "Admin Dashboard Overview | Elevate Flower",
+      "SEO_DESCRIPTION": "Analyze store statistics, order status percentages, sales revenue area trends, top sold items, and low stock inventory alerts in real-time.",
+      "STATS": {
+        "TOTAL_PRODUCTS": "Total Products",
+        "TOTAL_ORDERS": "Total Orders",
+        "TOTAL_CATEGORIES": "Total Categories",
+        "TOTAL_REVENUE": "Total Revenue"
+      },
+      "WIDGETS": {
+        "ALL_CATEGORIES": "All Categories",
+        "NO_DATA": "No data",
+        "NO_CATEGORY_DATA": "No category data",
+        "ORDERS_STATUS": "Orders Status",
+        "NO_ORDERS_DATA": "No orders data",
+        "REVENUE": "Revenue",
+        "REVENUE_LABEL": "Revenue (EGP)",
+        "MONTHLY": "Monthly",
+        "LAST_WEEK": "Last Week",
+        "NO_REVENUE_DATA": "No revenue data",
+        "TOP_SELLING_PRODUCTS": "Top Selling Products",
+        "NO_SALES_DATA": "No sales data available",
+        "SALES": "Sales",
+        "LOW_STOCK_PRODUCTS": "Low Stock Products",
+        "ALL_PRODUCTS_NORMAL": "All products stock are normal",
+        "PRODUCTS": "Products",
+        "UNKNOWN": "Unknown"
+      },
+      "ORDER_STATUS": {
+        "COMPLETED": "Completed",
+        "IN_PROGRESS": "In progress",
+        "PENDING": "Pending",
+        "CANCELED": "Canceled",
+        "UNKNOWN": "Unknown"
+      },
+      "INVENTORY_STATUS": {
+        "OUT_OF_STOCK": "Out of Stock",
+        "LOW_STOCK": "Low Stock",
+        "OPTIMAL": "Optimal"
+      },
+      "ERRORS": {
+        "FAILED_LOAD_STATISTICS": "Failed to load statistics",
+        "NO_STATISTICS_DATA": "No statistics data found in response",
+        "TRY_AGAIN": "Try Again"
+      }
+    }
+  },
+  "PROFILE_PAGE": {
+    "ACCOUNT_SETTINGS": "Account Settings",
+    "UPLOAD_PHOTO": "Upload Photo",
+    "UPLOAD_HINT": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+    "CHOOSE_FILE": "Choose File",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "GENDER": "Gender",
+    "DELETE_ACCOUNT": "Delete My Account",
+    "SAVE_CHANGES": "Save Changes",
+    "OLD_PASSWORD": "Old Password",
+    "NEW_PASSWORD": "New Password",
+    "CONFIRM_PASSWORD": "Confirm New Password",
+    "CHANGE_PASSWORD": "Change Password",
+    "CHANGE_PASSWORD_FORM": "Change Password Form",
+    "ENTER_OLD_PASSWORD": "Enter your current password",
+    "ENTER_NEW_PASSWORD": "Enter a new password",
+    "ENTER_CONFIRM_PASSWORD": "Re-enter your new password",
+    "PASSWORDS_MISMATCH": "Passwords do not match",
+    "PROFILE_PHOTO": "Profile Photo",
+    "PROFILE_DETAILS_FORM": "Profile Details Form",
+    "USER_PROFILE_PICTURE": "User Profile Picture",
+    "UPLOADING_PHOTO": "Uploading Photo",
+    "FILE_SIZE_LIMIT": "File size exceeds 5MB limit",
+    "DELETE_CONFIRMATION": "Delete Confirmation",
+    "DELETE_CONFIRM_MESSAGE": "Are you sure you want to delete your account? This action is permanent and cannot be undone.",
+    "YES_DELETE": "Yes, delete",
+    "NO_KEEP": "No, keep it",
+    "PHOTO_UPDATED": "Photo updated successfully",
+    "PHOTO_UPDATE_FAILED": "Failed to update photo",
+    "UPDATE_SUCCESS": "Profile updated successfully",
+    "PASSWORD_UPDATE_SUCCESS": "Password changed successfully",
+    "ACCOUNT_DELETED": "Account deleted successfully"
+  },
+  "NOT_FOUND": {
+    "TITLE": "This page does not exist.",
+    "DESCRIPTION": "We couldn't find the page you are looking for. Please make sure you are in the right path."
+  }
+}

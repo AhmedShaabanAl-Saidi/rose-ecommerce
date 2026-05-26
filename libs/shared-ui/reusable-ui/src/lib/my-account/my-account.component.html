@@ -1,16 +1,18 @@
 @if(user() && user()?.role === 'admin') {
-<p class="text-2xl text-semibold text-zinc-800 mb-6">Account Settings</p>
+<p class="text-2xl text-semibold text-zinc-800 mb-6 dark:text-zinc-50">
+  {{ 'PROFILE_PAGE.ACCOUNT_SETTINGS' | translate }}
+</p>
 }
 <div class="bg-white dark:bg-zinc-900 p-6 rounded-lg mb-5">
   <form
     [formGroup]="profileForm"
     (ngSubmit)="onSubmit()"
-    aria-label="Profile Details Form"
+    [attr.aria-label]="'PROFILE_PAGE.PROFILE_DETAILS_FORM' | translate"
   >
     <div
       class="flex items-center gap-6 mb-8"
       role="group"
-      aria-label="Profile Photo"
+      [attr.aria-label]="'PROFILE_PAGE.PROFILE_PHOTO' | translate"
     >
       <div
         class="relative w-24 h-24 rounded-full overflow-hidden bg-gray-100 dark:bg-zinc-800 flex-shrink-0 border border-gray-200 dark:border-zinc-700"
@@ -19,7 +21,7 @@
         @if (previewUrl()) {
         <img
           [src]="previewUrl()"
-          alt="User Profile Picture"
+          [alt]="'PROFILE_PAGE.USER_PROFILE_PICTURE' | translate"
           class="w-full h-full object-cover"
         />
         } @else {
@@ -31,7 +33,7 @@
         } @if (isUploadingPhoto()) {
         <div
           class="absolute inset-0 bg-black/50 flex items-center justify-center"
-          aria-label="Uploading Photo"
+          [attr.aria-label]="'PROFILE_PAGE.UPLOADING_PHOTO' | translate"
         >
           <i class="pi pi-spin pi-spinner text-white text-2xl"></i>
         </div>

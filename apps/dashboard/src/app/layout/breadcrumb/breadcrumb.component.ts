@@ -1,18 +1,27 @@
 import { CommonModule } from '@angular/common';
-import {Component,OnDestroy,OnInit,inject,input,signal} from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, input, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { Subscription, filter } from 'rxjs';
+import { Subscription, filter, merge } from 'rxjs';
+import { AppearanceControlsComponent } from '../appearance-controls/appearance-controls.component';
 
 @Component({
   selector: 'app-breadcrumb',
-  imports: [CommonModule, BreadcrumbModule, RouterLink],
+  imports: [
+    CommonModule,
+    BreadcrumbModule,
+    RouterLink,
+    TranslatePipe,
+    AppearanceControlsComponent,
+  ],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.css',
 })
 export class BreadcrumbComponent implements OnInit, OnDestroy {
   private router = inject(Router);
+  private translate = inject(TranslateService);
   private sub!: Subscription;
 
   variant = input<'desktop' | 'mobile'>('desktop');
@@ -24,19 +33,23 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
   };
 
   private routeLabels: Record<string, string> = {
-    overview: 'Overview',
-    categories: 'Categories',
-    occasions: 'Occasions',
-    products: 'Products',
-    add: 'Add New',
-    edit: 'Edit',
+    overview: 'DASHBOARD.BREADCRUMB.OVERVIEW',
+    categories: 'DASHBOARD.BREADCRUMB.CATEGORIES',
+    occasions: 'DASHBOARD.BREADCRUMB.OCCASIONS',
+    products: 'DASHBOARD.BREADCRUMB.PRODUCTS',
+    add: 'DASHBOARD.BREADCRUMB.ADD_NEW',
+    edit: 'DASHBOARD.BREADCRUMB.EDIT',
+    account: 'DASHBOARD.BREADCRUMB.ACCOUNT',
+    'change-password': 'DASHBOARD.BREADCRUMB.CHANGE_PASSWORD',
   };
 
   ngOnInit(): void {
     this.buildBreadcrumbs();
 
-    this.sub = this.router.events
-      .pipe(filter((e) => e instanceof NavigationEnd))
+    this.sub = merge(
+      this.router.events.pipe(filter((e) => e instanceof NavigationEnd)),
+      this.translate.onLangChange
+    )
       .subscribe(() => this.buildBreadcrumbs());
   }
 
@@ -52,7 +65,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     let cumulativePath = '';
 
     items.push({
-      label: 'Dashboard',
+      label: this.translate.instant('DASHBOARD.BREADCRUMB.DASHBOARD'),
       routerLink: '/dashboard/overview',
     });
 
@@ -65,7 +78,9 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
         continue;
       }
 
-      const label = this.routeLabels[segment] ?? this.toTitleCase(segment);
+      const label = this.routeLabels[segment]
+        ? this.translate.instant(this.routeLabels[segment])
+        : this.toTitleCase(segment);
       const isLast = i === segments.length - 1;
 
       items.push({

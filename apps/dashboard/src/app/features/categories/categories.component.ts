@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categories',
-  standalone: true,
-  imports: [CommonModule],
+
+  imports: [CommonModule, TranslatePipe],
   template: `
-    <div class="p-8 max-w-4xl mx-auto">
-      <h1 class="text-3xl font-semibold mb-4">Categories</h1>
-      <p class="text-gray-600">Manage your categories here.</p>
+    <div class="mx-auto max-w-4xl p-8 text-start">
+      <h1 class="mb-4 text-3xl font-semibold text-zinc-900 dark:text-zinc-50">
+        {{ 'DASHBOARD.PAGES.CATEGORIES.TITLE' | translate }}
+      </h1>
+      <p class="text-zinc-600 dark:text-zinc-400">
+        {{ 'DASHBOARD.PAGES.CATEGORIES.DESCRIPTION' | translate }}
+      </p>
     </div>
   `,
 })

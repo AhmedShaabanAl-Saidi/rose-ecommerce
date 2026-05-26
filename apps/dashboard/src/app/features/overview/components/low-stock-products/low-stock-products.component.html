@@ -1,23 +1,23 @@
-<div class="flex h-full min-w-0 flex-col rounded-xl border border-zinc-200/80 bg-white p-4 shadow-sm sm:rounded-2xl sm:p-6">
+<div class="flex h-full min-w-0 flex-col rounded-xl border border-zinc-200/80 bg-white p-4 shadow-sm transition-colors dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none sm:rounded-2xl sm:p-6">
   <div class="mb-4 min-w-0 sm:mb-5">
-    <h3 class="truncate text-base font-bold text-zinc-800 sm:text-lg">Low Stock Products</h3>
+    <h3 class="truncate text-base font-bold text-zinc-800 dark:text-zinc-100 sm:text-lg">{{ 'DASHBOARD.OVERVIEW.WIDGETS.LOW_STOCK_PRODUCTS' | translate }}</h3>
   </div>
 
   <div class="min-w-0 flex-1">
     @if (productsList().length === 0) {
-      <div class="flex h-32 flex-col items-center justify-center px-2 text-center text-zinc-400">
+      <div class="flex h-32 flex-col items-center justify-center px-2 text-center text-zinc-400 dark:text-zinc-500">
         <i class="pi pi-check-circle text-2xl mb-2 text-emerald-500"></i>
-        <span class="text-xs">All products stock are normal</span>
+        <span class="text-xs">{{ 'DASHBOARD.OVERVIEW.WIDGETS.ALL_PRODUCTS_NORMAL' | translate }}</span>
       </div>
     } @else {
-      <div class="custom-scrollbar max-h-[260px] space-y-4 overflow-y-auto pr-1 sm:max-h-[300px] sm:pr-2">
+      <div class="custom-scrollbar max-h-[260px] space-y-4 overflow-y-auto pe-1 sm:max-h-[300px] sm:pe-2">
         @for (prod of productsList(); track prod._id) {
           <div class="flex min-w-0 items-center justify-between gap-3">
-            <span class="min-w-0 truncate text-sm text-zinc-700">
+            <span class="min-w-0 truncate text-sm text-zinc-700 dark:text-zinc-300">
               {{ prod.name }}
             </span>
-            <span class="ml-2 shrink-0 whitespace-nowrap text-xs font-bold" [ngClass]="isCritical(prod.stock) ? 'text-red-500' : 'text-zinc-500'">
-              {{ prod.stock }} Products
+            <span class="ms-2 shrink-0 whitespace-nowrap text-xs font-bold" [ngClass]="isCritical(prod.stock) ? 'text-red-500 dark:text-red-300' : 'text-zinc-500 dark:text-zinc-400'">
+              {{ prod.stock }} {{ 'DASHBOARD.OVERVIEW.WIDGETS.PRODUCTS' | translate }}
             </span>
           </div>
         }

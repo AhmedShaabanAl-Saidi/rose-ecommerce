@@ -34,7 +34,7 @@ interface PhoneValue {
 
 @Component({
   selector: 'lib-my-account',
-  standalone: true,
+
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     ReactiveFormsModule,
@@ -98,7 +98,7 @@ export class MyAccountComponent implements OnInit {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        this.toastr.error('File size exceeds 5MB limit');
+        this.toastr.error(this.translate.instant('PROFILE_PAGE.FILE_SIZE_LIMIT'));
         return;
       }
       this.selectedFile = file;
@@ -127,6 +127,9 @@ export class MyAccountComponent implements OnInit {
           error: () => {
             this.isUploadingPhoto.set(false);
             this.previewUrl.set(oldPhoto);
+            this.toastr.error(
+              this.translate.instant('PROFILE_PAGE.PHOTO_UPDATE_FAILED')
+            );
           },
         });
     }
@@ -176,12 +179,11 @@ export class MyAccountComponent implements OnInit {
 
   deleteAccount(): void {
     this.confirmationService.confirm({
-      message:
-        'Are you sure you want to delete your account? This action is permanent and cannot be undone.',
-      header: 'Delete Confirmation',
+      message: this.translate.instant('PROFILE_PAGE.DELETE_CONFIRM_MESSAGE'),
+      header: this.translate.instant('PROFILE_PAGE.DELETE_CONFIRMATION'),
       icon: 'pi pi-info-circle',
-      acceptLabel: 'Yes, delete',
-      rejectLabel: 'Nope, not doing it',
+      acceptLabel: this.translate.instant('PROFILE_PAGE.YES_DELETE'),
+      rejectLabel: this.translate.instant('PROFILE_PAGE.NO_KEEP'),
       acceptButtonStyleClass: 'p-button-danger',
       rejectButtonStyleClass: 'p-button-text',
       accept: () => {
@@ -190,7 +192,9 @@ export class MyAccountComponent implements OnInit {
           .pipe(take(1))
           .subscribe({
             next: () => {
-              this.toastr.success('Account deleted successfully');
+              this.toastr.success(
+                this.translate.instant('PROFILE_PAGE.ACCOUNT_DELETED')
+              );
               this.authRepo.cleanData();
               this.router.navigate(['/auth/login']);
             },

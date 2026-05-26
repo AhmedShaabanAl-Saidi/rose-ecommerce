@@ -1,0 +1,148 @@
+{
+  "DASHBOARD": {
+    "NAVIGATION": {
+      "LABEL": "التنقل الرئيسي",
+      "MOBILE_LABEL": "تنقل لوحة التحكم",
+      "BACK_TO_WEBSITE": "العودة إلى الموقع",
+      "PREVIEW_WEBSITE": "معاينة الموقع",
+      "PROFILE_MENU": "قائمة الملف الشخصي",
+      "ACCOUNT": "الحساب",
+      "LOG_OUT": "تسجيل الخروج",
+      "GUEST": "زائر"
+    },
+    "BREADCRUMB": {
+      "LABEL": "مسار التنقل",
+      "DASHBOARD": "لوحة التحكم",
+      "OVERVIEW": "نظرة عامة",
+      "CATEGORIES": "التصنيفات",
+      "OCCASIONS": "المناسبات",
+      "PRODUCTS": "المنتجات",
+      "ADD_NEW": "إضافة جديد",
+      "EDIT": "تعديل",
+      "ACCOUNT": "الحساب",
+      "CHANGE_PASSWORD": "تغيير كلمة المرور",
+      "PAGE_NOT_FOUND": "الصفحة غير موجودة"
+    },
+    "ROUTES": {
+      "OVERVIEW_TITLE": "لوحة التحكم - نظرة عامة",
+      "CATEGORIES_TITLE": "لوحة التحكم - التصنيفات",
+      "OCCASIONS_TITLE": "لوحة التحكم - المناسبات",
+      "PRODUCTS_TITLE": "لوحة التحكم - المنتجات",
+      "ADD_PRODUCT_TITLE": "لوحة التحكم - إضافة منتج",
+      "EDIT_PRODUCT_TITLE": "لوحة التحكم - تعديل منتج",
+      "ACCOUNT_TITLE": "لوحة التحكم - حسابي",
+      "CHANGE_PASSWORD_TITLE": "لوحة التحكم - تغيير كلمة المرور",
+      "NOT_FOUND_TITLE": "لوحة التحكم - الصفحة غير موجودة"
+    },
+    "PAGES": {
+      "CATEGORIES": {
+        "TITLE": "التصنيفات",
+        "DESCRIPTION": "إدارة التصنيفات من هنا."
+      },
+      "OCCASIONS": {
+        "TITLE": "المناسبات",
+        "DESCRIPTION": "عرض وإدارة المناسبات."
+      },
+      "PRODUCTS": {
+        "TITLE": "المنتجات",
+        "DESCRIPTION": "قائمة المنتجات وإدارتها.",
+        "ADD_PRODUCT": "إضافة منتج",
+        "EDIT_PRODUCT": "تعديل منتج",
+        "LIST_AREA": "منطقة قائمة المنتجات",
+        "SECTION": "منتج",
+        "ADD_TITLE": "إضافة منتج",
+        "ADD_DESCRIPTION": "هذا مسار إضافة منتج فرعي.",
+        "EDIT_TITLE": "تعديل منتج",
+        "EDIT_DESCRIPTION": "هذا مسار تعديل منتج فرعي.",
+        "BACK_TO_PRODUCTS": "العودة إلى المنتجات"
+      }
+    },
+    "OVERVIEW": {
+      "TITLE": "لوحة التحكم",
+      "SEO_TITLE": "نظرة عامة على لوحة الإدارة | Elevate Flower",
+      "SEO_DESCRIPTION": "حلل إحصاءات المتجر وحالات الطلبات واتجاهات الإيرادات والمنتجات الأكثر مبيعاً وتنبيهات المخزون المنخفض مباشرة.",
+      "STATS": {
+        "TOTAL_PRODUCTS": "إجمالي المنتجات",
+        "TOTAL_ORDERS": "إجمالي الطلبات",
+        "TOTAL_CATEGORIES": "إجمالي التصنيفات",
+        "TOTAL_REVENUE": "إجمالي الإيرادات"
+      },
+      "WIDGETS": {
+        "ALL_CATEGORIES": "كل التصنيفات",
+        "NO_DATA": "لا توجد بيانات",
+        "NO_CATEGORY_DATA": "لا توجد بيانات للتصنيفات",
+        "ORDERS_STATUS": "حالة الطلبات",
+        "NO_ORDERS_DATA": "لا توجد بيانات للطلبات",
+        "REVENUE": "الإيرادات",
+        "REVENUE_LABEL": "الإيرادات (جنيه)",
+        "MONTHLY": "شهري",
+        "LAST_WEEK": "آخر أسبوع",
+        "NO_REVENUE_DATA": "لا توجد بيانات للإيرادات",
+        "TOP_SELLING_PRODUCTS": "المنتجات الأكثر مبيعاً",
+        "NO_SALES_DATA": "لا توجد بيانات مبيعات",
+        "SALES": "مبيعات",
+        "LOW_STOCK_PRODUCTS": "منتجات منخفضة المخزون",
+        "ALL_PRODUCTS_NORMAL": "كل المنتجات بمخزون طبيعي",
+        "PRODUCTS": "منتجات",
+        "UNKNOWN": "غير معروف"
+      },
+      "ORDER_STATUS": {
+        "COMPLETED": "مكتمل",
+        "IN_PROGRESS": "قيد التنفيذ",
+        "PENDING": "معلق",
+        "CANCELED": "ملغي",
+        "UNKNOWN": "غير معروف"
+      },
+      "INVENTORY_STATUS": {
+        "OUT_OF_STOCK": "غير متوفر",
+        "LOW_STOCK": "مخزون منخفض",
+        "OPTIMAL": "مناسب"
+      },
+      "ERRORS": {
+        "FAILED_LOAD_STATISTICS": "فشل تحميل الإحصاءات",
+        "NO_STATISTICS_DATA": "لم يتم العثور على بيانات الإحصاءات في الاستجابة",
+        "TRY_AGAIN": "حاول مرة أخرى"
+      }
+    }
+  },
+  "PROFILE_PAGE": {
+    "ACCOUNT_SETTINGS": "إعدادات الحساب",
+    "UPLOAD_PHOTO": "رفع صورة",
+    "UPLOAD_HINT": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif بحجم أقصى 5 ميجابايت.",
+    "CHOOSE_FILE": "اختيار ملف",
+    "FIRST_NAME": "الاسم الأول",
+    "LAST_NAME": "اسم العائلة",
+    "EMAIL": "البريد الإلكتروني",
+    "PHONE": "الهاتف",
+    "GENDER": "النوع",
+    "DELETE_ACCOUNT": "حذف حسابي",
+    "SAVE_CHANGES": "حفظ التغييرات",
+    "OLD_PASSWORD": "كلمة المرور القديمة",
+    "NEW_PASSWORD": "كلمة المرور الجديدة",
+    "CONFIRM_PASSWORD": "تأكيد كلمة المرور الجديدة",
+    "CHANGE_PASSWORD": "تغيير كلمة المرور",
+    "CHANGE_PASSWORD_FORM": "نموذج تغيير كلمة المرور",
+    "ENTER_OLD_PASSWORD": "أدخل كلمة المرور الحالية",
+    "ENTER_NEW_PASSWORD": "أدخل كلمة مرور جديدة",
+    "ENTER_CONFIRM_PASSWORD": "أعد إدخال كلمة المرور الجديدة",
+    "PASSWORDS_MISMATCH": "كلمتا المرور غير متطابقتين",
+    "PROFILE_PHOTO": "صورة الملف الشخصي",
+    "PROFILE_DETAILS_FORM": "نموذج بيانات الملف الشخصي",
+    "USER_PROFILE_PICTURE": "صورة المستخدم الشخصية",
+    "UPLOADING_PHOTO": "جاري رفع الصورة",
+    "FILE_SIZE_LIMIT": "حجم الملف يتجاوز حد 5 ميجابايت",
+    "DELETE_CONFIRMATION": "تأكيد الحذف",
+    "DELETE_CONFIRM_MESSAGE": "هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+    "YES_DELETE": "نعم، احذف",
+    "NO_KEEP": "لا، احتفظ به",
+    "PHOTO_UPDATED": "تم تحديث الصورة بنجاح",
+    "PHOTO_UPDATE_FAILED": "فشل تحديث الصورة",
+    "UPDATE_SUCCESS": "تم تحديث الملف الشخصي بنجاح",
+    "PASSWORD_UPDATE_SUCCESS": "تم تغيير كلمة المرور بنجاح",
+    "ACCOUNT_DELETED": "تم حذف الحساب بنجاح"
+  },
+  "NOT_FOUND": {
+    "TITLE": "هذه الصفحة غير موجودة.",
+    "DESCRIPTION": "لم نتمكن من العثور على الصفحة التي تبحث عنها. تأكد من أنك في المسار الصحيح."
+  }
+}

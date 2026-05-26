@@ -1,6 +1,6 @@
 <div
   [ngClass]="getCardClasses()"
-  class="group relative flex min-h-[120px] min-w-0 flex-col items-start justify-between overflow-hidden rounded-xl p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:min-h-[140px] sm:rounded-2xl sm:p-6"
+  class="group relative flex min-h-[120px] min-w-0 flex-col items-start justify-between overflow-hidden rounded-xl border border-transparent p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:shadow-none sm:min-h-[140px] sm:rounded-2xl sm:p-6"
 >
   <div
     [ngClass]="getIconContainerClasses()"
@@ -16,7 +16,7 @@
     >
       {{ formatValue(value()) }}
     </h3>
-    <p class="max-w-full break-words text-sm font-medium leading-5 text-zinc-600">
+    <p class="max-w-full break-words text-sm font-medium leading-5 text-zinc-600 dark:text-zinc-300">
       {{ label() }}
     </p>
   </div>

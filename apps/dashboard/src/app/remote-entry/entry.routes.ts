@@ -20,32 +20,32 @@ export const remoteRoutes: Route[] = [
       {
         path: 'overview',
         component: OverviewComponent,
-        title: 'Dashboard – Overview',
+        title: 'Dashboard - Overview',
       },
       {
         path: 'categories',
         component: CategoriesComponent,
-        title: 'Dashboard – Categories',
+        title: 'Dashboard - Categories',
       },
       {
         path: 'occasions',
         component: OccasionsComponent,
-        title: 'Dashboard – Occasions',
+        title: 'Dashboard - Occasions',
       },
       {
         path: 'products',
         component: ProductsComponent,
-        title: 'Dashboard – Products',
+        title: 'Dashboard - Products',
         children: [
           {
             path: 'add',
             component: ProductAddComponent,
-            title: 'Dashboard – Add Product',
+            title: 'Dashboard - Add Product',
           },
           {
             path: 'edit',
             component: ProductEditComponent,
-            title: 'Dashboard – Edit Product',
+            title: 'Dashboard - Edit Product',
           },
         ],
       },
@@ -56,7 +56,7 @@ export const remoteRoutes: Route[] = [
             path: '',
             loadComponent: () =>
               import('@elevate/reusable-ui').then((m) => m.MyAccountComponent),
-            title: 'Dashboard – My Account',
+            title: 'Dashboard - My Account',
           },
           {
             path: 'change-password',
@@ -64,7 +64,7 @@ export const remoteRoutes: Route[] = [
               import('@elevate/reusable-ui').then(
                 (m) => m.ChangePasswordComponent
               ),
-            title: 'Dashboard – Change Password',
+            title: 'Dashboard - Change Password',
           },
         ],
       },
@@ -72,7 +72,7 @@ export const remoteRoutes: Route[] = [
         path: '**',
         loadComponent: () =>
           import('@elevate/reusable-ui').then((m) => m.NotFoundComponent),
-        title: 'Dashboard – Page Not Found',
+        title: 'Dashboard - Page Not Found',
       },
     ],
   },

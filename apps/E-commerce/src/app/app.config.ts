@@ -20,7 +20,11 @@ import {
   withInMemoryScrolling,
 } from '@angular/router';
 import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
-import { provideElevatePrimeNG } from '@elevate/theme';
+import {
+  provideElevatePrimeNG,
+  provideLanguageInitializer,
+  provideThemeInitializer,
+} from '@elevate/theme';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
@@ -70,8 +74,6 @@ import { provideToastr } from 'ngx-toastr';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { appRoutes } from './app.routes';
-import { provideLanguageInitializer } from './core/initializers/language.initializer';
-import { provideThemeInitializer } from './core/initializers/theme.initializer';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 export const appConfig: ApplicationConfig = {

@@ -1,5 +1,5 @@
 <section
-  class="relative min-h-[80vh] flex flex-col items-center justify-center px-6 py-24 bg-white"
+  class="relative min-h-[80vh] flex flex-col items-center justify-center px-6 py-24 bg-white dark:bg-zinc-950"
   aria-labelledby="not-found-heading"
 >
   <div class="relative z-10 flex flex-col items-center text-center max-w-lg w-full">
@@ -37,16 +37,16 @@
     <!-- Heading -->
     <h1
       id="not-found-heading"
-      class="text-2xl sm:text-[28px] font-bold text-black mb-3"
+      class="text-2xl sm:text-[28px] font-bold text-black dark:text-zinc-50 mb-3"
     >
-      {{ title }}
+      {{ title | translate }}
     </h1>
 
     <!-- Description -->
     <p
-      class="text-[15px] text-zinc-400 mb-8 max-w-sm mx-auto leading-relaxed"
+      class="text-[15px] text-zinc-400 dark:text-zinc-500 mb-8 max-w-sm mx-auto leading-relaxed"
     >
-      {{ description }}
+      {{ description | translate }}
     </p>
 
     <!-- Content projection for buttons -->

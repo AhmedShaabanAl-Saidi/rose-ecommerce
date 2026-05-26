@@ -4,11 +4,15 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { appRoutes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
-import { provideElevatePrimeNG } from '@elevate/theme';
+import { provideElevatePrimeNG, provideLanguageInitializer, provideThemeInitializer } from '@elevate/theme';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideThemeInitializer(),
+    provideLanguageInitializer(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimationsAsync(),
@@ -18,6 +22,13 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([authInterceptor])
     ),
     provideAuth({ baseUrl: 'https://flower.elevateegy.com/' }),
+    provideTranslateService({
+      fallbackLang: 'en',
+    }),
+    provideTranslateHttpLoader({
+      prefix: '/i18n/',
+      suffix: '.json',
+    }),
     provideToastr({
       closeButton: true,
       timeOut: 3000,

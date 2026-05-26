@@ -1,4 +1,4 @@
-import { languageService } from './../../../../core/services/language-service';
+import { languageService } from '@elevate/theme';
 import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import {
   FormControl,
@@ -22,7 +22,6 @@ import { PhoneValue } from '../../../auth/pages/register/interface/PhoneValue.in
 
 @Component({
   selector: 'app-contact-form',
-  standalone: true,
   host: {
     class: 'block w-full lg:col-span-3',
   },

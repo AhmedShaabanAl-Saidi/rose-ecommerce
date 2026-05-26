@@ -1,21 +1,28 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ChartModule } from 'primeng/chart';
 import { OrderStatusStat } from '../../../../core/interfaces/dashboard.interface';
+import { LanguageService } from '@elevate/theme';
 
 @Component({
   selector: 'app-order-status-chart',
-  standalone: true,
-  imports: [CommonModule, ChartModule],
+
+  imports: [CommonModule, ChartModule, TranslatePipe],
   templateUrl: './order-status-chart.component.html',
   styleUrl: './order-status-chart.component.css',
 })
 export class OrderStatusChartComponent {
+  private readonly translate = inject(TranslateService);
+  private readonly languageService = inject(LanguageService);
+
   items = input.required<OrderStatusStat[]>();
 
   totalCount = computed(() => this.items().reduce((acc, curr) => acc + curr.count, 0));
 
   legendItems = computed(() => {
+    this.languageService.currentLang();
+
     const data = this.items();
     const total = this.totalCount();
     const colorsMap: Record<string, string> = {
@@ -35,7 +42,7 @@ export class OrderStatusChartComponent {
       const percentage = total === 0 ? 0 : Math.round((item.count / total) * 100);
       
       return {
-        label: rawStatus,
+        label: this.translateStatus(rawStatus),
         count: item.count,
         percentage,
         color: colorsMap[rawStatus as string] || '#a1a1aa'
@@ -69,4 +76,19 @@ export class OrderStatusChartComponent {
     responsive: true,
     resizeDelay: 100
   };
+
+  private translateStatus(status: string): string {
+    switch (status) {
+      case 'Completed':
+        return this.translate.instant('DASHBOARD.OVERVIEW.ORDER_STATUS.COMPLETED');
+      case 'In progress':
+        return this.translate.instant('DASHBOARD.OVERVIEW.ORDER_STATUS.IN_PROGRESS');
+      case 'Pending':
+        return this.translate.instant('DASHBOARD.OVERVIEW.ORDER_STATUS.PENDING');
+      case 'Canceled':
+        return this.translate.instant('DASHBOARD.OVERVIEW.ORDER_STATUS.CANCELED');
+      default:
+        return this.translate.instant('DASHBOARD.OVERVIEW.ORDER_STATUS.UNKNOWN');
+    }
+  }
 }

@@ -8,7 +8,7 @@ import { MenuItem } from 'primeng/api';
 import { DividerModule } from 'primeng/divider';
 import { MenuModule } from 'primeng/menu';
 import { take, tap } from 'rxjs';
-import { languageService } from '../../../../../services/language-service';
+import { languageService } from '@elevate/theme';
 import { LanguageSwitcherComponent } from '../../../../auth-layout/components/language-switcher/language-switcher.component';
 import { ThemeSwitcherComponent } from '../../../../auth-layout/components/theme-switcher/theme-switcher.component';
 import { CartService } from '../../../../../../../app/feature/cart/services/cart.service';
