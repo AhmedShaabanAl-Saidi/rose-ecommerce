@@ -6,10 +6,12 @@ import { OccasionsComponent } from '../features/occasions/occasions.component';
 import { ProductsComponent } from '../features/products/products.component';
 import { ProductAddComponent } from '../features/products/product-add/product-add.component';
 import { ProductEditComponent } from '../features/products/product-edit/product-edit.component';
+import { provideDashboardI18n } from '../core/i18n/dashboard-i18n.service';
 
 export const remoteRoutes: Route[] = [
   {
     path: '',
+    providers: [provideDashboardI18n()],
     component: DashboardLayoutComponent,
     children: [
       {
