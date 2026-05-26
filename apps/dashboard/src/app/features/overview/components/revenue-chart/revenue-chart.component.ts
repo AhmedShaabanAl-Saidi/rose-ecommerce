@@ -26,14 +26,20 @@ export class RevenueChartComponent {
   }
 
   activeData = computed(() => {
-    return this.activeFilter() === 'weekly' ? this.dailyRevenue() : this.monthlyRevenue();
+    return this.activeFilter() === 'weekly'
+      ? this.dailyRevenue()
+      : this.monthlyRevenue();
   });
+
+  activeTotal = computed(() =>
+    this.activeData().reduce((total, item) => total + item.revenue, 0)
+  );
 
   chartData = computed(() => {
     this.languageService.currentLang();
 
     const data = this.activeData();
-    
+
     return {
       labels: data.map(
         (d) =>
@@ -44,15 +50,15 @@ export class RevenueChartComponent {
       datasets: [
         {
           label: this.translate.instant('DASHBOARD.OVERVIEW.WIDGETS.REVENUE_LABEL'),
-          data: data.map(d => d.revenue),
+          data: data.map((d) => d.revenue),
           fill: true,
-          borderColor: '#e11d48', // rose-600
-          backgroundColor: 'rgba(225, 29, 72, 0.2)', // rose-600 with opacity
+          borderColor: '#a6252a',
+          backgroundColor: 'rgba(166, 37, 42, 0.12)',
           tension: 0.4,
-          pointBackgroundColor: '#e11d48',
+          pointBackgroundColor: '#a6252a',
           pointBorderColor: '#ffffff',
           pointBorderWidth: 2,
-          pointRadius: 4,
+          pointRadius: 3,
           pointHoverRadius: 6
         }
       ]

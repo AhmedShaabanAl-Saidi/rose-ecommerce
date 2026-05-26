@@ -1,23 +1,19 @@
-<div
-  [ngClass]="getCardClasses()"
-  class="group relative flex min-h-[120px] min-w-0 flex-col items-start justify-between overflow-hidden rounded-xl border border-transparent p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:shadow-none sm:min-h-[140px] sm:rounded-2xl sm:p-6"
->
-  <div
-    [ngClass]="getIconContainerClasses()"
-    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
-  >
-    <i [class]="icon() + ' text-xl'"></i>
-  </div>
+<div class="stat-card" [ngClass]="getCardClasses()">
+  <span class="stat-card__accent" [ngClass]="getAccentClasses()"></span>
 
-  <div class="mt-4 min-w-0 max-w-full space-y-1">
-    <h3
-      [ngClass]="getTextClasses()"
-      class="max-w-full text-xl font-bold leading-tight break-words [overflow-wrap:anywhere] sm:text-2xl lg:text-3xl"
-    >
-      {{ formatValue(value()) }}
-    </h3>
-    <p class="max-w-full break-words text-sm font-medium leading-5 text-zinc-600 dark:text-zinc-300">
+  <div class="stat-card__header">
+    <div class="stat-card__icon" [ngClass]="getIconContainerClasses()">
+      <i [class]="icon() + ' text-lg'"></i>
+    </div>
+
+    <p class="stat-card__label">
       {{ label() }}
     </p>
+  </div>
+
+  <div class="stat-card__body">
+    <h3 class="stat-card__value" [ngClass]="getTextClasses()">
+      {{ formatValue(value()) }}
+    </h3>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { CommonModule, I18nPluralPipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -23,4 +23,8 @@ export class ListWidgetComponent {
     '=1': '1',
     'other': '#'
   });
+
+  totalValue = computed(() =>
+    this.items().reduce((total, item) => total + item.value, 0)
+  );
 }

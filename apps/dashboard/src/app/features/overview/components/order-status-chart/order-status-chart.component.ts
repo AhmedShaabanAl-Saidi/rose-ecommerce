@@ -18,7 +18,9 @@ export class OrderStatusChartComponent {
 
   items = input.required<OrderStatusStat[]>();
 
-  totalCount = computed(() => this.items().reduce((acc, curr) => acc + curr.count, 0));
+  totalCount = computed(() =>
+    this.items().reduce((acc, curr) => acc + curr.count, 0)
+  );
 
   legendItems = computed(() => {
     this.languageService.currentLang();
@@ -32,20 +34,15 @@ export class OrderStatusChartComponent {
       Canceled: '#ef4444',
     };
 
-    return data.map(item => {
-      let rawStatus = item.status || item._id || 'unknown';
-      if (rawStatus === 'inProgress' || rawStatus === 'in progress') rawStatus = 'In progress';
-      if (rawStatus === 'completed') rawStatus = 'Completed';
-      if (rawStatus === 'pending') rawStatus = 'Pending';
-      if (rawStatus === 'canceled') rawStatus = 'Canceled';
-      
+    return data.map((item) => {
+      const rawStatus = this.normalizeStatus(item.status || item._id || 'unknown');
       const percentage = total === 0 ? 0 : Math.round((item.count / total) * 100);
-      
+
       return {
         label: this.translateStatus(rawStatus),
         count: item.count,
         percentage,
-        color: colorsMap[rawStatus as string] || '#a1a1aa'
+        color: colorsMap[rawStatus] || '#a1a1aa'
       };
     });
   });
@@ -56,9 +53,11 @@ export class OrderStatusChartComponent {
       labels: items.map(item => item.label),
       datasets: [
         {
-          data: items.map(item => item.count),
-          backgroundColor: items.map(item => item.color),
-          hoverBackgroundColor: items.map(item => item.color),
+          data: items.map((item) => item.count),
+          backgroundColor: items.map((item) => item.color),
+          hoverBackgroundColor: items.map((item) => item.color),
+          borderRadius: 8,
+          spacing: 3,
           borderWidth: 0,
         },
       ],
@@ -76,6 +75,18 @@ export class OrderStatusChartComponent {
     responsive: true,
     resizeDelay: 100
   };
+
+  private normalizeStatus(status: string): string {
+    const normalized = status.trim().toLowerCase();
+
+    if (normalized === 'inprogress' || normalized === 'in progress') {
+      return 'In progress';
+    }
+    if (normalized === 'completed') return 'Completed';
+    if (normalized === 'pending') return 'Pending';
+    if (normalized === 'canceled' || normalized === 'cancelled') return 'Canceled';
+    return status;
+  }
 
   private translateStatus(status: string): string {
     switch (status) {

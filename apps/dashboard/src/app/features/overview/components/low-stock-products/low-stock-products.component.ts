@@ -67,6 +67,30 @@ export class LowStockProductsComponent {
     return this.translate.instant('DASHBOARD.OVERVIEW.INVENTORY_STATUS.OPTIMAL');
   }
 
+  getStockWidth(stock: number): number {
+    return Math.min(Math.max((stock / this.threshold) * 100, 0), 100);
+  }
+
+  getStockClasses(stock: number): string {
+    if (stock === 0) {
+      return 'stock-meter__fill--danger';
+    }
+    if (stock < this.threshold) {
+      return 'stock-meter__fill--warning';
+    }
+    return 'stock-meter__fill--success';
+  }
+
+  getStatusClasses(stock: number): string {
+    if (stock === 0) {
+      return 'inventory-status--danger';
+    }
+    if (stock < this.threshold) {
+      return 'inventory-status--warning';
+    }
+    return 'inventory-status--success';
+  }
+
   fallbackImage(event: Event) {
     const img = event.target as HTMLImageElement;
     img.src = 'https://images.unsplash.com/photo-1561181286-d3fee7d55364?q=80&w=300&auto=format&fit=crop';

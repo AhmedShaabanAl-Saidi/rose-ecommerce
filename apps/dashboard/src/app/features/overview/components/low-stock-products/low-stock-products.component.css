@@ -1,7 +1,7 @@
+@reference '../../../../../styles.css';
+
 :host {
-  display: block;
-  height: 100%;
-  min-width: 0;
+  @apply block h-full min-w-0;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -9,22 +9,65 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
+  @apply bg-transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #e4e4e7;
-  border-radius: 9999px;
+  @apply rounded-full bg-zinc-200;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #d4d4d8;
+  @apply bg-zinc-300;
+}
+
+.inventory-status {
+  @apply inline-flex max-w-full items-center rounded-md px-2 py-0.5 text-[11px] font-bold leading-4 ring-1;
+}
+
+.inventory-status--danger {
+  @apply bg-red-50 text-red-700 ring-red-100;
+}
+
+.inventory-status--warning {
+  @apply bg-amber-50 text-amber-700 ring-amber-100;
+}
+
+.inventory-status--success {
+  @apply bg-emerald-50 text-emerald-700 ring-emerald-100;
+}
+
+.stock-meter__fill {
+  @apply h-full rounded-full;
+}
+
+.stock-meter__fill--danger {
+  @apply bg-red-500;
+}
+
+.stock-meter__fill--warning {
+  @apply bg-amber-500;
+}
+
+.stock-meter__fill--success {
+  @apply bg-emerald-500;
 }
 
 :host-context(.dark) .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #3f3f46;
+  @apply bg-zinc-700;
 }
 
 :host-context(.dark) .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  @apply bg-zinc-600;
+}
+
+:host-context(.dark) .inventory-status--danger {
+  @apply bg-red-500/10 text-red-300 ring-red-500/20;
+}
+
+:host-context(.dark) .inventory-status--warning {
+  @apply bg-amber-500/10 text-amber-300 ring-amber-500/20;
+}
+
+:host-context(.dark) .inventory-status--success {
+  @apply bg-emerald-500/10 text-emerald-300 ring-emerald-500/20;
 }
