@@ -73,9 +73,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { errorInterceptor, loadingInterceptor } from '@elevate/core-data-access';
 import { appRoutes } from './app.routes';
-import { errorInterceptor } from './core/interceptors/error-interceptor';
-import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideThemeInitializer(),

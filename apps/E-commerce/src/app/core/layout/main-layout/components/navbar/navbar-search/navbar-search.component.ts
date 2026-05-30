@@ -17,9 +17,11 @@ import {
   take,
   tap,
 } from 'rxjs';
-import { ProductsService } from '../../../../../../../app/feature/products/services/product';
-import { Product } from '../../../../../../shared/components/ui/product-card/interface/product';
-import { SKIP_GLOBAL_LOADING } from '../../../../../interceptors/loading-interceptor';
+import {
+  Product,
+  ProductsService,
+  SKIP_GLOBAL_LOADING,
+} from '@elevate/core-data-access';
 import { ClickOutsideDirective } from '../../../../../utils/click-outside.directive';
 
 @Component({

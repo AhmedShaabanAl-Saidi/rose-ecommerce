@@ -4,8 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LayoutGrid, LucideAngularModule } from 'lucide-angular';
 import { finalize } from 'rxjs';
 import { TaxonomyCardComponent } from '../../shared/components/ui/taxonomy-card/taxonomy-card.component';
-import { Category } from '../products/interfaces/product';
-import { ProductsService } from '../products/services/product';
+import { Category, CategoriesService } from '@elevate/core-data-access';
 
 @Component({
   selector: 'app-categories',
@@ -13,7 +12,7 @@ import { ProductsService } from '../products/services/product';
   templateUrl: './categories.component.html',
 })
 export class CategoriesComponent {
-  private readonly productsService = inject(ProductsService);
+  private readonly categoriesService = inject(CategoriesService);
   private readonly destroyRef = inject(DestroyRef);
 
   readonly categories = signal<Category[]>([]);
@@ -28,7 +27,7 @@ export class CategoriesComponent {
   private loadCategories(): void {
     this.isLoading.set(true);
 
-    this.productsService
+    this.categoriesService
       .getCategories()
       .pipe(
         finalize(() => this.isLoading.set(false)),

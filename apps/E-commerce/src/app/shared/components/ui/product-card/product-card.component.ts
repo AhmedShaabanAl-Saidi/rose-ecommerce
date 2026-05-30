@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { Product } from './interface/product';
+import { Product } from '@elevate/core-data-access';
 import { CartService } from '../../../../../app/feature/cart/services/cart.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { WishlistService } from '../../../services/wishlist.service';

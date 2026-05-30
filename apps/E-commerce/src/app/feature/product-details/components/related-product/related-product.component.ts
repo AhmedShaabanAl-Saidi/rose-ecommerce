@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CarouselModule } from 'primeng/carousel';
 import { HeadingTitleComponent } from '../../../../shared/components/ui/heading/heading-title.component';
-import { Product } from '../../../../shared/components/ui/product-card/interface/product';
+import { Product } from '@elevate/core-data-access';
 import { ProdcutCarousalComponent } from '../../../../shared/components/ui/product-carousal/prodcut-carousal.component';
 @Component({
   selector: 'app-related-product',

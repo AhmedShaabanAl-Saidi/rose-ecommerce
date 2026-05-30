@@ -1,12 +1,30 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideBrowserGlobalErrorListeners,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { appRoutes } from './app.routes';
-import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { authInterceptor, provideAuth } from '@elevate/auth-data-access';
-import { provideElevatePrimeNG, provideLanguageInitializer, provideThemeInitializer } from '@elevate/theme';
+import {
+  errorInterceptor,
+  loadingInterceptor,
+} from '@elevate/core-data-access';
+import {
+  provideElevatePrimeNG,
+  provideLanguageInitializer,
+  provideThemeInitializer,
+} from '@elevate/theme';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
@@ -19,7 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes, withComponentInputBinding()),
     provideHttpClient(
       withFetch(),
-      withInterceptors([authInterceptor])
+      withInterceptors([loadingInterceptor, authInterceptor, errorInterceptor])
     ),
     provideAuth({ baseUrl: 'https://flower.elevateegy.com/' }),
     provideTranslateService({
@@ -35,6 +53,9 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    importProvidersFrom(
+      NgxSpinnerModule.forRoot({ type: 'triangle-skew-spin' })
+    ),
     provideElevatePrimeNG(),
   ],
 };

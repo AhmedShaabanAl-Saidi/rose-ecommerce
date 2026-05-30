@@ -8,7 +8,7 @@ import {
   PLATFORM_ID,
   signal,
 } from '@angular/core';
-import { Product } from '../product-card/interface/product';
+import { Product } from '@elevate/core-data-access';
 import { CarouselModule } from 'primeng/carousel';
 import { ProductCardComponent } from '../product-card/product-card.component';
 

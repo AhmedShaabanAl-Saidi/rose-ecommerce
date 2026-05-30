@@ -1,5 +1,5 @@
 import { Component, computed, inject, input, output } from '@angular/core';
-import { Product } from '../../../../shared/components/ui/product-card/interface/product';
+import { Product } from '@elevate/core-data-access';
 import { LucideAngularModule } from 'lucide-angular';
 import { Divider } from 'primeng/divider';
 import { DecimalPipe } from '@angular/common';

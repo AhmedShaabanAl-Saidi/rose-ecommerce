@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductList } from './components/product-list/product.list';
 import { FiltersComponent } from './components/filters/filters.component';
-import { FilterState } from './interfaces/product';
+import { FilterState } from '@elevate/core-data-access';
 
 @Component({
   selector: 'app-products',

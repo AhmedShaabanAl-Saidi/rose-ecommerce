@@ -1,7 +1,6 @@
 import { Component, DestroyRef, OnInit, effect, inject, input, output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Occasion } from '../../../interfaces/product';
-import { ProductsService } from '../../../services/product';
+import { Occasion, OccasionsService } from '@elevate/core-data-access';
 import { FilterResetBtnComponent } from '../filter-reset-btn/filter-reset-btn.component';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -11,7 +10,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './occasion-filter.component.html',
 })
 export class OccasionFilterComponent implements OnInit {
-  private readonly productsService = inject(ProductsService);
+  private readonly occasionsService = inject(OccasionsService);
   private readonly destroyRef = inject(DestroyRef);
 
   occasions = signal<Occasion[]>([]);
@@ -33,7 +32,7 @@ export class OccasionFilterComponent implements OnInit {
 
   private fetchOccasions(): void {
     this.isLoading.set(true);
-    this.productsService
+    this.occasionsService
       .getOccasions()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({

@@ -1,4 +1,4 @@
-import { Product as ProductCardModel } from '../../shared/components/ui/product-card/interface/product';
+import { Product as ProductCardModel } from '@elevate/core-data-access';
 import { product as HomeProduct } from './interfaces/home';
 
 export function mapToProductCard(product: HomeProduct): ProductCardModel {

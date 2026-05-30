@@ -3,7 +3,7 @@ import { Component, inject, input, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeadingTitleComponent } from '../../../../shared/components/ui/heading/heading-title.component';
-import { Review } from '../../../products/interfaces/review';
+import { Review } from '@elevate/core-data-access';
 import {
   TextareaInputComponent,
   TextInputComponent,

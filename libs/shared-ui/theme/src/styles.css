@@ -360,6 +360,178 @@ textarea:focus-visible,
   @apply text-zinc-700;
 }
 
+/* Dashboard data table utilities */
+app-dashboard-data-table {
+  @apply block min-w-0;
+}
+
+.dashboard-data-table {
+  @apply flex min-w-0 flex-col gap-4;
+}
+
+.dashboard-data-table__card {
+  @apply min-w-0 rounded-lg bg-white p-6 text-start shadow-sm;
+}
+
+.dashboard-data-table__header {
+  @apply mb-4 flex min-w-0 items-center justify-between gap-3;
+}
+
+.dashboard-data-table__title {
+  @apply m-0 min-w-0 truncate text-xl font-bold text-zinc-900;
+}
+
+.dashboard-data-table__add-button,
+.dashboard-data-table__action-button,
+.dashboard-data-table__more-button {
+  @apply inline-flex cursor-pointer items-center justify-center transition-colors duration-200;
+}
+
+.dashboard-data-table__add-button {
+  @apply h-11 min-w-11 shrink-0 gap-2 rounded-lg bg-maroon-600 px-4 text-sm font-bold text-white;
+}
+
+.dashboard-data-table__add-button:hover {
+  @apply bg-maroon-700;
+}
+
+.dashboard-data-table__add-button:focus-visible,
+.dashboard-data-table__more-button:focus-visible,
+.dashboard-data-table__action-button:focus-visible {
+  @apply outline-solid outline-2 outline-offset-2 outline-maroon-500;
+}
+
+.dashboard-data-table__button-icon,
+.dashboard-data-table__action-icon,
+.dashboard-data-table__more-icon {
+  @apply h-4 w-4 shrink-0;
+}
+
+.dashboard-data-table__search {
+  @apply relative mb-4 block min-w-0;
+}
+
+.dashboard-data-table__search-icon {
+  @apply pointer-events-none absolute start-3 top-1/2 z-[1] h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-zinc-400;
+}
+
+.dashboard-data-table__search-input {
+  @apply h-11 ps-12! text-sm;
+}
+
+.dashboard-data-table__state {
+  @apply flex min-h-[22rem] flex-col items-center justify-center gap-3 rounded-lg border border-zinc-100 bg-zinc-50/50 px-4 py-10 text-center text-sm font-semibold text-zinc-500;
+}
+
+.dashboard-data-table__state--error {
+  @apply border-red-100 bg-red-50 text-red-600;
+}
+
+.dashboard-data-table__actions-heading,
+.dashboard-data-table__actions-cell {
+  @apply w-12 text-end;
+}
+
+.dashboard-data-table__desktop-actions {
+  @apply hidden items-center justify-end gap-2;
+}
+
+.dashboard-data-table__mobile-actions,
+.dashboard-data-table__paginator {
+  @apply flex justify-end;
+}
+
+.dashboard-data-table__paginator {
+  @apply justify-center;
+}
+
+.dashboard-data-table__action-button {
+  @apply h-8 gap-1.5 rounded-md px-2.5 text-xs font-medium;
+}
+
+.dashboard-data-table__action-button--edit {
+  @apply bg-blue-50 text-blue-600;
+}
+
+.dashboard-data-table__action-button--delete {
+  @apply bg-red-100 text-red-600;
+}
+
+.dashboard-data-table__action-button--edit:hover {
+  @apply bg-blue-100;
+}
+
+.dashboard-data-table__action-button--delete:hover {
+  @apply bg-red-200;
+}
+
+.dashboard-data-table__more-button {
+  @apply h-8 w-8 rounded-lg border border-zinc-200 bg-white text-zinc-500;
+}
+
+.dashboard-data-table__more-button:hover {
+  @apply border-maroon-200 text-maroon-700;
+}
+
+.dark .dashboard-data-table__card {
+  @apply bg-zinc-900 shadow-none;
+}
+
+.dark .dashboard-data-table__title {
+  @apply text-zinc-50;
+}
+
+.dark .dashboard-data-table__add-button {
+  @apply bg-soft-pink-200 text-zinc-950;
+}
+
+.dark .dashboard-data-table__add-button:hover {
+  @apply bg-soft-pink-300;
+}
+
+.dark .dashboard-data-table__state {
+  @apply border-zinc-800 bg-zinc-950/30 text-zinc-400;
+}
+
+.dark .dashboard-data-table__state--error {
+  @apply border-red-500/20 bg-red-500/10 text-red-300;
+}
+
+.dark .dashboard-data-table__more-button {
+  @apply border-zinc-700 bg-zinc-900 text-zinc-300;
+}
+
+.dark .dashboard-data-table__more-button:hover {
+  @apply border-soft-pink-300/40 text-soft-pink-200;
+}
+
+@media (width >= 40rem) {
+  .dashboard-data-table__title {
+    @apply text-2xl;
+  }
+}
+
+@media (width >= 48rem) {
+  .dashboard-data-table__actions-heading,
+  .dashboard-data-table__actions-cell {
+    @apply w-36;
+  }
+
+  .dashboard-data-table__desktop-actions {
+    @apply flex;
+  }
+
+  .dashboard-data-table__mobile-actions {
+    @apply hidden;
+  }
+}
+
+@media (width < 48rem) {
+  .dashboard-data-table__card {
+    @apply p-3;
+  }
+}
+
 /* PrimeNG overrides */
 .full-width-confirm-dialog .p-dialog-footer {
   @apply flex flex-row items-stretch gap-3;
@@ -437,6 +609,141 @@ textarea:focus-visible,
 .p-component-overlay,
 .p-motion {
   @apply block!;
+}
+
+.dashboard-data-table__prime-table.p-datatable {
+  @apply overflow-hidden rounded-lg border border-zinc-100;
+}
+
+.dashboard-data-table__prime-table .p-datatable-table {
+  @apply table-fixed;
+}
+
+.dashboard-data-table__prime-table .p-datatable-thead > tr > th {
+  @apply border-0 border-b border-zinc-100 bg-zinc-50 p-3 px-4 text-start text-xs font-medium text-zinc-900;
+}
+
+.dashboard-data-table__prime-table .p-datatable-tbody > tr {
+  @apply bg-white transition-colors;
+}
+
+.dashboard-data-table__prime-table .p-datatable-tbody > tr:hover {
+  @apply bg-maroon-50/70;
+}
+
+.dashboard-data-table__prime-table .p-datatable-tbody > tr > td {
+  @apply border-0 border-b border-zinc-100 p-4 text-sm font-medium text-zinc-800;
+}
+
+.dashboard-data-table__prime-table .p-datatable-tbody > tr > td:not(:first-child) {
+  @apply font-normal text-zinc-700;
+}
+
+.dashboard-data-table__prime-table .p-datatable-tbody > tr:last-child > td {
+  @apply border-b-0;
+}
+
+.dashboard-data-table__prime-table .dashboard-data-table__stock-low {
+  @apply font-bold text-red-600;
+}
+
+.dashboard-data-table .p-paginator {
+  @apply gap-2 border-0! bg-transparent!;
+}
+
+.dashboard-data-table .p-paginator .p-paginator-pages .p-paginator-page,
+.dashboard-data-table .p-paginator button {
+  @apply h-10! min-w-10! rounded-lg! border! border-zinc-100! text-gray-600 transition-all! duration-200! ease-in-out!;
+}
+
+.dashboard-data-table .p-paginator .p-paginator-pages .p-paginator-page-selected,
+.dashboard-data-table
+  .p-paginator
+  .p-paginator-pages
+  .p-paginator-page:hover:not(.p-highlight),
+.dashboard-data-table .p-paginator button:not(.p-disabled):hover {
+  @apply border-maroon-50! bg-maroon-600! text-white!;
+}
+
+.dashboard-table-action-menu {
+  @apply min-w-36 overflow-hidden rounded-lg! border! border-zinc-200! bg-white! shadow-xl;
+}
+
+.dashboard-table-action-menu .p-menu-item-link {
+  @apply text-sm! font-medium! text-zinc-700!;
+}
+
+.dashboard-table-action-menu .p-menu-item-link:hover {
+  @apply bg-maroon-50! text-maroon-700!;
+}
+
+.dark .dashboard-data-table__prime-table.p-datatable,
+.dark .dashboard-data-table__prime-table .p-datatable-thead > tr > th,
+.dark .dashboard-data-table__prime-table .p-datatable-tbody > tr > td {
+  @apply border-zinc-800;
+}
+
+.dark .dashboard-data-table__prime-table .p-datatable-thead > tr > th {
+  @apply bg-zinc-950/40 text-zinc-100;
+}
+
+.dark .dashboard-data-table__prime-table .p-datatable-tbody > tr {
+  @apply bg-zinc-900;
+}
+
+.dark .dashboard-data-table__prime-table .p-datatable-tbody > tr:hover {
+  @apply bg-soft-pink-300/10;
+}
+
+.dark .dashboard-data-table__prime-table .p-datatable-tbody > tr > td {
+  @apply text-zinc-100;
+}
+
+.dark .dashboard-data-table__prime-table .p-datatable-tbody > tr > td:not(:first-child) {
+  @apply text-zinc-300;
+}
+
+.dark .dashboard-data-table__prime-table .dashboard-data-table__stock-low {
+  @apply text-red-300;
+}
+
+.dark .dashboard-table-action-menu {
+  @apply border-zinc-800! bg-zinc-950!;
+}
+
+.dark .dashboard-table-action-menu .p-menu-item-link {
+  @apply text-zinc-200!;
+}
+
+.dark .dashboard-table-action-menu .p-menu-item-link:hover {
+  @apply bg-zinc-900! text-soft-pink-200!;
+}
+
+.dark .dashboard-data-table .p-paginator .p-paginator-pages .p-paginator-page,
+.dark .dashboard-data-table .p-paginator button {
+  @apply border-0! bg-zinc-700 text-white;
+}
+
+.dark .dashboard-data-table .p-paginator .p-paginator-pages .p-paginator-page-selected,
+.dark
+  .dashboard-data-table
+  .p-paginator
+  .p-paginator-pages
+  .p-paginator-page:hover:not(.p-highlight),
+.dark .dashboard-data-table .p-paginator button:not(.p-disabled):hover {
+  @apply border-soft-pink-300! bg-soft-pink-300! text-zinc-700!;
+}
+
+@media (width < 48rem) {
+  .dashboard-data-table__prime-table .p-datatable-thead > tr > th,
+  .dashboard-data-table__prime-table .p-datatable-tbody > tr > td {
+    @apply p-3 text-xs;
+  }
+
+  .dashboard-data-table .p-paginator .p-paginator-pages .p-paginator-page,
+  .dashboard-data-table .p-paginator button {
+    @apply h-[34px]! min-w-[34px]!;
+  }
 }
 
 /* ngx-toastr overrides */

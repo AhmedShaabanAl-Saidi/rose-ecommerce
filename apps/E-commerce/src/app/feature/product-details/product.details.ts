@@ -13,9 +13,7 @@ import {
   tap,
 } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
-import { Product } from '../../shared/components/ui/product-card/interface/product';
-import { Review } from '../products/interfaces/review';
-import { ProductsService } from '../products/services/product';
+import { Product, ProductsService, Review } from '@elevate/core-data-access';
 import { WishlistService } from '../../shared/services/wishlist.service';
 import { ProductGalleryComponent } from './components/product-gallery/product-gallery.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';

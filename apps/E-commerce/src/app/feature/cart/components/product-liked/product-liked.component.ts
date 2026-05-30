@@ -1,8 +1,7 @@
 import { Component, inject, OnInit, signal, input } from '@angular/core';
 import { HeadingTitleComponent } from '../../../../../app/shared/components/ui/heading/heading-title.component';
 import { ProdcutCarousalComponent } from '../../../../../app/shared/components/ui/product-carousal/prodcut-carousal.component';
-import { ProductsService } from '../../../products/services/product';
-import { Product } from '../../../products/interfaces/product';
+import { Product, ProductsService } from '@elevate/core-data-access';
 
 import { TranslateModule } from '@ngx-translate/core';
 
