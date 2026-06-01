@@ -1,7 +1,6 @@
 import { Component, DestroyRef, OnInit, effect, inject, input, output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Category } from '../../../interfaces/product';
-import { ProductsService } from '../../../services/product';
+import { Category, CategoriesService } from '@elevate/core-data-access';
 import { FilterResetBtnComponent } from '../filter-reset-btn/filter-reset-btn.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
@@ -12,7 +11,7 @@ import { LucideAngularModule } from 'lucide-angular';
   templateUrl: './category-filter.component.html',
 })
 export class CategoryFilterComponent implements OnInit {
-  private readonly productsService = inject(ProductsService);
+  private readonly categoriesService = inject(CategoriesService);
   private readonly destroyRef = inject(DestroyRef);
 
   categories = signal<Category[]>([]);
@@ -34,7 +33,7 @@ export class CategoryFilterComponent implements OnInit {
 
   private fetchCategories(): void {
     this.isLoading.set(true);
-    this.productsService
+    this.categoriesService
       .getCategories()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({

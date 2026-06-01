@@ -33,10 +33,7 @@ export class OverviewComponent implements OnInit {
   private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
 
-  // Expose signals to the view
   readonly statistics = this.dashboardService.statistics;
-  readonly loading = this.dashboardService.loading;
-  readonly error = this.dashboardService.error;
 
   readonly categoryWidgetItems = computed<ListItem[]>(() => {
     const stats = this.statistics();

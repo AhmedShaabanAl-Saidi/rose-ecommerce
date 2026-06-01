@@ -3,7 +3,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from 'apps/E-commerce/src/environments/environments';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { Product } from '../components/ui/product-card/interface/product';
+import { Product } from '@elevate/core-data-access';
 import { Observable, throwError } from 'rxjs';
 import { tap, switchMap, catchError } from 'rxjs/operators';
 

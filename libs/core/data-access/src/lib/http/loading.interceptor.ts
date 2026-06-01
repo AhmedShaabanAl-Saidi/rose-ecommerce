@@ -1,7 +1,7 @@
 import { HttpContextToken, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { finalize } from 'rxjs';
-import { LoadingService } from '../services/loading.service';
+import { LoadingService } from './loading.service';
 
 export const SKIP_GLOBAL_LOADING = new HttpContextToken<boolean>(() => false);
 

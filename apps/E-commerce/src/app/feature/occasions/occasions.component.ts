@@ -4,8 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LayoutGrid, LucideAngularModule } from 'lucide-angular';
 import { finalize } from 'rxjs';
 import { TaxonomyCardComponent } from '../../shared/components/ui/taxonomy-card/taxonomy-card.component';
-import { Occasion } from '../products/interfaces/product';
-import { ProductsService } from '../products/services/product';
+import { Occasion, OccasionsService } from '@elevate/core-data-access';
 
 @Component({
   selector: 'app-occasions',
@@ -13,7 +12,7 @@ import { ProductsService } from '../products/services/product';
   templateUrl: './occasions.component.html',
 })
 export class OccasionsComponent {
-  private readonly productsService = inject(ProductsService);
+  private readonly occasionsService = inject(OccasionsService);
   private readonly destroyRef = inject(DestroyRef);
 
   readonly occasions = signal<Occasion[]>([]);
@@ -34,7 +33,7 @@ export class OccasionsComponent {
   private loadOccasions(): void {
     this.isLoading.set(true);
 
-    this.productsService
+    this.occasionsService
       .getOccasions()
       .pipe(
         finalize(() => this.isLoading.set(false)),

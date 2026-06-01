@@ -1,4 +1,4 @@
-import { Product } from '../../products/interfaces/product';
+import { Product } from '@elevate/core-data-access';
 
 export interface ICartResponse {
   message: string;

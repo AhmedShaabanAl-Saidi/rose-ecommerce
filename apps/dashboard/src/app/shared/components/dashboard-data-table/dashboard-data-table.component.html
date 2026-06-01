@@ -1,0 +1,101 @@
+<div class="dashboard-data-table">
+  <section class="dashboard-data-table__card" aria-live="polite">
+    <div class="dashboard-data-table__header">
+      <h1 class="dashboard-data-table__title">
+        {{ config().titleKey | translate }}
+      </h1>
+
+      <button type="button" class="dashboard-data-table__add-button"
+        [attr.aria-label]="config().addButtonLabelKey | translate">
+        <lucide-icon [img]="PlusIcon" class="dashboard-data-table__button-icon" aria-hidden="true"></lucide-icon>
+        <span class="hidden sm:inline">
+          {{ config().addButtonLabelKey | translate }}
+        </span>
+      </button>
+    </div>
+
+    <label class="dashboard-data-table__search" for="dashboard-table-search">
+      <span class="sr-only">
+        {{ config().searchPlaceholderKey | translate }}
+      </span>
+      <lucide-icon [img]="SearchIcon" class="dashboard-data-table__search-icon" aria-hidden="true"></lucide-icon>
+      <input id="dashboard-table-search" type="search"
+        class="input-base input-status-normal dashboard-data-table__search-input" [formControl]="searchControl"
+        [placeholder]="config().searchPlaceholderKey | translate" />
+    </label>
+
+    @if (hasLoaded() && totalRecords() === 0) {
+    <div class="dashboard-data-table__state">
+      <i class="pi pi-inbox text-xl"></i>
+      <span>{{ config().emptyMessageKey | translate }}</span>
+    </div>
+    } @else if (hasLoaded()) {
+    <p-table [value]="pagedRows()" [tableStyle]="{ width: '100%' }" styleClass="dashboard-data-table__prime-table">
+      <ng-template pTemplate="header">
+        <tr>
+          @if (hasImage()) {
+          <th class="w-16"></th>
+          }
+          @for (column of config().columns; track column.headerKey) {
+          <th [class]="getColumnClass(column)">
+            {{ column.headerKey | translate }}
+          </th>
+          }
+          <th class="dashboard-data-table__actions-heading"></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-row>
+        <tr>
+          @if (hasImage()) {
+          <td class="w-16">
+            <img [src]="imageUrl(row)" [alt]="config().searchAccessor(row)"
+              (error)="fallbackImage($event.target)"
+              class="h-10 w-10 rounded-lg object-cover ring-1 ring-zinc-200 dark:ring-zinc-700" />
+          </td>
+          }
+          @for (column of config().columns; track column.headerKey) {
+          <td [class]="getCellClass(column, row)">
+            {{ formatCellValue(column, row) }}
+          </td>
+          }
+          <td class="dashboard-data-table__actions-cell">
+            <div class="dashboard-data-table__desktop-actions">
+              <button type="button"
+                class="dashboard-data-table__action-button dashboard-data-table__action-button--edit">
+                <lucide-icon [img]="EditIcon" class="dashboard-data-table__action-icon"
+                  aria-hidden="true"></lucide-icon>
+                <span>{{ 'DASHBOARD.TABLE.ACTIONS.EDIT' | translate }}</span>
+              </button>
+              <button type="button"
+                class="dashboard-data-table__action-button dashboard-data-table__action-button--delete">
+                <lucide-icon [img]="DeleteIcon" class="dashboard-data-table__action-icon"
+                  aria-hidden="true"></lucide-icon>
+                <span>{{ 'DASHBOARD.TABLE.ACTIONS.DELETE' | translate }}</span>
+              </button>
+            </div>
+
+            <div class="dashboard-data-table__mobile-actions">
+              <button type="button" class="dashboard-data-table__more-button"
+                [attr.aria-label]="'DASHBOARD.TABLE.ACTIONS.MORE' | translate"
+                (click)="mobileActionMenu.toggle($event)">
+                <lucide-icon [img]="MoreVerticalIcon" class="dashboard-data-table__more-icon"
+                  aria-hidden="true"></lucide-icon>
+              </button>
+              <p-menu #mobileActionMenu [model]="mobileActionItems()" [popup]="true" appendTo="body"
+                styleClass="dashboard-table-action-menu"></p-menu>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    }
+  </section>
+
+  @if (showPaginator()) {
+  <div class="dashboard-data-table__paginator">
+    <p-paginator [first]="first()" [rows]="rows()" [totalRecords]="totalRecords()"
+      (onPageChange)="onPageChange($event)"></p-paginator>
+  </div>
+  }
+</div>

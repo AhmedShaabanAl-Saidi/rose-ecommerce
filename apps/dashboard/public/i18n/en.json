@@ -1,4 +1,11 @@
 {
+  "ERRORS": {
+    "UNEXPECTED": "An unexpected error occurred",
+    "NETWORK": "Network error: Please check your connection",
+    "SERVER": "Server error: Please try again later",
+    "UNAUTHORIZED": "Please login first",
+    "FORBIDDEN": "You don't have permission to access this page"
+  },
   "DASHBOARD": {
     "NAVIGATION": {
       "LABEL": "Main navigation",
@@ -55,6 +62,41 @@
         "EDIT_TITLE": "Edit Product",
         "EDIT_DESCRIPTION": "This is the edit-product child route.",
         "BACK_TO_PRODUCTS": "Back to products"
+      }
+    },
+    "TABLE": {
+      "SEARCH_PLACEHOLDER": "Search...",
+      "LOADING": "Loading table data...",
+      "ERROR": "Failed to load data",
+      "CURRENCY": "EGP",
+      "PRODUCTS_SUFFIX": "products",
+      "ACTIONS": {
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "MORE": "More actions"
+      },
+      "COLUMNS": {
+        "NAME": "Name",
+        "PRICE": "Price",
+        "STOCK": "Stock",
+        "SALES": "Sales",
+        "RATINGS": "Ratings",
+        "PRODUCTS": "Products"
+      },
+      "PRODUCTS": {
+        "TITLE": "All Products",
+        "ADD": "Add a new product",
+        "EMPTY": "No products found."
+      },
+      "CATEGORIES": {
+        "TITLE": "All Categories",
+        "ADD": "Add a new category",
+        "EMPTY": "No categories found."
+      },
+      "OCCASIONS": {
+        "TITLE": "All Occasions",
+        "ADD": "Add a new occasion",
+        "EMPTY": "No occasions found."
       }
     },
     "OVERVIEW": {

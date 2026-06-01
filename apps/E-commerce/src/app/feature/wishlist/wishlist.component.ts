@@ -6,10 +6,9 @@ import { LucideAngularModule } from 'lucide-angular';
 import { ButtonComponent } from '@elevate/reusable-ui';
 import { WishlistService } from '../../shared/services/wishlist.service';
 import { ProductCardComponent } from '../../shared/components/ui/product-card/product-card.component';
-import { ProductsService } from '../products/services/product';
+import { Product, ProductsService } from '@elevate/core-data-access';
 import { HeadingTitleComponent } from '../../shared/components/ui/heading/heading-title.component';
 import { ProdcutCarousalComponent } from '../../shared/components/ui/product-carousal/prodcut-carousal.component';
-import { Product } from '../../shared/components/ui/product-card/interface/product';
 
 @Component({
   selector: 'app-wishlist',

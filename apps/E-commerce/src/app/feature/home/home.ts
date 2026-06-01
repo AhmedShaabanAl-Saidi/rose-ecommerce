@@ -5,7 +5,7 @@ import { BestSellerComponent } from './components/best-seller/best-seller.compon
 import { GallerySectionComponent } from './components/gallery-section/gallery-section.component';
 import { TrustedByComponent } from './components/trusted/trusted-by.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
-import { Product } from '../../shared/components/ui/product-card/interface/product';
+import { Product } from '@elevate/core-data-access';
 import { FeaturesBarComponent } from './components/features-bar/features-bar.component';
 import { HomeService } from './services/home';
 import { mapToProductCard } from './home.mapper';

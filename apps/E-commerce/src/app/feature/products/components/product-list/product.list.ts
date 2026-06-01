@@ -2,11 +2,9 @@ import { Component, DestroyRef, computed, effect, inject, input, signal } from '
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 import { PaginatorState } from 'primeng/paginator';
-import { ProductQueryParams } from '../../interfaces/product';
-import { Product } from '../../../../shared/components/ui/product-card/interface/product';
+import { Product,ProductQueryParams,ProductsService } from '@elevate/core-data-access';
 import { PaginatorComponent } from '../../../../shared/components/ui/paginator/paginator.component';
 import { ProductCardComponent } from '../../../../shared/components/ui/product-card/product-card.component';
-import { ProductsService } from '../../services/product';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule, SearchX } from 'lucide-angular';
 

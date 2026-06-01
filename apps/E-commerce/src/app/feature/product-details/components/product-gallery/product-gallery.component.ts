@@ -1,5 +1,5 @@
 import { Component, effect, input, signal } from '@angular/core';
-import { Product } from '../../../../shared/components/ui/product-card/interface/product';
+import { Product } from '@elevate/core-data-access';
 
 @Component({
   selector: 'app-product-gallery',

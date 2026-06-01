@@ -1,20 +1,29 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Occasion, OccasionsService } from '@elevate/core-data-access';
+import { DashboardDataTableComponent } from '../../shared/components/dashboard-data-table/dashboard-data-table.component';
+import { occasionsTableConfig } from './occasions-table.config';
 
 @Component({
   selector: 'app-occasions',
-
-  imports: [CommonModule, TranslatePipe],
-  template: `
-    <div class="mx-auto max-w-4xl p-8 text-start">
-      <h1 class="mb-4 text-3xl font-semibold text-zinc-900 dark:text-zinc-50">
-        {{ 'DASHBOARD.PAGES.OCCASIONS.TITLE' | translate }}
-      </h1>
-      <p class="text-zinc-600 dark:text-zinc-400">
-        {{ 'DASHBOARD.PAGES.OCCASIONS.DESCRIPTION' | translate }}
-      </p>
-    </div>
-  `,
+  imports: [DashboardDataTableComponent],
+  templateUrl: './occasions.component.html',
 })
-export class OccasionsComponent {}
+export class OccasionsComponent {
+  private readonly occasionsService = inject(OccasionsService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  readonly config = occasionsTableConfig;
+  readonly occasions = signal<Occasion[] | null>(null);
+
+  constructor() {
+    this.loadOccasions();
+  }
+
+  private loadOccasions(): void {
+    this.occasionsService
+      .getAllOccasions()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((occasions) => this.occasions.set(occasions));
+  }
+}

@@ -16,6 +16,7 @@
     "paths": {
       "@elevate/auth-data-access": ["./libs/auth/data-access/src/index.ts"],
       "@elevate/auth-domain": ["./libs/auth/domain/src/index.ts"],
+      "@elevate/core-data-access": ["./libs/core/data-access/src/index.ts"],
       "@elevate/reusable-input": [
         "./libs/shared-ui/reusable-input/src/index.ts"
       ],

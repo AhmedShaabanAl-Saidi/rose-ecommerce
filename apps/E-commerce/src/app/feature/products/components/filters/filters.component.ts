@@ -6,7 +6,7 @@ import { auditTime, fromEvent, startWith } from 'rxjs';
 import { DrawerModule } from 'primeng/drawer';
 import { ChevronDown, ChevronUp, RotateCcw, SlidersHorizontal } from 'lucide-angular';
 import { ButtonComponent } from '@elevate/reusable-ui';
-import { FilterState } from '../../interfaces/product';
+import { FilterState } from '@elevate/core-data-access';
 import { CategoryFilterComponent } from './category-filter/category-filter.component';
 import { OccasionFilterComponent } from './occasion-filter/occasion-filter.component';
 import { PriceFilterComponent } from './price-filter/price-filter.component';

@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { HeaderTittle } from 'apps/E-commerce/src/app/shared/components/ui/header-tittle/header-tittle';
 import { ProductCardComponent } from 'apps/E-commerce/src/app/shared/components/ui/product-card/product-card.component';
-import { Product as ProductCardModel } from 'apps/E-commerce/src/app/shared/components/ui/product-card/interface/product';
+import { Product as ProductCardModel } from '@elevate/core-data-access';
 import { pategoryOrOccasion } from '../../interfaces/home';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule, ArrowLeft, ArrowRight } from 'lucide-angular';
