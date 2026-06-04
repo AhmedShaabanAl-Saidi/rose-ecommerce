@@ -38,18 +38,16 @@ export const remoteRoutes: Route[] = [
         path: 'products',
         component: ProductsComponent,
         title: 'Dashboard - Products',
-        children: [
-          {
-            path: 'add',
-            component: ProductAddComponent,
-            title: 'Dashboard - Add Product',
-          },
-          {
-            path: 'edit',
-            component: ProductEditComponent,
-            title: 'Dashboard - Edit Product',
-          },
-        ],
+      },
+      {
+        path: 'products/add',
+        component: ProductAddComponent,
+        title: 'Dashboard - Add Product',
+      },
+      {
+        path: 'products/update/:id',
+        component: ProductEditComponent,
+        title: 'Dashboard - Update Product',
       },
       {
         path: 'account',

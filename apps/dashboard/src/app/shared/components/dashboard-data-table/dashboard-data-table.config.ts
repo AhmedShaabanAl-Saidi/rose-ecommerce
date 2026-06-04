@@ -13,6 +13,8 @@ export interface DashboardTableConfig<TItem = any> {
   addButtonLabelKey: string;
   searchPlaceholderKey: string;
   emptyMessageKey: string;
+  addRoute: string;
+  updateRoute: (row: TItem) => string;
   imageAccessor?: (row: TItem) => string;
   searchAccessor: (row: TItem) => string;
   columns: DashboardTableColumn<TItem>[];

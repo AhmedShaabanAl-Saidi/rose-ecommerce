@@ -1,23 +1,50 @@
-import { Component, DestroyRef, computed, inject, input, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { EllipsisVertical, LucideAngularModule, Pencil, Plus, Search, Trash2 } from 'lucide-angular';
+import {
+  EllipsisVertical,
+  LucideAngularModule,
+  Pencil,
+  Plus,
+  Search,
+  Trash2,
+} from 'lucide-angular';
 import { MenuItem } from 'primeng/api';
 import { MenuModule } from 'primeng/menu';
 import { Paginator, PaginatorState } from 'primeng/paginator';
 import { TableModule } from 'primeng/table';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { LanguageService } from '@elevate/theme';
-import { DashboardTableColumn, DashboardTableConfig } from './dashboard-data-table.config';
+import {
+  DashboardTableColumn,
+  DashboardTableConfig,
+} from './dashboard-data-table.config';
 import { environment } from '../../../../environments/environment';
+import { RouterLink } from '@angular/router';
 
-const IMAGE_FALLBACK = 'https://images.unsplash.com/photo-1561181286-d3fee7d55364?q=80&w=300&auto=format&fit=crop';
+const IMAGE_FALLBACK =
+  'https://images.unsplash.com/photo-1561181286-d3fee7d55364?q=80&w=300&auto=format&fit=crop';
 const UPLOADS_BASE = `${environment.baseUrl.replace('/api/v1', '')}/uploads`;
 
 @Component({
   selector: 'app-dashboard-data-table',
-  imports: [LucideAngularModule, MenuModule, Paginator, ReactiveFormsModule, TableModule, TranslatePipe],
+  imports: [
+    LucideAngularModule,
+    MenuModule,
+    Paginator,
+    ReactiveFormsModule,
+    TableModule,
+    TranslatePipe,
+    RouterLink,
+  ],
   templateUrl: './dashboard-data-table.component.html',
   host: { class: 'block w-full min-w-0 pb-24 lg:pb-12' },
 })
@@ -67,9 +94,7 @@ export class DashboardDataTableComponent {
   });
 
   readonly totalRecords = computed(() => this.filteredRows().length);
-  readonly showPaginator = computed(
-    () => this.totalRecords() > this.rows()
-  );
+  readonly showPaginator = computed(() => this.totalRecords() > this.rows());
 
   readonly mobileActionItems = computed<MenuItem[]>(() => {
     this.languageService.currentLang();
@@ -112,7 +137,9 @@ export class DashboardDataTableComponent {
     }
 
     const formattedValue = String(value);
-    const suffix = column.suffixKey ? this.translate.instant(column.suffixKey) : '';
+    const suffix = column.suffixKey
+      ? this.translate.instant(column.suffixKey)
+      : '';
 
     return suffix ? `${formattedValue} ${suffix}` : formattedValue;
   }
