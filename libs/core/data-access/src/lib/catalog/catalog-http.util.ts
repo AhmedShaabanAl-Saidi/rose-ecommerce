@@ -13,7 +13,16 @@ export function pageParams(page: number, limit: number): HttpParams {
   return new HttpParams().set('page', page).set('limit', limit);
 }
 
-export function productSearchParams({ page = 1, limit = 12, keyword, categoryIds, occasionIds, rating, priceFrom, priceTo }: ProductQueryParams): HttpParams {
+export function productSearchParams({
+  page = 1,
+  limit = 12,
+  keyword,
+  categoryIds,
+  occasionIds,
+  rating,
+  priceFrom,
+  priceTo,
+}: ProductQueryParams): HttpParams {
   let params = pageParams(page, limit);
   const search = keyword?.trim();
   if (search) params = params.set('keyword', search);
@@ -25,7 +34,13 @@ export function productSearchParams({ page = 1, limit = 12, keyword, categoryIds
   return params;
 }
 
-export function loadAllPages<TItem, TResponse extends { metadata: CatalogMetadata }>(loadPage: (page: number) => Observable<TResponse>, selectItems: (response: TResponse) => TItem[]): Observable<TItem[]> {
+export function loadAllPages<
+  TItem,
+  TResponse extends { metadata: CatalogMetadata }
+>(
+  loadPage: (page: number) => Observable<TResponse>,
+  selectItems: (response: TResponse) => TItem[]
+): Observable<TItem[]> {
   return loadPage(1).pipe(
     switchMap((first) => {
       const { totalPages, numberOfPages } = first.metadata;
@@ -38,4 +53,32 @@ export function loadAllPages<TItem, TResponse extends { metadata: CatalogMetadat
       );
     })
   );
+}
+
+export function toFormData(payload: Record<string, unknown>): FormData {
+  const fd = new FormData();
+
+  Object.keys(payload).forEach((key) => {
+    const val = payload[key];
+
+    if (val === undefined || val === null) return;
+
+    if (Array.isArray(val)) {
+      (val as unknown[]).forEach((item) => {
+        if (item instanceof File) fd.append(key, item as File);
+        else fd.append(key, String(item));
+      });
+      return;
+    }
+
+    if (val instanceof File) {
+      fd.append(key, val as File);
+      return;
+    }
+
+    // plain value (string/number/boolean)
+    fd.append(key, String(val));
+  });
+
+  return fd;
 }

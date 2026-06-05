@@ -8,7 +8,7 @@ export const occasionsTableConfig: DashboardTableConfig<Occasion> = {
   emptyMessageKey: 'DASHBOARD.TABLE.OCCASIONS.EMPTY',
   rowsPerPage: 12,
   addRoute: 'add',
-  updateRoute: (occasion) => `update/${occasion._id}`,
+  updateRoute: (occasion) => `edit/${occasion._id}`,
   imageAccessor: (occasion) => occasion.image,
   searchAccessor: (occasion) => occasion.name,
   columns: [

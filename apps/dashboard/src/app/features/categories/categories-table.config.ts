@@ -8,7 +8,7 @@ export const categoriesTableConfig: DashboardTableConfig<Category> = {
   emptyMessageKey: 'DASHBOARD.TABLE.CATEGORIES.EMPTY',
   rowsPerPage: 12,
   addRoute: 'add',
-  updateRoute: (category) => `update/${category._id}`,
+  updateRoute: (category) => `edit/${category._id}`,
   imageAccessor: (category) => category.image,
   searchAccessor: (category) => category.name,
   columns: [

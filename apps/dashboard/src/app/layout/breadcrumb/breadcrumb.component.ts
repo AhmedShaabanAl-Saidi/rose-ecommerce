@@ -82,6 +82,14 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
 
+      if (
+        i > 0 &&
+        segments[i - 1]?.toLowerCase() === 'edit' &&
+        !this.routeLabels[segment]
+      ) {
+        continue;
+      }
+
       cumulativePath += `/${segment}`;
       if (segments[i - 1] === 'update') {
         continue;

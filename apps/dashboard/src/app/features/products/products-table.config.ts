@@ -8,7 +8,7 @@ export const productsTableConfig: DashboardTableConfig<Product> = {
   emptyMessageKey: 'DASHBOARD.TABLE.PRODUCTS.EMPTY',
   rowsPerPage: 12,
   addRoute: 'add',
-  updateRoute: (product) => `update/${product._id}`,
+  updateRoute: (product) => `edit/${product._id}`,
   imageAccessor: (product) => product.imgCover,
   searchAccessor: (product) => product.title,
   columns: [

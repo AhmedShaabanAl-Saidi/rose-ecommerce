@@ -1,0 +1,16 @@
+<div class="mb-6">
+  <h1
+    class="text-2xl font-bold text-zinc-800 dark:text-zinc-100 truncate max-w-full"
+    [title]="(pageTitleKey() | translate) + entityNameSuffix()"
+  >
+    {{ pageTitleKey() | translate }}{{ entityNameSuffix() }}
+  </h1>
+</div>
+
+<app-dashboard-entity-form
+  class="block"
+  [config]="formConfig()"
+  [mode]="mode()"
+  [entityType]="entityType()"
+  (submitted)="onSubmit()"
+></app-dashboard-entity-form>

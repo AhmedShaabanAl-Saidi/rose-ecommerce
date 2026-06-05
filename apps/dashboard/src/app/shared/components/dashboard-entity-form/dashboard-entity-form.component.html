@@ -1,0 +1,208 @@
+<form [formGroup]="config().form" (ngSubmit)="onSubmit()" class="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
+  <div [class]="config().gridClass || 'grid gap-4 md:grid-cols-2'">
+    @for (field of config().fields; track field.key) {
+      @if (!(mode() === 'edit' && entityType() === 'products' && field.key === 'images')) {
+      <div [class]="fieldClass(field)">
+        @if (mode() === 'edit' && field.type === 'file') {
+          @if (entityType() === 'products' && field.key === 'imgCover') {
+            <!-- Render cover and gallery view buttons side by side -->
+            <div class="flex items-center justify-end gap-3 h-full pt-4">
+              <button
+                type="button"
+                (click)="triggerPreview('cover')"
+                class="flex items-center gap-2 px-4 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-blue-600 dark:text-soft-pink-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors text-sm font-semibold cursor-pointer focus:outline-none"
+              >
+                <i-lucide name="image" class="w-4 h-4 text-blue-600 dark:text-soft-pink-300"></i-lucide>
+                <span>View product cover</span>
+              </button>
+
+              <button
+                type="button"
+                (click)="triggerPreview('gallery')"
+                class="flex items-center gap-2 px-4 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-blue-600 dark:text-soft-pink-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors text-sm font-semibold cursor-pointer focus:outline-none"
+              >
+                <i-lucide name="image" class="w-4 h-4 text-blue-600 dark:text-soft-pink-300"></i-lucide>
+                <span>View product gallery</span>
+              </button>
+            </div>
+          }
+          @if (entityType() !== 'products' && field.key === 'image') {
+            <!-- Render category/occasion view button -->
+            <div class="flex items-center justify-end h-full pt-4">
+              <button
+                type="button"
+                (click)="triggerPreview('image')"
+                class="flex items-center gap-2 px-4 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-blue-600 dark:text-soft-pink-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors text-sm font-semibold cursor-pointer focus:outline-none"
+              >
+                <i-lucide name="image" class="w-4 h-4 text-blue-600 dark:text-soft-pink-300"></i-lucide>
+                <span>View {{ entityType() === 'categories' ? 'category' : 'occasion' }} image</span>
+              </button>
+            </div>
+          }
+        } @else {
+          @switch (field.type) {
+            @case ('text') {
+              <lib-text-input
+                [formControlName]="field.key"
+                [label]="field.labelKey | translate"
+                [placeholder]="field.placeholderKey ? (field.placeholderKey | translate) : ''"
+                [required]="isRequired(field.key)"
+              ></lib-text-input>
+            }
+
+            @case ('number') {
+              <lib-text-input
+                [formControlName]="field.key"
+                type="number"
+                [label]="field.labelKey | translate"
+                [placeholder]="field.placeholderKey ? (field.placeholderKey | translate) : ''"
+                [required]="isRequired(field.key)"
+              ></lib-text-input>
+            }
+
+            @case ('textarea') {
+              <lib-textarea-input
+                [formControlName]="field.key"
+                [rows]="field.rows || 4"
+                [label]="field.labelKey | translate"
+                [placeholder]="field.placeholderKey ? (field.placeholderKey | translate) : ''"
+                [required]="isRequired(field.key)"
+              ></lib-textarea-input>
+            }
+
+            @case ('select') {
+              <lib-select-input
+                [formControlName]="field.key"
+                [label]="field.labelKey | translate"
+                [placeholder]="field.placeholderKey ? (field.placeholderKey | translate) : ''"
+                [options]="field.options || []"
+                [required]="isRequired(field.key)"
+              ></lib-select-input>
+            }
+
+            @case ('file') {
+              <lib-file-input
+                [formControlName]="field.key"
+                [accept]="field.accept || ''"
+                [multiple]="field.multiple || false"
+                [label]="field.labelKey | translate"
+                [placeholder]="field.placeholderKey ? (field.placeholderKey | translate) : ''"
+                [required]="isRequired(field.key)"
+              ></lib-file-input>
+            }
+          }
+        }
+      </div>
+      }
+    }
+  </div>
+
+  <div class="mt-8">
+    <button
+      type="submit"
+      class="w-full inline-flex items-center justify-center rounded-xl bg-maroon-700 hover:bg-maroon-800 text-white font-semibold text-base py-3.5 transition-colors disabled:cursor-not-allowed disabled:bg-zinc-400 dark:bg-soft-pink-300 dark:text-zinc-900 dark:hover:bg-soft-pink-400 dark:disabled:bg-zinc-700 cursor-pointer"
+      [disabled]="config().form.invalid || config().isSubmitting"
+    >
+      {{ config().submitLabelKey | translate }}
+    </button>
+  </div>
+</form>
+
+<p-dialog
+  [header]="previewTitle()"
+  [visible]="showPreviewDialog()"
+  (visibleChange)="showPreviewDialog.set($event)"
+  [modal]="true"
+  [style]="{ width: '450px', maxWidth: '95vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  appendTo="body"
+  styleClass="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 shadow-xl"
+>
+  <div class="flex flex-col items-center gap-6 mt-2">
+    <!-- Single Image Preview -->
+    @if (previewType() === 'image' || previewType() === 'cover') {
+      @let imgUrl = getImageUrl(previewType() === 'image' ? 'image' : 'imgCover');
+      <div class="w-full flex items-center justify-center bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-4 min-h-60 border border-zinc-100 dark:border-zinc-800">
+        @if (imgUrl) {
+          <img
+            [src]="imgUrl"
+            alt="Preview"
+            class="max-w-full max-h-72 rounded-lg object-contain shadow-sm"
+          />
+        } @else {
+          <div class="text-zinc-400 dark:text-zinc-500 text-sm py-12 flex flex-col items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-zinc-300">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+            <span>No image uploaded</span>
+          </div>
+        }
+      </div>
+      
+      <button
+        type="button"
+        (click)="replaceInput.click()"
+        class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-maroon-700 hover:bg-maroon-800 dark:bg-soft-pink-300 dark:text-zinc-900 dark:hover:bg-soft-pink-400 text-white font-semibold text-sm px-5 py-3 transition-colors cursor-pointer focus:outline-none"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+        </svg>
+        <span>Replace Image</span>
+      </button>
+      <input
+        #replaceInput
+        type="file"
+        accept="image/*"
+        class="hidden"
+        (change)="onFileReplace($event, previewType() === 'image' ? 'image' : 'imgCover'); showPreviewDialog.set(false)"
+      />
+    }
+
+    <!-- Gallery Preview -->
+    @if (previewType() === 'gallery') {
+      @let galleryUrls = getGalleryUrls();
+      <div class="w-full bg-zinc-50 dark:bg-zinc-800/50 rounded-xl p-4 min-h-60 border border-zinc-100 dark:border-zinc-800">
+        @if (galleryUrls.length > 0) {
+          <div class="grid grid-cols-2 gap-3 w-full max-h-72 overflow-y-auto pr-1">
+            @for (url of galleryUrls; track url) {
+              <div class="relative aspect-square bg-white dark:bg-zinc-700 rounded-lg p-1 border border-zinc-200 dark:border-zinc-600">
+                <img
+                  [src]="url"
+                  alt="Gallery Preview"
+                  class="w-full h-full rounded-md object-cover"
+                />
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="text-zinc-400 dark:text-zinc-500 text-sm py-12 flex flex-col items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-zinc-300">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+            <span>No gallery images uploaded</span>
+          </div>
+        }
+      </div>
+      
+      <button
+        type="button"
+        (click)="replaceGalleryInput.click()"
+        class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-maroon-700 hover:bg-maroon-800 dark:bg-soft-pink-300 dark:text-zinc-900 dark:hover:bg-soft-pink-400 text-white font-semibold text-sm px-5 py-3 transition-colors cursor-pointer focus:outline-none"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+        </svg>
+        <span>Replace Gallery Images</span>
+      </button>
+      <input
+        #replaceGalleryInput
+        type="file"
+        accept="image/*"
+        multiple
+        class="hidden"
+        (change)="onFileReplace($event, 'images'); showPreviewDialog.set(false)"
+      />
+    }
+  </div>
+</p-dialog>

@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import {
   EllipsisVertical,
@@ -28,7 +29,6 @@ import {
   DashboardTableConfig,
 } from './dashboard-data-table.config';
 import { environment } from '../../../../environments/environment';
-import { RouterLink } from '@angular/router';
 
 const IMAGE_FALLBACK =
   'https://images.unsplash.com/photo-1561181286-d3fee7d55364?q=80&w=300&auto=format&fit=crop';
@@ -41,15 +41,16 @@ const UPLOADS_BASE = `${environment.baseUrl.replace('/api/v1', '')}/uploads`;
     MenuModule,
     Paginator,
     ReactiveFormsModule,
+    RouterLink,
     TableModule,
     TranslatePipe,
-    RouterLink,
   ],
   templateUrl: './dashboard-data-table.component.html',
   host: { class: 'block w-full min-w-0 pb-24 lg:pb-12' },
 })
 export class DashboardDataTableComponent {
   private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
   private readonly languageService = inject(LanguageService);
 
@@ -65,6 +66,7 @@ export class DashboardDataTableComponent {
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly first = signal(0);
   readonly searchTerm = signal('');
+  readonly selectedRow = signal<unknown | null>(null);
 
   readonly rows = computed(() => this.config().rowsPerPage ?? 12);
   readonly hasImage = computed(() => !!this.config().imageAccessor);
@@ -98,11 +100,14 @@ export class DashboardDataTableComponent {
 
   readonly mobileActionItems = computed<MenuItem[]>(() => {
     this.languageService.currentLang();
+    const row = this.selectedRow();
+    const editRoute = row && this.config().updateRoute?.(row);
 
     return [
       {
         label: this.translate.instant('DASHBOARD.TABLE.ACTIONS.EDIT'),
         icon: 'pi pi-pencil',
+        routerLink: editRoute ?? undefined,
       },
       {
         label: this.translate.instant('DASHBOARD.TABLE.ACTIONS.DELETE'),
@@ -129,6 +134,25 @@ export class DashboardDataTableComponent {
     this.first.set(event.first ?? 0);
   }
 
+  openMobileActions(
+    row: unknown,
+    menu: { toggle: (event: Event) => void },
+    event: Event
+  ): void {
+    this.selectedRow.set(row);
+    menu.toggle(event);
+  }
+
+  navigateToEdit(row: unknown): void {
+    const route = this.config().updateRoute?.(row);
+
+    if (!route) {
+      return;
+    }
+
+    void this.router.navigate(Array.isArray(route) ? route : [route]);
+  }
+
   formatCellValue(column: DashboardTableColumn, row: unknown): string {
     const value = column.value(row);
 
@@ -152,6 +176,17 @@ export class DashboardDataTableComponent {
     return [this.getColumnClass(column), column.cellClass?.(row)]
       .filter(Boolean)
       .join(' ');
+  }
+
+  resolveRoute(
+    route?: string | any[] | ((row: unknown) => string | any[]),
+    row?: unknown
+  ): string | any[] | undefined {
+    if (typeof route === 'function') {
+      return route(row);
+    }
+
+    return route;
   }
 
   imageUrl(row: unknown): string {

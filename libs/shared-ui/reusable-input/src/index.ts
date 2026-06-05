@@ -4,4 +4,5 @@ export * from './lib/select/select-input.component';
 export * from './lib/checkbox/checkbox-input.component';
 export * from './lib/otp/otp-input.component';
 export * from './lib/phone/phone-input.component';
+export * from './lib/file/file-input.component';
 export * from './lib/error/input-error.component';

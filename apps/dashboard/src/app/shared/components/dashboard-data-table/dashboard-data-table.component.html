@@ -64,27 +64,27 @@
         </tr>
       </ng-template>
 
-      <ng-template pTemplate="body" let-row>
+      <ng-template pTemplate="body" let-item>
         <tr>
           @if (hasImage()) {
           <td class="w-16">
             <img
-              [src]="imageUrl(row)"
-              [alt]="config().searchAccessor(row)"
+              [src]="imageUrl(item)"
+              [alt]="config().searchAccessor(item)"
               (error)="fallbackImage($event.target)"
               class="h-10 w-10 rounded-lg object-cover ring-1 ring-zinc-200 dark:ring-zinc-700"
             />
           </td>
           } @for (column of config().columns; track column.headerKey) {
-          <td [class]="getCellClass(column, row)">
-            {{ formatCellValue(column, row) }}
+          <td [class]="getCellClass(column, item)">
+            {{ formatCellValue(column, item) }}
           </td>
           }
           <td class="dashboard-data-table__actions-cell">
             <div class="dashboard-data-table__desktop-actions">
               <button
                 type="button"
-                routerLink="{{ config().updateRoute(row) }}"
+                routerLink="{{ config().updateRoute(item) }}"
                 class="dashboard-data-table__action-button dashboard-data-table__action-button--edit"
               >
                 <lucide-icon

@@ -33,13 +33,79 @@
     "ROUTES": {
       "OVERVIEW_TITLE": "لوحة التحكم - نظرة عامة",
       "CATEGORIES_TITLE": "لوحة التحكم - التصنيفات",
+      "ADD_CATEGORY_TITLE": "لوحة التحكم - إضافة تصنيف",
+      "EDIT_CATEGORY_TITLE": "لوحة التحكم - تعديل تصنيف",
       "OCCASIONS_TITLE": "لوحة التحكم - المناسبات",
+      "ADD_OCCASION_TITLE": "لوحة التحكم - إضافة مناسبة",
+      "EDIT_OCCASION_TITLE": "لوحة التحكم - تعديل مناسبة",
       "PRODUCTS_TITLE": "لوحة التحكم - المنتجات",
       "ADD_PRODUCT_TITLE": "لوحة التحكم - إضافة منتج",
       "EDIT_PRODUCT_TITLE": "لوحة التحكم - تعديل منتج",
       "ACCOUNT_TITLE": "لوحة التحكم - حسابي",
       "CHANGE_PASSWORD_TITLE": "لوحة التحكم - تغيير كلمة المرور",
       "NOT_FOUND_TITLE": "لوحة التحكم - الصفحة غير موجودة"
+    },
+    "FORMS": {
+      "SAVE": "حفظ التغييرات",
+      "BACK_TO_LIST": "العودة إلى القائمة",
+      "BACK_TO_PRODUCTS": "العودة إلى المنتجات",
+      "BACK_TO_CATEGORIES": "العودة إلى التصنيفات",
+      "BACK_TO_OCCASIONS": "العودة إلى المناسبات",
+      "ADD_PRODUCT": "إضافة منتج",
+      "UPDATE_PRODUCT": "تحديث المنتج",
+      "ADD_CATEGORY": "إضافة تصنيف",
+      "UPDATE_CATEGORY": "تحديث التصنيف",
+      "ADD_OCCASION": "إضافة مناسبة",
+      "UPDATE_OCCASION": "تحديث المناسبة",
+      "CATEGORIES": {
+        "SECTION": "تصنيف",
+        "ADD_TITLE": "إضافة تصنيف",
+        "EDIT_TITLE": "تحديث تصنيف",
+        "ADD_DESCRIPTION": "أنشئ تصنيفاً جديداً وارفع صورته.",
+        "EDIT_DESCRIPTION": "حدّث بيانات التصنيف وغيّر الصورة إذا لزم الأمر.",
+        "NAME": "الاسم",
+        "NAME_PLACEHOLDER": "أدخل اسم التصنيف",
+        "IMAGE": "صورة التصنيف",
+        "IMAGE_HINT": "ارفع صورة واضحة تمثل التصنيف."
+      },
+      "OCCASIONS": {
+        "SECTION": "مناسبة",
+        "ADD_TITLE": "إضافة مناسبة",
+        "EDIT_TITLE": "تحديث مناسبة",
+        "ADD_DESCRIPTION": "أنشئ مناسبة جديدة وارفع صورتها.",
+        "EDIT_DESCRIPTION": "حدّث بيانات المناسبة وغيّر الصورة إذا لزم الأمر.",
+        "NAME": "الاسم",
+        "NAME_PLACEHOLDER": "أدخل اسم المناسبة",
+        "IMAGE": "صورة المناسبة",
+        "IMAGE_HINT": "ارفع صورة واضحة تمثل المناسبة."
+      },
+      "PRODUCTS": {
+        "SECTION": "منتج",
+        "ADD_TITLE": "إضافة منتج",
+        "EDIT_TITLE": "تحديث منتج",
+        "ADD_DESCRIPTION": "أنشئ منتجاً مع بيانات السعر والتصنيف والصور.",
+        "EDIT_DESCRIPTION": "حدّث بيانات المنتج وبدّل المرفقات إذا لزم الأمر.",
+        "TITLE": "العنوان",
+        "TITLE_PLACEHOLDER": "أدخل عنوان المنتج",
+        "DESCRIPTION": "الوصف",
+        "DESCRIPTION_PLACEHOLDER": "أدخل وصف المنتج",
+        "PRICE": "السعر",
+        "PRICE_PLACEHOLDER": "أدخل سعر المنتج",
+        "DISCOUNT": "الخصم",
+        "DISCOUNT_PLACEHOLDER": "أدخل قيمة الخصم",
+        "PRICE_AFTER_DISCOUNT": "السعر بعد الخصم",
+        "PRICE_AFTER_DISCOUNT_PLACEHOLDER": "يتم حسابه تلقائياً",
+        "QUANTITY": "الكمية",
+        "QUANTITY_PLACEHOLDER": "أدخل الكمية",
+        "CATEGORY": "التصنيف",
+        "CATEGORY_PLACEHOLDER": "اختر تصنيفاً",
+        "OCCASION": "المناسبة",
+        "OCCASION_PLACEHOLDER": "اختر مناسبة",
+        "COVER_IMAGE": "صورة الغلاف",
+        "COVER_IMAGE_HINT": "ارفع الصورة الرئيسية الظاهرة في القوائم والبطاقات.",
+        "GALLERY_IMAGES": "صور المعرض",
+        "GALLERY_IMAGES_HINT": "ارفع صورة أو أكثر لدعم عرض المنتج."
+      }
     },
     "PAGES": {
       "CATEGORIES": {
@@ -146,6 +212,21 @@
         "TRY_AGAIN": "حاول مرة أخرى"
       }
     }
+  },
+  "VALIDATION": {
+    "REQUIRED": "هذا الحقل مطلوب",
+    "EMAIL": "يرجى إدخال بريد إلكتروني صحيح",
+    "MIN_LENGTH": "الحد الأدنى {{length}} أحرف",
+    "MAX_LENGTH": "الحد الأقصى {{length}} أحرف",
+    "MISMATCH": "الحقول غير متطابقة",
+    "INVALID_PHONE": "صيغة رقم الهاتف غير صحيحة",
+    "STRONG_PASSWORD": "يجب أن تحتوي كلمة المرور على أحرف كبيرة وصغيرة وأرقام ورموز",
+    "PATTERN_PASSWORD": "يجب أن تحتوي كلمة المرور على أحرف كبيرة وصغيرة وأرقام ورموز",
+    "INVALID": "حقل غير صالح"
+  },
+  "SHARED": {
+    "SELECT_OPTION": "اختر خياراً",
+    "UPLOAD_FILE": "تحميل ملف"
   },
   "PROFILE_PAGE": {
     "ACCOUNT_SETTINGS": "إعدادات الحساب",
