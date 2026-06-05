@@ -32,6 +32,7 @@ import {
 import { buildProductFields } from './configs/product-form.config';
 import { buildCategoryFields } from './configs/category-form.config';
 import { buildOccasionFields } from './configs/occasion-form.config';
+import { ToastrService } from 'ngx-toastr';
 
 type CatalogEntityType = 'categories' | 'occasions' | 'products';
 type FormMode = 'add' | 'edit';
@@ -53,7 +54,7 @@ export class CatalogFormPageComponent {
   private readonly productsService = inject(ProductsService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
-
+  private readonly toaster = inject(ToastrService);
   readonly entityType = input.required<CatalogEntityType>();
   readonly mode = input.required<FormMode>();
   readonly id = input<string | undefined>();
@@ -123,7 +124,6 @@ export class CatalogFormPageComponent {
       return () => sub.unsubscribe();
     });
   }
-
   onSubmit(): void {
     this.form().markAllAsTouched();
 
@@ -132,16 +132,38 @@ export class CatalogFormPageComponent {
     }
 
     this.isSubmitting.set(true);
-    const payload = this.form().getRawValue();
+
+    const payload = { ...this.form().getRawValue() };
     const entity = this.entityType();
     const mode = this.mode();
 
+    if (mode === 'edit') {
+      if (typeof payload.image === 'string') delete payload.image;
+      if (typeof payload.imgCover === 'string') delete payload.imgCover;
+      if (Array.isArray(payload.images)) {
+        const hasNewProductImage = payload.images.some(
+          (img: any) => img instanceof File
+        );
+        if (!hasNewProductImage) {
+          delete payload.images;
+        }
+      }
+    }
+
     if (entity === 'products') {
+      if ('priceAfterDiscount' in payload) delete payload.priceAfterDiscount;
+      if (mode === 'edit') {
+        if ('discount' in payload) delete payload.discount;
+        if ('occasion' in payload) delete payload.occasion;
+      }
       if (mode === 'add') {
         this.productsService
           .createProduct(payload)
           .pipe(finalize(() => this.isSubmitting.set(false)))
-          .subscribe(() => this.router.navigate(this.backRoute(entity)));
+          .subscribe(() => {
+            this.toaster.success('Product created successfully');
+            this.router.navigate(this.backRoute(entity));
+          });
         return;
       }
 
@@ -149,49 +171,62 @@ export class CatalogFormPageComponent {
         this.productsService
           .updateProduct(this.id() as string, payload)
           .pipe(finalize(() => this.isSubmitting.set(false)))
-          .subscribe(() => this.router.navigate(this.backRoute(entity)));
+          .subscribe(() => {
+            this.toaster.success('Product updated successfully');
+            this.router.navigate(this.backRoute(entity));
+          });
         return;
       }
     }
 
-    if (entity === 'categories') {
-      if (mode === 'add') {
-        this.categoriesService
-          .createCategory(payload)
-          .pipe(finalize(() => this.isSubmitting.set(false)))
-          .subscribe(() => this.router.navigate(this.backRoute(entity)));
-        return;
+    if (entity === 'categories' || entity === 'occasions') {
+      const cleanPayload: Record<string, any> = {
+        name: payload.name,
+      };
+      if (payload.image !== undefined) {
+        cleanPayload['image'] = payload.image;
       }
 
-      if (this.id()) {
-        this.categoriesService
-          .updateCategory(this.id() as string, payload)
-          .pipe(finalize(() => this.isSubmitting.set(false)))
-          .subscribe(() => this.router.navigate(this.backRoute(entity)));
-        return;
+      if (entity === 'categories') {
+        if (mode === 'add') {
+          this.categoriesService
+            .createCategory(cleanPayload)
+            .pipe(finalize(() => this.isSubmitting.set(false)))
+            .subscribe(() => {
+              this.toaster.success('Category created successfully');
+              this.router.navigate(this.backRoute(entity));
+            });
+        } else if (this.id()) {
+          this.categoriesService
+            .updateCategory(this.id() as string, cleanPayload)
+            .pipe(finalize(() => this.isSubmitting.set(false)))
+            .subscribe(() => {
+              this.toaster.success('Category updated successfully');
+              this.router.navigate(this.backRoute(entity));
+            });
+        }
+      }
+
+      if (entity === 'occasions') {
+        if (mode === 'add') {
+          this.occasionsService
+            .createOccasion(cleanPayload)
+            .pipe(finalize(() => this.isSubmitting.set(false)))
+            .subscribe(() => {
+              this.toaster.success('Occasion created successfully');
+              this.router.navigate(this.backRoute(entity));
+            });
+        } else if (this.id()) {
+          this.occasionsService
+            .updateOccasion(this.id() as string, cleanPayload)
+            .pipe(finalize(() => this.isSubmitting.set(false)))
+            .subscribe(() => {
+              this.toaster.success('Occasion updated successfully');
+              this.router.navigate(this.backRoute(entity));
+            });
+        }
       }
     }
-
-    if (entity === 'occasions') {
-      if (mode === 'add') {
-        this.occasionsService
-          .createOccasion(payload)
-          .pipe(finalize(() => this.isSubmitting.set(false)))
-          .subscribe(() => this.router.navigate(this.backRoute(entity)));
-        return;
-      }
-
-      if (this.id()) {
-        this.occasionsService
-          .updateOccasion(this.id() as string, payload)
-          .pipe(finalize(() => this.isSubmitting.set(false)))
-          .subscribe(() => this.router.navigate(this.backRoute(entity)));
-        return;
-      }
-    }
-
-    // fallback: clear submitting flag
-    this.isSubmitting.set(false);
   }
 
   private buildForm(entityType: CatalogEntityType): FormGroup {

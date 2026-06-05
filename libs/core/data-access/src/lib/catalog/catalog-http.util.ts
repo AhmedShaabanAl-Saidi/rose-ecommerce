@@ -55,7 +55,7 @@ export function loadAllPages<
   );
 }
 
-export function toFormData(payload: Record<string, unknown>): FormData {
+export function toFormData(payload: Record<string, any>): FormData {
   const fd = new FormData();
 
   Object.keys(payload).forEach((key) => {
@@ -64,19 +64,35 @@ export function toFormData(payload: Record<string, unknown>): FormData {
     if (val === undefined || val === null) return;
 
     if (Array.isArray(val)) {
-      (val as unknown[]).forEach((item) => {
-        if (item instanceof File) fd.append(key, item as File);
-        else fd.append(key, String(item));
+      val.forEach((item) => {
+        if (item instanceof File) {
+          fd.append(key, item);
+        } else if (
+          item &&
+          typeof item === 'object' &&
+          item.rawFile instanceof File
+        ) {
+          fd.append(key, item.rawFile);
+        } else {
+          fd.append(key, String(item));
+        }
       });
       return;
     }
 
     if (val instanceof File) {
-      fd.append(key, val as File);
+      fd.append(key, val);
       return;
     }
 
-    // plain value (string/number/boolean)
+    if (typeof val === 'object' && val !== null) {
+      const fileInstance = val.rawFile || val.file || val;
+      if (fileInstance instanceof File) {
+        fd.append(key, fileInstance);
+        return;
+      }
+    }
+
     fd.append(key, String(val));
   });
 

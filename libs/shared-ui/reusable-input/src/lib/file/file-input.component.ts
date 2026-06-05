@@ -3,11 +3,9 @@ import { Component, input } from '@angular/core';
 import { BaseInputComponent } from '../base/base-input.component';
 import { InputErrorComponent } from '../error/input-error.component';
 
-import { TranslatePipe } from '@ngx-translate/core';
-
 @Component({
   selector: 'lib-file-input',
-  imports: [CommonModule, InputErrorComponent, TranslatePipe],
+  imports: [CommonModule, InputErrorComponent],
   templateUrl: './file-input.component.html',
   host: {
     class: 'block w-full',
