@@ -10,7 +10,7 @@ import { InputErrorComponent } from '../error/input-error.component';
   styleUrl: './text-input.component.css',
 })
 export class TextInputComponent extends BaseInputComponent {
-  type = input<'text' | 'password' | 'email'>('text');
+  type = input<'text' | 'password' | 'email' | 'number'>('text');
   showPassword = signal(false);
 
   togglePassword() {

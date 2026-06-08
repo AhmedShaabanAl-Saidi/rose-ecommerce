@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CategoriesRes, Category } from './categories.interface';
 import { catalogUrl, loadAllPages, pageParams } from './catalog-http.util';
+import { toFormData } from './catalog-http.util';
 
 @Injectable({ providedIn: 'root' })
 export class CategoriesService {
@@ -18,6 +19,49 @@ export class CategoriesService {
     return loadAllPages(
       (page) => this.getCategories(page, limit),
       (res) => res.categories
+    );
+  }
+
+  createCategory(
+    payload: Record<string, any>
+  ): Observable<{ category: Category }> {
+    const hasFiles = Object.values(payload).some(
+      (v) =>
+        v instanceof File ||
+        (Array.isArray(v) && v.some((i: any) => i instanceof File))
+    );
+    if (hasFiles) {
+      return this.http.post<{ category: Category }>(
+        catalogUrl('categories'),
+        toFormData(payload)
+      );
+    }
+
+    return this.http.post<{ category: Category }>(
+      catalogUrl('categories'),
+      payload
+    );
+  }
+
+  updateCategory(
+    id: string,
+    payload: Record<string, any>
+  ): Observable<{ category: Category }> {
+    const hasFiles = Object.values(payload).some(
+      (v) =>
+        v instanceof File ||
+        (Array.isArray(v) && v.some((i: any) => i instanceof File))
+    );
+    if (hasFiles) {
+      return this.http.put<{ category: Category }>(
+        catalogUrl(`categories/${id}`),
+        toFormData(payload)
+      );
+    }
+
+    return this.http.put<{ category: Category }>(
+      catalogUrl(`categories/${id}`),
+      payload
     );
   }
 }

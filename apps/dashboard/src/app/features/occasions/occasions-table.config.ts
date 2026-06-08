@@ -7,6 +7,8 @@ export const occasionsTableConfig: DashboardTableConfig<Occasion> = {
   searchPlaceholderKey: 'DASHBOARD.TABLE.SEARCH_PLACEHOLDER',
   emptyMessageKey: 'DASHBOARD.TABLE.OCCASIONS.EMPTY',
   rowsPerPage: 12,
+  addRoute: 'add',
+  updateRoute: (occasion) => `edit/${occasion._id}`,
   imageAccessor: (occasion) => occasion.image,
   searchAccessor: (occasion) => occasion.name,
   columns: [

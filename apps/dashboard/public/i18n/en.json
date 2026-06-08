@@ -24,7 +24,7 @@
       "CATEGORIES": "Categories",
       "OCCASIONS": "Occasions",
       "PRODUCTS": "Products",
-      "ADD_NEW": "Add New",
+      "ADD_NEW": "Add",
       "EDIT": "Edit",
       "ACCOUNT": "Account",
       "CHANGE_PASSWORD": "Change Password",
@@ -33,13 +33,79 @@
     "ROUTES": {
       "OVERVIEW_TITLE": "Dashboard - Overview",
       "CATEGORIES_TITLE": "Dashboard - Categories",
+      "ADD_CATEGORY_TITLE": "Dashboard - Add Category",
+      "EDIT_CATEGORY_TITLE": "Dashboard - Edit Category",
       "OCCASIONS_TITLE": "Dashboard - Occasions",
+      "ADD_OCCASION_TITLE": "Dashboard - Add Occasion",
+      "EDIT_OCCASION_TITLE": "Dashboard - Edit Occasion",
       "PRODUCTS_TITLE": "Dashboard - Products",
       "ADD_PRODUCT_TITLE": "Dashboard - Add Product",
       "EDIT_PRODUCT_TITLE": "Dashboard - Edit Product",
       "ACCOUNT_TITLE": "Dashboard - My Account",
       "CHANGE_PASSWORD_TITLE": "Dashboard - Change Password",
       "NOT_FOUND_TITLE": "Dashboard - Page Not Found"
+    },
+    "FORMS": {
+      "SAVE": "Save changes",
+      "BACK_TO_LIST": "Back to list",
+      "BACK_TO_PRODUCTS": "Back to products",
+      "BACK_TO_CATEGORIES": "Back to categories",
+      "BACK_TO_OCCASIONS": "Back to occasions",
+      "ADD_PRODUCT": "Add Product",
+      "UPDATE_PRODUCT": "Update Product",
+      "ADD_CATEGORY": "Add Category",
+      "UPDATE_CATEGORY": "Update Category",
+      "ADD_OCCASION": "Add Occasion",
+      "UPDATE_OCCASION": "Update Occasion",
+      "CATEGORIES": {
+        "SECTION": "Category",
+        "ADD_TITLE": "Add Category",
+        "EDIT_TITLE": "Update Category",
+        "ADD_DESCRIPTION": "Create a new category and upload its image.",
+        "EDIT_DESCRIPTION": "Update the category details and replace the image if needed.",
+        "NAME": "Name",
+        "NAME_PLACEHOLDER": "Enter category name",
+        "IMAGE": "Category image",
+        "IMAGE_HINT": "Upload a clear image that represents the category."
+      },
+      "OCCASIONS": {
+        "SECTION": "Occasion",
+        "ADD_TITLE": "Add Occasion",
+        "EDIT_TITLE": "Update Occasion",
+        "ADD_DESCRIPTION": "Create a new occasion and upload its image.",
+        "EDIT_DESCRIPTION": "Update the occasion details and replace the image if needed.",
+        "NAME": "Name",
+        "NAME_PLACEHOLDER": "Enter occasion name",
+        "IMAGE": "Occasion image",
+        "IMAGE_HINT": "Upload a clear image that represents the occasion."
+      },
+      "PRODUCTS": {
+        "SECTION": "Product",
+        "ADD_TITLE": "Add Product",
+        "EDIT_TITLE": "Update Product",
+        "ADD_DESCRIPTION": "Create a product with pricing, category, and media details.",
+        "EDIT_DESCRIPTION": "Update the product information and replace its assets if needed.",
+        "TITLE": "Title",
+        "TITLE_PLACEHOLDER": "Enter product title",
+        "DESCRIPTION": "Description",
+        "DESCRIPTION_PLACEHOLDER": "Enter product description",
+        "PRICE": "Price",
+        "PRICE_PLACEHOLDER": "Enter product price",
+        "DISCOUNT": "Discount",
+        "DISCOUNT_PLACEHOLDER": "Enter discount amount",
+        "PRICE_AFTER_DISCOUNT": "Price after discount",
+        "PRICE_AFTER_DISCOUNT_PLACEHOLDER": "Calculated automatically",
+        "QUANTITY": "Quantity",
+        "QUANTITY_PLACEHOLDER": "Enter quantity",
+        "CATEGORY": "Category",
+        "CATEGORY_PLACEHOLDER": "Select a category",
+        "OCCASION": "Occasion",
+        "OCCASION_PLACEHOLDER": "Select an occasion",
+        "COVER_IMAGE": "Cover image",
+        "COVER_IMAGE_HINT": "Upload the main product image shown in lists and cards.",
+        "GALLERY_IMAGES": "Gallery images",
+        "GALLERY_IMAGES_HINT": "Upload one or more supporting product photos."
+      }
     },
     "PAGES": {
       "CATEGORIES": {
@@ -146,6 +212,21 @@
         "TRY_AGAIN": "Try Again"
       }
     }
+  },
+  "VALIDATION": {
+    "REQUIRED": "Field is required",
+    "EMAIL": "Please enter a valid email address",
+    "MIN_LENGTH": "Minimum {{length}} characters required",
+    "MAX_LENGTH": "Maximum {{length}} characters allowed",
+    "MISMATCH": "Fields do not match",
+    "INVALID_PHONE": "Invalid phone number format",
+    "STRONG_PASSWORD": "Password must contain uppercase, lowercase, number and special character",
+    "PATTERN_PASSWORD": "Password must contain uppercase, lowercase, number and special character",
+    "INVALID": "Invalid field"
+  },
+  "SHARED": {
+    "SELECT_OPTION": "Select option",
+    "UPLOAD_FILE": "Upload file"
   },
   "PROFILE_PAGE": {
     "ACCOUNT_SETTINGS": "Account Settings",

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { InputErrorComponent } from '../error/input-error.component';
 import { SelectModule } from 'primeng/select';
 export interface SelectOption {
+  labelKey?: string;
   label: string;
   value: any;
 }

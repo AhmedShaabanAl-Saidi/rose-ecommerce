@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject, input, signal } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
@@ -40,6 +47,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     categories: 'DASHBOARD.BREADCRUMB.CATEGORIES',
     occasions: 'DASHBOARD.BREADCRUMB.OCCASIONS',
     products: 'DASHBOARD.BREADCRUMB.PRODUCTS',
+    update: 'DASHBOARD.BREADCRUMB.EDIT',
     add: 'DASHBOARD.BREADCRUMB.ADD_NEW',
     edit: 'DASHBOARD.BREADCRUMB.EDIT',
     account: 'DASHBOARD.BREADCRUMB.ACCOUNT',
@@ -52,8 +60,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     this.sub = merge(
       this.router.events.pipe(filter((e) => e instanceof NavigationEnd)),
       this.translate.onLangChange
-    )
-      .subscribe(() => this.buildBreadcrumbs());
+    ).subscribe(() => this.buildBreadcrumbs());
   }
 
   ngOnDestroy(): void {
@@ -75,8 +82,18 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     for (let i = 0; i < segments.length; i++) {
       const segment = segments[i];
 
-      cumulativePath += `/${segment}`;
+      if (
+        i > 0 &&
+        segments[i - 1]?.toLowerCase() === 'edit' &&
+        !this.routeLabels[segment]
+      ) {
+        continue;
+      }
 
+      cumulativePath += `/${segment}`;
+      if (segments[i - 1] === 'update') {
+        continue;
+      }
       if (segment.toLowerCase() === 'dashboard') {
         continue;
       }
@@ -86,10 +103,14 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
         : this.toTitleCase(segment);
       const isLast = i === segments.length - 1;
 
-      items.push({
-        label,
-        routerLink: isLast ? undefined : cumulativePath,
-      });
+      const routerLinkValue =
+        segment.toLowerCase() === 'update'
+          ? undefined
+          : isLast
+          ? undefined
+          : cumulativePath;
+
+      items.push({ label, routerLink: routerLinkValue });
     }
 
     this.breadcrumbs.set(items);

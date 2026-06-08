@@ -18,6 +18,7 @@ export abstract class BaseInputComponent implements ControlValueAccessor {
   label = input<string>('');
   placeholder = input<string>('');
   icon = input<string>('');
+  required = input<boolean>(false);
   readonly inputId = computed(() => {
     const explicitId = this.id().trim();
     if (explicitId) return explicitId;
