@@ -17,4 +17,8 @@ export class OrdersService {
       params,
     });
   }
+
+  deleteOrder(id: string): Observable<any> {
+    return this.http.delete<any>(`${environment.baseUrl}/orders/${id}`);
+  }
 }

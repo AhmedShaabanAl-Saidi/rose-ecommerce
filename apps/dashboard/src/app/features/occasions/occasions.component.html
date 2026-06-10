@@ -1,1 +1,12 @@
-<app-dashboard-data-table [config]="config" [data]="occasions()"></app-dashboard-data-table>
+<app-dashboard-data-table 
+  [config]="config" 
+  [data]="occasions()"
+  (deleteItem)="openDeleteModal($any($event))"
+></app-dashboard-data-table>
+
+<app-delete-modal
+  [visible]="isDeleteModalVisible()"
+  [message]="'Are you sure you want to delete this occasion?'"
+  (confirm)="confirmDelete()"
+  (cancel)="closeDeleteModal()"
+></app-delete-modal>

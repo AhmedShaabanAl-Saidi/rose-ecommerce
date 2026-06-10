@@ -96,4 +96,8 @@ export class ProductsService {
       payload
     );
   }
+
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete<any>(catalogUrl(`products/${id}`));
+  }
 }

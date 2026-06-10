@@ -97,6 +97,7 @@
               <button
                 type="button"
                 class="dashboard-data-table__action-button dashboard-data-table__action-button--delete"
+                (click)="deleteItem.emit(item)"
               >
                 <lucide-icon
                   [img]="DeleteIcon"

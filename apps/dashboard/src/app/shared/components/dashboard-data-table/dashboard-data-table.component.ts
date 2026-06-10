@@ -4,6 +4,7 @@ import {
   computed,
   inject,
   input,
+  output,
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -63,6 +64,8 @@ export class DashboardDataTableComponent {
   readonly config = input.required<DashboardTableConfig>();
   readonly data = input.required<unknown[] | null>();
 
+  readonly deleteItem = output<unknown>();
+
   readonly searchControl = new FormControl('', { nonNullable: true });
   readonly first = signal(0);
   readonly searchTerm = signal('');
@@ -112,6 +115,11 @@ export class DashboardDataTableComponent {
       {
         label: this.translate.instant('DASHBOARD.TABLE.ACTIONS.DELETE'),
         icon: 'pi pi-trash',
+        command: () => {
+          if (row) {
+            this.deleteItem.emit(row);
+          }
+        }
       },
     ];
   });
