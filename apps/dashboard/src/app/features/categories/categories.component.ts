@@ -45,7 +45,9 @@ export class CategoriesComponent {
     const item = this.selectedItemForDelete();
     if (!item) return;
 
-    this.categoriesService.deleteCategory(item._id)
+    this.categoriesService
+      .deleteCategory(item._id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.closeDeleteModal();
         this.loadCategories();
