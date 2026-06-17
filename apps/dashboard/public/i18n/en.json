@@ -1,4 +1,9 @@
 {
+  "COMMON": {
+    "CONFIRM": "Confirm",
+    "CANCEL": "Cancel",
+    "DELETE_CONFIRM": "Are you sure you want to delete this item?"
+  },
   "ERRORS": {
     "UNEXPECTED": "An unexpected error occurred",
     "NETWORK": "Network error: Please check your connection",
@@ -110,11 +115,13 @@
     "PAGES": {
       "CATEGORIES": {
         "TITLE": "Categories",
-        "DESCRIPTION": "Manage your categories here."
+        "DESCRIPTION": "Manage your categories here.",
+        "DELETE_CONFIRM": "Are you sure you want to delete this category?"
       },
       "OCCASIONS": {
         "TITLE": "Occasions",
-        "DESCRIPTION": "List and manage occasions."
+        "DESCRIPTION": "List and manage occasions.",
+        "DELETE_CONFIRM": "Are you sure you want to delete this occasion?"
       },
       "PRODUCTS": {
         "TITLE": "Products",
@@ -127,7 +134,8 @@
         "ADD_DESCRIPTION": "This is the add-product child route.",
         "EDIT_TITLE": "Edit Product",
         "EDIT_DESCRIPTION": "This is the edit-product child route.",
-        "BACK_TO_PRODUCTS": "Back to products"
+        "BACK_TO_PRODUCTS": "Back to products",
+        "DELETE_CONFIRM": "Are you sure you want to delete this product?"
       }
     },
     "TABLE": {

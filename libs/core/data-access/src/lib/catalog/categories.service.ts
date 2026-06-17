@@ -64,4 +64,8 @@ export class CategoriesService {
       payload
     );
   }
+
+  deleteCategory(id: string): Observable<any> {
+    return this.http.delete<any>(catalogUrl(`categories/${id}`));
+  }
 }

@@ -1,4 +1,9 @@
 {
+  "COMMON": {
+    "CONFIRM": "تأكيد",
+    "CANCEL": "إلغاء",
+    "DELETE_CONFIRM": "هل أنت متأكد أنك تريد حذف هذا العنصر?"
+  },
   "ERRORS": {
     "UNEXPECTED": "حدث خطأ غير متوقع",
     "NETWORK": "خطأ في الشبكة: يرجى التحقق من اتصالك",
@@ -110,11 +115,13 @@
     "PAGES": {
       "CATEGORIES": {
         "TITLE": "التصنيفات",
-        "DESCRIPTION": "إدارة التصنيفات من هنا."
+        "DESCRIPTION": "إدارة التصنيفات من هنا.",
+        "DELETE_CONFIRM": "هل أنت متأكد أنك تريد حذف هذا التصنيف؟"
       },
       "OCCASIONS": {
         "TITLE": "المناسبات",
-        "DESCRIPTION": "عرض وإدارة المناسبات."
+        "DESCRIPTION": "عرض وإدارة المناسبات.",
+        "DELETE_CONFIRM": "هل أنت متأكد أنك تريد حذف هذه المناسبة؟"
       },
       "PRODUCTS": {
         "TITLE": "المنتجات",
@@ -127,7 +134,8 @@
         "ADD_DESCRIPTION": "هذا مسار إضافة منتج فرعي.",
         "EDIT_TITLE": "تعديل منتج",
         "EDIT_DESCRIPTION": "هذا مسار تعديل منتج فرعي.",
-        "BACK_TO_PRODUCTS": "العودة إلى المنتجات"
+        "BACK_TO_PRODUCTS": "العودة إلى المنتجات",
+        "DELETE_CONFIRM": "هل أنت متأكد أنك تريد حذف هذا المنتج؟"
       }
     },
     "TABLE": {

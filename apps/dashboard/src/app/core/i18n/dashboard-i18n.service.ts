@@ -4,8 +4,14 @@ import arTranslations from '../../../../public/i18n/ar.json';
 import enTranslations from '../../../../public/i18n/en.json';
 
 const dashboardTranslations = {
-  en: { DASHBOARD: enTranslations.DASHBOARD },
-  ar: { DASHBOARD: arTranslations.DASHBOARD },
+  en: {
+    DASHBOARD: enTranslations.DASHBOARD,
+    COMMON: enTranslations.COMMON,
+  },
+  ar: {
+    DASHBOARD: arTranslations.DASHBOARD,
+    COMMON: arTranslations.COMMON,
+  },
 } satisfies LanguageTranslations;
 
 export function provideDashboardI18n() {

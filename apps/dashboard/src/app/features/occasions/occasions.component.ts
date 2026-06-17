@@ -3,10 +3,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Occasion, OccasionsService } from '@elevate/core-data-access';
 import { DashboardDataTableComponent } from '../../shared/components/dashboard-data-table/dashboard-data-table.component';
 import { occasionsTableConfig } from './occasions-table.config';
+import { DeleteModalComponent } from '@elevate/reusable-ui';
 
 @Component({
   selector: 'app-occasions',
-  imports: [DashboardDataTableComponent],
+  imports: [DashboardDataTableComponent, DeleteModalComponent],
   templateUrl: './occasions.component.html',
 })
 export class OccasionsComponent {
@@ -15,6 +16,9 @@ export class OccasionsComponent {
 
   readonly config = occasionsTableConfig;
   readonly occasions = signal<Occasion[] | null>(null);
+
+  readonly isDeleteModalVisible = signal(false);
+  readonly selectedItemForDelete = signal<Occasion | null>(null);
 
   constructor() {
     this.loadOccasions();
@@ -25,5 +29,26 @@ export class OccasionsComponent {
       .getAllOccasions()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((occasions) => this.occasions.set(occasions));
+  }
+
+  openDeleteModal(item: Occasion): void {
+    this.selectedItemForDelete.set(item);
+    this.isDeleteModalVisible.set(true);
+  }
+
+  closeDeleteModal(): void {
+    this.isDeleteModalVisible.set(false);
+    this.selectedItemForDelete.set(null);
+  }
+
+  confirmDelete(): void {
+    const item = this.selectedItemForDelete();
+    if (!item) return;
+
+    this.occasionsService.deleteOccasion(item._id)
+      .subscribe(() => {
+        this.closeDeleteModal();
+        this.loadOccasions();
+      });
   }
 }
