@@ -1,7 +1,8 @@
 <div class="input-wrapper">
   @if (label()) {
   <label [for]="inputId()" class="input-label">
-    {{ label() }} @if (required()) { <span class="text-red-500 ml-0.5">*</span> }
+    {{ label() }} @if (required()) {
+    <span class="text-red-500 ml-0.5">*</span> }
   </label>
   }
 
@@ -24,7 +25,7 @@
       [attr.aria-invalid]="Invalid"
       (blur)="onTouched()"
       (input)="value = $any($event.target).value; onChange(value)"
-      class="input-base"
+      class="input-base disabled:bg-zinc-100 dark:disabled:bg-zinc-800 disabled:text-zinc-500"
       [class.input-status-normal]="!Invalid"
       [class.input-status-error]="Invalid"
       [class.input-padding-start]="icon()"

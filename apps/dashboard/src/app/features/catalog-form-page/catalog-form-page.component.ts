@@ -234,10 +234,10 @@ export class CatalogFormPageComponent {
       const form = this.fb.group({
         title: ['', [Validators.required, Validators.minLength(2)]],
         description: ['', [Validators.required, Validators.minLength(10)]],
-        price: [0, [Validators.required, Validators.min(0)]],
+        price: [0, [Validators.required, Validators.min(1)]],
         discount: [0, [Validators.required, Validators.min(0)]],
         priceAfterDiscount: [{ value: 0, disabled: true }],
-        quantity: [0, [Validators.required, Validators.min(0)]],
+        quantity: [0, [Validators.required, Validators.min(1)]],
         category: ['', Validators.required],
         occasion: ['', Validators.required],
         imgCover: [null, Validators.required],
