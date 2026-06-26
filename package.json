@@ -10,7 +10,7 @@
     "build": "nx build E-commerce",
     "serve": "nx serve E-commerce",
     "test": "nx test E-commerce",
-    "vercel-build": "NX_DAEMON=false NX_DISABLE_NATIVE_HASHER=true npx nx build E-commerce --skip-nx-cache --verbose"
+    "vercel-build": "NX_DAEMON=false NX_NON_NATIVE_HASHER=true npx nx build E-commerce --skip-nx-cache --verbose"
   },
   "dependencies": {
     "@angular/animations": "20.3.1",
