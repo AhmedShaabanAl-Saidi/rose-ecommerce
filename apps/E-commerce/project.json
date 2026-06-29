@@ -19,6 +19,11 @@
           {
             "glob": "**/*",
             "input": "apps/E-commerce/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "dist/apps/dashboard",
+            "output": "dashboard"
           }
         ],
         "styles": [
